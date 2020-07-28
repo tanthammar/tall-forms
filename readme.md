@@ -17,30 +17,28 @@ The package is in development, it is being used in a live project without issues
 # Help wanted
 If you like this package, please help me with the documentation and tests. Send me a PM.
 
-# Requirements
+### Requirements
 
 - Make sure you've [installed Laravel Livewire](https://laravel-livewire.com/docs/installation/).
 - Install [Tailwind UI](https://tailwindui.com/) or [Tailwind CSS](https://tailwindcss.com/) + [Form plugin](https://tailwindcss-custom-forms.netlify.app/)
 - This package also uses [Blade UI kit - blade-icons](https://github.com/blade-ui-kit/blade-icons). Follow the package installation instructions.
 
-# Looking for a Bootstrap CSS version?:
+## Looking for a Bootstrap CSS version?:
 If you want to use Bootstrap CSS you can use the package made by kdion4891, which this package is based on. 
 - [https://github.com/kdion4891/laravel-livewire-forms](https://github.com/kdion4891/laravel-livewire-forms)
 
-# Credits
+## Credits
 
 - [kdion4891](https://github.com/kdion4891)
 
 # Installation
 Installing this package via composer:
-```
 
     composer require tanthammar/tall-forms
-```
+    
 
 You'll need to add `@stack('scripts')`, `@livewireScripts`, and `@livewireStyles` blade directives to your `resources/views/layouts/app.blade.php` file:
 
-```blade
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @livewireStyles
@@ -52,21 +50,18 @@ You'll need to add `@stack('scripts')`, `@livewireScripts`, and `@livewireStyles
     @livewireScripts
     @stack('scripts')
 
-```
+
 
 
 # Making Form Components
 
 Using the `make` command:
-```
 
-php artisan make:tall-form UserCreateForm --model=User --path=App/
-```
+    php artisan make:tall-form UserCreateForm --model=User --path=App/
 
 That command would create a new form component in `app/Http/Livewire/App` folder.
 
 After making a component, you may want to edit the `fields`, `success`, `saveAndStayResponse` and `saveAndGoBackResponse` methods:
-```php
 
     class UserCreateForm extends FormComponent
     {
@@ -92,7 +87,6 @@ After making a component, you may want to edit the `fields`, `success`, `saveAnd
             return back();
         }
     }
-```
     
 You don't have to use the `render()` method in your form component or worry about a component view, because the package handles that automatically.
 
@@ -102,9 +96,7 @@ You don't have to use the `render()` method in your form component or worry abou
 
 You use form components in views just like any other Livewire component:
 
-```
- @livewire('user-create-form')
-```
+    @livewire('user-create-form')
 
 Now all you have to do is update your form component class!
 
@@ -116,14 +108,13 @@ Doing so, you can skip the step to create a laravel blade view. **No render meth
 ### For this feature to work;
 - Livewire assumes you have a layout stored in `resources/views/layouts/app.blade.php` that yields a "content" section `@yield('content')` 
 - A laravel 7 Blade component: `pages/default.php` with a default `{$slot}`. It will be used as `<x-pages.default />`.
-
 ```
 // Route
 Route::livewire('/users/edit/{$user}', 'users.edit');
 ```
 
 Users/Edit.php
-```php
+```
 use App\User;
 
 //override the tall-form components mount method
@@ -141,10 +132,8 @@ use App\User;
 
 ```
 
-
 ### "SPA" mode without route
 Simply setting the property `spaMode` to true will wrap your form with `<x-pages.default />`. Don't forget to create the blade component.
-
 ```
 $this->spaMode = true;
 ```
@@ -159,30 +148,24 @@ Publish the config file and set the path and name for the array field icons (use
 Optional [Eloquent](https://laravel.com/docs/master/eloquent) model instance attached to the form component. This is passed in via the `@livewire` blade directive.
 
 Example:
-```php
 
     @livewire('user-edit-form', ['model' => $user])
-```
-
     
 Example of using the model in the component `success` method:
-```php
 
     public function success()
     {
         $this->model->update($this->form_data);
     }
-```
-
+    
 ### `$form_data`
 
 An array of the current data present in the form. This data is keyed with each field name.
 
 Example:
-```php
-    $name = $this->form_data['name'];
-``` 
 
+    $name = $this->form_data['name'];
+    
 ### `$storage_disk`
 
 A static property which sets the disk to use for file uploads. Defaults to `public`.
@@ -200,36 +183,17 @@ Or, via `.env` to apply globally:
 A static property which sets the path to use for file uploads. Defaults to `uploads`.
 
 Example:
-```php
 
     private static $storage_path = 'avatars';
-```
-
+    
 Or, via `.env` to apply globally:
-```
 
     FORM_STORAGE_PATH="avatars"
-```
-    
-### Inline or Stacked form layout
-```php
-$this->inline = true //inline
-```
-![InlineForm](https://user-images.githubusercontent.com/21239634/88694243-8f251a00-d100-11ea-9cac-561b0e50c0a3.png)
-
-```php
-$this->inline = false //stacked
-```
-![StackedForm](https://user-images.githubusercontent.com/21239634/88694247-8fbdb080-d100-11ea-9572-20bee38c7618.png)
-
-
     
 # Form Component Methods
 
 ### `beforeFormProperties()`
-Executes before form_data is set. 
-
-Example:
+Executes before form_data is set. Example:
 ```php
 public function beforeFormProperties()
 {
@@ -244,9 +208,7 @@ public function beforeFormProperties()
 ```
 
 ### `setup()`
-Executes after form_data is set. 
-
-Example:
+Executes after form_data is set. Example:
 ```php
     public function setup() {
         Gate::authorize('edit user');
@@ -282,20 +244,17 @@ Declaring `Field`s is similar to declaring Laravel Nova fields. [Jump to the fie
 This method is used to set rules to ignore during realtime validation.
 
 Example:
-```php 
 
     public function rulesIgnoreRealtime()
     {
         return ['confirmed', new MyCustomRule];
     }
-```
-
+    
 ### `success()`
 
 This method defines what actions should take place when the form is successfully submitted and validation has passed.
 
 Example:
-```php
 
     public function success()
     {
@@ -304,35 +263,27 @@ Example:
         User::create($this->form_data);
     }
     
-```
-
 ### `saveAndStayResponse()`
 
 This method defines the response after successful submission via the `Save` button.
 
 Example:
-```php 
 
     public function saveAndStayResponse()
     {
         return redirect()->route('users.edit', $this->model->id);
     }
-```
-
     
 ### `saveAndGoBackResponse()`
 
 This method defines the response after successful submission via the `Save & Go Back` button. By default it uses a version of `redirect()->back()`. See the source code.
 
 Example:
-```php
 
     public function saveAndGoBackResponse()
     {
         return redirect()->route('users.index');
     }
-```
-
     
 ### `mount($model = null)`
 
@@ -343,7 +294,6 @@ This method sets the initial form properties. If you have to override it, be sur
 The model instance passed to the form component.
 
 Example:
-```php 
 
     public function mount($model = null)
     {
@@ -351,15 +301,12 @@ Example:
         
         // my custom code
     }
-```
-
 
 ### `render()`
 
 This method renders the form component view. If you have to override it, be sure to `return $this->formView()`.
 
 Example:
-```php 
 
     public function render()
     {
@@ -367,14 +314,10 @@ Example:
         
         return $this->formView();
     }
-```
-
 
 # Form Field Declaration
 
 The `Field` class is used to declare your form fields.
-
-```php 
 
     public function fields()
     {
@@ -396,8 +339,6 @@ The `Field` class is used to declare your form fields.
         ];
     }
     
-```
-
 ### `make($label, $name = null)`
 
 ##### `$label`
@@ -409,20 +350,16 @@ The label to use for the form field, e.g. `First Name`.
 The name to use for the form field. If null, it will use a snake cased `$label`.
 
 Basic field example:
-```php
 
     Field::make('First Name')->input()->rules('required|min:2'),
-```
     
 Relationship field example:
-```php
 
     $brand_options = Brand::orderBy('name')->get()->pluck('id', 'name')->all();
 
     return [
         Field::make('Brand', 'brand_id')->select($brand_options)->rules(['required', Rule::exists('brands', 'id')]),
         ...
-```
 
 ### `input($type = 'text')`
 
@@ -433,9 +370,8 @@ Sets the field to be an `input` element. Defaults to `text`.
 Optional HTML5 input type to use for the input.
 
 Example:
-```php 
+
     Field::make('Email Address')->input('email'),
-```
     
 ### `file()`
 
@@ -546,21 +482,28 @@ Sets the field to be an array of fields.
 
 ##### `$fields`
 
-An array of `ArrayField`s to use. [Jump to the array field declaration section](#array-field-declaration) to learn more.
+An array of `ArrayField`s or `KeyValField`s to use. [Jump to the array field declaration section](#array-field-declaration) to learn more.
 
 Example:
-
+```php 
     Field::make('Owners')->array([
         ArrayField::make('Full Name')->input()->placeholder('Full Name')->rules('required'),
         ArrayField::make('Phone Number')->input('tel')->placeholder('Phone Number'),
     ]),
+    Field::make(trans('fields.name'), 'upfront_name')->keyval([
+        KeyValField::make(trans('global.english'), 'en')->input(),
+        KeyValField::make(trans('global.swedish'), 'sv')->input(),
+    ])->help(trans('fields.upfront_name_hint')),
+```
 
-Use the `sortable()` method to make the array fields sortable:
-
+Use the `sortable()` method on the ArrayField to make the array fields sortable:
+```php
     Field::make('Owners')->array([
         ArrayField::make('Full Name')->input()->placeholder('Full Name')->rules('required'),
         ArrayField::make('Phone Number')->input('tel')->placeholder('Phone Number'),
     ])->sortable(),
+```
+
 
 ### `default($default)`
 
@@ -675,6 +618,26 @@ Array fields do not use labels. Rather, you should specify a `placeholder()` for
 Example:
 
     ArrayField::make('phone_number')->input('tel')->placeholder('Phone Number')->rules('required'),
+
+# KeyVal Field declaration
+Used for flat `key => value` paired fields. Usually saved as a `json` db column on the model. Same as Nova KeyVal field.
+**Do not forget to ``$cast`` the field to array on the model.**
+
+Example use with a Spatie translatable field:
+```php
+Field::make(trans('fields.name'), 'name')->keyval([
+                KeyValField::make(trans('global.english'), 'en')
+                    ->input()
+                    ->placeholder('Upfront payment')
+                    ->rules('required|string|between:5,25')
+                    ->colspan(6),
+                KeyValField::make(trans('global.swedish'), 'sv')
+                    ->input()
+                    ->placeholder('Delbetalning')
+                    ->rules('required|string|between:5,25')
+                    ->colspan(6),
+])->help(trans('fields.upfront_name_hint')),
+```
 
 ### `colspan($width)`
 
