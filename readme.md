@@ -8,7 +8,7 @@ A dynamic, responsive [Laravel Livewire](https://laravel-livewire.com) form comp
 - [Contributions](https://github.com/kdion4891/laravel-livewire-forms/pulls)
 - [Buy me a coffee](https://paypal.me/kjjdion)
 
-# WARNING, this documentation is not up to date. 
+# WARNING, this documentation is not complete. 
 If you want to use it, please check the source code for all (not yet documented) features.
 
 # Status
