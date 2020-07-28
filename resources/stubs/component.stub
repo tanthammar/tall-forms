@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Http\Livewire\Namespace;
+
+use App\Models\DummyModel;
+use Tanthammar\TallForms\ArrayField;
+use Tanthammar\TallForms\Field;
+use Tanthammar\TallForms\FormComponent;
+
+class DummyComponent extends FormComponent
+{
+    public function setup() {
+        //validation?
+        $this->fill([
+            'formTitle' => trans('global.create').' '.trans('crud.dummymodel.title_singular'),
+            'action' => 'create', //or update,
+            'model' => null, //must be null in a create form, remove this and pass model to mount in an update form
+            'spaMode' => true, //wrap with x-pages.default
+            'showGoBack' => false, //or true
+        ]);
+    }
+
+    //needed if this is a create form
+    public function create($form_data)
+    {
+        DummyModel::create($form_data);
+    }
+
+    public function fields()
+    {
+        return [
+            Field::make('Name')->input()->rules('required'),
+        ];
+    }
+}
