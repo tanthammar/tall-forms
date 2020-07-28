@@ -163,9 +163,10 @@ Example of using the model in the component `success` method:
 An array of the current data present in the form. This data is keyed with each field name.
 
 Example:
-
+```php
     $name = $this->form_data['name'];
-    
+``` 
+
 ### `$storage_disk`
 
 A static property which sets the disk to use for file uploads. Defaults to `public`.
@@ -190,10 +191,25 @@ Or, via `.env` to apply globally:
 
     FORM_STORAGE_PATH="avatars"
     
+### Inline or Stacked form layout
+```php
+$this->inline = true //inline
+```
+![InlineForm](https://user-images.githubusercontent.com/21239634/88694243-8f251a00-d100-11ea-9cac-561b0e50c0a3.png)
+
+```php
+$this->inline = false //stacked
+```
+![StackedForm](https://user-images.githubusercontent.com/21239634/88694247-8fbdb080-d100-11ea-9572-20bee38c7618.png)
+
+
+    
 # Form Component Methods
 
 ### `beforeFormProperties()`
-Executes before form_data is set. Example:
+Executes before form_data is set. 
+
+Example:
 ```php
 public function beforeFormProperties()
 {
@@ -208,7 +224,9 @@ public function beforeFormProperties()
 ```
 
 ### `setup()`
-Executes after form_data is set. Example:
+Executes after form_data is set. 
+
+Example:
 ```php
     public function setup() {
         Gate::authorize('edit user');
