@@ -8,17 +8,19 @@ A dynamic, responsive [Laravel Livewire](https://laravel-livewire.com) form comp
 - [Contributions](https://github.com/kdion4891/laravel-livewire-forms/pulls)
 - [Buy me a coffee](https://paypal.me/kjjdion)
 
+### Requirements
+
+- Make sure you've [installed Laravel Livewire](https://laravel-livewire.com/docs/installation/).
+- Install [Tailwind UI](https://tailwindui.com/) or [Tailwind CSS](https://tailwindcss.com/) + [Form plugin](https://tailwindcss-custom-forms.netlify.app/)
+- This package also uses [Blade UI kit - blade-icons](https://github.com/blade-ui-kit/blade-icons). Follow the package installation instructions.
+
 # Installation
-
-Make sure you've [installed Laravel Livewire](https://laravel-livewire.com/docs/installation/).
-
 Installing this package via composer:
 
-    composer require kdion4891/laravel-livewire-forms
+    composer require tanthammar/tall-forms
     
-This package was designed to work well with [Laravel frontend scaffolding](https://laravel.com/docs/master/frontend).
 
-If you're just doing scaffolding now, you'll need to add `@stack('scripts')`, `@livewireScripts`, and `@livewireStyles` blade directives to your `resources/views/layouts/app.blade.php` file:
+You'll need to add `@stack('scripts')`, `@livewireScripts`, and `@livewireStyles` blade directives to your `resources/views/layouts/app.blade.php` file:
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -31,25 +33,16 @@ If you're just doing scaffolding now, you'll need to add `@stack('scripts')`, `@
     @livewireScripts
     @stack('scripts')
 
-This package also uses [Font Awesome](https://fontawesome.com) for icons. If you don't already have it installed, it's as simple as:
 
-    npm install @fortawesome/fontawesome-free
-    
-Then add the following line to `resources/sass/app.scss`:
-    
-    @import '~@fortawesome/fontawesome-free/css/all.min.css';
-    
-Now all that's left is to compile the assets:
-    
-    npm install && npm run dev
+
 
 # Making Form Components
 
 Using the `make` command:
 
-    php artisan make:form UserCreateForm --model=User
+    php artisan make:tall-form UserCreateForm --model=User --path=App/
 
-This creates your new form component in the `app/Http/Livewire` folder.
+That command would create a new form component in `app/Http/Livewire/App` folder.
 
 After making a component, you may want to edit the `fields`, `success`, `saveAndStayResponse` and `saveAndGoBackResponse` methods:
 
@@ -74,7 +67,7 @@ After making a component, you may want to edit the `fields`, `success`, `saveAnd
     
         public function saveAndGoBackResponse()
         {
-            return redirect()->route('users.index');
+            return back();
         }
     }
     
