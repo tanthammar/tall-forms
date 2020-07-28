@@ -1,4 +1,4 @@
-# Laravel Livewire Forms
+# Laravel TALL-stack Forms
 
 ![Laravel Livewire Forms](https://i.imgur.com/YB0gEJ8.gif)
 
@@ -8,11 +8,28 @@ A dynamic, responsive [Laravel Livewire](https://laravel-livewire.com) form comp
 - [Contributions](https://github.com/kdion4891/laravel-livewire-forms/pulls)
 - [Buy me a coffee](https://paypal.me/kjjdion)
 
+# WARNING, this documentation is not up to date. 
+If you want to use it, please check the source code for all (not yet documented) features.
+
+# Status
+The package is in development, it is being used in a live project without issues but please test thoroughly in your project.
+
+# Help wanted
+If you like this package, please help me with the documentation and tests. Send me a PM.
+
 ### Requirements
 
 - Make sure you've [installed Laravel Livewire](https://laravel-livewire.com/docs/installation/).
 - Install [Tailwind UI](https://tailwindui.com/) or [Tailwind CSS](https://tailwindcss.com/) + [Form plugin](https://tailwindcss-custom-forms.netlify.app/)
 - This package also uses [Blade UI kit - blade-icons](https://github.com/blade-ui-kit/blade-icons). Follow the package installation instructions.
+
+## Looking for a Bootstrap CSS version?:
+If you want to use Bootstrap CSS you can use the package made by kdion4891, which this package is based on. 
+- [https://github.com/kdion4891/laravel-livewire-forms](https://github.com/kdion4891/laravel-livewire-forms)
+
+## Credits
+
+- [kdion4891](https://github.com/kdion4891)
 
 # Installation
 Installing this package via composer:
@@ -83,6 +100,47 @@ You use form components in views just like any other Livewire component:
 
 Now all you have to do is update your form component class!
 
+# "SPA" mode with Route::livewire
+You can use [Livewire route registration](https://laravel-livewire.com/docs/rendering-components#route-registration) to directly return a component and benefit from Laravel route model binding.
+Doing so, you can skip the step to create a laravel blade view. **No render method is needed.**
+
+
+### For this feature to work;
+- Livewire assumes you have a layout stored in `resources/views/layouts/app.blade.php` that yields a "content" section `@yield('content')` 
+- A laravel 7 Blade component: `pages/default.php` with a default `{$slot}`. It will be used as `<x-pages.default />`.
+```
+// Route
+Route::livewire('/users/edit/{$user}', 'users.edit');
+```
+
+Users/Edit.php
+```
+use App\User;
+
+//override the tall-form components mount method
+    public function mount(User $user, $action = 'update', $showDelete = false)
+    {
+        $this->model = $user;
+        $this->beforeFormProperties();
+        $this->setFormProperties($user);
+        $this->action = $action;
+        $this->showDelete = $showDelete;
+        $this->spaMode = true;
+        $this->setup();
+        $this->previous = \URL::previous();  //used for saveAndGoBack
+    }
+
+```
+
+### "SPA" mode without route
+Simply setting the property `spaMode` to true will wrap your form with `<x-pages.default />`. Don't forget to create the blade component.
+```
+$this->spaMode = true;
+```
+
+# Icons
+Publish the config file and set the path and name for the array field icons (used with Blade UI package).
+
 # Form Component Properties
 
 ### `$model`
@@ -133,6 +191,34 @@ Or, via `.env` to apply globally:
     FORM_STORAGE_PATH="avatars"
     
 # Form Component Methods
+
+### `beforeFormProperties()`
+Executes before form_data is set. Example:
+```php
+public function beforeFormProperties()
+{
+    $condition = true;
+    if (!$condition) {
+      session()->flash('negative', 'The condition is required!');
+      return redirect(route('some_route'));
+    } else {
+        $this->model->some_prop = true;
+    }
+}
+```
+
+### `setup()`
+Executes after form_data is set. Example:
+```
+    public function setup() {
+        Gate::authorize('edit user');
+        $this->fill([
+            'formTitle' => trans('global.edit') . ' ' . trans('user.title_singular'),
+            'action' => 'update', //or create,
+            'showGoBack' => false,
+        ]);
+    }
+```
 
 ### `fields()`
 
@@ -189,7 +275,7 @@ Example:
     
 ### `saveAndGoBackResponse()`
 
-This method defines the response after successful submission via the `Save & Go Back` button.
+This method defines the response after successful submission via the `Save & Go Back` button. By default it uses a version of `redirect()->back()`. See the source code.
 
 Example:
 

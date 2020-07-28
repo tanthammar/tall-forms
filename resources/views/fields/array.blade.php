@@ -19,19 +19,19 @@
                         @if($field->array_sortable)
                         <button class="border rounded border px-1"
                             wire:click="arrayMoveUp('{{ $field->name }}', '{{ $key }}')">
-                            @svg('light/arrow-up', 'h-4 w-4')
+                            @svg(config('tall-forms.arrow-up-icon'), 'h-4 w-4')
                         </button>
 
                         <button class="border rounded border px-1"
                             wire:click="arrayMoveDown('{{ $field->name }}', '{{ $key }}')">
-                            @svg('light/arrow-down', 'h-4 w-4')
+                            @svg(config('tall-forms.arrow-down-icon'), 'h-4 w-4')
                         </button>
                         @endif
 
                         <button class="rounded bg-aurora-red shadow px-1 text-white"
                             onclick="confirm('{{ __('Are you sure?') }}') || event.stopImmediatePropagation();"
                             wire:click="arrayRemove('{{ $field->name }}', '{{ $key }}')">
-                            @svg('light/trash', 'h-4 w-4')
+                            @svg(config('tall-forms.trash-icon'), 'h-4 w-4')
                         </button>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
         </div>
         @endif
         <button class="rounded-md shadow-sm text-white bg-aurora-green" wire:click="arrayAdd('{{ $field->name }}')" style="width:fit-content">
-            @svg('light/plus-circle', 'h-5 w-5 m-2')
+            @svg(config('tall-forms.plus-icon'), 'h-5 w-5 m-2')
         </button>
     </div>
 </div>

@@ -22,12 +22,12 @@
             <div class="flex items-center">
                 <div class="flex-1">
                     <a href="{{ Storage::url($value['file']) }}" target="_blank">
-                        @svg("light/file-{$value['mime_type']}", "h-4 w-4 mr-1"){{ $value['name'] }}
+                        @svg(config('tall-forms.file-icon')."{$value['mime_type']}", "h-4 w-4 mr-1"){{ $value['name'] }}
                         {{-- <i class="fa fa-fw {{ $this->fileIcon($value['mime_type']) }} mr-1"></i> --}}
                     </a>
                 </div>
                 <div class="flex-auto">
-                    <x-button size="xs" color="danger" icon="light/trash-alt"
+                    <x-button size="xs" color="danger" :icon="config('tall-forms.trash-icon')"
                         onclick="confirm('{{ __('Are you sure?') }}') || event.stopImmediatePropagation();"
                         wire:click="arrayRemove('{{ $field->name }}', '{{ $key }}')">
                     </x-button>
