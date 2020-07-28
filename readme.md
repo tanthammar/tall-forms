@@ -209,7 +209,7 @@ public function beforeFormProperties()
 
 ### `setup()`
 Executes after form_data is set. Example:
-```
+```php
     public function setup() {
         Gate::authorize('edit user');
         $this->fill([
@@ -225,8 +225,8 @@ Executes after form_data is set. Example:
 This method returns an array of `Field`s to use in the form.
 
 Example:
-
-    public function fields()
+```php
+public function fields()
     {
         return [
             Field::make('Name')->input()->rules('required'),
@@ -235,6 +235,7 @@ Example:
             Field::make('Confirm Password', 'password_confirmation')->input('password'),
         ];
     }
+```
 
 Declaring `Field`s is similar to declaring Laravel Nova fields. [Jump to the field declaration section](#form-field-declaration) to learn more.
 
