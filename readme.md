@@ -476,7 +476,7 @@ Example:
 
     Field::make('Fuel Type')->radio(['Gas', 'Diesel', 'Electric'])->default('Diesel'),
 
-### `array($fields = [])`
+### `array($fields = [])` "Repeater"
 
 Sets the field to be an array of fields.
 
