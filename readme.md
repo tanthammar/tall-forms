@@ -4,9 +4,8 @@
 
 A dynamic, responsive [Laravel Livewire](https://laravel-livewire.com) form component with realtime validation, file uploads, array fields, and more.
 
-- [Support](https://github.com/kdion4891/laravel-livewire-forms/issues)
-- [Contributions](https://github.com/kdion4891/laravel-livewire-forms/pulls)
-- [Buy me a coffee](https://paypal.me/kjjdion)
+- [Support](https://github.com/tanthammar/tall-forms/issues)
+- [Contributions](https://github.com/tanthammar/tall-forms/pulls)
 
 # WARNING, this documentation is not complete. 
 If you want to use it, please check the source code for all (not yet documented) features.
@@ -22,6 +21,7 @@ If you like this package, please help me with the documentation and tests. Send 
 - Make sure you've [installed Laravel Livewire](https://laravel-livewire.com/docs/installation/).
 - Install [Tailwind UI](https://tailwindui.com/) or [Tailwind CSS](https://tailwindcss.com/) + [Form plugin](https://tailwindcss-custom-forms.netlify.app/)
 - This package also uses [Blade UI kit - blade-icons](https://github.com/blade-ui-kit/blade-icons). Follow the package installation instructions.
+- Your project needs a `@pushonce` Blade directive. (It is currently used for the fileupload field, but more fields are coming with scripts that should only be loaded once.) You can create your own or install this package: [Appstract Laravel Blade Directives](https://github.com/appstract/laravel-blade-directives)
 
 ## Looking for a Bootstrap CSS version?:
 If you want to use Bootstrap CSS you can use the package made by kdion4891, which this package is based on. 
