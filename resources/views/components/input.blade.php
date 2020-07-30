@@ -5,6 +5,7 @@
     'id' => null,
     'type' => 'text',
     'prefix' => null,
+    'icon' => null,
     'autocomplete' => null,
     'placeholder' => null,
     'help' => null,
@@ -18,6 +19,12 @@
     </label>
     @endif
 <div class="my-1 flex rounded-md shadow-sm w-full relative {{$fieldClass}}">
+    @if($icon)
+        <span
+            class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
+            @svg($icon, 'h-4 w-4')
+        </span>
+    @endif
         @if($prefix)
         <span
             class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">

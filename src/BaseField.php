@@ -18,6 +18,7 @@ class BaseField
     protected $rules;
     protected $view;
     protected $prefix;
+    protected $icon;
     protected $colspan;
     protected $fieldW;
     protected $labelW;
@@ -31,89 +32,130 @@ class BaseField
         return $this->$property;
     }
 
-    public function input($type = 'text')
+    public function input(string $type = 'text'): BaseField
     {
         $this->type = 'input';
         $this->input_type = $type;
         return $this;
     }
 
-    public function textarea($rows = 2)
+    public function textarea(int $rows = 2): BaseField
     {
         $this->type = 'textarea';
         $this->textarea_rows = $rows;
         return $this;
     }
 
-    public function select($options = [])
+    public function select(array $options = [])
     {
         $this->type = 'select';
         $this->options($options);
         return $this;
     }
 
-    public function checkbox()
+    public function checkbox(): BaseField
     {
         $this->type = 'checkbox';
         return $this;
     }
 
-    public function checkboxes($options = [])
+    public function checkboxes(array $options = []): BaseField
     {
         $this->type = 'checkboxes';
         $this->options($options);
         return $this;
     }
 
-    public function radio($options = [])
+    public function radio(array $options = []): BaseField
     {
         $this->type = 'radio';
         $this->options($options);
         return $this;
     }
 
-    protected function options($options)
+
+    protected function options(array $options): void
     {
         $this->options = Arr::isAssoc($options) ? array_flip($options) : array_combine($options, $options);
     }
 
-    public function default($default)
+
+    public function default(string $default): BaseField
     {
         $this->default = $default;
         return $this;
     }
 
-    public function autocomplete($autocomplete)
+    /**
+     * Only applied to fields of type input
+     * @param string $autocomplete
+     * @return $this
+     */
+    public function autocomplete(string $autocomplete): BaseField
     {
         $this->autocomplete = $autocomplete;
         return $this;
     }
 
-    public function placeholder($placeholder)
+    /**
+     * Only applied to fields on type input, textarea, select
+     * @param string $placeholder
+     * @return $this
+     */
+    public function placeholder(string $placeholder): BaseField
     {
         $this->placeholder = $placeholder;
         return $this;
     }
 
-    public function help($help)
+
+    public function help(string $help): BaseField
     {
         $this->help = $help;
         return $this;
     }
 
-    public function prefix($prefix)
+
+    /**
+     * Only applied to fields of type input
+     * @param string $prefix
+     * @return $this
+     */
+    public function prefix(string $prefix): BaseField
     {
         $this->prefix = $prefix;
         return $this;
     }
 
-    public function rules($rules)
+    /**
+     * Only applied to fields of type input
+     * @param $icon
+     * @return $this
+     */
+    public function icon(string $icon): BaseField
+    {
+        $this->icon = $icon;
+        return $this;
+    }
+
+    /**
+     * Standard Laravel validation syntax
+     * @param array|string $rules
+     * @return $this
+     */
+    public function rules($rules): BaseField
     {
         $this->rules = $rules;
         return $this;
     }
 
-    public function view($view)
+
+    /**
+     * Display a custom view instad of the default field view
+     * @param string $view
+     * @return $this
+     */
+    public function view(string $view): BaseField
     {
         $this->view = $view;
         return $this;
@@ -121,8 +163,10 @@ class BaseField
 
     /**
      * Default 6 of 6 columns
+     * @param int $width
+     * @return BaseField
      */
-    public function colspan($width)
+    public function colspan(int $width): BaseField
     {
         $this->colspan = $width;
         return $this;
@@ -130,8 +174,10 @@ class BaseField
 
     /**
      * Default sm:w-2/3
-     */    
-    public function fieldWidth($class)
+     * @param $class
+     * @return BaseField
+     */
+    public function fieldWidth(string $class): BaseField
     {
         $this->fieldW = $class;
         return $this;
@@ -140,8 +186,10 @@ class BaseField
     /**
      * Used only in inline form
      * Default sm:w-1/3
+     * @param string $class
+     * @return BaseField
      */
-    public function labelWidth($class)
+    public function labelWidth(string $class): BaseField
     {
         $this->labelW = $class;
         return $this;
@@ -149,8 +197,10 @@ class BaseField
 
     /**
      * Applied to the field wrapper
+     * @param string $classes
+     * @return BaseField
      */
-    public function class($classes)
+    public function class(string $classes): BaseField
     {
         $this->class = $classes;
         return $this;
@@ -159,14 +209,22 @@ class BaseField
     /**
      * Applied to the outer wrapper surrounding Array and KeyVal field groups
      * Default 'rounded border bg-gray-50';
+     *
+     * @param $classes
+     * @return $this
      */
-    public function groupClass($classes)
+    public function groupClass(string $classes): BaseField
     {
         $this->group_class = $classes;
         return $this;
     }
-    
-    public function errorMsg($string)
+
+    /**
+     * Add a custom error message displayed on field validation error
+     * @param $string
+     * @return $this
+     */
+    public function errorMsg(string $string): BaseField
     {
         $this->errorMsg = $string;
         return $this;

@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Namespace;
 
-use App\Models\DummyModel;
+use App\ModelsPathDummyModel;
 use Tanthammar\TallForms\ArrayField;
 use Tanthammar\TallForms\Field;
 use Tanthammar\TallForms\FormComponent;
@@ -12,7 +12,7 @@ class DummyComponent extends FormComponent
     public function setup() {
         //validation?
         $this->fill([
-            'formTitle' => trans('global.create').' '.trans('crud.dummymodel.title_singular'),
+            'formTitle' => FormTitle,
             'action' => 'create', //or update,
             'model' => null, //must be null in a create form, remove this and pass model to mount in an update form
             'spaMode' => true, //wrap with x-pages.default
