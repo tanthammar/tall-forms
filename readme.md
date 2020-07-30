@@ -16,17 +16,17 @@ A dynamic, responsive [Laravel Livewire](https://laravel-livewire.com) form comp
 * Laravel 7 Blade form components
 * Laravel Nova like syntax to auto generate TALL-stack forms
 
-# Status
-The package is actively maintained and being used in live projects without issues, but please test thoroughly in your project.
-
-# Help wanted
+### Help wanted
 - If you like this package, please help me with the documentation and tests. Send me a PM.
 - **Pull Requests** I appreciate any input that improves the functionality and usability of this package. **Please contribute!**
 
-## Looking for a Bootstrap CSS version?:
+### Looking for a Bootstrap CSS version?:
 If you want to use Bootstrap CSS you can use the package made by kdion4891, which this package is based on. 
 - [https://github.com/kdion4891/laravel-livewire-forms](https://github.com/kdion4891/laravel-livewire-forms)
 
-## Credits
+### Credits
 
 - [kdion4891](https://github.com/kdion4891)
+
+# Documentation [See the wiki](https://github.com/tanthammar/tall-forms/wiki)
+The package is actively maintained and being used in live projects without issues, but please test thoroughly in your project.
