@@ -13,7 +13,7 @@ class DummyComponent extends FormComponent
         //validation?
         $this->fill([
             'formTitle' => FormTitle,
-            'action' => 'create', //or update,
+            'action' => 'Action', //create or update,
             'model' => null, //must be null in a create form, remove this and pass model to mount in an update form
             'spaMode' => true, //wrap with x-pages.default
             'showGoBack' => false, //or true
