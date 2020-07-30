@@ -3,6 +3,7 @@
 namespace Tanthammar\TallForms;
 
 use App\Http\Livewire\Traits\Notify;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Arr;
 use Tanthammar\TallForms\Traits\FollowsRules;
 use Tanthammar\TallForms\Traits\HandlesArrays;
@@ -118,6 +119,17 @@ class FormComponent extends Component
     public function create($form_data)
     {
         return;
+    }
+
+
+    public function delete()
+    {
+        if (optional($this->model)->exists) {
+            $this->model->delete();
+            session()->flash('success', 'The object was deleted');
+            return redirect($this->previous);
+        }
+        return null;
     }
 
     public function saveAndStayResponse()
