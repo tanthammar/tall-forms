@@ -1,6 +1,6 @@
-# Laravel Livewire TALL-stack Forms and Blade components
-
 ![Laravel Livewire Forms](https://i.imgur.com/YB0gEJ8.gif)
+
+# Laravel Livewire TALL-stack Forms and Blade components
 
 A dynamic, responsive [Laravel Livewire](https://laravel-livewire.com) form component with realtime validation, file uploads, array fields, blade form input components and more.
 
