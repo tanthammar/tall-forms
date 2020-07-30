@@ -4,10 +4,10 @@
 
 A dynamic, responsive [Laravel Livewire](https://laravel-livewire.com) form component with realtime validation, file uploads, array fields, blade form input components and more.
 
-[![Latest Stable Version](https://poser.pugx.org/phpunit/phpunit/v)](//packagist.org/packages/phpunit/phpunit) 
-[![Total Downloads](https://poser.pugx.org/phpunit/phpunit/downloads)](//packagist.org/packages/phpunit/phpunit) 
-[![Latest Unstable Version](https://poser.pugx.org/phpunit/phpunit/v/unstable)](//packagist.org/packages/phpunit/phpunit) 
-[![License](https://poser.pugx.org/phpunit/phpunit/license)](//packagist.org/packages/phpunit/phpunit)
+[![Latest Stable Version](https://poser.pugx.org/tanthammar/tall-forms/v)](//packagist.org/packages/tanthammar/tall-forms) 
+[![Total Downloads](https://poser.pugx.org/tanthammar/tall-forms/downloads)](//packagist.org/packages/tanthammar/tall-forms) 
+[![Latest Unstable Version](https://poser.pugx.org/tanthammar/tall-forms/v/unstable)](//packagist.org/packages/tanthammar/tall-forms) 
+[![License](https://poser.pugx.org/tanthammar/tall-forms/license)](//packagist.org/packages/tanthammar/tall-forms)
 
 - [Support](https://github.com/tanthammar/tall-forms/issues)
 - [Contributions](https://github.com/tanthammar/tall-forms/pulls)
