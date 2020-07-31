@@ -29,4 +29,3 @@ If you want to use Bootstrap CSS you can use the package made by kdion4891, whic
 - [kdion4891](https://github.com/kdion4891)
 
 # Documentation [See the wiki](https://github.com/tanthammar/tall-forms/wiki)
-The package is actively maintained and being used in live projects without issues, but please test thoroughly in your project.

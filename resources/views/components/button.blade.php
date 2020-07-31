@@ -29,11 +29,11 @@
     'gray' => 'text-gray-100 bg-gray-500 hover:bg-gray-600 focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-700',
     'orange' => 'text-orange-100 bg-orange-500 hover:bg-orange-600 focus:border-orange-700 focus:shadow-outline-orange active:bg-orange-700',
     'teal' => 'text-teal-100 bg-teal-500 hover:bg-teal-600 focus:border-teal-700 focus:shadow-outline-teal active:bg-teal-700',
-    'info' => 'text-white bg-frost-dimmed hover:bg-frost-blue focus:border-blue-700 focus:shadow-outline-blue active:bg-frost-dimmed',
-    'positive' => 'text-white bg-aurora-green hover:bg-green-500 focus:border-green-600 focus:shadow-outline-green active:bg-aurora-green',
-    'negative' => 'text-red-100 bg-aurora-red hover:bg-red-500 focus:border-red-600 focus:shadow-outline-red active:bg-aurora-red',
-    'warning' => 'text-orange-100 bg-aurora-orange hover:bg-orange-600 focus:border-orange-700 focus:shadow-outline-orange active:bg-orange-700',
-    'primary' => 'text-blue-100 bg-night-lighter hover:bg-night-dark focus:border-night-light focus:shadow-outline-blue active:bg-night-dark',
+    'info' => config('tall-forms.button-info'),
+    'positive' => config('tall-forms.button-positive'),
+    'negative' => config('tall-forms.button-negative'),
+    'warning' => config('tall-forms.button-warning'),
+    'primary' => config('tall-forms.button-primary'),
 ]])
 <{{$tag}} {{ $attributes->merge([
     'class' => "{$sizes[$size]} {$colors[$color]} inline-flex items-center border border-transparent font-semibold tracking-wider rounded text-white focus:outline-none transition ease-in-out duration-150",

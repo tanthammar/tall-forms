@@ -2,11 +2,11 @@
 
 namespace Tanthammar\TallForms;
 
-use App\Http\Livewire\Traits\Notify;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Arr;
 use Tanthammar\TallForms\Traits\FollowsRules;
 use Tanthammar\TallForms\Traits\HandlesArrays;
+use Tanthammar\TallForms\Traits\Notify;
 use Tanthammar\TallForms\Traits\UploadsFiles;
 use Livewire\Component;
 
