@@ -26,6 +26,7 @@ class BaseField
     protected $group_class = 'rounded border bg-gray-50';
     protected $errorMsg;
     protected $inline = true;
+    protected $is_relation = false;
 
     public function __get($property)
     {
@@ -79,6 +80,12 @@ class BaseField
         $this->options = Arr::isAssoc($options) ? array_flip($options) : array_combine($options, $options);
     }
 
+
+    public function relation(): BaseField
+    {
+        $this->is_relation = true;
+        return $this;
+    }
 
     public function default(string $default): BaseField
     {

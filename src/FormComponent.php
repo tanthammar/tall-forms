@@ -96,10 +96,13 @@ class FormComponent extends Component
         $this->validate($this->rules());
 
         $field_names = [];
-        foreach ($this->fields() as $field) $field_names[] = $field->name;
+        $relationship_names = [];
+        foreach ($this->fields() as $field) {
+            ($field->is_relation) ? $relation_names[] = $field->name : $field_names[] = $field->name;
+        }
         $this->form_data = Arr::only($this->form_data, $field_names);
-
         $this->success();
+        filled($relationship_data = Arr::only($this->form_data, $relationship_names)) ? $this->relations($relationship_data) : null;
     }
 
     public function errorMessage($message)
@@ -114,6 +117,11 @@ class FormComponent extends Component
         ($this->action == 'update')
             ? $this->model->update($this->form_data)
             : $this->create($this->form_data);
+    }
+
+    public function relations(array $relationship_data)
+    {
+        return;
     }
 
     public function create($form_data)
