@@ -9,26 +9,17 @@ use Tanthammar\TallForms\FormComponent;
 
 class DummyComponent extends FormComponent
 {
-    public function mount(DummyModel $dummymodel) //or mount() in a create form
+    public function mount(DummyModel $dummymodel)
     {
-        $this->mount_form($dummymodel); //or mount_form(null) in a create form
-    }
-
-    public function afterFormProperties() {
         //Gate::authorize()
         $this->fill([
             'formTitle' => FormTitle,
-            'action' => 'Action', //create or update,
-            'model' => null, //must be null in a create form, remove this and pass model to mount in an update form
+            'action' => 'update',
             'spaMode' => true, //wrap with x-pages.default
             'showGoBack' => false, //or true
         ]);
-    }
 
-    //remove this method, if this is an update form
-    public function create($form_data)
-    {
-        DummyModel::create($form_data);
+        $this->mount_form($dummymodel);
     }
 
     public function fields()

@@ -6,26 +6,23 @@ use App\ModelsPathDummyModel;
 use Tanthammar\TallForms\ArrayField;
 use Tanthammar\TallForms\Field;
 use Tanthammar\TallForms\FormComponent;
+use Tanthammar\TallForms\Traits\DefaultMount;
 
 class DummyComponent extends FormComponent
 {
-    public function mount(DummyModel $dummymodel) //or mount() in a create form
+    public function mount()
     {
-        $this->mount_form($dummymodel); //or mount_form(null) in a create form
-    }
-
-    public function afterFormProperties() {
         //Gate::authorize()
         $this->fill([
             'formTitle' => FormTitle,
-            'action' => 'Action', //create or update,
-            'model' => null, //must be null in a create form, remove this and pass model to mount in an update form
+            'action' => 'create',
             'spaMode' => true, //wrap with x-pages.default
             'showGoBack' => false, //or true
         ]);
+        $this->mount_form();
     }
 
-    //remove this method, if this is an update form
+
     public function create($form_data)
     {
         DummyModel::create($form_data);

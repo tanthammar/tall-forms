@@ -27,6 +27,7 @@ class BaseField
     protected $errorMsg;
     protected $inline = true;
     protected $is_relation = false;
+    protected $is_custom = false;
 
     public function __get($property)
     {
@@ -87,6 +88,12 @@ class BaseField
         return $this;
     }
 
+    public function custom(): BaseField
+    {
+        $this->is_custom = true;
+        return $this;
+    }
+
     public function default(string $default): BaseField
     {
         $this->default = $default;
@@ -121,7 +128,6 @@ class BaseField
         $this->help = $help;
         return $this;
     }
-
 
     /**
      * Only applied to fields of type input

@@ -2,8 +2,9 @@
 
 namespace Tanthammar\TallForms;
 
-use Illuminate\Routing\Redirector;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\URL;
 use Tanthammar\TallForms\Traits\FollowsRules;
 use Tanthammar\TallForms\Traits\HandlesArrays;
 use Tanthammar\TallForms\Traits\Notify;
@@ -16,7 +17,7 @@ class FormComponent extends Component
 
     public $model;
     public $form_data;
-    public $action;
+    public $action = 'update';
     public $formTitle;
     public $showDelete = false;
     public $showGoBack = true;
@@ -30,38 +31,42 @@ class FormComponent extends Component
 
     protected $listeners = ['fileUpdate'];
 
-    public function mount($model = null, $action = 'update', $showDelete = false)
+    public function mount_form($model = null)
     {
         $this->model = $model;
         $this->beforeFormProperties();
-        $this->setFormProperties($model);
-        $this->action = $action;
-        $this->showDelete = $showDelete;
-        $this->setup();
+        $this->setFormProperties($this->model);
+        $this->afterFormProperties();
         $this->previous = \URL::previous();  //used for saveAndGoBack
     }
+
 
     public function beforeFormProperties()
     {
         return;
     }
 
+
     public function setFormProperties($model = null)
     {
         if ($model) $this->form_data = $model->toArray();
         foreach ($this->fields() as $field) {
             if (!isset($this->form_data[$field->name])) {
-                $array = in_array($field->type, ['checkbox', 'file']);
+                $array = in_array($field->type, ['checkboxes', 'file']);
                 $this->form_data[$field->name] = $field->default ?? ($array ? [] : null);
             }
         }
     }
 
-    public function setup() {
-        $this->fill([
-            'formTitle' => 'create DummyModel',
-            'action' => 'update',
-        ]);
+    public function afterFormProperties()
+    {
+        return;
+    }
+
+    //legacy method from v1
+    public function setup()
+    {
+        $this->formTitle = '';
     }
 
     public function render()
@@ -97,12 +102,26 @@ class FormComponent extends Component
 
         $field_names = [];
         $relationship_names = [];
+        $custom_names = [];
+
         foreach ($this->fields() as $field) {
-            ($field->is_relation) ? $relation_names[] = $field->name : $field_names[] = $field->name;
+            if ($field->is_relation) {
+                $relationship_names[] = $field->name;
+            } elseif ($field->is_custom) {
+                $custom_names[] = $field->name;
+            } else {
+                $field_names[] = $field->name;
+            }
         }
+
+        $relationship_data = Arr::only($this->form_data, $relationship_names);
+        $custom_data = Arr::only($this->form_data, $custom_names);
         $this->form_data = Arr::only($this->form_data, $field_names);
-        $this->success();
-        filled($relationship_data = Arr::only($this->form_data, $relationship_names)) ? $this->relations($relationship_data) : null;
+
+        //make sure to create the model before attaching any relations
+        $this->success(); //creates or updates the model
+        if (filled($this->model)) $this->relations($relationship_data);
+        $this->custom_fields($custom_data);
     }
 
     public function errorMessage($message)
@@ -120,6 +139,11 @@ class FormComponent extends Component
     }
 
     public function relations(array $relationship_data)
+    {
+        return;
+    }
+
+    public function custom_fields(array $custom_data)
     {
         return;
     }
