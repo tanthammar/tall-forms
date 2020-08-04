@@ -15,7 +15,7 @@ class DummyComponent extends FormComponent
         $this->fill([
             'formTitle' => FormTitle,
             'action' => 'update',
-            'spaMode' => true, //wrap with x-pages.default
+            'spaMode' => true, //wrap with x-pages.default or set prop $spaLayout to define a blade layout to wrap the form
             'showGoBack' => false, //or true
         ]);
 
