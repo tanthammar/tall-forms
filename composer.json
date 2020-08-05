@@ -1,6 +1,6 @@
 {
     "name": "tanthammar/tall-forms",
-    "description": "A dynamic, responsive Laravel Livewire form component with realtime validation, file uploads, array fields, and more.",
+    "description": "A dynamic, responsive Laravel Livewire form generator with realtime validation, file uploads, array fields, and more.",
     "keywords": [
         "tailwind",
         "alpinejs",
@@ -32,7 +32,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Tanthammar\\TallForms\\Providers\\FormServiceProvider"
+                "Tanthammar\\TallForms\\FormServiceProvider"
             ]
         }
     }
