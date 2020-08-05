@@ -22,7 +22,7 @@
             <div class="flex items-center">
                 <div class="flex-1">
                     <a href="{{ Storage::url($value['file']) }}" target="_blank">
-                        @svg(config('tall-forms.file-icon')."{$value['mime_type']}", "h-4 w-4 mr-1"){{ $value['name'] }}
+                        @svg(config('tall-forms.file-icon').$this->fileIcon($value['mime_type']), "h-4 w-4 mr-1"){{ $value['name'] }}
                         {{-- <i class="fa fa-fw {{ $this->fileIcon($value['mime_type']) }} mr-1"></i> --}}
                     </a>
                 </div>
