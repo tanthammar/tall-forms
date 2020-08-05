@@ -30,7 +30,7 @@ $rowgap = $inline ? 'sm:row-gap-4 space-y-4' : 'sm:row-gap-3 space-y-3';
                 @endif
                 <x-button wire:click="saveAndStay" wire:loading.attr="disabled" color="positive">
                     <span class="mr-2" wire:loading wire:target="saveAndStay">
-                        <x-spinners.button /></span>
+                        <x-tall-spinner /></span>
                     @lang(config('tall-forms.save-and-stay'))
                 </x-button>
             </div>
