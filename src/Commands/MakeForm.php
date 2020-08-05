@@ -17,7 +17,7 @@ class MakeForm extends Command
         $stub = str_replace('FormTitle', config('tall-forms.form-title'), $stub);
         $stub = str_replace('DummyComponent', $this->argument('name'), $stub);
         $stub = str_replace('DummyModel', $this->option('model'), $stub);
-        if ($this->option('action') != 'create') $stub = str_replace('dummymodel', Str::lower($this->option('model')), $stub);
+        $stub = str_replace('dummymodel', Str::lower($this->option('model')), $stub);
         $stub = str_replace('ModelsPath', $this->option('modelspath'), $stub);
         //$stub = str_replace('Action', $this->option('action'), $stub);
         //$stub = str_replace('DummyRoute', Str::slug(Str::plural($this->option('model'))), $stub);
