@@ -28,5 +28,5 @@ return [
     'arrow-down-icon' => 'light/arrow-down',
     'trash-icon' => 'light/trash-alt',
     'plus-icon' => 'light/plus-circle',
-    'file-icon' => 'light/file-' //used as light/file-{$value['mime_type']}
+    'file-icon' => 'light/' //used as light/{$mime_type}
 ];
