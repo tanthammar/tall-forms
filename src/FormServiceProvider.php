@@ -32,6 +32,7 @@ class FormServiceProvider extends ServiceProvider
         Blade::component('tall-forms::components.button', 'button');
         Blade::component('tall-forms::components.spinners.button', 'tall-spinner');
         Blade::component('tall-forms::components.input', 'tall-input');
+        Blade::component('tall-forms::components.range', 'tall-range');
         Blade::component('tall-forms::components.checkbox', 'tall-checkbox');
         Blade::component('tall-forms::components.radio', 'tall-radio');
         Blade::component('tall-forms::components.select', 'tall-select');

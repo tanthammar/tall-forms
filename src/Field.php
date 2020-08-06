@@ -13,6 +13,7 @@ class Field extends BaseField
     protected $keyval_fields = [];
     protected $array_sortable = false;
 
+
     public function __construct($label, $name)
     {
         $this->label = $label;
@@ -20,40 +21,40 @@ class Field extends BaseField
         $this->key = 'form_data.' . $this->name;
     }
 
+
     public static function make($label, $name = null)
     {
         return new static($label, $name);
     }
 
-    public function file()
+    public function file(): Field
     {
         $this->type = 'file';
         return $this;
     }
 
-    public function multiple()
+    public function multiple(): Field
     {
         $this->file_multiple = true;
         return $this;
     }
 
-    public function array($fields = [])
+    public function array($fields = []): Field
     {
         $this->type = 'array';
         $this->array_fields = $fields;
         return $this;
     }
-    public function keyval($fields = [])
+    public function keyval($fields = []): Field
     {
         $this->type = 'keyval';
         $this->keyval_fields = $fields;
         return $this;
     }
 
-    public function sortable()
+    public function sortable(): Field
     {
         $this->array_sortable = true;
         return $this;
     }
-
 }

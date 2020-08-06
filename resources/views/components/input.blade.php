@@ -11,6 +11,9 @@
     'help' => null,
     'errorMsg' => null,
     'fieldClass' => null,
+    'step' => null,
+    'min' => null,
+    'max' => null,
 ])
 <div {{ $attributes->merge(['class' => "sm:col-span-{$colspan}"]) }}>
     @if($label)
@@ -32,8 +35,8 @@
         @endif
     <input x-ref="{{ $field }}" wire:model.lazy="{{ $field }}" value="{{ old($field) }}" name="{{ $id ?? $field }}" type="{{ $type }}" @if($autocomplete)autocomplete="{{ $autocomplete }}"@endif
             @if($placeholder) placeholder="{{ $placeholder }}" @endif class="flex-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5
-            {{ ($prefix || $icon) ? ' rounded-none rounded-r-md ' : ' rounded ' }}
-            @error($field) error placeholder-red-300 @enderror" />
+            {{ ($prefix || $icon) ? ' rounded-none rounded-r-md ' : ' rounded ' }} @error($field) error placeholder-red-300 @enderror"
+           @if(in_array($type, ['number', 'range', 'date', 'datetime-local', 'month', 'time', 'week'])) min="{{ $min }}" max="{{ $max }}" step="{{ $step }}" @endif/>
         @error($field)
         <x-tall-error-icon :right="($type == 'date' || $type == 'datetime-local' || $type == 'time') ? 'right-6' : 'right-0'" @endif />
         @enderror

@@ -28,6 +28,9 @@ class BaseField
     protected $inline = true;
     protected $is_relation = false;
     protected $is_custom = false;
+    protected $step = 1;
+    protected $min = 0;
+    protected $max;
 
     public function __get($property)
     {
@@ -58,6 +61,13 @@ class BaseField
     public function checkbox(): BaseField
     {
         $this->type = 'checkbox';
+        return $this;
+    }
+
+
+    public function range(): BaseField
+    {
+        $this->type = 'range';
         return $this;
     }
 
@@ -240,6 +250,25 @@ class BaseField
     public function errorMsg(string $string): BaseField
     {
         $this->errorMsg = $string;
+        return $this;
+    }
+
+    public function step(float $step): BaseField
+    {
+        $this->step = $step;
+        return $this;
+    }
+
+
+    public function min(float $min): BaseField
+    {
+        $this->min = $min;
+        return $this;
+    }
+
+    public function max(float $max): BaseField
+    {
+        $this->max = $max;
         return $this;
     }
 }

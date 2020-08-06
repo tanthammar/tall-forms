@@ -23,7 +23,7 @@ class FormComponent extends Component
     public $showGoBack = true;
     public $inline = true;
     public $spaMode = false;
-    public $spaLayout = 'tall-forms::spa-layout';
+    public $spaLayout;
     private static $storage_disk;
     private static $storage_path;
     public $form_wrapper = 'max-w-screen-lg mx-auto';
@@ -38,6 +38,7 @@ class FormComponent extends Component
         $this->setFormProperties($this->model);
         $this->afterFormProperties();
         $this->previous = \URL::previous();  //used for saveAndGoBack
+        $this->spaLayout = config('tall-forms.spa-layout');
     }
 
 
@@ -93,7 +94,13 @@ class FormComponent extends Component
 
     public function updated($field)
     {
+        $this->fields_updated($field);
         $this->validateOnly($field, $this->rules(true));
+    }
+
+    public function fields_updated($field)
+    {
+        return null;
     }
 
     public function submit()
