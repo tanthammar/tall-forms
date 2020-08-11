@@ -11,7 +11,7 @@
 ])
 <div {{ $attributes->merge(['class' => "sm:col-span-{$colspan}"]) }}>
     @if($label)<label for="{{ $id ?? $field }}" class="form-label">{{ $label }}</label>@endif
-    <select x-ref="{{ $field }}" wire:model.lazy="{{ $field }}" name="{{ $id ?? $field }}" class="form-select w-full {{$fieldClass}}">
+    <select x-ref="{{ $field }}" wire:model.lazy="{{ $field }}" name="{{ $id ?? $field }}" class="form-select my-1 w-full {{$fieldClass}}">
         @if($placeholder)<option value="">{{ $placeholder }}</option>@endif
         @foreach($options as $value => $label)
             <option value="{{ $value }}">{{ $label }}</option>
