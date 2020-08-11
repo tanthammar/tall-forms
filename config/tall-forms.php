@@ -11,7 +11,7 @@ return [
     //form buttons translations
     'saved' => 'global.saved',
     'delete' => 'global.delete',
-    'save-and-stay' =>'global.save',
+    'save-and-stay' => 'global.save',
     'save-go-back' => 'global.save_go_back',
     'message-updated-success' => 'messages.updated_success',
 
@@ -49,5 +49,9 @@ return [
     'arrow-down-icon' => 'light/arrow-down',
     'trash-icon' => 'light/trash-alt',
     'plus-icon' => 'light/plus-circle',
-    'file-icon' => 'light/' //used as @svg('light/{$mime_type}', 'classes')
+    'file-icon' => 'light/', //used as @svg('light/{$mime_type}', 'classes')
+
+    //Default label-, field-width for inline form layout
+    'field-width' => 'sm:w-3/4 md:w-4/5',
+    'label-width' => 'sm:w-1/4 md:w-1/5',
 ];

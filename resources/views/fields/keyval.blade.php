@@ -1,8 +1,5 @@
-<div class="w-full">
-    <label for="{{ $field->name }}" class="form-label w-full">
-        {{ $field->label }}
-    </label>
-    @include('tall-forms::fields.error-help')
+<x-tall-field-wrapper :inline="$field->inline" :field="$field->name" :label="$field->label" :labelW="$field->labelW" :fieldW="$field->fieldW">
+@include('tall-forms::fields.error-help')
     <div class="w-full mt-2">
     <div class="flex flex-col divide-y mb-2 {{ $field->group_class }}">
             <div class="py-2">
@@ -17,4 +14,4 @@
             </div>
         </div>
     </div>
-</div>
+</x-tall-field-wrapper>

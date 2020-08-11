@@ -1,6 +1,5 @@
 {{-- not tested --}}
-<x-tall-field-wrapper :inline="$field->inline" :colspan="$field->colspan" :field="$field->name" :label="$field->label"
-    :labelW="$field->labelW" :fieldW="$field->fieldW">
+<x-tall-field-wrapper :inline="$field->inline" :field="$field->name" :label="$field->label" :labelW="$field->labelW" :fieldW="$field->fieldW">
     <div class="my-1 flex rounded-md shadow-sm w-full relative {{$fieldClass}}">
         <span
             class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">

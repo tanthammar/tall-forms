@@ -1,11 +1,10 @@
-<x-tall-field-wrapper :inline="$field->inline" :colspan="$field->colspan" :field="$field->name" :label="$field->label"
-    :labelW="$field->labelW" :fieldW="$field->fieldW">
-    <x-tall-textarea 
-    :field="$field->key" 
-    :id="$field->name" 
+<x-tall-field-wrapper :inline="$field->inline" :field="$field->name" :label="$field->label" :labelW="$field->labelW" :fieldW="$field->fieldW">
+    <x-tall-textarea
+    :field="$field->key"
+    :id="$field->name"
     :rows="$field->textarea_rows"
-    :fieldClass="$field->class" 
+    :fieldClass="$field->class"
     :placeholder="$field->placeholder"
-    :help="$field->help" 
+    :help="$field->help"
     :errorMsg="$field->errorMsg" />
 </x-tall-field-wrapper>

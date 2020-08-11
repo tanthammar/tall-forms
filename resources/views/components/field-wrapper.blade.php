@@ -2,11 +2,11 @@
     'colspan' => 6,
     'field' => "",
     'label' => "",
-    'labelW' => 'sm:w-1/3',
-    'fieldW' => 'sm:w-2/3',
+    'labelW' => config('tall-forms.label-width'),
+    'fieldW' => config('tall-forms.field-width'),
     'align' => 'items-baseline'
 ])
-<div class="col-span-{{ $colspan }} {{ $this->inline ? 'sm:flex' : 'w-full'}} {{$align}}">
+<div class="{{ $this->inline ? 'sm:flex' : 'w-full'}} {{$align}}">
     <label for="{{ $field }}" class="w-full form-label {{ $this->inline ? $labelW : null }} {{ $this->inline ? 'sm:text-right' : 'text-left' }} pr-4">
         {{ $label }}
     </label>
