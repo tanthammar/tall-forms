@@ -6,6 +6,7 @@ $rowgap = $inline ? 'sm:row-gap-4 space-y-4' : 'sm:row-gap-3 space-y-3';
     <div class="{{ $form_wrapper }}">
         <div class="sm:grid sm:col-gap-4 sm:grid-cols-6 sm:space-y-0 {{ $rowgap }}">
             @foreach($fields as $field)
+                @if(filled($field))
             <div class="sm:col-span-{{ $field->colspan ?? 6 }}">
                 @if($field->view)
                 @include($field->view)
@@ -13,6 +14,7 @@ $rowgap = $inline ? 'sm:row-gap-4 space-y-4' : 'sm:row-gap-3 space-y-3';
                 @include('tall-forms::fields.' . $field->type)
                 @endif
             </div>
+                @endif
             @endforeach
         </div>
         <div class="w-full mt-8 border-t border-gray-200 pt-5">
