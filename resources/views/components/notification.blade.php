@@ -1,7 +1,6 @@
 <div
     class="fixed inset-0 flex items-end justify-center px-4 py-6 pointer-events-none sm:p-6 sm:items-start sm:justify-end"
-    style="margin-top: 50px" xmlns:x-bind="http://www.w3.org/1999/xhtml"
-    xmlns:x-transition="http://www.w3.org/1999/xhtml" xmlns:x-on="http://www.w3.org/1999/xhtml">
+    style="margin-top: 50px">
     <div x-cloak x-data="{ show: {{ $show ?? 'false' }}, message: '{{ $message ?? '' }}', bg: '{{ $bg ?? config('tall-forms.positive')}}' }"
          x-on:notify.window="
     show = true;

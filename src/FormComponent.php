@@ -2,9 +2,7 @@
 
 namespace Tanthammar\TallForms;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\URL;
 use Tanthammar\TallForms\Traits\FollowsRules;
 use Tanthammar\TallForms\Traits\HandlesArrays;
 use Tanthammar\TallForms\Traits\Notify;

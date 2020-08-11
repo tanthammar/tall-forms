@@ -1,5 +1,4 @@
 @props([
-'colspan' => 6,
 'field' => "",
 'label' => "",
 'id' => null,
@@ -8,7 +7,7 @@
 'value' => false,
 'html' => null,
 ])
-<div {{ $attributes->merge(['class' => "flex sm:col-span-{$colspan}"]) }}>
+<div {{ $attributes->merge(['class' => "flex"]) }}>
 <input x-ref="{{ $field }}" wire:model="{{ $field }}" name="{{ $id ?? $field }}" type="checkbox" @if($value)value="{{$value}}"@endif
         class="form-checkbox mt-1 h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
     <div class="ml-2 block">
