@@ -16,7 +16,6 @@ class BaseField
     protected $placeholder;
     protected $help;
     protected $rules;
-    protected $view;
     protected $prefix;
     protected $icon;
     protected $colspan;
@@ -169,18 +168,6 @@ class BaseField
     public function rules($rules): BaseField
     {
         $this->rules = $rules;
-        return $this;
-    }
-
-
-    /**
-     * Display a custom view instad of the default field view
-     * @param string $view
-     * @return $this
-     */
-    public function view(string $view): BaseField
-    {
-        $this->view = $view;
         return $this;
     }
 

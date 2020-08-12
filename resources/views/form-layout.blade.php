@@ -9,9 +9,11 @@ $rowgap = $inline ? 'sm:row-gap-4 space-y-4' : 'sm:row-gap-3 space-y-3';
                 @if(filled($field))
             <div class="sm:col-span-{{ $field->colspan ?? 6 }}">
                 @if($field->view)
-                @include($field->view)
+                    @include($field->view)
+                @elseif($field->livewireComponent)
+                    @livewire($field->livewireComponent, $field->livewireParams)
                 @else
-                @include('tall-forms::fields.' . $field->type)
+                    @include('tall-forms::fields.' . $field->type)
                 @endif
             </div>
                 @endif

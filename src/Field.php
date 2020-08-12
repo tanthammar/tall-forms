@@ -12,6 +12,9 @@ class Field extends BaseField
     protected $array_fields = [];
     protected $keyval_fields = [];
     protected $array_sortable = false;
+    protected $view;
+    protected $livewireComponent;
+    protected $livewireParams;
 
 
     public function __construct($label, $name)
@@ -55,6 +58,24 @@ class Field extends BaseField
     public function sortable(): Field
     {
         $this->array_sortable = true;
+        return $this;
+    }
+
+    /**
+     * Display a custom view instad of the default field view
+     * @param string $view
+     * @return $this
+     */
+    public function view(string $view): BaseField
+    {
+        $this->view = $view;
+        return $this;
+    }
+
+    public function livewireComponent(string $component, array $params = []): BaseField
+    {
+        $this->livewireComponent = $component;
+        $this->livewireParams = $params;
         return $this;
     }
 }

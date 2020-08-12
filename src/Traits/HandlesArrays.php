@@ -45,4 +45,11 @@ trait HandlesArrays
         unset($this->form_data[$field_name][$key]);
         $this->form_data[$field_name] = array_values($this->form_data[$field_name]);
     }
+
+    public function autoSelectSingleArrayValue(string $arrayName, string $field)
+    {
+        if (count($this->$arrayName) === 1) {
+            $this->form_data[$field] = array_values($this->$arrayName);
+        }
+    }
 }

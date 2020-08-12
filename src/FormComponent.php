@@ -136,8 +136,6 @@ class FormComponent extends Component
 
     public function success()
     {
-        // $this->form_data['password'] = bcrypt($this->form_data['password']);
-        // \App\Models\User::create($this->form_data);
         ($this->action == 'update')
             ? $this->model->update($this->form_data)
             : $this->create($this->form_data);
