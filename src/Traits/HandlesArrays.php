@@ -9,12 +9,14 @@ trait HandlesArrays
         $array_fields = [];
 
         foreach ($this->fields() as $field) {
-            if ($field->name == $field_name) {
-                foreach ($field->array_fields as $array_field) {
-                    $array_fields[$array_field->name] = $array_field->default ?? ($array_field->type == 'checkboxes' ? [] : null);
-                }
+            if (filled($field)) {
+                if ($field->name == $field_name) {
+                    foreach ($field->array_fields as $array_field) {
+                        $array_fields[$array_field->name] = $array_field->default ?? ($array_field->type == 'checkboxes' ? [] : null);
+                    }
 
-                break;
+                    break;
+                }
             }
         }
 

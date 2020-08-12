@@ -10,21 +10,23 @@ trait FollowsRules
         $rules_ignore = $realtime ? $this->rulesIgnoreRealtime() : [];
 
         foreach ($this->fields() as $field) {
-            if ($field->rules) {
-                $rules[$field->key] = $this->fieldRules($field, $rules_ignore);
-            }
-
-            // File fields need more complex logic since they are technically arrays
-            // Right now we can only do simple validation with file fields
-
-            foreach ($field->array_fields as $array_field) {
-                if ($array_field->rules) {
-                    $rules[$field->key . '.*.' . $array_field->name] = $this->fieldRules($array_field, $rules_ignore);
+            if(filled($field)) {
+                if ($field->rules) {
+                    $rules[$field->key] = $this->fieldRules($field, $rules_ignore);
                 }
-            }
-            foreach ($field->keyval_fields as $array_field) {
-                if ($array_field->rules) {
-                    $rules[$field->key . '.' . $array_field->name] = $this->fieldRules($array_field, $rules_ignore);
+
+                // File fields need more complex logic since they are technically arrays
+                // Right now we can only do simple validation with file fields
+
+                foreach ($field->array_fields as $array_field) {
+                    if ($array_field->rules) {
+                        $rules[$field->key . '.*.' . $array_field->name] = $this->fieldRules($array_field, $rules_ignore);
+                    }
+                }
+                foreach ($field->keyval_fields as $array_field) {
+                    if ($array_field->rules) {
+                        $rules[$field->key . '.' . $array_field->name] = $this->fieldRules($array_field, $rules_ignore);
+                    }
                 }
             }
         }

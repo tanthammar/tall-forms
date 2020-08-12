@@ -24,7 +24,6 @@ class BaseField
     protected $class;
     protected $group_class = 'rounded border bg-gray-50';
     protected $errorMsg;
-    protected $inline = true;
     protected $is_relation = false;
     protected $is_custom = false;
     protected $step = 1;

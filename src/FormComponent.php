@@ -110,12 +110,14 @@ class FormComponent extends Component
         $custom_names = [];
 
         foreach ($this->fields() as $field) {
-            if ($field->is_relation) {
-                $relationship_names[] = $field->name;
-            } elseif ($field->is_custom) {
-                $custom_names[] = $field->name;
-            } else {
-                $field_names[] = $field->name;
+            if (filled($field)) {
+                if ($field->is_relation) {
+                    $relationship_names[] = $field->name;
+                } elseif ($field->is_custom) {
+                    $custom_names[] = $field->name;
+                } else {
+                    $field_names[] = $field->name;
+                }
             }
         }
 

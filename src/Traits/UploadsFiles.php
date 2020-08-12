@@ -26,9 +26,11 @@ trait UploadsFiles
     public function fileUpdate($field_name, $uploaded_files)
     {
         foreach ($this->fields() as $field) {
-            if ($field->name == $field_name) {
-                $value = $field->file_multiple ? array_merge($this->form_data[$field_name], $uploaded_files) : $uploaded_files;
-                break;
+            if (filled($field)) {
+                if ($field->name == $field_name) {
+                    $value = $field->file_multiple ? array_merge($this->form_data[$field_name], $uploaded_files) : $uploaded_files;
+                    break;
+                }
             }
         }
 

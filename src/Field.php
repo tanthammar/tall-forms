@@ -15,6 +15,10 @@ class Field extends BaseField
     protected $view;
     protected $livewireComponent;
     protected $livewireParams;
+    protected $tagType;
+    protected $tagLocale;
+    protected $inline;
+
 
 
     public function __construct($label, $name)
@@ -48,10 +52,19 @@ class Field extends BaseField
         $this->array_fields = $fields;
         return $this;
     }
+
     public function keyval($fields = []): Field
     {
         $this->type = 'keyval';
         $this->keyval_fields = $fields;
+        return $this;
+    }
+
+    public function tags($tagType = "", $tagLocale = null): Field
+    {
+        $this->type = 'tags';
+        $this->tagType = $tagType;
+        $this->tagLocale = $tagLocale ?? app()->getLocale();
         return $this;
     }
 
@@ -76,6 +89,12 @@ class Field extends BaseField
     {
         $this->livewireComponent = $component;
         $this->livewireParams = $params;
+        return $this;
+    }
+
+    public function inline(bool $inline = true): BaseField
+    {
+        $this->inline = $inline;
         return $this;
     }
 }
