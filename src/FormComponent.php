@@ -91,12 +91,12 @@ class FormComponent extends Component
         ];
     }
 
-    public function updated($field)
+    public function updated($field, $value)
     {
         $this->fields_updated($field);
 
         $function = $this->parseUpdateFunctionFrom($field);
-        if (method_exists($this, $function)) $this->$function();
+        if (method_exists($this, $function)) $this->$function($value);
 
         $this->validateOnly($field, $this->rules(true));
     }
