@@ -16,7 +16,6 @@ class Field extends BaseField
     protected $livewireComponent;
     protected $livewireParams;
     protected $tagType;
-    protected $tagLocale;
     protected $inline;
 
 
@@ -60,11 +59,11 @@ class Field extends BaseField
         return $this;
     }
 
-    public function tags($tagType = "", $tagLocale = null): Field
+    public function tags($tagType = "", $tagTypeSuffix = null): Field
     {
+        $this->is_custom = true;
         $this->type = 'tags';
-        $this->tagType = $tagType;
-        $this->tagLocale = $tagLocale ?? app()->getLocale();
+        $this->tagType = filled($tagTypeSuffix) ? $tagType . '-' . $tagTypeSuffix : $tagType;
         return $this;
     }
 

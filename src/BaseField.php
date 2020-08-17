@@ -102,7 +102,7 @@ class BaseField
         return $this;
     }
 
-    public function default(string $default): BaseField
+    public function default($default): BaseField
     {
         $this->default = $default;
         return $this;

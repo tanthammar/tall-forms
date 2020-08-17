@@ -24,10 +24,11 @@ class FormComponent extends Component
     public $spaLayout;
     private static $storage_disk;
     private static $storage_path;
+    protected $custom_data;
     public $form_wrapper = 'max-w-screen-lg mx-auto';
     public $previous;
 
-    protected $listeners = ['fileUpdate'];
+    protected $listeners = ['fileUpdate', 'fillField'];
 
     public function mount_form($model = null)
     {
@@ -35,7 +36,7 @@ class FormComponent extends Component
         $this->beforeFormProperties();
         $this->setFormProperties($this->model);
         $this->afterFormProperties();
-        $this->previous = \URL::previous();  //used for saveAndGoBack
+        $this->previous = urlencode(\URL::previous());  //used for saveAndGoBack
         $this->spaLayout = config('tall-forms.spa-layout');
     }
 
@@ -93,12 +94,41 @@ class FormComponent extends Component
     public function updated($field)
     {
         $this->fields_updated($field);
+
+        $function = $this->parseUpdateFunctionFrom($field);
+        if (method_exists($this, $function)) $this->$function();
+
         $this->validateOnly($field, $this->rules(true));
+    }
+
+    /**
+     * Executes before field validation, creds to "@roni", livewire discord channel member
+     * @param string $field
+     * @return string
+     */
+    protected function parseUpdateFunctionFrom(string $field): string
+    {
+        return 'updated' . \Str::of($field)->replace('.', '_')->studly();
     }
 
     public function fields_updated($field)
     {
         return null;
+    }
+
+
+    public function fillField($array)
+    {
+        $this->form_data[$array['field']] = $array['value'];
+    }
+
+    public function syncTags($field, $tagType = null)
+    {
+        $tags = data_get($this->custom_data, $field);
+        if (filled($tags = explode(",", $tags)) && filled($this->model)) {
+            clock($tagType, $tags);
+            filled($tagType) ? $this->model->syncTagsWithType($tags, $tagType) : $this->model->syncTags($tags);
+        }
     }
 
     public function submit()
@@ -122,13 +152,13 @@ class FormComponent extends Component
         }
 
         $relationship_data = Arr::only($this->form_data, $relationship_names);
-        $custom_data = Arr::only($this->form_data, $custom_names);
+        $this->custom_data = Arr::only($this->form_data, $custom_names); //custom_data also used by syncTags() after save if create form
         $this->form_data = Arr::only($this->form_data, $field_names);
 
         //make sure to create the model before attaching any relations
         $this->success(); //creates or updates the model
         if (filled($this->model)) $this->relations($relationship_data);
-        $this->custom_fields($custom_data);
+        $this->custom_fields($this->custom_data);
     }
 
     public function errorMessage($message)
@@ -140,7 +170,7 @@ class FormComponent extends Component
     {
         ($this->action == 'update')
             ? $this->model->update($this->form_data)
-            : $this->create($this->form_data);
+            : $this->create($this->form_data); // you have to add the create() method to your component
     }
 
     public function relations(array $relationship_data)
@@ -164,7 +194,7 @@ class FormComponent extends Component
         if (optional($this->model)->exists) {
             $this->model->delete();
             session()->flash('success', 'The object was deleted');
-            return redirect($this->previous);
+            return redirect(urldecode($this->previous));
         }
         return null;
     }
@@ -178,7 +208,7 @@ class FormComponent extends Component
     public function saveAndGoBackResponse()
     {
         //return back(); //does not work with livewire
-        return redirect($this->previous);
+        return redirect(urldecode($this->previous));
     }
 
     public function saveAndStay()

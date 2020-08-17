@@ -23,9 +23,11 @@ class DummyComponent extends FormComponent
     }
 
 
+    // Mandatory method, if $this->action = 'create'
     public function create($form_data)
     {
-        DummyModel::create($form_data);
+        // Set the $model property in order to conditionally display fields when the model instance exists, on saveAndStayResponse()
+        $this->model = DummyModel::create($form_data);
     }
 
     public function fields()

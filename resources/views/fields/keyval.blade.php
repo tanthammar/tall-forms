@@ -1,4 +1,4 @@
-<x-tall-field-wrapper :inline="$inline" :field="$field->name" :label="$field->label" :labelW="$field->labelW" :fieldW="$field->fieldW">
+<x-tall-field-wrapper :inline="$field->inline ?? $inline" :field="$field->name" :label="$field->label" :labelW="$field->labelW" :fieldW="$field->fieldW">
 @include('tall-forms::fields.error-help')
     <div class="w-full mt-2">
     <div class="flex flex-col divide-y mb-2 {{ $field->group_class }}">
