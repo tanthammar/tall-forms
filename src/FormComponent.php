@@ -35,7 +35,7 @@ class FormComponent extends Component
         $this->beforeFormProperties();
         $this->setFormProperties($this->model);
         $this->afterFormProperties();
-        $this->previous = \URL::previous();  //used for saveAndGoBack
+        $this->previous = urlencode(\URL::previous());  //used for saveAndGoBack
         $this->spaLayout = config('tall-forms.spa-layout');
     }
 
@@ -164,7 +164,7 @@ class FormComponent extends Component
         if (optional($this->model)->exists) {
             $this->model->delete();
             session()->flash('success', 'The object was deleted');
-            return redirect($this->previous);
+            return redirect(urldecode($this->previous));
         }
         return null;
     }
@@ -178,7 +178,7 @@ class FormComponent extends Component
     public function saveAndGoBackResponse()
     {
         //return back(); //does not work with livewire
-        return redirect($this->previous);
+        return redirect(urldecode($this->previous));
     }
 
     public function saveAndStay()
