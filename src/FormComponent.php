@@ -108,7 +108,7 @@ class FormComponent extends Component
      */
     protected function parseUpdateFunctionFrom(string $field): string
     {
-        return 'updated' . \Str::of($field)->replace('.', '_')->studly();
+        return 'updated' . \Str::of($field)->replace('.', '_')->studly()->ltrim('FormData');
     }
 
     public function fields_updated($field)
