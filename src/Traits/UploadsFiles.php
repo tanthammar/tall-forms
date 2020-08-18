@@ -35,7 +35,7 @@ trait UploadsFiles
         }
 
         $this->form_data[$field_name] = $value ?? [];
-        $this->updated('form_data.' . $field_name);
+        $this->updated('form_data.' . $field_name, data_get($this->form_data, $field_name));
     }
 
     public function fileIcon($mime_type)

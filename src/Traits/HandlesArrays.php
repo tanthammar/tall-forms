@@ -21,7 +21,7 @@ trait HandlesArrays
         }
 
         $this->form_data[$field_name][] = $array_fields;
-        $this->updated('form_data.' . $field_name);
+        $this->updated('form_data.' . $field_name, data_get($this->form_data, $field_name));
     }
 
     public function arrayMoveUp($field_name, $key)
