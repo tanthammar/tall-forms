@@ -1,5 +1,6 @@
 @props([
     'colspan' => 6,
+    'colclass' => config('tall-forms.col-span-classes'),
     'rows' => 3,
     'id' => null,
     'field' => null,
@@ -9,7 +10,7 @@
     'label' => null,
     'fieldClass' => null,
 ])
-<div {{ $attributes->merge(['class' => "sm:col-span-{$colspan}"]) }}>
+<div {{ $attributes->merge(['class' => $colclass[$colspan]]) }}>
     @if($label)<label for="{{ $id ?? $field }}" class="form-label">{{ $label }}</label>@endif
     <div class="my-1 w-full">
         <textarea x-ref="{{ $field }}" wire:model.lazy="{{ $field }}" name="{{ $id ?? $field }}" rows="{{ $rows }}"

@@ -54,4 +54,14 @@ return [
     //Default label-, field-width for inline form layout
     'field-width' => 'sm:w-3/4 md:w-4/5',
     'label-width' => 'sm:w-1/4 md:w-1/5',
+
+    //Column span classes for the fields ->colspan() method
+    'col-span-classes' => [
+        '1' => 'sm:col-span-1',
+        '2' => 'sm:col-span-2',
+        '3' => 'sm:col-span-3',
+        '4' => 'sm:col-span-4',
+        '5' => 'sm:col-span-5',
+        '6' => 'sm:col-span-6',
+    ],
 ];

@@ -172,12 +172,12 @@ class BaseField
 
     /**
      * Default 6 of 6 columns
-     * @param int $width
+     * @param int $cols
      * @return BaseField
      */
-    public function colspan(int $width): BaseField
+    public function colspan(int $cols): BaseField
     {
-        $this->colspan = $width;
+        $this->colspan = $cols;
         return $this;
     }
 

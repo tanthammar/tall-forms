@@ -1,5 +1,6 @@
 @props([
 'colspan' => 6,
+'colclass' => config('tall-forms.col-span-classes'),
 'field' => "",
 'label' => "",
 'id' => null,
@@ -11,7 +12,7 @@
 'min' => null,
 'max' => null,
 ])
-<div {{ $attributes->merge(['class' => "sm:col-span-{$colspan}"]) }}>
+<div {{ $attributes->merge(['class' => $colclass[$colspan]]) }}>
 
         <label for="{{ $id ?? $field }}">
             <span class="block text-sm font-medium leading-5 text-gray-500">{{ $label ?? ''}}</span>
