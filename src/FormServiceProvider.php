@@ -18,7 +18,8 @@ class FormServiceProvider extends ServiceProvider
         $this->publishes([__DIR__ . '/../config/tall-forms.php' => config_path('tall-forms.php')], 'form-config');
         $this->publishes([__DIR__ . '/../resources/views' => resource_path('views/vendor/tall-forms')], 'form-views');
 
-        \Livewire::component('tall-tags', TagsField::class);
+        \Livewire::component('tall-tags-update', \Tanthammar\TallForms\Tags\TagsFieldUpdate::class);
+        \Livewire::component('tall-tags-create', \Tanthammar\TallForms\Tags\TagsFieldCreate::class);
 
         $this->bootViews();
     }

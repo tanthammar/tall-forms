@@ -16,6 +16,6 @@ trait LegacyMount
         $this->action = $action;
         $this->showDelete = $showDelete;
         $this->setup();
-        $this->previous = \URL::previous();  //used for saveAndGoBack
+        $this->previous = urlencode(\URL::previous());  //used for saveAndGoBack
     }
 }
