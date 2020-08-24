@@ -92,7 +92,7 @@ class FormComponent extends Component
     {
         $this->fields_updated($field);
 
-        $function = $this->parseUpdateFunctionFrom($field);
+        $function = $this->parseFunctionNameFrom($field);
         if (method_exists($this, $function)) $this->$function($value);
 
         $fieldType = $this->getFieldType($field);
@@ -134,13 +134,29 @@ class FormComponent extends Component
         }
 
         $relationship_data = Arr::only($this->form_data, $relationship_names);
-        $this->custom_data = Arr::only($this->form_data, $custom_names); //custom_data also used by syncTags() after save if create form
+        $this->custom_data = Arr::only($this->form_data, $custom_names); //custom_data also used by syncTags() after save if create form, therefore must be a property
         $this->form_data = Arr::only($this->form_data, $field_names);
 
         //make sure to create the model before attaching any relations
         $this->success(); //creates or updates the model
-        if (filled($this->model)) $this->relations($relationship_data);
-        $this->custom_fields($this->custom_data);
+
+        //save relations, legacy
+        if (filled($this->model) && filled($relationship_data)) {
+            $this->relations($relationship_data);
+        }
+
+        //save custom fields, legacy
+        if(filled($this->custom_data)) {
+            $this->custom_fields($this->custom_data);
+        }
+
+        //saveFoo()
+        foreach ($this->fields() as $field) {
+            if(filled($field)) {
+                $function = $this->parseFunctionNameFrom($field->key, 'save');
+                if (method_exists($this, $function)) $this->$function();
+            }
+        }
     }
 
     public function success()

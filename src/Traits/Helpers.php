@@ -37,12 +37,15 @@ trait Helpers
     /**
      * Executes before field validation, creds to "@roni", livewire discord channel member
      * @param string $field
+     * @param string $hook
      * @return string
      */
-    protected function parseUpdateFunctionFrom(string $field): string
+    protected function parseFunctionNameFrom(string $field, $hook = 'updated'): string
     {
-        return 'updated' . \Str::of($field)->replace('.', '_')->studly()->ltrim('FormData');
+        return $hook . \Str::of($field)->replace('.', '_')->studly()->replaceFirst('FormData', '');
     }
+
+
 
     public function fillField($array)
     {
