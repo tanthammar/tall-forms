@@ -6,10 +6,11 @@
     'fieldW' => config('tall-forms.field-width'),
     'align' => 'items-baseline',
     'inline' => true,
+    'labelSuffix' => "",
 ])
 <div class="{{ $inline ? 'sm:flex' : 'w-full'}} {{$align}}">
     <label for="{{ $field }}" class="w-full form-label {{ $inline ? $labelW : null }} {{ $inline ? 'sm:text-right' : 'text-left' }} pr-4">
-        {{ $label }}
+        {{ $label }} <span class="italic text-black text-opacity-25 text-xs">{{ $labelSuffix }}</span>
     </label>
     <div class="w-full {{ $inline ? $fieldW : null }}">
         {{$slot}}

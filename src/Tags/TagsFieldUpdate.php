@@ -9,9 +9,9 @@ class TagsFieldUpdate extends Component
 {
     use TagsTrait;
 
-    public function mount(Model $model, string $field, string $tagType = null, string $tags = null, string $help = null, string $errorMsg = null)
+    public function mount(Model $model, string $field, string $tagType = null, string $tags = null, string $help = null, string $errorMsg = null, string $tagLocale = null)
     {
         $this->model = $model;
-        $this->tags_mount($field, $tagType, $tags, $help, $errorMsg);
+        $this->tags_mount($field, $tagType, $tags, $help, $errorMsg, $tagLocale);
     }
 }

@@ -29,6 +29,7 @@ class BaseField
     protected $step = 1;
     protected $min = 0;
     protected $max;
+    protected $labelSuffix;
 
     public function __get($property)
     {
@@ -255,6 +256,12 @@ class BaseField
     public function max(float $max): BaseField
     {
         $this->max = $max;
+        return $this;
+    }
+
+    public function labelSuffix(string $string): BaseField
+    {
+        $this->labelSuffix = $string;
         return $this;
     }
 }

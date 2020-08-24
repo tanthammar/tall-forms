@@ -3,15 +3,17 @@
 namespace Tanthammar\TallForms;
 
 use Illuminate\Support\Arr;
+use Livewire\WithFileUploads;
 use Tanthammar\TallForms\Traits\FollowsRules;
 use Tanthammar\TallForms\Traits\HandlesArrays;
+use Tanthammar\TallForms\Traits\Helpers;
 use Tanthammar\TallForms\Traits\Notify;
-use Tanthammar\TallForms\Traits\UploadsFiles;
 use Livewire\Component;
+use Tanthammar\TallForms\Traits\UploadsFiles;
 
 class FormComponent extends Component
 {
-    use FollowsRules, UploadsFiles, HandlesArrays, Notify;
+    use FollowsRules, HandlesArrays, Notify, WithFileUploads, UploadsFiles, Helpers;
 
     public $model;
     public $form_data;
@@ -22,13 +24,12 @@ class FormComponent extends Component
     public $inline = true;
     public $spaMode = false;
     public $spaLayout;
-    private static $storage_disk;
-    private static $storage_path;
     protected $custom_data;
     public $form_wrapper = 'max-w-screen-lg mx-auto';
     public $previous;
 
-    protected $listeners = ['fileUpdate', 'fillField'];
+    protected $listeners = ['fillField'];
+
 
     public function mount_form($model = null)
     {
@@ -83,13 +84,9 @@ class FormComponent extends Component
 
     public function fields()
     {
-        return [
-            Field::make('Name')->input()->rules(['required', 'string', 'max:255']),
-            Field::make('Email')->input('email')->rules(['required', 'string', 'email', 'max:255', 'unique:users,email']),
-            Field::make('Password')->input('password')->rules(['required', 'string', 'min:8', 'confirmed']),
-            Field::make('Confirm Password', 'password_confirmation')->input('password'),
-        ];
+        return [];
     }
+
 
     public function updated($field, $value)
     {
@@ -98,37 +95,22 @@ class FormComponent extends Component
         $function = $this->parseUpdateFunctionFrom($field);
         if (method_exists($this, $function)) $this->$function($value);
 
-        $this->validateOnly($field, $this->rules(true));
+        $fieldType = $this->getFieldType($field); //Array and KeyVal returns null
+        if ($fieldType == 'file') {
+            // livewire native file upload
+            $this->customValidateFilesIn($field, $this->getFieldValueByKey($field, 'rules'));
+        } elseif ($fieldType != 'file' && !\Str::startsWith($field, 'form_data.') && is_array($value)) {
+            // custom array field or multiselect
+            $this->validateOnly($field . ".*", $this->rules(true));
+        } else {
+            $this->validateOnly($field, $this->rules(true));
+        }
     }
 
-    /**
-     * Executes before field validation, creds to "@roni", livewire discord channel member
-     * @param string $field
-     * @return string
-     */
-    protected function parseUpdateFunctionFrom(string $field): string
-    {
-        return 'updated' . \Str::of($field)->replace('.', '_')->studly()->ltrim('FormData');
-    }
 
     public function fields_updated($field)
     {
         return null;
-    }
-
-
-    public function fillField($array)
-    {
-        $this->form_data[$array['field']] = $array['value'];
-    }
-
-    public function syncTags($field, $tagType = null)
-    {
-        $tags = data_get($this->custom_data, $field);
-        if (filled($tags = explode(",", $tags)) && filled($this->model)) {
-            clock($tagType, $tags);
-            filled($tagType) ? $this->model->syncTagsWithType($tags, $tagType) : $this->model->syncTags($tags);
-        }
     }
 
     public function submit()
@@ -159,11 +141,6 @@ class FormComponent extends Component
         $this->success(); //creates or updates the model
         if (filled($this->model)) $this->relations($relationship_data);
         $this->custom_fields($this->custom_data);
-    }
-
-    public function errorMessage($message)
-    {
-        return str_replace('form data.', '', $message);
     }
 
     public function success()

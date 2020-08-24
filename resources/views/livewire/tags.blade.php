@@ -1,6 +1,6 @@
 <div class="bg-grey-lighter w-full">
     @error('search')<p class="error">@lang('fields.tag_error')</p>@enderror
-    @error($field)<p class="error">{{ $errorMsg ?? $message }}</p>@enderror
+    @error($field)<p class="error">{{ $errorMsg ?? $this->errorMessage($message) }}</p>@enderror
     <div class="flex flex-1 flex-wrap bg-white border rounded shadow-sm pl-2 pr-4 pt-2 pb-1">
         @foreach ($tags as $i => $tag)
             <span
@@ -13,7 +13,7 @@
                 </button>
             </span>
         @endforeach
-        <input autofocus wire:model.debounce.500ms="search" wire:keydown.enter.prevent="addFromSearch" name="search"
+        <input autofocus wire:model.debounce.750ms="search" wire:keydown.enter.prevent="addFromSearch" name="search"
                class="tags-input-text flex-1 outline-none pt-1 pb-1 ml-2"
                style="min-width:10rem" placeholder="Add tag...">
     </div>

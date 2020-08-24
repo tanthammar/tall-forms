@@ -2,40 +2,81 @@
 
 namespace Tanthammar\TallForms\Traits;
 
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
+
 trait UploadsFiles
 {
-    public static function fileUpload()
+    public $showFileUploadError = false;
+
+    public function getFileErrorProperty()
     {
-        $storage_disk = self::$storage_disk ?? config('tall-forms.storage_disk');
-        $storage_path = self::$storage_path ?? config('tall-forms.storage_path');
-        $files = [];
-
-        foreach (request()->file('files') as $file) {
-            $files[] = [
-                'file' => $file->store($storage_path, $storage_disk),
-                'disk' => $storage_disk,
-                'name' => $file->getClientOriginalName(),
-                'size' => $file->getSize(),
-                'mime_type' => $file->getMimeType(),
-            ];
-        }
-
-        return ['field_name' => request()->input('field_name'), 'uploaded_files' => $files];
+        return isset($this->uploadFileError)
+            ? $this->uploadFileError
+            : trans(config('tall-forms.upload-file-error'));
     }
 
-    public function fileUpdate($field_name, $uploaded_files)
+    /**
+     * @param string $field_name
+     * @param string|array $rules
+     */
+    public function customValidateFilesIn($field_name, $rules)
     {
-        foreach ($this->fields() as $field) {
-            if (filled($field)) {
-                if ($field->name == $field_name) {
-                    $value = $field->file_multiple ? array_merge($this->form_data[$field_name], $uploaded_files) : $uploaded_files;
-                    break;
-                }
+        if(filled($this->$field_name) && filled($rules)) {
+            $key = is_array($this->$field_name) ? $field_name.'.*' : $field_name;
+            try {
+                Validator::make([$field_name => $this->$field_name], [
+                    $key => $rules,
+                ])->validate();
+                $this->showFileUploadError = false;
+            } catch (ValidationException $e) {
+                $this->showFileUploadError = true;
+                $this->clearFieldAndDeleteTempFiles($field_name);
             }
         }
+    }
 
-        $this->form_data[$field_name] = $value ?? [];
-        $this->updated('form_data.' . $field_name, data_get($this->form_data, $field_name));
+    /**
+     * RESETS THE FIELD and DELETES all TEMPORARY files.
+     * Don't call this before you saved the files you want to keep.
+     * @param $field_name
+     */
+    public function clearFieldAndDeleteTempFiles($field_name)
+    {
+        if ($this->deleteAllTempFiles($this->$field_name)) $this->$field_name = null;
+    }
+
+    public function deleteSingleTempFile($field_name, $key)
+    {
+        if (is_array($this->$field_name)) {
+            if (filled($file = data_get($this->$field_name, $key))) {
+                if ($file->delete()) $this->arrayRemove($field_name, $key, false);
+            }
+        } else {
+            if (filled($file = $this->$field_name)) $file->delete();
+            $this->$field_name = null;
+        }
+    }
+
+    /**
+     * DELETES all TEMPORARY files.
+     * Don't call this before you saved the files you want to keep.
+     * @param $files
+     * @return bool
+     */
+    public function deleteAllTempFiles($files): bool
+    {
+        $success = false;
+        if (filled($files)) {
+            if (is_array($files)) {
+                foreach ($files as $file) {
+                    if (filled($file)) $success = $file->delete();
+                }
+            } else {
+                $success = $files->delete();
+            }
+        }
+        return $success;
     }
 
     public function fileIcon($mime_type)

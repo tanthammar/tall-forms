@@ -1,69 +1,51 @@
-{{-- not tested --}}
-<x-tall-field-wrapper :inline="$field->inline ?? $inline" :field="$field->name" :label="$field->label" :labelW="$field->labelW" :fieldW="$field->fieldW">
-    <div class="my-1 flex rounded-md shadow-sm w-full relative {{$fieldClass}}">
-        <span
-            class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
-            Browse file
-        </span>
-        <input data-file="kdion" id="{{ $field->name }}" name="{{ $field->name }}" type="file"
-            {{ $field->file_multiple ? 'multiple' : '' }} placeholder="{{ $field->placeholder }}" class="flex-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 rounded-none rounded-r-md
-            @error($field->key) error placeholder-red-300 @enderror" />
-        @error($field)
-        <x-tall-error-icon :right="($type == 'date' || $type == 'datetime-local' || $type == 'time') ? 'right-6' : 'right-0'" @endif />
-        @enderror
-    </div>
-
-
-    @if($form_data[$field->name])
-    <ul class="border rounded dividy-y mt-2">
-        @foreach($form_data[$field->name] as $key => $value)
-        <li class="w-full py-2">
-            <div class="flex items-center">
-                <div class="flex-1">
-                    <a href="{{ Storage::url($value['file']) }}" target="_blank">
-                        @svg(config('tall-forms.file-icon').$this->fileIcon($value['mime_type']), "h-4 w-4 mr-1"){{ $value['name'] }}
-                        {{-- <i class="fa fa-fw {{ $this->fileIcon($value['mime_type']) }} mr-1"></i> --}}
-                    </a>
+<x-tall-field-wrapper :inline="$field->inline ?? $inline" :field="$field->name" :label="$field->label"
+                      :labelSuffix="$field->labelSuffix"
+                      :labelW="$field->labelW" :fieldW="$field->fieldW">
+    @if(blank(${$field->name}) || $errors->has($field->multiple ? $field->name.'.*' : $field->name))
+        {{--only show the file input if the field is empty or there are validation errors, to force the user to upload new files or delete existing. --}}
+        <div x-data="{ isUploading: false }"
+             x-on:livewire-upload-start="isUploading = true"
+             x-on:livewire-upload-finish="isUploading = false"
+             x-on:livewire-upload-error="isUploading = false"
+             class="my-1 flex rounded-md shadow-sm w-full relative {{ $field->class }}">
+            <div
+                class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
+                {{-- <div x-cloak x-show="isUploading">--}}
+                <div wire:loading wire:target="{{ $field->name }}">
+                    <x-tall-spinner/>
                 </div>
-                <div class="flex-auto">
-                    <x-button size="xs" color="danger" :icon="config('tall-forms.trash-icon')"
-                        onclick="confirm('{{ __('Are you sure?') }}') || event.stopImmediatePropagation();"
-                        wire:click="arrayRemove('{{ $field->name }}', '{{ $key }}')">
-                    </x-button>
+                <div x-show="!isUploading">
+                    @svg(config('tall-forms.file-upload'), "h-4 w-4")
                 </div>
             </div>
-        </li>
-        @endforeach
-    </ul>
+            {{--intentionally removed input id if multiple forms, with the same field name --}}
+            <input wire:model="{{ $field->name }}" name="{{ $field->name }}" type="file"
+                   {{ $field->multiple ? 'multiple' : '' }} placeholder="{{ $field->placeholder }}"
+                   class="flex-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 rounded-none rounded-r-md @error($field->key) error placeholder-red-300 @enderror"/>
+        </div>
     @endif
 
-    @if($help)<p class="help">{{ $help }}</p>@endif
-    @error($field)<p class="error">{{ $errorMsg ?? $message }}</p>@enderror
+    @if(filled(${$field->name}))
+        <ul class="space-y-2 my-2">
+            @if($field->multiple)
+                @foreach(${$field->name} as $file)
+                    @if(filled($file)) @include('tall-forms::includes.file-loop') @endif
+                @endforeach
+            @else
+                @php $file = ${$field->name}; @endphp
+                @if(filled($file)) @include('tall-forms::includes.file-loop') @endif
+            @endif
+        </ul>
+    @endif
+    @if($field->help)<p class="help">{{ $field->help }}</p>@endif
+    {{--show livewire file upload default validation error--}}
+    @error($field->multiple ? $field->name.'.*': $field->name)
+        @foreach($errors->get($field->multiple ? $field->name.'.*': $field->name) as $message)
+        <p class="error">{{ $field->multiple ? $this->errorMessage($message[0]) : $this->errorMessage($message) }}</p>
+        @endforeach
+        <p class="error">{{ $field->errorMsg ?? $this->fileError }}</p>
+    @enderror
+    {{--show components general validation error --}}
+    @if($showFileUploadError)<p class="error">{{ $field->errorMsg ?? $this->fileError }}</p>@endif
 </x-tall-field-wrapper>
 
-@pushonce('scripts:kdionfile')
-<script>
-    // Code is inspired by Pastor Ryan Hayden
-    // https://github.com/livewire/livewire/issues/106
-    // Thank you, sir!
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('input[data-file="kdion"]').forEach(file => {
-            file.addEventListener('input', event => {
-                let form_data = new FormData();
-                form_data.append('component', @json(get_class($this)));
-                form_data.append('field_name', file.id);
-
-                for (let i = 0; i < event.target.files.length; i++) {
-                    form_data.append('files[]', event.target.files[i]);
-                }
-
-                axios.post('{{ route('tall-forms.file-upload') }}', form_data, {
-                    headers: {'Content-Type': 'multipart/form-data'}
-                }).then(response => {
-                    window.livewire.emit('fileUpdate', response.data.field_name, response.data.uploaded_files);
-                });
-            })
-        });
-    });
-</script>
-@endpushonce

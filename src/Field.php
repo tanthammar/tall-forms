@@ -8,7 +8,7 @@ class Field extends BaseField
 {
     protected $label;
     protected $key;
-    protected $file_multiple;
+    protected $multiple = false;
     protected $array_fields = [];
     protected $keyval_fields = [];
     protected $array_sortable = false;
@@ -16,6 +16,7 @@ class Field extends BaseField
     protected $livewireComponent;
     protected $livewireParams;
     protected $tagType;
+    protected $tagLocale;
     protected $inline;
 
 
@@ -35,13 +36,14 @@ class Field extends BaseField
 
     public function file(): Field
     {
+        $this->is_custom = true;
         $this->type = 'file';
         return $this;
     }
 
     public function multiple(): Field
     {
-        $this->file_multiple = true;
+        $this->multiple = true;
         return $this;
     }
 
@@ -59,11 +61,12 @@ class Field extends BaseField
         return $this;
     }
 
-    public function tags($tagType = "", $tagTypeSuffix = null): Field
+    public function tags(string $tagType = "", string $tagTypeSuffix = null, string $locale = null): Field
     {
         $this->is_custom = true;
         $this->type = 'tags';
         $this->tagType = filled($tagTypeSuffix) ? $tagType . '-' . $tagTypeSuffix : $tagType;
+        $this->tagLocale = $locale;
         return $this;
     }
 

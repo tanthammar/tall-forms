@@ -15,11 +15,12 @@
     'step' => null,
     'min' => null,
     'max' => null,
+    'labelSuffix' => "",
 ])
 <div {{ $attributes->merge(['class' => $colclass[$colspan]]) }}>
     @if($label)
     <label for="{{ $id ?? $field }}" class="block text-sm font-medium leading-5 text-gray-500">
-        {{ $label ?? ''}} {{ old($field) }}
+        {{ $label ?? ''}} {{ old($field) }} <span class="italic text-black text-opacity-25 text-xs">{{ $labelSuffix }}</span>
     </label>
     @endif
 <div class="my-1 flex rounded-md shadow-sm w-full relative {{$fieldClass}}">
@@ -39,9 +40,9 @@
             {{ ($prefix || $icon) ? ' rounded-none rounded-r-md ' : ' rounded ' }} @error($field) error placeholder-red-300 @enderror"
            @if(in_array($type, ['number', 'range', 'date', 'datetime-local', 'month', 'time', 'week'])) min="{{ $min }}" max="{{ $max }}" step="{{ $step }}" @endif/>
         @error($field)
-        <x-tall-error-icon :right="($type == 'date' || $type == 'datetime-local' || $type == 'time') ? 'right-6' : 'right-0'" @endif />
+        <x-tall-error-icon :right="($type == 'date' || $type == 'datetime-local' || $type == 'time') ? 'right-6' : 'right-0'" />
         @enderror
     </div>
     @if($help)<p class="help">{{ $help }}</p>@endif
-    @error($field)<p class="error">{{ $errorMsg ?? $message }}</p>@enderror
+    @error($field)<p class="error">{{ $errorMsg ?? $this->errorMessage($message) }}</p>@enderror
 </div>

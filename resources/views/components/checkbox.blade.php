@@ -14,7 +14,7 @@
         <label for="{{ $id ?? $field }}" class="text-sm leading-5 text-gray-900">
             {{ $label ?? ''}}
         </label>
-        @error($field)<p class="error" style="line-height: 0.5rem">{{ $errorMsg ?? $message }}</p>
+        @error($field)<p class="error" style="line-height: 0.5rem">{{ $errorMsg ?? $this->errorMessage($message) }}</p>
         @else
         @if($help)<p class="help">{{ $help }}</p>@endif
         @if($html)<p class="help">{!! $html !!}</p>@endif

@@ -14,6 +14,7 @@ return [
     'save-and-stay' => 'global.save',
     'save-go-back' => 'global.save_go_back',
     'message-updated-success' => 'messages.updated_success',
+    'are-u-sure' => 'global.areYouSure',
 
 
     //notification trait popup bg colors
@@ -39,10 +40,6 @@ return [
     'button-primary' => 'text-blue-100 bg-night-lighter hover:bg-night-dark focus:border-night-light focus:shadow-outline-blue active:bg-night-dark',
 
 
-    //file uploads
-    'storage_disk' => env('FORM_STORAGE_DISK', 'public'),
-    'storage_path' => env('FORM_STORAGE_PATH', 'uploads'),
-
 
     //icons
     'arrow-up-icon' => 'light/arrow-up', //used as @svg('light/arrow-up', 'classes')
@@ -50,6 +47,7 @@ return [
     'trash-icon' => 'light/trash-alt',
     'plus-icon' => 'light/plus-circle',
     'file-icon' => 'light/', //used as @svg('light/{$mime_type}', 'classes')
+    'file-upload' => 'light/upload', //prefix icon for file upload field
 
     //Default label-, field-width for inline form layout
     'field-width' => 'sm:w-3/4 md:w-4/5',
@@ -64,4 +62,7 @@ return [
         '5' => 'sm:col-span-5',
         '6' => 'sm:col-span-6',
     ],
+
+    //File upload default validation message
+    'upload-file-error' => 'messages.file_upload_error',
 ];

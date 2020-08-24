@@ -2,7 +2,7 @@
 $rowgap = $inline ? 'sm:row-gap-4 space-y-4' : 'sm:row-gap-3 space-y-3';
 @endphp
 <div class="w-full">
-    @if(!$spaMode) <h3 class="text-2xl my-4">{{$formTitle}}</h3> @endif
+    @if(!$spaMode && $formTitle) <h3 class="text-2xl my-4">{{ $formTitle }}</h3> @endif
     <div class="{{ $form_wrapper }}">
         <div class="sm:grid sm:col-gap-4 sm:grid-cols-6 sm:space-y-0 {{ $rowgap }}">
             @foreach($fields as $field)

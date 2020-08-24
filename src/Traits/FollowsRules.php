@@ -10,9 +10,16 @@ trait FollowsRules
         $rules_ignore = $realtime ? $this->rulesIgnoreRealtime() : [];
 
         foreach ($this->fields() as $field) {
-            if(filled($field)) {
+            if ($field != null) {
                 if ($field->rules) {
-                    $rules[$field->key] = $this->fieldRules($field, $rules_ignore);
+                    //for file upload or multi select validation
+                    if($field->type === 'file') {
+                        $field->multiple
+                            ? $rules[$field->name . ".*"] = $this->fieldRules($field, $rules_ignore)
+                            : $rules[$field->name] = $this->fieldRules($field, $rules_ignore);
+                    } else {
+                        $rules[$field->key] = $this->fieldRules($field, $rules_ignore);
+                    }
                 }
 
                 // File fields need more complex logic since they are technically arrays
@@ -30,7 +37,6 @@ trait FollowsRules
                 }
             }
         }
-
         return $rules;
     }
 

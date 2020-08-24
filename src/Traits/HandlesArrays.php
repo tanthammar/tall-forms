@@ -42,10 +42,16 @@ trait HandlesArrays
         }
     }
 
-    public function arrayRemove($field_name, $key)
+    //also used by File input
+    public function arrayRemove($field_name, $key, $is_in_form_data = true)
     {
-        unset($this->form_data[$field_name][$key]);
-        $this->form_data[$field_name] = array_values($this->form_data[$field_name]);
+        if($is_in_form_data) {
+            unset($this->form_data[$field_name][$key]);
+            $this->form_data[$field_name] = array_values($this->form_data[$field_name]);
+        } else {
+            unset($this->$field_name[$key]);
+            $this->$field_name = array_values($this->$field_name);
+        }
     }
 
     public function autoSelectSingleArrayValue(string $arrayName, string $field)
