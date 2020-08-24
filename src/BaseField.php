@@ -264,4 +264,15 @@ class BaseField
         $this->labelSuffix = $string;
         return $this;
     }
+
+    //TODO if type = keyval or array, make extra loop to convert them to sub-arrays
+    //on arrays they are in $this->array_fields[]
+    //on keyval they are in $this->keyval_fields[]
+    public function fieldToArray() {
+        $array = array();
+        foreach ($this as $key => $value) {
+            $array[$key] = $value;
+        }
+        return $array;
+    }
 }

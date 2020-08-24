@@ -95,10 +95,10 @@ class FormComponent extends Component
         $function = $this->parseUpdateFunctionFrom($field);
         if (method_exists($this, $function)) $this->$function($value);
 
-        $fieldType = $this->getFieldType($field); //Array and KeyVal returns null
+        $fieldType = $this->getFieldType($field);
         if ($fieldType == 'file') {
             // livewire native file upload
-            $this->customValidateFilesIn($field, $this->getFieldValueByKey($field, 'rules'));
+            $this->customValidateFilesIn($field, $this->getFieldValueByKey($field, 'rules'));//this does not work for array keyval fields
         } elseif ($fieldType != 'file' && !\Str::startsWith($field, 'form_data.') && is_array($value)) {
             // custom array field or multiselect
             $this->validateOnly($field . ".*", $this->rules(true));

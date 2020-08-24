@@ -7,6 +7,8 @@ use Illuminate\Support\Arr;
 
 trait Helpers
 {
+    //TODO expand method to include keyval and array fields
+    //you cannot get rules for keyval or array fields with this method
     protected function getFieldValueByKey(string $fieldKey, string $fieldValue)
     {
 
@@ -21,26 +23,16 @@ trait Helpers
         return $this->getFieldValueByKey($fieldKey, 'type');
     }
 
+    //Does not convert Array or KeyVal fields, they remain as objects!!
     protected function fieldsToArray(): array
     {
         $array = [];
         foreach ($this->fields() as $field) {
-            if (filled($field)) $array[] = $this->dismount($field);
+            if (filled($field)) $array[] = $field->fieldToArray();
         }
         return $array;
     }
 
-    protected function dismount($object): array
-    {
-        $reflectionClass = new \ReflectionClass(get_class($object));
-        $array = array();
-        foreach ($reflectionClass->getProperties() as $property) {
-            $property->setAccessible(true);
-            $array[$property->getName()] = $property->getValue($object);
-            $property->setAccessible(false);
-        }
-        return $array;
-    }
 
     /**
      * Executes before field validation, creds to "@roni", livewire discord channel member
