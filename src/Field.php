@@ -18,7 +18,8 @@ class Field extends BaseField
     protected $tagType;
     protected $tagLocale;
     protected $inline;
-
+    protected $cropperAttributes;
+    public $includeScript;
 
 
     public function __construct($label, $name)
@@ -97,6 +98,19 @@ class Field extends BaseField
     public function inline(bool $inline = true): BaseField
     {
         $this->inline = $inline;
+        return $this;
+    }
+
+    public function singleImgCropper($includeScript = false, $cropperAttributes = [
+        'width' => 300,
+        'height' => 300,
+        'shape' => 'square', //or circle
+    ]): Field
+    {
+        $this->is_custom = true;
+        $this->type = 'single-croppie';
+        $this->includeScript = $includeScript;
+        $this->cropperAttributes = $cropperAttributes;
         return $this;
     }
 }
