@@ -2,24 +2,63 @@
 
 namespace Tanthammar\TallForms;
 
+use Illuminate\Support\Str;
+use Tanthammar\TallForms\Traits\HasSharedProperties;
+
 class ArrayField extends BaseField
 {
-    protected $show_label = false;
+    use HasSharedProperties;
 
-    public function __construct($label, $name)
-    {
-        $this->label = $label;
-        $this->name = $name ?? \Str::snake(\Str::lower($label));
-    }
+    public $type = 'array';
+    public $array_fields = [];
+    public $keyval_fields = [];
+    public $array_sortable = false;
+    public $group_class = 'rounded border bg-gray-50';
 
-    public static function make($label, $name = null)
+    public function repeater($fields = []): self
     {
-        return new static($label, $name);
-    }
-
-    public function showLabel()
-    {
-        $this->show_label = true;
+        $this->type = 'array';
+        $this->array_fields = $fields;
         return $this;
+    }
+
+    public function keyval($fields = []): self
+    {
+        $this->type = 'keyval';
+        $this->keyval_fields = $fields;
+        return $this;
+    }
+
+    public function sortable(): self
+    {
+        if ($this->type === 'array') $this->array_sortable = true;
+        return $this;
+    }
+
+    /**
+     * Applied to the outer wrapper surrounding Array and KeyVal field groups
+     * Default 'rounded border bg-gray-50';
+     *
+     * @param $classes
+     * @return $this
+     */
+    public function groupClass(string $classes = 'rounded border bg-gray-50'): self
+    {
+        $this->group_class = $classes;
+        return $this;
+    }
+
+    //TODO check if this is working
+    //override FieldBase fieldToArray()
+    public function fieldToArray() {
+        $array = [];
+        $fields = $this->array_fields ?? $this->keyval_fields;
+        if(filled($fields)) {
+            foreach ($fields as $field) {
+                $array[] = (array) $field;
+            }
+        }
+        $array[$this->key] = $array;
+        return $array;
     }
 }

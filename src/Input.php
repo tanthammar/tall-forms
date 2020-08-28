@@ -5,99 +5,69 @@ namespace Tanthammar\TallForms;
 
 
 use Illuminate\Support\Str;
+use Tanthammar\TallForms\Traits\HasSharedProperties;
 
-class Input
+class Input extends BaseField
 {
+    use HasSharedProperties;
 
-    protected string $label;
-    protected string $key;
-    protected string $type = 'text';
-    protected string $wire = 'wire:model';
-    protected array $attributes = [];
-    private string $before;
-    private string $after;
-    private string $default;
+    public $type = 'input';
+    public $input_type = 'text';
+    public $autocomplete;
+    public $placeholder;
+    public $prefix;
+    public $icon;
+    protected $step = 1;
+    protected $min = 0;
+    protected $max = 100;
 
-    public function __construct(string $label, string $key)
+
+    public function type(string $type): self
     {
-        $this->label = $label;
-        $this->key = $key ?? Str::snake(Str::lower($label));
-    }
-
-    public static function make(string $label, $key = null): Input
-    {
-        return new static($label, $key);
-    }
-
-    public function type(string $type): Input
-    {
-        $this->type = $type;
+        $this->input_type = $type;
         return $this;
     }
 
-    public function getType(): string
+    public function autocomplete(string $autocomplete): self
     {
-        return $this->type;
-    }
-
-
-    public function default($default): Input
-    {
-        $this->default = $default;
+        $this->autocomplete = $autocomplete;
         return $this;
     }
 
-    public function wire(string $wire_model_declaration): Input
+    public function prefix(string $prefix): self
     {
-        $this->wire = $wire_model_declaration;
+        $this->prefix = $prefix;
         return $this;
     }
 
-    public function xData(string $xData): Input
+    public function placeholder(string $placeholder): self
     {
-        $this->wire = $xData;
+        $this->placeholder = $placeholder;
         return $this;
     }
 
-    public function xInit(string $xInit): Input
+    public function icon(string $icon): self
     {
-        $this->wire = $xInit;
+        $this->icon = $icon;
         return $this;
     }
 
-    public function before(string $blade_view_to_include): Input
+    public function step(float $step): self
     {
-        $this->before = $blade_view_to_include;
+        $this->step = $step;
         return $this;
     }
 
-    public function after(string $blade_view_to_include): Input
+
+    public function min(float $min): self
     {
-        $this->after = $blade_view_to_include;
+        $this->min = $min;
         return $this;
     }
 
-    public function rootAttr(array $attributes): Input
+    public function max(float $max): self
     {
-        $this->attributes['root'] = $attributes;
-        return $this;
-    }
-
-    public function labelAttr(array $attributes): Input
-    {
-        $this->attributes['label'] = $attributes;
-        return $this;
-    }
-
-    public function wrapperAttr(array $attributes): Input
-    {
-        $this->attributes['label'] = $attributes;
-        return $this;
-    }
-
-    public function inputAttr(array $attributes): Input
-    {
-        $this->attributes['input'] = $attributes;
+        $this->max = $max;
         return $this;
     }
 

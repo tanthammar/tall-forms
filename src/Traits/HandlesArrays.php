@@ -2,8 +2,14 @@
 
 namespace Tanthammar\TallForms\Traits;
 
+
 trait HandlesArrays
 {
+    protected function arrayFlipOrCombine(array $options): void
+    {
+        $this->options = \Arr::isAssoc($options) ? array_flip($options) : array_combine($options, $options);
+    }
+
     public function arrayAdd($field_name)
     {
         $array_fields = [];
