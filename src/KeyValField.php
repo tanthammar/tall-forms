@@ -4,7 +4,6 @@ namespace Tanthammar\TallForms;
 
 class KeyValField extends BaseField
 {
-    protected $label;
     protected $show_label = true;
 
     public function __construct($label, $name)

@@ -6,7 +6,6 @@ use Illuminate\Support\Str;
 
 class Field extends BaseField
 {
-    protected $label;
     protected $key;
     protected $multiple = false;
     protected $array_fields = [];

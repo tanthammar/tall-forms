@@ -7,6 +7,7 @@ use Illuminate\Support\Arr;
 class BaseField
 {
     protected $name;
+    protected $label;
     protected $type;
     protected $input_type;
     protected $textarea_rows;
@@ -50,7 +51,7 @@ class BaseField
         return $this;
     }
 
-    public function select(array $options = [])
+    public function select(array $options = []): BaseField
     {
         $this->type = 'select';
         $this->options($options);

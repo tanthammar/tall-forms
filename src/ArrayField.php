@@ -4,7 +4,6 @@ namespace Tanthammar\TallForms;
 
 class ArrayField extends BaseField
 {
-    protected $label;
     protected $show_label = false;
 
     public function __construct($label, $name)
