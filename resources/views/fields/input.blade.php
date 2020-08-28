@@ -1,7 +1,7 @@
 @if($field->input_type === 'hidden')
     <input {{ $field->wire }}="{{ $field->key }}" name="{{ $field->key }}" type="hidden"
     autocomplete="{{ $field->autocomplete }}" class="nosy"
-    @forelse($field->getAttr('field') as $key => $value) {{$key}}="{{$value}}"@endforelse />
+    @foreach($field->getAttr('field') as $key => $value) {{$key}}="{{$value}}" @endforeach/>
 @else
     <x-tall-field-wrapper :inline="$field->inline ?? $inline" :field="$field->key" :label="$field->label"
                           :labelSuffix="$field->labelSuffix" :labelW="$field->labelW" :fieldW="$field->fieldW">

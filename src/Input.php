@@ -17,9 +17,9 @@ class Input extends BaseField
     public $placeholder;
     public $prefix;
     public $icon;
-    protected $step = 1;
-    protected $min = 0;
-    protected $max = 100;
+    public $step = 1;
+    public $min = 0;
+    public $max = 100;
 
 
     public function type(string $type): self

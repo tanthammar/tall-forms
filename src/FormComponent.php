@@ -19,8 +19,6 @@ class FormComponent extends Component
     public $form_data;
     public $action = 'update';
     public $formTitle;
-    public $showDelete = false;
-    public $showGoBack = true;
     public $inline = true;
     public $spaMode = false;
     public $spaLayout;
