@@ -5,6 +5,7 @@
 @else
     <x-tall-field-wrapper :inline="$field->inline ?? $inline" :field="$field->key" :label="$field->label"
                           :labelSuffix="$field->labelSuffix" :labelW="$field->labelW" :fieldW="$field->fieldW">
+        <p>@foreach($field->getAttr('field') as $key => $value) {{$key}}="{{$value}}" @endforeach</p>
         <x-tall-input :field="$field->key" :id="$field->key" :type="$field->input_type" :prefix="$field->prefix"
                       :icon="$field->icon" :fieldClass="$field->class" :autocomplete="$field->autocomplete"
                       :placeholder="$field->placeholder" :help="$field->help" :errorMsg="$field->errorMsg"

@@ -36,6 +36,7 @@ trait LivewireForm
     public function save()
     {
         $validated_data = $this->validate();
+        dd($validated_data);
         $model = $this->entity;
         $this->$model->exist ? $this->$model->save() : $this->create($validated_data[$this->entity]);
         //return redirect
