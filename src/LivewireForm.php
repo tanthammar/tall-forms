@@ -40,7 +40,6 @@ trait LivewireForm
                 }
             }
         }
-        dd($rules);
         return $rules;
     }
 
