@@ -9,6 +9,8 @@ trait HasLabels
 {
     public $labelW = 'sm:w-1/3';
     public $labelSuffix;
+    public $show_label = true;
+
     /**
      * Used only in inline form
      * Default sm:w-1/3
@@ -24,6 +26,12 @@ trait HasLabels
     public function labelSuffix(string $string): self
     {
         $this->labelSuffix = $string;
+        return $this;
+    }
+
+    public function hideLabel()
+    {
+        $this->show_label = false;
         return $this;
     }
 

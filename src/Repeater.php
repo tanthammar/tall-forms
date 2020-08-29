@@ -2,24 +2,20 @@
 
 namespace Tanthammar\TallForms;
 
+use Illuminate\Support\Str;
+use Tanthammar\TallForms\Traits\HasSharedProperties;
+use Tanthammar\TallForms\Traits\IsArrayField;
+
 class Repeater extends BaseField
 {
-    public $show_label = false;
+    use HasSharedProperties, IsArrayField;
 
-    public function __construct($label, $name)
-    {
-        $this->label = $label;
-        $this->name = $name ?? \Str::snake(\Str::lower($label));
-    }
+    public $type = 'array';
+    public $array_sortable = false;
 
-    public static function make($label, $name = null)
+    public function sortable(): self
     {
-        return new static($label, $name);
-    }
-
-    public function showLabel()
-    {
-        $this->show_label = true;
+        $this->array_sortable = true;
         return $this;
     }
 }

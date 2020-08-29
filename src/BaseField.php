@@ -14,17 +14,16 @@ class BaseField
     public $label;
     public $key;
     public $type = 'input';
+    public $rules = 'nullable';
 
     public $default;
     public $placeholder;
-
     public $help;
-    public $errorMsg;
 
+    public $errorMsg;
     public $xData;
     public $xInit;
     public $wire = 'wire:model.lazy';
-
 
 
     public function __construct($label, $key)
@@ -43,6 +42,17 @@ class BaseField
 //    {
 //        return $this->$property;
 //    }
+
+    /**
+     * Standard Laravel validation syntax, default = 'nullable'
+     * @param array|string $rules
+     * @return $this
+     */
+    public function rules($rules): self
+    {
+        $this->rules = $rules;
+        return $this;
+    }
 
     public function default($default): self
     {

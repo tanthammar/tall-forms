@@ -3,10 +3,10 @@
 namespace App\Http\Livewire\Namespace;
 
 use App\ModelsPathDummyModel;
-use Tanthammar\TallForms\ArrayField;
+use Tanthammar\TallForms\Repeater;
 use Tanthammar\TallForms\Field;
 use Tanthammar\TallForms\FormComponent;
-use Tanthammar\TallForms\KeyValField;
+use Tanthammar\TallForms\KeyVal;
 
 class DummyComponent extends FormComponent
 {
@@ -16,7 +16,7 @@ class DummyComponent extends FormComponent
         $this->fill([
             'formTitle' => FormTitle,
             'action' => 'create',
-            'spaMode' => true, //wrap with x-pages.default or set prop $spaLayout to define a blade layout to wrap the form
+            'wrapWithComponent' => true, //wrap with x-pages.default or set prop $wrapComponentName to define a blade layout to wrap the form
             'showGoBack' => false, //or true
         ]);
         $this->mount_form();

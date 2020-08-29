@@ -4,8 +4,8 @@ return [
     //note that the word dummymodel is auto replaced with the lower case value of --model option in the make command
     'form-title' => "trans('global.create').' '.trans('crud.dummymodel.title_singular')",
 
-    //A Laravel 7 blade component to wrap your form if $spaMode = true, see documentation
-    'spa-layout' => 'tall-forms::spa-layout',
+    //A Laravel 7 blade component to wrap your form if $wrapWithComponent = true, see documentation
+    'wrap-component-name' => 'tall-forms::wrapper-layout',
 
 
     //form buttons translations

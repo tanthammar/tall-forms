@@ -20,8 +20,8 @@ class FormComponent extends Component
     public $action = 'update';
     public $formTitle;
     public $inline = true;
-    public $spaMode = false;
-    public $spaLayout;
+    public $wrapWithComponent = false;
+    public $wrapComponentName;
     protected $custom_data;
     public $form_wrapper = 'max-w-screen-lg mx-auto';
     public $previous;
@@ -36,7 +36,7 @@ class FormComponent extends Component
         $this->setFormProperties($this->model);
         $this->afterFormProperties();
         $this->previous = urlencode(\URL::previous());  //used for saveAndGoBack
-        $this->spaLayout = config('tall-forms.spa-layout');
+        $this->wrapComponentName = config('tall-forms.wrap-component-name');
     }
 
 
