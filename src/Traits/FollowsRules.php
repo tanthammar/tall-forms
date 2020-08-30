@@ -4,6 +4,7 @@ namespace Tanthammar\TallForms\Traits;
 
 trait FollowsRules
 {
+    //TODO denna fil är klar, kan raderas
     public function rules($realtime = false)
     {
         $rules = [];

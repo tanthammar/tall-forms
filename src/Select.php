@@ -23,6 +23,7 @@ class Select extends BaseField
     //TODO add support for mulitple select
     public function multiple(): self
     {
+        $this->type = 'multiselect';
         $this->multiple = true;
         return $this;
     }

@@ -14,7 +14,8 @@ trait Helpers
 
         $fieldName = \Str::replaceFirst('form_data.', '', $fieldKey);
         $fieldsArray = $this->fieldsToArray();
-        $field = Arr::first($fieldsArray, (fn($value) => $value['name'] === $fieldName)) ?? Arr::first($fieldsArray, (fn($value) => $value['key'] === $fieldKey));
+        $field = collect($fieldsArray)->firstWhere('name', $fieldName) ?? collect($fieldsArray)->firstWhere('key', $fieldKey);
+//        $field = Arr::first($fieldsArray, (fn($value) => $value['name'] === $fieldName)) ?? Arr::first($fieldsArray, (fn($value) => $value['key'] === $fieldKey));
         return optional($field)[$fieldValue];
     }
 
@@ -28,7 +29,7 @@ trait Helpers
     {
         $array = [];
         foreach ($this->fields() as $field) {
-            if (filled($field)) $array[] = $field->fieldToArray();
+            if (filled($field)) $array[] = $field->fieldToArray(); //in BaseField and IsArrayField
         }
         return $array;
     }

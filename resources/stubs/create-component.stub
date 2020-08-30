@@ -3,37 +3,43 @@
 namespace App\Http\Livewire\Namespace;
 
 use App\ModelsPathDummyModel;
-use Tanthammar\TallForms\Repeater;
-use Tanthammar\TallForms\Field;
-use Tanthammar\TallForms\FormComponent;
-use Tanthammar\TallForms\KeyVal;
+use Livewire\Component;
+use Tanthammar\TallForms\Input;
+use Tanthammar\TallForms\LivewireForm;
 
-class DummyComponent extends FormComponent
+class DummyComponent extends Component
 {
-    public function mount()
+    use LivewireForm;
+
+    public function mount(?DummyModel $dummymodel)
     {
         //Gate::authorize()
         $this->fill([
             'formTitle' => FormTitle,
-            'action' => 'create',
             'wrapWithComponent' => true, //wrap with x-pages.default or set prop $wrapComponentName to define a blade layout to wrap the form
             'showGoBack' => false, //or true
         ]);
-        $this->mount_form();
+        $this->mount_form($dummymodel);
     }
 
 
-    // Mandatory method, if $this->action = 'create'
-    public function create($form_data)
+    // Mandatory method
+    public function onCreateModel($validated_data)
     {
         // Set the $model property in order to conditionally display fields when the model instance exists, on saveAndStayResponse()
-        $this->model = DummyModel::create($form_data);
+        $this->model = DummyModel::create($validated_data);
+    }
+
+    // OPTIONAL method used for the "Save and stay" button
+    public function onUpdateModel($validated_data)
+    {
+        $this->model = $this->model->update($validated_data);
     }
 
     public function fields()
     {
         return [
-            Field::make('Name')->input()->rules('required'),
+            Input::make('Name')->rules('required'),
         ];
     }
 }

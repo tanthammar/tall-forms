@@ -44,5 +44,5 @@
         @enderror
     </div>
     @if($help)<p class="help">{{ $help }}</p>@endif
-    @error($field)<p class="error">{{ $errorMsg ?? $this->cleanMessage($message) }}</p>@enderror
+    @error($field)<p class="error">{{ $errorMsg ?? $this->errorMessage($message) }}</p>@enderror
 </div>

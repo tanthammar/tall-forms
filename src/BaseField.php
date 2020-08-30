@@ -12,6 +12,7 @@ class BaseField
     use HasLabels, HasAttributes, HasDesign;
 
     public $label;
+    public $name;
     public $key;
     public $type = 'input';
     public $rules = 'nullable';
@@ -29,7 +30,8 @@ class BaseField
     public function __construct($label, $key)
     {
         $this->label = $label;
-        $this->key = $key ?? \Str::snake(\Str::lower($label));
+        $this->name = $key ?? \Str::snake(\Str::lower($label));
+        $this->key = 'form_data.' . $this->name;
     }
 
 
@@ -97,11 +99,10 @@ class BaseField
         return $this;
     }
 
-    //ArrayField has override
     public function fieldToArray() {
         $array = array();
         foreach ($this as $key => $value) {
-            $array[$key] = $value;
+            $array[$key] = is_array($value) ? (array) $value : $value;
         }
         return $array;
     }

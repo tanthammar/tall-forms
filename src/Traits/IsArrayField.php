@@ -12,9 +12,9 @@ trait IsArrayField
     public function fields($fields = []): self
     {
         foreach($fields as $field) {
-            if (in_array($field->type, ['array', 'keyval'])) {
+            if (!in_array($field->type, ['input', 'textarea', 'trix', 'range', 'checkbox', 'checkboxes', 'radio', 'select', 'multiselect'])) {
                 //TODO throw real error
-                dd('you are not allowed to add arrays or keyval field to this type of field');
+                dd('You can not add this field-type to Repeater or KeyVal fields');
             }
         }
         $this->fields = $fields;
@@ -34,8 +34,6 @@ trait IsArrayField
         return $this;
     }
 
-    //TODO check if this is working
-    //override FieldBase fieldToArray()
     public function fieldToArray() {
         $array = [];
         if(filled($this->fields)) {
