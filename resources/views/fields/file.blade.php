@@ -19,9 +19,17 @@
                 </div>
             </div>
             {{--intentionally removed input id if multiple forms, with the same field name --}}
-            <input wire:model="{{ $field->name }}" name="{{ $field->name }}" type="file"
-                   {{ $field->multiple ? 'multiple' : '' }} placeholder="{{ $field->placeholder }}"
-                   class="flex-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 rounded-none rounded-r-md @error($field->key) error placeholder-red-300 @enderror"/>
+            <input
+{{--                wire:model="{{ $field->name }}"--}}
+                x-data="files = $wire.entangle('{{ $field->name }}')"
+                x-model="files"
+                x-on:change.prevent="checkFileSize($event.target.files, {{ $field->maxBytes }}, '{{ $field->sizeLimitAlert }}')"
+                name="{{ $field->name }}"
+                type="file"
+                {{ $field->multiple ? 'multiple' : '' }}
+                placeholder="{{ $field->placeholder }}"
+                accept="{{$field->accept}}"
+                class="flex-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 rounded-none rounded-r-md @error($field->key) error placeholder-red-300 @enderror"/>
         </div>
     @endif
 
@@ -40,12 +48,32 @@
     @if($field->help)<p class="help">{{ $field->help }}</p>@endif
     {{--show livewire file upload default validation error--}}
     @error($field->multiple ? $field->name.'.*': $field->name)
-        @foreach($errors->get($field->multiple ? $field->name.'.*': $field->name) as $message)
+    @foreach($errors->get($field->multiple ? $field->name.'.*': $field->name) as $message)
         <p class="error">{{ $field->multiple ? $this->errorMessage($message[0]) : $this->errorMessage($message) }}</p>
-        @endforeach
-        <p class="error">{{ $field->errorMsg ?? $this->fileError }}</p>
+    @endforeach
+    <p class="error">{{ $field->errorMsg ?? $this->fileError }}</p>
     @enderror
     {{--show components general validation error --}}
     @if($showFileUploadError)<p class="error">{{ $field->errorMsg ?? $this->fileError }}</p>@endif
 </x-tall-field-wrapper>
+@once
+<script>
+function defaultFileUpload() {
+    return {
+        files: {},
+        checkFileSize(files, maxBytes, alertMsg) {
+            if (files && files[0] && maxBytes > 0) {
+                Array.from(files).forEach(file => {
+                    console.info(file.size);
+                    if (file.size > maxBytes) {
+                        alert(alertMsg);
+                        this.files = null;
+                    }
+                });
+            }
+        }
+    }
+}
+</script>
+@endonce
 
