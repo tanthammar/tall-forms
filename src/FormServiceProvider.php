@@ -2,8 +2,10 @@
 
 namespace Tanthammar\TallForms;
 
+use BladeUIKit\Components\BladeComponent;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\Compilers\BladeCompiler;
 use Tanthammar\TallForms\Commands\MakeForm;
 
 class FormServiceProvider extends ServiceProvider
@@ -22,6 +24,7 @@ class FormServiceProvider extends ServiceProvider
         \Livewire::component('tall-tags-create', \Tanthammar\TallForms\Tags\TagsFieldCreate::class);
 
         $this->bootViews();
+        $this->prefixBladeUIComponents();
     }
 
     public function register()
@@ -44,5 +47,16 @@ class FormServiceProvider extends ServiceProvider
         Blade::component('tall-forms::components.error-icon', 'tall-error-icon');
         Blade::component('tall-forms::components.field-wrapper', 'tall-field-wrapper');
         Blade::component('tall-forms::components.notification', 'tall-notification');
+    }
+
+    private function prefixBladeUIComponents(): void
+    {
+        $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
+            $prefix = 'tall-buk';
+            /** @var BladeComponent $component */
+            foreach (config('blade-ui-kit.components', []) as $alias => $component) {
+                $blade->component($component, $alias, $prefix);
+            }
+        });
     }
 }
