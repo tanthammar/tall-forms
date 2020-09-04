@@ -44,27 +44,32 @@ class FileUpload extends BaseField
         return $this;
     }
 
+    // TODO Waiting for livewire v2 bugfix to .defer on file uploads, see file.blade.php
+    // https://github.com/livewire/livewire/issues/1461
+    // tested, working except for livewire bug
     /**
      * Validates filesize in frontend and prevents upload <br>
      * Observe that this is not a replacement for field validation rules!
      * @param int $bytes
      * @return $this
      */
-    public function max_bytes(int $bytes): self
-    {
-        $this->maxBytes = $bytes;
-        return $this;
-    }
+//    public function max_bytes(int $bytes): self
+//    {
+//        $this->maxBytes = $bytes;
+//        return $this;
+//    }
 
     /**
-     * If the file size is larger than allowed max_bytes, <br> alert this message
+     * If the file size is larger than allowed max_bytes, <br>
+     * alert this message <br>
+     * Observe that this is not a replacement for field validation rules!
      * @param string $message
      * @return $this
      */
-    public function size_limit_alert(string $message): self
-    {
-        $this->sizeLimitAlert = $message;
-        return $this;
-    }
+//    public function size_limit_alert(string $message): self
+//    {
+//        $this->sizeLimitAlert = $message;
+//        return $this;
+//    }
 }
 

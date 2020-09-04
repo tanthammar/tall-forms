@@ -20,10 +20,27 @@
             </div>
             {{--intentionally removed input id if multiple forms, with the same field name --}}
             <input
-{{--                wire:model="{{ $field->name }}"--}}
-                x-data="files = $wire.entangle('{{ $field->name }}')"
-                x-model="files"
-                x-on:change.prevent="checkFileSize($event.target.files, {{ $field->maxBytes }}, '{{ $field->sizeLimitAlert }}')"
+                wire:model="{{ $field->name }}"
+                {{-- TODO Waiting for livewire v2 bugfix to .defer on file uploads, see FileUpload.php --}}
+                {{-- tested, working except for livewire bug--}}
+                {{--wire:model.defer="{{ $field->name }}"
+                x-data="{
+                    files: null,
+                    maxBytes: {{ $field->maxBytes }},
+                    alertMsg: '{{ $field->sizeLimitAlert }}'
+                }"
+                x-on:change.prevent="files = $event.target.files;
+                if (files && files[0] && maxBytes > 0) {
+                    Array.from(files).forEach(file => {
+                        if (file.size > maxBytes) {
+                            alert(alertMsg);
+                            $event.target.value = '';
+                        }
+                    });
+                    if($event.target.value != '') {
+                        @this.set('{{ $field->name }}', files);
+                    }
+                }"--}}
                 name="{{ $field->name }}"
                 type="file"
                 {{ $field->multiple ? 'multiple' : '' }}
@@ -56,24 +73,3 @@
     {{--show components general validation error --}}
     @if($showFileUploadError)<p class="error">{{ $field->errorMsg ?? $this->fileError }}</p>@endif
 </x-tall-field-wrapper>
-@once
-<script>
-function defaultFileUpload() {
-    return {
-        files: {},
-        checkFileSize(files, maxBytes, alertMsg) {
-            if (files && files[0] && maxBytes > 0) {
-                Array.from(files).forEach(file => {
-                    console.info(file.size);
-                    if (file.size > maxBytes) {
-                        alert(alertMsg);
-                        this.files = null;
-                    }
-                });
-            }
-        }
-    }
-}
-</script>
-@endonce
-
