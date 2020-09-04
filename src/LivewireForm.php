@@ -5,25 +5,22 @@ namespace Tanthammar\TallForms;
 use Illuminate\Support\Arr;
 use Livewire\WithFileUploads;
 use Tanthammar\TallForms\Traits\HandlesArrays;
+use Tanthammar\TallForms\Traits\HasComponentDesign;
 use Tanthammar\TallForms\Traits\Helpers;
 use Tanthammar\TallForms\Traits\Notify;
 use Tanthammar\TallForms\Traits\UploadsFiles;
 
 trait LivewireForm
 {
-    use Notify, WithFileUploads, UploadsFiles, Helpers, HandlesArrays;
+    use Notify, WithFileUploads, UploadsFiles, Helpers, HandlesArrays, HasComponentDesign;
 
     public $model;
     public $form_data;
-    public $formTitle;
-    public $inline = true;
-    public $wrapWithComponent = true;
-    public $wrapComponentName;
+    public $onKeydownEnter = 'saveAndStay';
     public $previous;
     public $showDelete = false;
     public $showGoBack = true;
     public $custom_data = [];
-    public $form_wrapper = 'max-w-screen-lg mx-auto'; //ersatt av attribute?
 
 
     protected $rules = [];
@@ -32,6 +29,7 @@ trait LivewireForm
     {
         $this->rules = $this->set_rules();
         $this->listeners[] = 'fillField'; //emitted from tags field
+        $this->attributes = config('tall-forms.component-attributes');
         parent::__construct($id);
     }
 

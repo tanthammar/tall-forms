@@ -9,9 +9,6 @@ trait HasDesign
     public $fieldW = 'sm:w-2/3';
     public $inline;
     public $colspan = 6;
-    public $before;
-    public $after;
-    public $view;
     public $class;
 
     /**
@@ -39,29 +36,6 @@ trait HasDesign
     public function colspan(int $cols): self
     {
         $this->colspan = $cols;
-        return $this;
-    }
-
-    public function before(string $blade_view_to_include): self
-    {
-        $this->before = $blade_view_to_include;
-        return $this;
-    }
-
-    public function after(string $blade_view_to_include): self
-    {
-        $this->after = $blade_view_to_include;
-        return $this;
-    }
-
-    /**
-     * Display a custom view instad of the default field view
-     * @param string $view
-     * @return $this
-     */
-    public function view(string $your_on_your_own_blade_view): self
-    {
-        $this->view = $your_on_your_own_blade_view;
         return $this;
     }
 

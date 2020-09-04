@@ -4,10 +4,12 @@
 namespace Tanthammar\TallForms\Traits;
 
 
+use Tanthammar\TallForms\BaseField;
+
 trait IsArrayField
 {
     public $fields = [];
-    public $group_class = 'rounded border bg-gray-50';
+    public $array_wrapper_class = 'rounded border bg-gray-50';
 
     public function fields($fields = []): self
     {
@@ -25,12 +27,12 @@ trait IsArrayField
      * Applied to the outer wrapper surrounding Array and KeyVal field groups
      * Default 'rounded border bg-gray-50';
      *
-     * @param $classes
+     * @param string $classes
      * @return $this
      */
-    public function groupClass(string $classes = 'rounded border bg-gray-50'): self
+    public function wrapperClass(string $classes): self
     {
-        $this->group_class = $classes;
+        $this->array_wrapper_class = $classes;
         return $this;
     }
 

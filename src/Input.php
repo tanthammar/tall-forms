@@ -20,7 +20,14 @@ class Input extends BaseField
     public $step = 1;
     public $min = 0;
     public $max = 100;
+    public $wrapperClass = 'my-1 flex rounded-md shadow-sm w-full relative';
 
+
+    public function inputWrapperClass(string $classes): self
+    {
+        $this->wrapperClass = $classes;
+        return $this;
+    }
 
     public function type(string $type): self
     {

@@ -47,6 +47,7 @@ class FormServiceProvider extends ServiceProvider
         Blade::component('tall-forms::components.error-icon', 'tall-error-icon');
         Blade::component('tall-forms::components.field-wrapper', 'tall-field-wrapper');
         Blade::component('tall-forms::components.notification', 'tall-notification');
+        Blade::component('tall-forms::components.div-attr', 'tall-attr');
     }
 
     private function prefixBladeUIComponents(): void
