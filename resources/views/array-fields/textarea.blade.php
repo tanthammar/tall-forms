@@ -1,7 +1,7 @@
 <x-tall-textarea
 :colspan="$array_field->colspan ?? 6"
 :rows="$array_field->textarea_rows"
-:field="$temp_field_key"
+:field="$temp_key"
 :placeholder="$array_field->placeholder"
 :help="$array_field->help"
 :errorMsg="$array_field->errorMsg"

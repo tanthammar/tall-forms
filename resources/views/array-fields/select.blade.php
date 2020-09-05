@@ -1,4 +1,4 @@
-<x-tall-select :colspan="$array_field->colspan ?? 6" :field="$temp_field_key"
+<x-tall-select :colspan="$array_field->colspan ?? 6" :field="$temp_key"
     :fieldClass="$array_field->class"
     :placeholder="$array_field->placeholder"
     :help="$array_field->help"

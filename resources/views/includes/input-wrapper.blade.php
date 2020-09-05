@@ -1,4 +1,4 @@
-@php $temp_field_key = $temp_field_key ?? $field->key @endphp
+@php $temp_key = $temp_key ?? $field->key @endphp
 {{-- before field --}}
 @include('tall-forms::includes.before-field')
 {{-- input --}}

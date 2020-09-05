@@ -6,7 +6,7 @@
                 <div class="flex-1 sm:grid sm:grid-cols-12 col-gap-2 row-gap-4">
                     @foreach($keyval->fields as $array_field)
                         @php
-                            $temp_field_key = "{$keyval->key}.{$array_field->name}";
+                            $temp_key = "{$keyval->key}.{$array_field->name}";
                         @endphp
                         @include('tall-forms::includes.field-root', ['field' => $array_field])
                     @endforeach

@@ -1,5 +1,5 @@
 <x-tall-input
-    :field="$temp_field_key"
+    :field="$temp_key"
     :colspan="$array_field->colspan ?? 6"
     :type="$array_field->input_type"
     :prefix="$array_field->prefix ?? null"
