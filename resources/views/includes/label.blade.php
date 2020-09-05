@@ -1,3 +1,4 @@
+@if($field->show_label)
 <x-tall-attr tag="div" :attr="$field->getAttr('label-wrapper')">
     <x-tall-attr tag="label" :attr="$field->getAttr('label')">
         {{$field->label}}
@@ -11,3 +12,4 @@
         @include($field->afterLabelView)
     @endif
 </x-tall-attr>
+@endif

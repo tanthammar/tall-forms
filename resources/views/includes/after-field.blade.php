@@ -9,7 +9,7 @@
             {{ $field->help }}
         </p>
     @endif
-    @error($field->key)
+    @error($temp_field_key)
         <p class="{{ $this->getAttr('error') }}">
             {{ $field->errorMsg ?? $this->errorMessage($message) }}
         </p>

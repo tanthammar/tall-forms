@@ -14,8 +14,6 @@
             @include('tall-forms::includes.label')
             {{-- field column --}}
             <x-tall-attr tag="div" :attr="$field->getAttr('field-col')">
-                {{-- before field --}}
-                @include('tall-forms::includes.before-field')
                 {{-- field --}}
                 @if($field->type === 'array')
                     @include('tall-forms::includes.array-wrapper')
@@ -24,8 +22,6 @@
                 @else
                     @include('tall-forms::includes.input-wrapper')
                 @endif
-                {{-- after field --}}
-                @include('tall-forms::includes.after-field')
             </x-tall-attr>
         </x-tall-attr>
         {{-- after --}}

@@ -9,6 +9,7 @@
                             @foreach($repeater->fields as $array_field)
                                 @php
                                     $temp_field_key = "{$repeater->key}.{$key}.{$array_field->name}";
+                                    $array_field->show_label = false;
                                 @endphp
                                 @include('tall-forms::includes.field-root', ['field' => $array_field])
                             @endforeach
