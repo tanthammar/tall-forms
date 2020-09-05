@@ -1,6 +1,6 @@
-<x-tall-attr tag="div" :attr="$this->getAttr('root')">
+<x-tall-attr :attr="$this->getAttr('root')">
     @include('tall-forms::includes.form-head')
-    <x-tall-attr tag="div" :attr="$this->getAttr('form')">
+    <x-tall-attr :attr="$this->getAttr('form')">
     @foreach($fields as $field)
         @if(filled($field))
             @include('tall-forms::includes.field-root')

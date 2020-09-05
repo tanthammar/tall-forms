@@ -1,4 +1,4 @@
-<x-tall-attr tag="div" :attr="$field->getAttr('root')">
+<x-tall-attr :attr="$field->getAttr('root')" :colspan="$field->colspan ?? 12">
     @if($field->view)
         {{-- custom view --}}
         @include($field->view)
@@ -9,11 +9,11 @@
         {{-- before --}}
         @include('tall-forms::includes.before')
         {{-- label and field wrapper --}}
-        <x-tall-attr tag="div" :attr="$field->getAttr('label-field-wrapper')">
+        <x-tall-attr :attr="$field->getAttr('label-field-wrapper')">
             {{-- label --}}
             @include('tall-forms::includes.label')
             {{-- field column --}}
-            <x-tall-attr tag="div" :attr="$field->getAttr('field-col')">
+            <x-tall-attr :attr="$field->getAttr('field-col')">
                 {{-- field --}}
                 @if($field->type === 'array')
                     @include('tall-forms::includes.array-wrapper')

@@ -1,6 +1,6 @@
-<x-tall-attr tag="div" :attr="$field->getAttr('after-field-wrapper')">
+<x-tall-attr :attr="$field->getAttr('after-field-wrapper')">
     @if($field->afterField)
-        <x-tall-attr tag="div" :attr="$field->getAttr('after-field')">
+        <x-tall-attr :attr="$field->getAttr('after-field')">
             {{ $field->afterField }}
         </x-tall-attr>
     @endif

@@ -8,7 +8,7 @@ trait HasDesign
 {
     public $fieldW = 'sm:w-2/3';
     public $inline;
-    public $colspan = 6;
+    public $colspan = 12;
     public $class;
 
     /**
@@ -29,7 +29,7 @@ trait HasDesign
     }
 
     /**
-     * Default 6 of 6 columns
+     * Default 12 of 12 columns
      * @param int $cols
      * @return $this
      */

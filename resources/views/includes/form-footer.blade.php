@@ -1,5 +1,5 @@
 @if(empty($footerView) && ($formFooterTitle || $formFooterSubtitle))
-    <x-tall-attr tag="div" :attr="$this->getAttr('form-footer')">
+    <x-tall-attr :attr="$this->getAttr('form-footer')">
         <x-tall-attr tag="h3" :attr="$this->getAttr('form-footer-title')">
             {{ $formFooterTitle }}
         </x-tall-attr>
