@@ -3,12 +3,11 @@
 namespace Tanthammar\TallForms;
 
 use Illuminate\Support\Str;
-use Tanthammar\TallForms\Traits\HasSharedProperties;
 use Tanthammar\TallForms\Traits\IsArrayField;
 
 class Repeater extends BaseField
 {
-    use HasSharedProperties, IsArrayField;
+    use IsArrayField;
 
     public $type = 'array';
     public $array_sortable = false;

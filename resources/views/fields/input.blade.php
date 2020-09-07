@@ -15,7 +15,7 @@
                 @endif
         </span>
         @endif
-        <x-tall-buk-input :field="$field" :temp-key="$temp_key" />
+        <x-tall-input :field="$field" :temp-key="$temp_key" />
         @error($temp_key)
         <x-tall-error-icon :right="in_array($field->input_type, ['date', 'datetime-local', 'time']) ? 'right-6' : 'right-0'" />
         @enderror

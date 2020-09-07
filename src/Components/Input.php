@@ -3,29 +3,26 @@
 
 namespace Tanthammar\TallForms\Components;
 
-use Illuminate\Contracts\View\View;
+use Illuminate\View\View;
+use Illuminate\View\Component;
 use Tanthammar\TallForms\Input as Field;
 
-class Input extends \BladeUIKit\Components\Forms\Inputs\Input
+class Input extends Component
 {
     public Field $field;
     public string $temp_key;
 
-    public function __construct(Field $field, string $tempKey, string $value = '')
+    public function __construct(Field $field, string $tempKey)
     {
         $this->field = $field;
         $this->temp_key = $tempKey;
-        parent::__construct(
-            $name = $tempKey,
-            $id = $tempKey,
-            $type = $field->input_type,
-            $value);
     }
 
     public function options(): array
     {
         $default = [
             $this->field->wire => $this->temp_key,
+
             'field' => $this->temp_key,
             'id' => $this->temp_key,
             'name' => $this->temp_key,
@@ -46,7 +43,7 @@ class Input extends \BladeUIKit\Components\Forms\Inputs\Input
 
     public function class()
     {
-        $class = "flex-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5";
+        $class = "flex-1 bg-yellow-200 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5";
         $class .= ($this->field->prefix || $this->field->icon) ? " rounded-none rounded-r-md" : " rounded";
         return $class;
     }

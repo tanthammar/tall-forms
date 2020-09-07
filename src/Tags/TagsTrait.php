@@ -71,7 +71,7 @@ trait TagsTrait
         $cleaned = collect(array_sort($this->tags))->unique()->toArray();
         filled($this->model)
             ? $this->syncModelWithLocale($cleaned)
-            : $this->emitUp('fillField', [
+            : $this->emitUp('tallFillField', [
             'field' => $this->field,
             'value' => implode(",", $cleaned)
         ]);

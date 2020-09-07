@@ -24,7 +24,7 @@ class FormServiceProvider extends ServiceProvider
         \Livewire::component('tall-tags-create', \Tanthammar\TallForms\Tags\TagsFieldCreate::class);
 
         $this->bootViews();
-        $this->prefixBladeUIComponents();
+        $this->prefixComponents();
     }
 
     public function register()
@@ -37,7 +37,7 @@ class FormServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'tall-forms');
         Blade::component('tall-forms::components.button', 'button');
         Blade::component('tall-forms::components.spinners.button', 'tall-spinner');
-        Blade::component('tall-forms::components.input', 'tall-input');
+        //Blade::component('tall-forms::components.input', 'tall-input');
         Blade::component('tall-forms::components.range', 'tall-range');
         Blade::component('tall-forms::components.checkbox', 'tall-checkbox');
         Blade::component('tall-forms::components.radio', 'tall-radio');
@@ -50,10 +50,10 @@ class FormServiceProvider extends ServiceProvider
         Blade::component('tall-forms::components.div-attr', 'tall-attr');
     }
 
-    private function prefixBladeUIComponents(): void
+    private function prefixComponents(): void
     {
         $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
-            $prefix = 'tall-buk';
+            $prefix = 'tall';
             /** @var BladeComponent $component */
             foreach ($this->extendedComponents() as $alias => $component) {
                 $blade->component($component, $alias, $prefix);
@@ -63,12 +63,9 @@ class FormServiceProvider extends ServiceProvider
 
     private function extendedComponents(): array
     {
-        return [
+        return [ //list with blade ui kit components that this package replaces
             'alert' => Components\Alerts\Alert::class,
             'form-button' => Components\Buttons\FormButton::class,
-            'logout' => Components\Buttons\Logout::class,
-            'carbon' => Components\DateTime\Carbon::class,
-            'countdown' => Components\DateTime\Countdown::class,
             'easy-mde' => Components\Editors\EasyMDE::class,
             'trix' => Components\Editors\Trix::class,
             'error' => Components\Forms\Error::class,
@@ -81,15 +78,10 @@ class FormServiceProvider extends ServiceProvider
             'password' => Components\Forms\Inputs\Password::class,
             'pikaday' => Components\Forms\Inputs\Pikaday::class,
             'textarea' => Components\Forms\Inputs\Textarea::class,
-            'html' => Components\Layouts\Html::class,
-            'social-meta' => Components\Layouts\SocialMeta::class,
             'mapbox' => Components\Maps\Mapbox::class,
             'markdown' => Components\Markdown\Markdown::class,
-            'toc' => Components\Markdown\ToC::class,
             'dropdown' => Components\Navigation\Dropdown::class,
             'avatar' => Components\Support\Avatar::class,
-            'cron' => Components\Support\Cron::class,
-            'unsplash' => Components\Support\Unsplash::class,
         ];
     }
 }

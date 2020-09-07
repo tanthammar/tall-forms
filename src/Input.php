@@ -5,12 +5,9 @@ namespace Tanthammar\TallForms;
 
 
 use Illuminate\Support\Str;
-use Tanthammar\TallForms\Traits\HasSharedProperties;
 
 class Input extends BaseField
 {
-    use HasSharedProperties;
-
     public $type = 'input';
     public $input_type = 'text';
     public $autocomplete;

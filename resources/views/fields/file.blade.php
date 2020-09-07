@@ -21,8 +21,8 @@
             {{--intentionally removed input id if multiple forms, with the same field name --}}
             <input
                 wire:model="{{ $field->name }}"
-                {{-- TODO Waiting for livewire v2 bugfix to .defer on file uploads, see FileUpload.php --}}
-                {{-- tested, working except for livewire bug--}}
+                {{-- Livewire does not support .defer --}}
+                {{-- tested, working except for livewire not waiting for alpine--}}
                 {{--wire:model.defer="{{ $field->name }}"
                 x-data="{
                     files: null,

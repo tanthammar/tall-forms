@@ -22,9 +22,15 @@ trait HasDesign
         return $this;
     }
 
-    public function inline(bool $inline = true): self
+    public function inline(): self
     {
-        $this->inline = $inline;
+        $this->inline = true;
+        return $this;
+    }
+
+    public function stacked(): self
+    {
+        $this->inline = false;
         return $this;
     }
 

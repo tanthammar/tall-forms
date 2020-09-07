@@ -15,6 +15,7 @@ trait LivewireForm
     use Notify, WithFileUploads, UploadsFiles, Helpers, HandlesArrays, HasComponentDesign;
 
     public $model;
+    public $log;
     public $form_data;
     public $onKeydownEnter = 'saveAndStay';
     public $previous;
@@ -28,10 +29,10 @@ trait LivewireForm
     public function __construct($id = null)
     {
         $this->rules = $this->set_rules();
-        $this->listeners[] = 'fillField'; //emitted from tags field
-        $this->attributes = config('tall-forms.component-attributes');
+        $this->listeners = array_merge($this->listeners, ['tallFillField']);
         parent::__construct($id);
     }
+
 
     public function set_rules()
     {
@@ -79,7 +80,7 @@ trait LivewireForm
 
     public function setFormProperties()
     {
-        $this->form_data = $this->model->toArray();
+        $this->form_data = $this->model->only($this->fieldNames());
         foreach ($this->fields() as $field) {
             if (filled($field) && !isset($this->form_data[$field->name])) {
                 $array = in_array($field->type, ['checkboxes', 'file', 'multiselect']);
@@ -109,6 +110,7 @@ trait LivewireForm
 
     public function submit()
     {
+        clock($this->model);
         $validated_data = $this->validate()['form_data'];
 
         $field_names = [];

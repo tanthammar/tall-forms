@@ -4,11 +4,10 @@
 namespace Tanthammar\TallForms;
 
 use Tanthammar\TallForms\Traits\HasOptions;
-use Tanthammar\TallForms\Traits\HasSharedProperties;
 
 class Select extends BaseField
 {
-    use HasSharedProperties, HasOptions;
+    use HasOptions;
 
     public $type = 'select';
     public $placeholder;

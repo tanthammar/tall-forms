@@ -34,6 +34,13 @@ trait Helpers
         return $array;
     }
 
+    protected function fieldNames(): array
+    {
+        return $fieldNames = collect($this->fields())->map(function ($field) {
+            return $field->name;
+        })->toArray();
+    }
+
 
     /**
      * Executes before field validation, creds to "@roni", livewire discord channel member
@@ -48,7 +55,7 @@ trait Helpers
 
 
 
-    public function fillField($array)
+    public function tallFillField($array)
     {
         $this->form_data[$array['field']] = $array['value'];
     }

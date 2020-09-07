@@ -6,8 +6,6 @@ namespace Tanthammar\TallForms\Traits;
 
 trait HasComponentDesign
 {
-    public $attributes = [];
-
     public $headView;
     public $onceView;
     public $formTitle;
@@ -23,6 +21,6 @@ trait HasComponentDesign
 
     public function getAttr($type)
     {
-        return data_get($this->attributes, $type, []);
+        return data_get(config('tall-forms.component-attributes'), $type, []);
     }
 }

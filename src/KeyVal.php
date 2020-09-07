@@ -2,12 +2,11 @@
 
 namespace Tanthammar\TallForms;
 
-use Tanthammar\TallForms\Traits\HasSharedProperties;
 use Tanthammar\TallForms\Traits\IsArrayField;
 
 class KeyVal extends BaseField
 {
-    use HasSharedProperties, IsArrayField;
+    use IsArrayField;
 
     public $type = 'keyval';
 

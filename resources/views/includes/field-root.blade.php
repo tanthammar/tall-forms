@@ -9,7 +9,7 @@
         {{-- before --}}
         @include('tall-forms::includes.before')
         {{-- label and field wrapper --}}
-        <x-tall-attr :attr="$field->getAttr('label-field-wrapper')">
+        <x-tall-attr :attr="($field->inline) ? $field->getAttr('label-field-wrapper-inline') : $field->getAttr('label-field-wrapper-stacked')">
             {{-- label --}}
             @include('tall-forms::includes.label')
             {{-- field column --}}

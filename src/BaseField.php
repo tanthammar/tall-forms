@@ -6,11 +6,12 @@ use Illuminate\Support\Arr;
 use Tanthammar\TallForms\Traits\HasAttributes;
 use Tanthammar\TallForms\Traits\HasDesign;
 use Tanthammar\TallForms\Traits\HasLabels;
+use Tanthammar\TallForms\Traits\HasSharedProperties;
 use Tanthammar\TallForms\Traits\HasViews;
 
 class BaseField
 {
-    use HasLabels, HasAttributes, HasDesign, HasViews;
+    use HasLabels, HasAttributes, HasSharedProperties, HasDesign, HasViews;
 
     public $label;
     public $name;
