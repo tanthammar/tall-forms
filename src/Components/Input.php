@@ -22,9 +22,7 @@ class Input extends Component
     {
         $default = [
             $this->field->wire => $this->temp_key,
-
             'field' => $this->temp_key,
-            'id' => $this->temp_key,
             'name' => $this->temp_key,
             'type' => $this->field->input_type,
             'autocomplete' => $this->field->autocomplete,

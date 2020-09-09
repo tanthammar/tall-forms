@@ -16,7 +16,6 @@ class DummyComponent extends Component
         //Gate::authorize()
         $this->fill([
             'formTitle' => FormTitle,
-            'onKeydownEnter' => 'saveAndGoBack', //or saveAndStay
             'wrapWithComponent' => true, //wrap with x-pages.default or set prop $wrapComponentName to define a blade layout to wrap the form
             'showGoBack' => false, //or true
         ]);

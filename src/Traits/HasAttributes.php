@@ -20,7 +20,6 @@ trait HasAttributes
     public function setAttr()
     {
         $this->attributes = config('tall-forms.field-attributes');
-        data_set($this->attributes, 'label.for', $this->key);
         data_set($this->attributes, 'input', []);
     }
 

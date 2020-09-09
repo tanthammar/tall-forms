@@ -16,6 +16,7 @@ trait HasComponentDesign
     public $formFooterSubtitle;
 
     public $inline = true;
+    public $inlineLabelAlignment; //set in mount
     public $wrapWithComponent = true;
     public $wrapComponentName;
 
