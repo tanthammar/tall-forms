@@ -1,4 +1,4 @@
-<div class="{{$field->wrapperClass}} {{$field->class}}">
+<div class="{{$field->class}}">
     @if($field->prefix || $field->icon)
         <span
             class="inline-flex items-center px-1 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">

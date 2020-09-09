@@ -11,6 +11,7 @@
                                     $temp_key = "{$repeater->key}.{$key}.{$array_field->name}";
                                     $array_field->show_label = false;
                                     $array_field->inline = false;
+                                    $array_field->placeholder = $array_field->name;
                                 @endphp
                                 @include('tall-forms::includes.field-root', ['field' => $array_field])
                             @endforeach

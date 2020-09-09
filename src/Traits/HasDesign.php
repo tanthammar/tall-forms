@@ -48,11 +48,12 @@ trait HasDesign
     /**
      * Applied to the field wrapper
      * @param string $classes
+     * @param bool $merge
      * @return $this
      */
-    public function class(string $classes): self
+    public function class(string $classes, $merge = true): self
     {
-        $this->class = $classes;
+        $this->class = $merge ? "{$this->class} {$classes}" : $classes;
         return $this;
     }
 }
