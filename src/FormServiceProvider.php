@@ -35,7 +35,7 @@ class FormServiceProvider extends ServiceProvider
     protected function bootViews()
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'tall-forms');
-        Blade::component('tall-forms::components.button', 'button');
+        Blade::component('tall-forms::components.button', 'tall-button');
         Blade::component('tall-forms::components.spinners.button', 'tall-spinner');
         //Blade::component('tall-forms::components.input', 'tall-input');
         Blade::component('tall-forms::components.range', 'tall-range');
@@ -55,33 +55,9 @@ class FormServiceProvider extends ServiceProvider
         $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
             $prefix = 'tall';
             /** @var BladeComponent $component */
-            foreach ($this->extendedComponents() as $alias => $component) {
+            foreach (config('tall-forms.components', []) as $alias => $component) {
                 $blade->component($component, $alias, $prefix);
             }
         });
-    }
-
-    private function extendedComponents(): array
-    {
-        return [ //list with blade ui kit components that this package replaces
-            'alert' => Components\Alerts\Alert::class,
-            'form-button' => Components\Buttons\FormButton::class,
-            'easy-mde' => Components\Editors\EasyMDE::class,
-            'trix' => Components\Editors\Trix::class,
-            'error' => Components\Forms\Error::class,
-            'form' => Components\Forms\Form::class,
-            'label' => Components\Forms\Label::class,
-            'input' => Components\Input::class,
-            'checkbox' => Components\Forms\Inputs\Checkbox::class,
-            'color-picker' => Components\Forms\Inputs\ColorPicker::class,
-            'email' => Components\Forms\Inputs\Email::class,
-            'password' => Components\Forms\Inputs\Password::class,
-            'pikaday' => Components\Forms\Inputs\Pikaday::class,
-            'textarea' => Components\Forms\Inputs\Textarea::class,
-            'mapbox' => Components\Maps\Mapbox::class,
-            'markdown' => Components\Markdown\Markdown::class,
-            'dropdown' => Components\Navigation\Dropdown::class,
-            'avatar' => Components\Support\Avatar::class,
-        ];
     }
 }

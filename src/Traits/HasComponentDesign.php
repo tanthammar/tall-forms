@@ -7,7 +7,8 @@ namespace Tanthammar\TallForms\Traits;
 trait HasComponentDesign
 {
     public $headView;
-    public $onceView;
+    public $afterFormView;
+    public $beforeFormView;
     public $formTitle;
     public $formSubtitle;
 
@@ -19,6 +20,8 @@ trait HasComponentDesign
     public $inlineLabelAlignment; //set in mount
     public $wrapWithComponent = true;
     public $wrapComponentName;
+
+    public $onKeyDownEnter;
 
     public function getAttr($type)
     {

@@ -1,12 +1,12 @@
 @if(empty($footerView) && ($formFooterTitle || $formFooterSubtitle))
-    <x-tall-attr :attr="$this->getAttr('form-footer')">
-        <x-tall-attr tag="h3" :attr="$this->getAttr('form-footer-title')">
+    <div class="{{ $this->getAttr('form-footer') }}">
+        <h3 class="{{ $this->getAttr('form-footer-title') }}">
             {{ $formFooterTitle }}
-        </x-tall-attr>
-        <x-tall-attr tag="p" :attr="$this->getAttr('form-footer-sub-title')">
+        </h3>
+        <p tag="p" class="{{ $this->getAttr('form-footer-sub-title') }}">
             {{ $formFooterSubtitle }}
-        </x-tall-attr>
-    </x-tall-attr>
+        </p>
+    </div>
 @endif
 @if(filled($footerView))
     @include($footerView)

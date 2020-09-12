@@ -1,7 +1,8 @@
-<x-tall-attr :attr="$field->getAttr('after-field-wrapper')">
-    @if($field->afterField)
-        <x-tall-attr :attr="$field->getAttr('after-field')">
-            {{ $field->afterField }}
+@if($field->after || $field->help || $errors->has($temp_key))
+<x-tall-attr :attr="$field->getAttr('below-wrapper')">
+    @if($field->below)
+        <x-tall-attr :attr="$field->getAttr('below')">
+            {{ $field->below }}
         </x-tall-attr>
     @endif
     @if($field->help)
@@ -15,3 +16,4 @@
         </p>
     @enderror
 </x-tall-attr>
+@endif

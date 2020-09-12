@@ -1,12 +1,12 @@
 @if(empty($headView) && !$wrapWithComponent && ($formTitle || $formSubtitle))
-    <x-tall-attr :attr="$this->getAttr('form-head')">
-        <x-tall-attr tag="h1" :attr="$this->getAttr('form-title')">
+    <div class="{{ $this->getAttr('form-head') }}">
+        <h1 class="{{ $this->getAttr('form-title') }}">
             {{ $formTitle }}
-        </x-tall-attr>
-        <x-tall-attr tag="p" :attr="$this->getAttr('form-sub-title')">
+        </h1>
+        <p class="{{ $this->getAttr('form-sub-title') }}">
             {{ $formSubtitle }}
-        </x-tall-attr>
-    </x-tall-attr>
+        </p>
+    </div>
 @endif
 @if(filled($headView))
     @include($headView)

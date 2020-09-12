@@ -11,15 +11,18 @@ class Input extends Component
 {
     public Field $field;
     public string $temp_key;
+    public bool $required;
 
     public function __construct(Field $field, string $tempKey)
     {
         $this->field = $field;
         $this->temp_key = $tempKey;
+        $this->required = $field->required;
     }
 
     public function options(): array
     {
+        $custom = data_get($this->field, 'attributes.input');
         $default = [
             $this->field->wire => $this->temp_key,
             'field' => $this->temp_key,
@@ -34,9 +37,10 @@ class Input extends Component
                 'max' => $this->field->max,
                 'step' => $this->field->step,
             ];
+
             $default = array_merge($default, $limits);
         }
-        return array_merge($default);
+        return array_merge($default, $custom);
     }
 
     public function class()

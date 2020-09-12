@@ -1,17 +1,18 @@
+@php $repeater = $field @endphp
 <div class="w-full mt-2">
-    @php $repeater = $field @endphp
     @if(isset($form_data[$repeater->name]) && $form_data[$repeater->name])
         <div class="flex flex-col divide-y mb-2 {{ $repeater->array_wrapper_class }}">
             @foreach($form_data[$repeater->name] as $key => $value)
                 <div class="py-2">
                     <div class="flex px-2 space-x-3 items-center">
-                        <div class="flex-1 sm:grid sm:grid-cols-12 col-gap-2 row-gap-4">
+                        <div class="flex-1 sm:grid sm:grid-cols-12 gap-x-2 gap-y-4">
                             @foreach($repeater->fields as $array_field)
                                 @php
                                     $temp_key = "{$repeater->key}.{$key}.{$array_field->name}";
-                                    $array_field->show_label = false;
+                                    $array_field->show_label = $key === 0;
                                     $array_field->inline = false;
-                                    $array_field->placeholder = $array_field->name;
+                                    $array_field->help = $key === 0 ? $array_field->help : null;
+                                    $array_field->placeholder = $array_field->placeholder ?? $array_field->label;
                                 @endphp
                                 @include('tall-forms::includes.field-root', ['field' => $array_field])
                             @endforeach
@@ -29,7 +30,7 @@
                                 </button>
                             @endif
 
-                            <button class="{{config('tall-forms.negative')}} rounded shadow px-1 text-white"
+                            <button class="{{ config('tall-forms.negative' )}} rounded shadow px-1 text-white"
                                     wire:click.prevent="arrayRemove('{{ $repeater->name }}', '{{ $key }}')">
                                 @svg(config('tall-forms.trash-icon'), 'h-4 w-4')
                             </button>
@@ -39,7 +40,10 @@
             @endforeach
         </div>
     @endif
-    <button class="rounded-md shadow-sm text-white {{config('tall-forms.positive')}}" wire:click.prevent="arrayAdd('{{ $repeater->name }}')" style="width:fit-content">
+    <button class="rounded-md shadow-sm text-white {{config('tall-forms.positive')}}"
+            wire:click.prevent="arrayAdd('{{ $repeater->name }}')" style="width:fit-content">
         @svg(config('tall-forms.plus-icon'), 'h-5 w-5 m-2')
     </button>
 </div>
+{{-- after field --}}
+@include('tall-forms::includes.below', ['temp_key' => $repeater->key ])

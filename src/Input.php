@@ -17,6 +17,7 @@ class Input extends BaseField
     public $step = 1;
     public $min = 0;
     public $max = 100;
+    public $required = false;
 
     public function __construct($label, $key)
     {
@@ -26,7 +27,7 @@ class Input extends BaseField
 
     public function type(string $type): self
     {
-        $this->input_type = $type;
+        $type == 'hidden' ? $this->type = 'hidden' : $this->input_type = $type;
         return $this;
     }
 
@@ -39,6 +40,12 @@ class Input extends BaseField
     public function prefix(string $prefix): self
     {
         $this->prefix = $prefix;
+        return $this;
+    }
+
+    public function required(): self
+    {
+        $this->required = true;
         return $this;
     }
 
