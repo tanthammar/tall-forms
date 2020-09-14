@@ -69,20 +69,32 @@ class Input extends BaseField
         return $this;
     }
 
-    public function step(float $step): self
+    /**
+     * @param float|string $step
+     * @return $this
+     */
+    public function step($step): self
     {
         $this->step = $step;
         return $this;
     }
 
 
-    public function min(float $min): self
+    /**
+     * @param float|string $min
+     * @return $this
+     */
+    public function min($min): self
     {
         $this->min = $min;
         return $this;
     }
 
-    public function max(float $max): self
+    /**
+     * @param float|string $max
+     * @return $this
+     */
+    public function max($max): self
     {
         $this->max = $max;
         return $this;
