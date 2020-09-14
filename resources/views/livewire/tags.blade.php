@@ -7,7 +7,7 @@
                 class="tags-input-tag inline-flex leading-4 items-center text-sm bg-blue-300 text-blue-800 rounded py-1 px-2 mr-2 mb-1"
                 style="user-select: none">
                 <span>{{ $tag }}</span>
-                <button wire:click="removeTag({{$i}})" type="button"
+                <button wire.click.prevent="removeTag({{$i}})" type="button"
                         class="pl-1 tags-input-remove text-gray-500 text-lg leading-4 focus:outline-none">
                     &times;
                 </button>

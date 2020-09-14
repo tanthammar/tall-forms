@@ -5,7 +5,6 @@ namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
 use Illuminate\View\Component;
-use Tanthammar\TallForms\Input as Field;
 
 class Form extends Component
 {

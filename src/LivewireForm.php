@@ -18,7 +18,8 @@ trait LivewireForm
     public $log;
     public $form_data;
     public $previous;
-    public $showDelete = false;
+    public $showDelete = true;
+    public $showReset = true;
     public $showGoBack = true;
     public $custom_data = [];
 
@@ -168,7 +169,7 @@ trait LivewireForm
     public function success($model_fields_data)
     {
         // you have to add the methods to your component
-        $this->model->exist ? $this->onUpdateModel($model_fields_data) : $this->onCreateModel($model_fields_data);
+        $this->model->exists ? $this->onUpdateModel($model_fields_data) : $this->onCreateModel($model_fields_data);
     }
 
     public function onUpdateModel($validated_data)
@@ -179,6 +180,12 @@ trait LivewireForm
     public function onCreateModel($validated_data)
     {
         //
+    }
+
+    public function resetFormData()
+    {
+        $this->resetErrorBag();
+        $this->setFormProperties();
     }
 
     public function delete()

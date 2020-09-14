@@ -10,6 +10,7 @@ trait HasDesign
     public $inline;
     public $colspan = 12;
     public $class;
+    public $inArray = false;
 
     /**
      * Default sm:w-2/3

@@ -33,18 +33,22 @@ trait HandlesArrays
     public function arrayMoveUp($field_name, $key)
     {
         if ($key > 0) {
-            $prev = $this->form_data[$field_name][$key - 1];
-            $this->form_data[$field_name][$key - 1] = $this->form_data[$field_name][$key];
-            $this->form_data[$field_name][$key] = $prev;
+            $field = data_get($this->form_data, $field_name);
+            $prev = data_get($field, $key-1);
+            data_set($field, $key-1, data_get($field, $key));
+            data_set($field, $key, $prev);
+            $this->form_data[$field_name] = $field;
         }
     }
 
     public function arrayMoveDown($field_name, $key)
     {
         if (($key + 1) < count($this->form_data[$field_name])) {
-            $next = $this->form_data[$field_name][$key + 1];
-            $this->form_data[$field_name][$key + 1] = $this->form_data[$field_name][$key];
-            $this->form_data[$field_name][$key] = $next;
+            $field = data_get($this->form_data, $field_name);
+            $next = data_get($field, $key+1);
+            data_set($field, $key+1, data_get($field, $key));
+            data_set($field, $key, $next);
+            $this->form_data[$field_name] = $field;
         }
     }
 

@@ -16,7 +16,7 @@
     <div class="flex-1 px-2">{{ $file->getClientOriginalName() }}</div>
     <button class="{{config('tall-forms.negative')}} rounded shadow p-2 text-white flex items-center"
             onclick="confirm('{{ trans(config('tall-forms.are-u-sure')) }}') || event.stopImmediatePropagation();"
-            wire:click="deleteSingleTempFile('{{ $field->name }}', '{{ optional($loop)->index }}')">
+            wire.click.prevent="deleteSingleTempFile('{{ $field->name }}', '{{ optional($loop)->index }}')">
         <span class="px-2" wire:loading wire:target="deleteSingleTempFile"><x-tall-spinner /></span>
         @svg(config('tall-forms.trash-icon'), 'h-4 w-4')
     </button>

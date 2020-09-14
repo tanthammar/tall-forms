@@ -1,16 +1,81 @@
 <?php
+use Tanthammar\TallForms\Components;
 
 return [
     //note that the word dummymodel is auto replaced with the lower case value of --model option in the make command
     'form-title' => "trans('global.create').' '.trans('crud.dummymodel.title_singular')",
 
-    //A Laravel 7 blade component to wrap your form if $wrapWithComponent = true, see documentation
+    // Component attributes
+    'component-attributes' => [
+        // You can add anything to these attributes. Applied as @foreach($attr as key => value)
+        'form' => [
+            'class' => 'w-full',
+        ],
+        'fields-wrapper' => [
+            'class' => 'max-w-screen-lg mx-auto divide-gray-200 divide-y sm:grid sm:grid-cols-12'
+        ],
+        //these are not applied as foreach, you can only set the class attribute here
+        'form-head' => '',
+        'form-title' => 'text-lg leading-6 font-medium text-gray-900',
+        'form-sub-title' => 'mt-1 max-w-2xl text-sm leading-5 text-gray-500',
+        'form-footer' => 'border rounded sm:p-4',
+        'form-footer-title' => 'text-lg leading-6 font-medium text-gray-900',
+        'form-footer-sub-title' => 'mt-1 max-w-2xl text-sm leading-5 text-gray-500',
+        'help' => 'leading-tight text-gray-500 text-sm',
+        'error' => 'italic leading-tight text-gray-500 text-red-500 text-sm',
+        'buttons-root' => 'w-full border-t border-gray-200 pt-5',
+        'buttons-wrapper' => 'space-x-3 flex justify-center sm:justify-end items-center',
+        'inline-label-alignment' => 'text-left',
+        'stacked-label-alignment' => 'text-left',
+    ],
+
+    // Field attributes
+    'field-attributes' => [
+        // You can add anything to these attributes. Applied as @foreach($attr as key => value)
+        'root' => [
+            'class' => 'w-full' //do not add py-, my- or col-span-x here, see FieldRoot component.
+        ],
+        'before' => [
+            'class' => 'my-4 w-full border border-gray-200'
+        ],
+        'before-text' => [
+            'class' => 'block text-sm leading-5 text-gray-700 p-2'
+        ],
+        'above' => [
+            'class' => 'leading-4 text-gray-500 text-sm sm:pt-1'
+        ],
+        'below' => [
+            'class' => 'leading-tight text-gray-500 text-sm'
+        ],
+        'below-wrapper' => [
+            'class' => ''
+        ],
+        'after' => [
+            'class' => 'my-4 w-full border border-gray-200'
+        ],
+        'after-text' => [
+            'class' => 'block text-sm leading-5 text-gray-700 p-2'
+        ],
+        //these are not applied as foreach, you can only set the class attribute here
+        'label-field-wrapper-inline' => 'sm:flex',
+        'label-field-wrapper-stacked' => 'w-full',
+        'label' => 'block text-sm font-medium leading-5 text-gray-700',
+        'label-suffix' => 'italic text-black text-opacity-25 text-xs',
+        'after-label' => 'block text-sm leading-4 text-gray-700',
+        'keyval-wrapper' => 'flex flex-col',
+        'keyval-wrapper-grid' => 'sm:flex sm:grid sm:grid-cols-12 sm:gap-x-2 sm:gap-y-4',
+        'repeater-wrapper' => 'flex flex-col divide-y mb-2 rounded border',
+        'repeater-wrapper-grid' => 'flex-1 sm:grid sm:grid-cols-12 gap-x-2',
+    ],
+
+    //A Laravel 7 blade component to wrap your form if $spaMode = true, see documentation
     'wrap-component-name' => 'tall-forms::wrapper-layout',
 
 
     //form buttons translations
     'saved' => 'global.saved',
     'delete' => 'global.delete',
+    'reset' => 'global.reset',
     'save-and-stay' => 'global.save',
     'save-go-back' => 'global.save_go_back',
     'message-updated-success' => 'messages.updated_success',
@@ -54,6 +119,8 @@ return [
     'label-width' => 'sm:w-1/4 md:w-1/5',
 
     //Column span classes for the fields ->colspan() method
+    //requires tailwind css v1.7.0
+    //see tailwind.config.js future:{}
     'col-span-classes' => [
         '1' => 'sm:col-span-1',
         '2' => 'sm:col-span-2',
@@ -61,8 +128,26 @@ return [
         '4' => 'sm:col-span-4',
         '5' => 'sm:col-span-5',
         '6' => 'sm:col-span-6',
+        '7' => 'sm:col-span-7',
+        '8' => 'sm:col-span-8',
+        '9' => 'sm:col-span-9',
+        '10' => 'sm:col-span-10',
+        '11' => 'sm:col-span-11',
+        '12' => 'sm:col-span-12',
     ],
 
     //File upload default validation message
     'upload-file-error' => 'messages.file_upload_error',
+
+
+    // list with blade ui kit components that this package replaces
+    // the prefix is 'tall',
+    // you cannot change the prefix but you can extend these components,
+    // and replace the component classes here.
+    'components' => [
+        'form' => Components\Form::class,
+        'label-field-wrapper' => Components\LabelFieldWrapper::class,
+        'field-root' => Components\FieldRoot::class,
+        'input' => Components\Input::class,
+    ]
 ];

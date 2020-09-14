@@ -1,4 +1,7 @@
-<x-tall-attr :attr="$field->getAttr('root')" :colspan="$field->colspan ?? 12">
+<x-tall-field-root
+    :in-array="$field->inArray"
+    :colspan="$field->colspan ?? 12"
+    :attr="$field->getAttr('root')">
     @if($field->view)
         {{-- custom view --}}
         @include($field->view)
@@ -24,4 +27,4 @@
         {{-- after --}}
         @include('tall-forms::includes.after')
     @endif
-</x-tall-attr>
+</x-tall-field-root>

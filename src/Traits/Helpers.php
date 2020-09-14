@@ -75,4 +75,9 @@ trait Helpers
     {
         return str_replace('form data.', '', $message);
     }
+
+    public static function unique_words(string $scentence): string
+    {
+        return implode(' ',array_unique(explode(' ', $scentence)));
+    }
 }

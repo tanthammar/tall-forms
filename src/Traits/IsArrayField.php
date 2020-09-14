@@ -9,13 +9,14 @@ use Tanthammar\TallForms\BaseField;
 trait IsArrayField
 {
     public $fields = [];
-    public $array_wrapper_class = 'rounded border bg-gray-50';
+    public $array_wrapper_class; //set in parent construct
+    public $array_wrapper_grid_class; //set in parent construct
 
     public function fields($fields = []): self
     {
         foreach($fields as $field) {
-            if (!in_array($field->type, ['input', 'textarea', 'trix', 'range', 'checkbox', 'checkboxes', 'radio', 'select', 'multiselect'])) {
-                //TODO throw real error
+            if (in_array($field->type, ['array', 'keyval', 'repeater', 'checkboxes', 'multiselect'])) {
+                //TODO throw real error and wich fields are allowed in repeater
                 dd('You can not add this field-type to Repeater or KeyVal fields');
             }
         }
@@ -33,6 +34,12 @@ trait IsArrayField
     public function wrapperClass(string $classes): self
     {
         $this->array_wrapper_class = $classes;
+        return $this;
+    }
+
+    public function wrapperGrid(string $classes): self
+    {
+        $this->array_wrapper_grid_class = $classes;
         return $this;
     }
 
