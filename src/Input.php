@@ -22,12 +22,20 @@ class Input extends BaseField
     public function __construct($label, $key)
     {
         parent::__construct($label, $key);
-        $this->class .= 'my-1 flex rounded-md shadow-sm w-full relative';
+        $this->class .= config('tall-forms.field-attributes.input');
     }
 
     public function type(string $type): self
     {
-        $type == 'hidden' ? $this->type = 'hidden' : $this->input_type = $type;
+        if($type == 'hidden') {
+            $this->type = 'hidden';
+            return $this;
+        }
+        if($type == 'range') {
+            $this->type = 'range';
+            return $this;
+        }
+        $this->input_type = $type;
         return $this;
     }
 
