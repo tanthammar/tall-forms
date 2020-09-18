@@ -27,7 +27,6 @@ class Input extends Component
         $custom = data_get($this->field, 'attributes.input');
         $default = [
             $this->field->wire => $this->temp_key,
-            'field' => $this->temp_key,
             'name' => $this->temp_key,
             'type' => $this->field->input_type,
             'autocomplete' => $this->field->autocomplete,

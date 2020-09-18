@@ -5,20 +5,19 @@ namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
 use Illuminate\View\Component;
-use Tanthammar\TallForms\Textarea as Field;
-use Tanthammar\TallForms\Traits\Helpers;
+use Tanthammar\TallForms\Checkbox as Field;
 
-class Textarea extends Component
+class Checkbox extends Component
 {
     public Field $field;
     public string $temp_key;
-    public bool $required;
+    public string $label;
 
     public function __construct(Field $field, string $tempKey)
     {
         $this->field = $field;
         $this->temp_key = $tempKey;
-        $this->required = $field->required;
+        $this->label = $field->placeholder ?? $field->label;
     }
 
     public function options(): array
@@ -27,28 +26,28 @@ class Textarea extends Component
         $default = [
             $this->field->wire => $this->temp_key,
             'name' => $this->temp_key,
-            'placeholder' => $this->field->placeholder,
-            'rows' => $this->field->textarea_rows,
+            'class' => $this->class()
         ];
         return array_merge($default, $custom);
     }
 
     public function class()
     {
-        $class = "form-textarea block w-full rounded ";
-        $class .= $this->field->class;
-        return Helpers::unique_words($class);
+        return "form-checkbox mt-1 h-4 w-4 text-indigo-600 transition duration-150 ease-in-out ";
     }
 
-    public function error()
+    public function labelClass()
     {
-        return Helpers::unique_words(
-            $this->class()." border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red"
-        );
+        return 'text-sm leading-5 text-gray-900';
+    }
+
+    public function labelSpacingClass()
+    {
+        return 'ml-2 block';
     }
 
     public function render(): View
     {
-        return view('tall-forms::components.textarea');
+        return view('tall-forms::components.checkbox');
     }
 }
