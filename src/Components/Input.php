@@ -6,6 +6,7 @@ namespace Tanthammar\TallForms\Components;
 use Illuminate\View\View;
 use Illuminate\View\Component;
 use Tanthammar\TallForms\Input as Field;
+use Tanthammar\TallForms\Traits\Helpers;
 
 class Input extends Component
 {
@@ -48,12 +49,12 @@ class Input extends Component
     {
         $class = "flex-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5";
         $class .= ($this->field->prefix || $this->field->icon) ? " rounded-none rounded-r-md" : " rounded";
-        return $class;
+        return Helpers::unique_words($class);
     }
 
     public function error()
     {
-        return $this->class()." border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red";
+        return Helpers::unique_words($this->class()." border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red");
     }
 
     public function render(): View

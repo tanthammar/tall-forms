@@ -30,6 +30,8 @@ trait LivewireForm
     {
         $this->rules = $this->set_rules();
         $this->listeners = array_merge($this->listeners, ['tallFillField']);
+        $this->labelW = config('tall-forms.component-attributes.label-width');
+        $this->fieldW = config('tall-forms.component-attributes.field-width');
         parent::__construct($id);
     }
 

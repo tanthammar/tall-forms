@@ -7,7 +7,7 @@ namespace Tanthammar\TallForms\Traits;
 
 trait HasLabels
 {
-    public $labelW = 'sm:w-1/3';
+    public $labelW;
     public $inlineLabelAlignment;
     public $labelSuffix;
     public $show_label = true;

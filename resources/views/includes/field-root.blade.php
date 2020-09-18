@@ -15,7 +15,12 @@
         {{-- before --}}
         @include('tall-forms::includes.before')
         {{-- label and field --}}
-        <x-tall-label-field-wrapper :field="$field" :componentInline="$inline" :inlineLabelAlignment="$inlineLabelAlignment">
+        <x-tall-label-field-wrapper
+            :field="$field"
+            :componentInline="$inline"
+            :inlineLabelAlignment="$inlineLabelAlignment"
+            :label-w="$labelW"
+            :field-w="$fieldW">
             @if($field->type === 'array')
                 @include('tall-forms::includes.array-wrapper')
             @elseif($field->type === 'keyval')

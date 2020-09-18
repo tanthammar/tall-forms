@@ -6,10 +6,11 @@ namespace Tanthammar\TallForms\Components;
 use Illuminate\View\View;
 use Illuminate\View\Component;
 use Tanthammar\TallForms\Traits\Helpers;
+use Tanthammar\TallForms\Range as Field;
 
 class Range extends Component
 {
-    public \Tanthammar\TallForms\Range $field;
+    public Field $field;
     public string $temp_key;
     public int $colspan;
     public array $attr;
@@ -20,7 +21,7 @@ class Range extends Component
     public string $wrapper = 'flex space-x-2 py-2';
     public string $range_labels = 'text-gray-600';
 
-    public function __construct(\Tanthammar\TallForms\Range $field, string $tempKey, array $attr = [])
+    public function __construct(Field $field, string $tempKey, array $attr = [])
     {
         $this->field = $field;
         $this->temp_key = $tempKey;

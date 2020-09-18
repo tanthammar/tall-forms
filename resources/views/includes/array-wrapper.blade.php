@@ -1,5 +1,5 @@
 @php $repeater = $field @endphp
-<div class="w-full mt-2">
+<div class="w-full my-2">
     @if(isset($form_data[$repeater->name]) && $form_data[$repeater->name])
         <div class="{{ $repeater->array_wrapper_class }}">
             @foreach($form_data[$repeater->name] as $key => $value)

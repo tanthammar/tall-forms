@@ -23,6 +23,9 @@ trait HasComponentDesign
 
     public $onKeyDownEnter;
 
+    public $labelW;
+    public $fieldW;
+
     public function getAttr($type)
     {
         return data_get(config('tall-forms.component-attributes'), $type, []);

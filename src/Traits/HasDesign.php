@@ -6,7 +6,7 @@ namespace Tanthammar\TallForms\Traits;
 
 trait HasDesign
 {
-    public $fieldW = 'sm:w-2/3';
+    public $fieldW;
     public $inline;
     public $colspan = 12;
     public $class;
