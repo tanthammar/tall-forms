@@ -12,6 +12,7 @@ class Input extends Component
     public Field $field;
     public string $temp_key;
     public bool $required;
+    public string $icon_span = 'inline-flex items-center px-1 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm';
 
     public function __construct(Field $field, string $tempKey)
     {
