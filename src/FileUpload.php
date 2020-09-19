@@ -43,5 +43,6 @@ class FileUpload extends BaseField
         $this->accept = "image/*";
         return $this;
     }
+
 }
 

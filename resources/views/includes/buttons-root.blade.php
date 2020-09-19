@@ -11,7 +11,7 @@
               x-show.transition.out.duration.1000ms="open" style="display: none;"
               class="text-gray-500">{{ trans(config('tall-forms.saved')) }}</span>
         @if($showGoBack)
-            <x-tall-button wire.click.prevent="saveAndGoBack"
+            <x-tall-button wire:click.prevent="saveAndGoBack"
                       color="primary">@lang(config('tall-forms.save-go-back'))</x-tall-button>
         @endif
         <x-tall-button type="submit" wire:click.prevent="saveAndStay" wire:loading.attr="disabled" color="positive">
