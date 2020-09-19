@@ -16,7 +16,7 @@ class Radio extends Component
     public string $optionsIdx;
 
     /**
-     * Checkboxes constructor.
+     * Radio constructor.
      * @param Field $field
      * @param string $tempKey
      * @param int|string $value

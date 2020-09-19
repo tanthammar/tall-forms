@@ -8,7 +8,7 @@ trait HasOptions
 {
     use HandlesArrays;
 
-    public $options;
+    public $options = [];
     public $callableOptions;
 
     /**
