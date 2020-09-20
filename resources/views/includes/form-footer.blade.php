@@ -1,9 +1,9 @@
 @if(empty($footerView) && ($formFooterTitle || $formFooterSubtitle))
-    <div class="{{ $this->getAttr('form-footer') }}">
-        <h3 class="{{ $this->getAttr('form-footer-title') }}">
+    <div class="{{ $this->compAttr('form-footer') }}">
+        <h3 class="{{ $this->compAttr('form-footer-title') }}">
             {{ $formFooterTitle }}
         </h3>
-        <p tag="p" class="{{ $this->getAttr('form-footer-sub-title') }}">
+        <p tag="p" class="{{ $this->compAttr('form-footer-sub-title') }}">
             {{ $formFooterSubtitle }}
         </p>
     </div>

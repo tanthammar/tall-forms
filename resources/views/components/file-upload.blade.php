@@ -39,7 +39,7 @@
         </ul>
     @endif
     {{--show livewire file upload default validation error--}}
-    @php $errorClass = $this->getAttr('error') @endphp
+    @php $errorClass = $this->compAttr('error') @endphp
     @error($field->multiple ? $field->name.'.*': $field->name)
     @foreach($errors->get($field->multiple ? $field->name.'.*': $field->name) as $message)
         <p class="{{ $errorClass }}">{{ $field->multiple ? $this->errorMessage($message[0]) : $this->errorMessage($message) }}</p>

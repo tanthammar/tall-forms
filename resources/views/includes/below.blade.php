@@ -6,13 +6,13 @@
             </x-tall-attr>
         @endif
         @if($field->help)
-            <p class="{{ $this->getAttr('help') }}">
+            <p class="{{ $this->compAttr('help') }}">
                 {{ $field->help }}
             </p>
         @endif
         @if($field->type != 'file')
             @error($temp_key)
-            <p class="{{ $this->getAttr('error') }}">
+            <p class="{{ $this->compAttr('error') }}">
                 {{ $field->errorMsg ?? $this->errorMessage($message) }}
             </p>
             @enderror

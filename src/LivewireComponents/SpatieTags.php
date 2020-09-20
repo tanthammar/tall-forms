@@ -1,7 +1,8 @@
 <?php
 
-namespace Tanthammar\TallForms\Components\Livewire;
+namespace Tanthammar\TallForms\LivewireComponents;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Spatie\Tags\Tag;
@@ -10,57 +11,49 @@ class SpatieTags extends Component
 {
     public $model;
     public $field;
-    public $type;
     public $tags;
     public $search = "";
     public $options = [];
-    public $help;
-    public $errorMsg;
-    public $tagLocale;
     public $errorClass;
     public $helpClass;
     public $color;
 
 
-    public function mount(string $field,
-                          ?string $tagType,
-                          ?string $tags,
-                          ?string $help,
-                          ?string $errorMsg,
-                          ?string $tagLocale,
-                          string $errorClass,
-                          string $helpClass,
-                          string $color,
-                          $model = null)
+    /**
+     * @param array $field
+     * @param null|string $tags
+     * @param null|Model $model
+     */
+    public function mount(array $field, $tags = '', $model = null)
     {
         $this->model = isset($model) && $model->exists ? $model : null;
         $this->field = $field;
-        $this->type = $tagType;
         $this->tags = filled($this->model) && $model->exists
             ? $this->getExisting()
             : (filled($tags)
                 ? explode(",", $tags)
                 : []
             );
-        $this->help = $help;
-        $this->errorMsg = $errorMsg;
-        $this->tagLocale = $tagLocale;
-        $this->errorClass = $errorClass;
-        $this->helpClass = $helpClass;
-        $this->color = $color;
+        $this->errorClass = config('tall-forms.component-attributes.error');
+        $this->helpClass = config('tall-forms.component-attributes.help');
+        $this->color = config('tall-forms.component-attributes.tags-color');
     }
 
     public function getExisting()
     {
-        $query = filled($this->type) ? $this->model->tagsWithType($this->type) : $this->model->tags;
-        return array_filter(
-            $query->pluck('name')->unique()->toArray()
-        );
+        $query = $this->model->tags;
+        //must check filled model->tags else error: https://github.com/spatie/laravel-tags/issues/279
+        $query = filled(data_get($this->field, 'tagType')) && filled($query)
+            ? $this->model->tagsWithType($this->field['tagType'])
+            : $query;
+        return filled($query)
+            ? array_filter($query->pluck('name')->unique()->toArray())
+            : [];
     }
 
     public function getRules()
     {
-        return ['search' => 'nullable|string|between:3,40'];
+        return ['search' => $this->field['searchRule']];
     }
 
     public function updatedSearch()
@@ -69,7 +62,7 @@ class SpatieTags extends Component
         if (filled($slug)) {
             $this->options = array_filter(
                 Tag::where("slug", 'like', '%' . $slug . '%')
-                    ->where('type', $this->type)
+                    ->where('type', data_get($this->field, 'tagType'))
                     ->orderBy("name", 'asc')
                     ->take(10)
                     ->pluck('name')
@@ -88,7 +81,7 @@ class SpatieTags extends Component
         filled($this->model)
             ? $this->syncModelWithLocale($cleaned)
             : $this->emitUp('tallFillField', [
-            'field' => $this->field,
+            'field' => $this->field['name'],
             'value' => implode(",", $cleaned)
         ]);
         $this->tags = $cleaned;
@@ -99,9 +92,9 @@ class SpatieTags extends Component
 
     public function syncModelWithLocale($cleaned)
     {
-        if (filled($this->tagLocale)) {
+        if (filled(data_get($this->field, 'tagLocale'))) {
             $currentLocale = app()->getLocale();
-            app()->setLocale($this->tagLocale);
+            app()->setLocale($this->field['tagLocale']);
             $this->syncModel($cleaned);
             app()->setLocale($currentLocale);
         } else {
@@ -111,7 +104,7 @@ class SpatieTags extends Component
 
     public function syncModel($cleaned)
     {
-        filled($this->type) ? $this->model->syncTagsWithType($cleaned, $this->type) : $this->model->syncTags($cleaned);
+        filled(data_get($this->field, 'tagType')) ? $this->model->syncTagsWithType($cleaned, $this->field['tagType']) : $this->model->syncTags($cleaned);
     }
 
     public function addTag($tag)
