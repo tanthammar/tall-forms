@@ -31,6 +31,7 @@ trait TagsTrait
         $this->field = $field;
         $this->help = $help;
         $this->errorMsg = $errorMsg;
+        $this->tagLocale = $tagLocale;
     }
 
     public function getExisting()
