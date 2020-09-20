@@ -11,7 +11,7 @@ class SpatieTags extends BaseField
     public $tagLocale;
     public $is_custom = true;
     public $searchError;
-    public $searchRule = 'nullable|string|between:3,40';
+    public $tagsRules;
 
     public function __construct($label, $key)
     {
@@ -43,13 +43,9 @@ class SpatieTags extends BaseField
         return $this;
     }
 
-    /**
-     * @param array|string $rule
-     * @return $this
-     */
-    public function searchRule($rule): self
+    public function rules($rules): self
     {
-        $this->searchRule = $rule;
+        $this->tagsRules = $rules;
         return $this;
     }
 }

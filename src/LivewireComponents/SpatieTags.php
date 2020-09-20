@@ -41,20 +41,15 @@ class SpatieTags extends Component
 
     public function getExisting()
     {
-        $query = $this->model->tags;
-        //must check filled model->tags else error: https://github.com/spatie/laravel-tags/issues/279
-        $query = filled(data_get($this->field, 'tagType')) && filled($query)
-            ? $this->model->tagsWithType($this->field['tagType'])
-            : $query;
-        return filled($query)
-            ? array_filter($query->pluck('name')->unique()->toArray())
-            : [];
+        $query = filled(data_get($this->field, 'tagType'))
+            ? $this->model->tags()->where('type', $this->field['tagType']) : $this->model->tags();
+        return $query->pluck('name')->unique()->toArray();
+
     }
 
     public function getRules()
     {
-        //$rule = $this->field['searchRule'];
-        return ['search' => 'nullable|string|between:3,40'];
+        return ['search' => 'nullable|string|between:1,60'];
     }
 
     public function updatedSearch()
@@ -105,14 +100,19 @@ class SpatieTags extends Component
 
     public function syncModel($cleaned)
     {
-        filled(data_get($this->field, 'tagType')) ? $this->model->syncTagsWithType($cleaned, $this->field['tagType']) : $this->model->syncTags($cleaned);
+        filled(data_get($this->field, 'tagType'))
+            ? $this->model->syncTagsWithType($cleaned, $this->field['tagType'])
+            : $this->model->syncTags($cleaned);
     }
 
     public function addTag($tag)
     {
-        $tag = Str::of($tag)->trim()->trim(",")->title()->__toString();
-        if (!in_array($tag, $this->tags)) {
-            array_push($this->tags, $tag);
+        $tag = Str::of($tag)->trim()->trim(",")->title();
+        $tags = $tag->contains(',') ? explode(",", $tag) : null;
+        if(is_array($tags)) {
+            $this->tags = array_unique(array_merge($this->tags, $tags));
+        } else {
+            if (!in_array($tag, $this->tags)) array_push($this->tags, $tag->__toString());
         }
         $this->syncTags();
     }

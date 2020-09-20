@@ -31,7 +31,7 @@ class LabelFieldWrapper extends Component
     public function class(): string
     {
         $vertical =
-            in_array($this->field->type, ['array', 'keyval', 'textarea', 'checkboxes', 'radio'])
+            in_array($this->field->type, ['array', 'keyval', 'textarea', 'checkboxes', 'radio', 'spatie-tags'])
             || filled($this->field->afterLabel) || filled($this->field->above) ? '' : ' sm:items-center';
         return $this->field->inline
             ? config('tall-forms.field-attributes.label-field-wrapper-inline') . $vertical

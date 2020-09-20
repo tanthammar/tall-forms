@@ -5,12 +5,14 @@
                 {{ $field->below }}
             </x-tall-attr>
         @endif
-        @if($field->help)
-            <p class="{{ \Tanthammar\TallForms\ConfigAttr::key('help') }}">
-                {{ $field->help }}
-            </p>
+        @if(!in_array($field->type, ['spatie-tags']))
+            @if($field->help)
+                <p class="{{ \Tanthammar\TallForms\ConfigAttr::key('help') }}">
+                    {{ $field->help }}
+                </p>
+            @endif
         @endif
-        @if($field->type != 'file')
+        @if(!in_array($field->type, ['file', 'spatie-tags']))
             @error($temp_key)
             <p class="{{ \Tanthammar\TallForms\ConfigAttr::key('error') }}">
                 {{ $field->errorMsg ?? $this->errorMessage($message) }}
