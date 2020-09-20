@@ -26,8 +26,9 @@ trait HasComponentDesign
     public $labelW;
     public $fieldW;
 
-    public function compAttr($type)
-    {
-        return data_get(config('tall-forms.component-attributes'), $type, []);
-    }
+    //this method is temporary moved to ConfigAttr::class
+    /*public function compAttr($type)
+        {
+            return data_get(config('tall-forms.component-attributes'), $type, []);
+        }*/
 }

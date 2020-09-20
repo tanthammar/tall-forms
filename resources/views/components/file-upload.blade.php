@@ -39,7 +39,7 @@
         </ul>
     @endif
     {{--show livewire file upload default validation error--}}
-    @php $errorClass = $this->compAttr('error') @endphp
+    @php $errorClass = \Tanthammar\TallForms\ConfigAttr::key('error') @endphp
     @error($field->multiple ? $field->name.'.*': $field->name)
     @foreach($errors->get($field->multiple ? $field->name.'.*': $field->name) as $message)
         <p class="{{ $errorClass }}">{{ $field->multiple ? $this->errorMessage($message[0]) : $this->errorMessage($message) }}</p>

@@ -6,13 +6,13 @@
             </x-tall-attr>
         @endif
         @if($field->help)
-            <p class="{{ $this->compAttr('help') }}">
+            <p class="{{ \Tanthammar\TallForms\ConfigAttr::key('help') }}">
                 {{ $field->help }}
             </p>
         @endif
         @if($field->type != 'file')
             @error($temp_key)
-            <p class="{{ $this->compAttr('error') }}">
+            <p class="{{ \Tanthammar\TallForms\ConfigAttr::key('error') }}">
                 {{ $field->errorMsg ?? $this->errorMessage($message) }}
             </p>
             @enderror

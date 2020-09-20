@@ -53,7 +53,8 @@ class SpatieTags extends Component
 
     public function getRules()
     {
-        return ['search' => $this->field['searchRule']];
+        //$rule = $this->field['searchRule'];
+        return ['search' => 'nullable|string|between:3,40'];
     }
 
     public function updatedSearch()

@@ -3,7 +3,7 @@
 @endif
 <x-tall-form :onKeyDownEnter="$onKeyDownEnter" :attr="[]">
     @include('tall-forms::includes.form-head')
-    <x-tall-attr :attr="$this->compAttr('fields-wrapper')">
+    <x-tall-attr :attr="\Tanthammar\TallForms\ConfigAttr::key('fields-wrapper')">
     @foreach($fields as $field)
         @if(filled($field))
             @include('tall-forms::includes.field-root')

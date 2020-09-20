@@ -1,5 +1,5 @@
-<div class="{{ $this->compAttr('buttons-root') }}">
-    <div class="{{ $this->compAttr('buttons-wrapper') }}">
+<div class="{{ \Tanthammar\TallForms\ConfigAttr::key('buttons-root') }}">
+    <div class="{{ \Tanthammar\TallForms\ConfigAttr::key('buttons-wrapper') }}">
         @if($showDelete && $model->exists)
             <x-tall-button wire:click.prevent="delete" :text="trans(config('tall-forms.delete'))" color="negative"/>
         @endif
