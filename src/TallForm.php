@@ -10,7 +10,7 @@ use Tanthammar\TallForms\Traits\Helpers;
 use Tanthammar\TallForms\Traits\Notify;
 use Tanthammar\TallForms\Traits\UploadsFiles;
 
-trait LivewireForm
+trait TallForm
 {
     use Notify, WithFileUploads, UploadsFiles, Helpers, HandlesArrays, HasComponentDesign;
 

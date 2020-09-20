@@ -81,7 +81,7 @@ class SpatieTags extends Component
         }
     }
 
-    // OBSERVE: there is a syncTags() method in Tanthammar\TallForms\LivewireForm,
+    // OBSERVE: there is a syncTags() method in Tanthammar\TallForms\TallForm,
     // It's used for action="create" forms, create() method, to sync tags after the model is created
     // this method is triggered via wire:click.prevent="addFromOptions('{{$option}}')" in tags.blade
     public function syncTags()
