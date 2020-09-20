@@ -60,8 +60,8 @@ trait Helpers
         $this->form_data[$array['field']] = $array['value'];
     }
 
-    //all other methods regarding tags are in Tanthammar\TallForms\Tags\TagsTrait
-    // This is used for action="create" forms, create() method, to sync tags after the model is created
+    // All other methods regarding tags are in Tanthammar\TallForms\SpatieTags
+    // It's intended to be called in the onCreateModel() method, to sync tags after the model is created
     public function syncTags($field, $tagType = null)
     {
         $tags = data_get($this->custom_data, $field);

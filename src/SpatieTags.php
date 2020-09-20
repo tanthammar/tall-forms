@@ -1,26 +1,42 @@
 <?php
 
-namespace Tanthammar\TallForms\Tags;
+namespace Tanthammar\TallForms;
 
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Livewire\Component;
 use Spatie\Tags\Tag;
 
-trait TagsTrait
+class SpatieTags extends Component
 {
-    public $model;
-    public $type;
-    public $tags;
-    public $search = "";
-    public $options = [];
-    public $field;
-    public $help;
-    public $errorMsg;
-    public $tagLocale;
+    public ?Model $model;
+    public string $field;
+    public ?string $type;
+    public array $tags = [];
+    public string $search = "";
+    public array $options = [];
+    public ?string $help;
+    public ?string $errorMsg;
+    public ?string $tagLocale;
+    public string $errorClass;
+    public string $helpClass;
+    public string $color;
 
 
-    public function tags_mount($field, $tagType, $tags, $help, $errorMsg, $tagLocale)
+    public function mount(?Model $model,
+                          string $field,
+                          ?string $tagType,
+                          ?string $tags,
+                          ?string $help,
+                          ?string $errorMsg,
+                          ?string $tagLocale,
+                          string $errorClass,
+                          string $helpClass,
+                          string $color)
     {
+        $this->model = $model;
+        $this->field = $field;
         $this->type = $tagType;
         $this->tags = filled($this->model)
             ? $this->getExisting()
@@ -28,16 +44,17 @@ trait TagsTrait
                 ? explode(",", $tags)
                 : []
             );
-        $this->field = $field;
         $this->help = $help;
         $this->errorMsg = $errorMsg;
         $this->tagLocale = $tagLocale;
+        $this->errorClass = $errorClass;
+        $this->helpClass = $helpClass;
+        $this->color = $color;
     }
 
     public function getExisting()
     {
         $query = filled($this->type) ? $this->model->tagsWithType($this->type) : $this->model->tags;
-        clock($this->type);
         return array_filter(
             $query->pluck('name')->unique()->toArray()
         );
@@ -64,7 +81,7 @@ trait TagsTrait
         }
     }
 
-    // OBSERVE: there is a syncTags() method in Tanthammar\TallForms\FormComponent,
+    // OBSERVE: there is a syncTags() method in Tanthammar\TallForms\LivewireForm,
     // It's used for action="create" forms, create() method, to sync tags after the model is created
     // this method is triggered via wire:click.prevent="addFromOptions('{{$option}}')" in tags.blade
     public function syncTags()
