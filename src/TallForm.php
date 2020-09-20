@@ -3,16 +3,14 @@
 namespace Tanthammar\TallForms;
 
 use Illuminate\Support\Arr;
-use Livewire\WithFileUploads;
 use Tanthammar\TallForms\Traits\HandlesArrays;
 use Tanthammar\TallForms\Traits\HasComponentDesign;
 use Tanthammar\TallForms\Traits\Helpers;
 use Tanthammar\TallForms\Traits\Notify;
-use Tanthammar\TallForms\Traits\UploadsFiles;
 
 trait TallForm
 {
-    use Notify, WithFileUploads, UploadsFiles, Helpers, HandlesArrays, HasComponentDesign;
+    use Notify, Helpers, HandlesArrays, HasComponentDesign;
 
     public $model;
     public $log;

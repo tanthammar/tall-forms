@@ -37,7 +37,7 @@ class FileUpload extends Component
 
     public function inputWrapperError()
     {
-        return Helpers::unique_words($this->inputWrapper() . " border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red");
+        return Helpers::unique_words($this->inputWrapper() . " border-red-300 text-red-900 placeholder-red-300 shadow-outline-red");
     }
 
     public function deleteButton()

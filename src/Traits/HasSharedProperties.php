@@ -7,9 +7,9 @@ namespace Tanthammar\TallForms\Traits;
 trait HasSharedProperties
 {
     public $livewireComponent;
-    public $livewireParams;
+    public array $livewireParams = [];
     public $is_custom = false;
-    public $is_relation = false;
+    public bool $is_relation = false;
 
     public function livewireComponent(string $component, array $params = []): self
     {

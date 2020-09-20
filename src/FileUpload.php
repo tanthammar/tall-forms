@@ -14,7 +14,7 @@ class FileUpload extends BaseField
     public $livewireComponent;
     public $accept = "";
     public $maxBytes = null;
-    public string $sizeLimitAlert;
+    public $sizeLimitAlert;
 
 
     public function multiple(): self

@@ -1,156 +1,31 @@
 <?php
 
+
 namespace Tanthammar\TallForms;
 
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
-use Livewire\Component;
-use Spatie\Tags\Tag;
-
-class SpatieTags extends Component
+class SpatieTags extends BaseField
 {
-    public ?Model $model;
-    public string $field;
-    public ?string $type;
-    public array $tags = [];
-    public string $search = "";
-    public array $options = [];
-    public ?string $help;
-    public ?string $errorMsg;
-    public ?string $tagLocale;
-    public string $errorClass;
-    public string $helpClass;
-    public string $color;
+    public $type = 'spatie-tags';
+    public $tagType = "";
+    public $tagLocale;
+    public $is_custom = true;
 
-
-    public function mount(?Model $model,
-                          string $field,
-                          ?string $tagType,
-                          ?string $tags,
-                          ?string $help,
-                          ?string $errorMsg,
-                          ?string $tagLocale,
-                          string $errorClass,
-                          string $helpClass,
-                          string $color)
+    public function type(string $tagType = ""): self
     {
-        $this->model = $model;
-        $this->field = $field;
-        $this->type = $tagType;
-        $this->tags = filled($this->model)
-            ? $this->getExisting()
-            : (filled($tags)
-                ? explode(",", $tags)
-                : []
-            );
-        $this->help = $help;
-        $this->errorMsg = $errorMsg;
-        $this->tagLocale = $tagLocale;
-        $this->errorClass = $errorClass;
-        $this->helpClass = $helpClass;
-        $this->color = $color;
+        $this->tagType = $tagType;
+        return $this;
     }
 
-    public function getExisting()
+    public function suffix(string $tagTypeSuffix): self
     {
-        $query = filled($this->type) ? $this->model->tagsWithType($this->type) : $this->model->tags;
-        return array_filter(
-            $query->pluck('name')->unique()->toArray()
-        );
+        $this->tagType .= "-{$tagTypeSuffix}";
+        return $this;
     }
 
-    public function getRules()
+    public function locale(string $locale): self
     {
-        return ['search' => 'nullable|string|between:3,40'];
-    }
-
-    public function updatedSearch()
-    {
-        $slug = Str::slug($this->search, '-');
-        if (filled($slug)) {
-            $this->options = array_filter(
-                Tag::where("slug", 'like', '%' . $slug . '%')
-                    ->where('type', $this->type)
-                    ->orderBy("name", 'asc')
-                    ->take(10)
-                    ->pluck('name')
-                    ->unique()
-                    ->toArray()
-            );
-        }
-    }
-
-    // OBSERVE: there is a syncTags() method in Tanthammar\TallForms\TallForm,
-    // It's used for action="create" forms, create() method, to sync tags after the model is created
-    // this method is triggered via wire:click.prevent="addFromOptions('{{$option}}')" in tags.blade
-    public function syncTags()
-    {
-        $cleaned = collect(array_sort($this->tags))->unique()->toArray();
-        filled($this->model)
-            ? $this->syncModelWithLocale($cleaned)
-            : $this->emitUp('tallFillField', [
-            'field' => $this->field,
-            'value' => implode(",", $cleaned)
-        ]);
-        $this->tags = $cleaned;
-        $this->search = "";
-
-        //$this->notify();
-    }
-
-    public function syncModelWithLocale($cleaned)
-    {
-        if (filled($this->tagLocale)) {
-            $currentLocale = app()->getLocale();
-            app()->setLocale($this->tagLocale);
-            $this->syncModel($cleaned);
-            app()->setLocale($currentLocale);
-        } else {
-            $this->syncModel($cleaned);
-        }
-    }
-
-    public function syncModel($cleaned)
-    {
-        filled($this->type) ? $this->model->syncTagsWithType($cleaned, $this->type) : $this->model->syncTags($cleaned);
-    }
-
-    public function addTag($tag)
-    {
-        $tag = Str::of($tag)->trim()->trim(",")->title()->__toString();
-        if (!in_array($tag, $this->tags)) {
-            array_push($this->tags, $tag);
-        }
-        $this->syncTags();
-    }
-
-    public function removeTag(int $i): void
-    {
-        unset($this->tags[$i]);
-        //$this->search = ""; not needed called in syncTags() later
-        //$this->tags = array_values($this->tags);
-        $this->syncTags();
-    }
-
-    public function addFromSearch()
-    {
-        $this->validate($this->getRules());
-        $this->addTag($this->search);
-        //$this->search = ""; not needed called in syncTags() later
-    }
-
-    public function addFromOptions($option)
-    {
-        //validate that the option has not been modified in frontend
-        if (in_array($option, $this->options)) {
-            $this->addTag($option);
-        }
-        //$this->search = ""; //keep the search value to avoid rerendering of the component and to let the user continue typing from the value they had
-    }
-
-    public function render()
-    {
-        return view('tall-forms::livewire.tags');
+        $this->tagLocale = $locale;
+        return $this;
     }
 }

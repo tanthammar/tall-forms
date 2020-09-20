@@ -9,6 +9,11 @@ trait UploadsFiles
 {
     public $showFileUploadError = false;
 
+    public function clearFileUploadError(string $field)
+    {
+        $this->resetErrorBag($field);
+    }
+
     public function getFileErrorProperty()
     {
         return isset($this->uploadFileError)

@@ -20,6 +20,7 @@
                 wire:model="{{ $field->name }}"
                 name="{{ $field->name }}"
                 type="file"
+                @if($this->showFileUploadError) :value="null" @endif
                 {{ $field->multiple ? 'multiple' : '' }}
                 accept="{{$field->accept}}"
                 class="{{ $class() }}"/>
