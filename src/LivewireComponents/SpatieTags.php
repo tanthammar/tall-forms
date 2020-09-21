@@ -17,8 +17,7 @@ class SpatieTags extends Component
     public $errorClass;
     public $helpClass;
     public $color;
-
-
+    public $rules = ['search' => 'string|between:3,50']; //overriden in addFromSearch()
     /**
      * @param array $field
      * @param null|string $tags
@@ -41,15 +40,11 @@ class SpatieTags extends Component
 
     public function getExisting()
     {
+        //using tags()->where('type') because bug: https://github.com/spatie/laravel-tags/issues/279#
         $query = filled(data_get($this->field, 'tagType'))
             ? $this->model->tags()->where('type', $this->field['tagType']) : $this->model->tags();
         return $query->pluck('name')->unique()->toArray();
 
-    }
-
-    public function getRules()
-    {
-        return ['search' => 'nullable|string|between:1,60'];
     }
 
     public function updatedSearch()
@@ -109,7 +104,7 @@ class SpatieTags extends Component
     {
         $tag = Str::of($tag)->trim()->trim(",")->title();
         $tags = $tag->contains(',') ? explode(",", $tag) : null;
-        if(is_array($tags)) {
+        if (is_array($tags)) {
             $this->tags = array_unique(array_merge($this->tags, $tags));
         } else {
             if (!in_array($tag, $this->tags)) array_push($this->tags, $tag->__toString());
@@ -127,7 +122,12 @@ class SpatieTags extends Component
 
     public function addFromSearch()
     {
-        $this->validate($this->getRules());
+        $this->validateOnly(
+            'search',
+            ['search' => data_get($this->field, 'tagsRules', 'alpha|between:3,50')],
+            null,
+            ['search' => 'tag'],
+        );
         $this->addTag($this->search);
         //$this->search = ""; not needed called in syncTags() later
     }

@@ -10,7 +10,6 @@ class SpatieTags extends BaseField
     public $tagType = "";
     public $tagLocale;
     public $is_custom = true;
-    public $searchError;
     public $tagsRules;
 
     public function __construct($label, $key)
@@ -34,12 +33,6 @@ class SpatieTags extends BaseField
     public function locale(string $locale): self
     {
         $this->tagLocale = $locale;
-        return $this;
-    }
-
-    public function searchError(string $errorText): self
-    {
-        $this->searchError = $errorText;
         return $this;
     }
 

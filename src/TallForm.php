@@ -101,7 +101,7 @@ trait TallForm
         if (method_exists($this, $function)) $this->$function($value);
 
         $fieldType = $this->getFieldType($field);
-        if ($fieldType == 'file') { //TODO testa file upload
+        if ($fieldType == 'file') {
             // livewire native file upload
             $this->customValidateFilesIn($field, $this->getFieldValueByKey($field, 'rules'));//this does not work for array keyval fields
         } else {
@@ -111,7 +111,8 @@ trait TallForm
 
     public function submit()
     {
-        clock($this->model);
+        // fix for Livewire v2.5.5 returning ALL component properties
+        // bug: https://github.com/livewire/livewire/issues/1649
         $validated_data = $this->validate()['form_data'];
 
         $field_names = [];
@@ -131,7 +132,7 @@ trait TallForm
         }
 
         $relationship_data = Arr::only($validated_data, $relationship_names);
-        $this->custom_data = Arr::only($validated_data, $custom_names); //custom_data also used by syncTags() after save if create form, therefore must be a property
+        $this->custom_data = Arr::only($validated_data, $custom_names); //custom_data also used by syncTags(), therefore must be a property
         $model_fields_data = Arr::only($validated_data, $field_names);
 
         //make sure to create the model before attaching any relations

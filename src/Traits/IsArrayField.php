@@ -15,7 +15,7 @@ trait IsArrayField
     public function fields($fields = []): self
     {
         foreach($fields as $field) {
-            if (in_array($field->type, ['array', 'keyval', 'repeater', 'checkboxes', 'multiselect'])) {
+            if (in_array($field->type, ['array', 'keyval', 'repeater', 'checkboxes', 'multiselect', 'spatie-tags'])) {
                 //TODO throw real error and wich fields are allowed in repeater
                 dd('You can not add this field-type to Repeater or KeyVal fields');
             }

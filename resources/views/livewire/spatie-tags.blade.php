@@ -1,7 +1,5 @@
 <div class="bg-grey-lighter w-full">
-    <p>{{$field['key']}}</p>
-    @error('search')<p class="{{ $errorClass }}">{{ $field['searchError'] }}</p>@enderror
-{{--    @error($field['key'])<p class="{{ $errorClass }}">{{ $field['errorMsg'] ?? $this->errorMessage($message) }}</p>@enderror--}}
+    @error('search')<p class="{{ $errorClass }}">{{ $field['errorMsg'] ?? $message }}</p>@enderror
     <div class="flex flex-1 flex-wrap bg-white border rounded shadow-sm pl-2 pr-4 pt-2 pb-1">
         @foreach ($tags as $i => $tag)
             <span
