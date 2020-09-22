@@ -17,7 +17,7 @@ class SpatieTags extends Component
     public $errorClass;
     public $helpClass;
     public $color;
-    public $rules = ['search' => 'string|between:3,50']; //overriden in addFromSearch()
+    public $rules = ['search' => 'alpha|between:3,50']; //overriden in addFromSearch(), prevents Livewire from squeaking
     /**
      * @param array $field
      * @param null|string $tags
@@ -26,7 +26,7 @@ class SpatieTags extends Component
     public function mount(array $field, $tags = '', $model = null)
     {
         $this->model = isset($model) && $model->exists ? $model : null;
-        $this->field = $field;
+        $this->field = $field; //observe that the field is an array here, not the class
         $this->tags = filled($this->model) && $model->exists
             ? $this->getExisting()
             : (filled($tags)

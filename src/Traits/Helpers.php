@@ -65,7 +65,7 @@ trait Helpers
     public function syncTags($field, $tagType = null)
     {
         $tags = data_get($this->custom_data, $field);
-        if (filled($tags = explode(",", $tags)) && filled($this->model)) {
+        if (filled($tags = explode(",", $tags)) && $this->model->exists) {
             filled($tagType) ? $this->model->syncTagsWithType($tags, $tagType) : $this->model->syncTags($tags);
         }
     }

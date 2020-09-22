@@ -139,14 +139,12 @@ trait TallForm
         $this->success($model_fields_data); //creates or updates the model
 
         //save relations, group method
-        if (filled($this->model) && filled($relationship_data)) {//TODO är det mitt jobb att vara polis?
+        if ($this->model->exists) {
             $this->relations($relationship_data);
         }
 
         //save custom fields, group method
-        if (filled($this->custom_data)) {
-            $this->custom_fields($this->custom_data);
-        }
+        $this->custom_fields($this->custom_data);
 
         //saveFoo()
         foreach ($this->fields() as $field) {

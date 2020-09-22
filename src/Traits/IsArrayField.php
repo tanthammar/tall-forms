@@ -5,6 +5,7 @@ namespace Tanthammar\TallForms\Traits;
 
 
 use Tanthammar\TallForms\BaseField;
+use Tanthammar\TallForms\Exceptions\invalidArrayFieldType;
 
 trait IsArrayField
 {
@@ -15,10 +16,10 @@ trait IsArrayField
     public function fields($fields = []): self
     {
         foreach($fields as $field) {
-            if (in_array($field->type, ['array', 'keyval', 'repeater', 'checkboxes', 'multiselect', 'spatie-tags'])) {
-                //TODO throw real error and wich fields are allowed in repeater
-                dd('You can not add this field-type to Repeater or KeyVal fields');
-            }
+            throw_if(
+                in_array($field->type, ['array', 'keyval', 'repeater', 'checkboxes', 'multiselect', 'spatie-tags']),
+                new invalidArrayFieldType($field->name, $field->type)
+            );
         }
         $this->fields = $fields;
         return $this;

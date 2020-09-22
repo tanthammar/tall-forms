@@ -24,7 +24,7 @@ class Input extends Component
 
     public function options(): array
     {
-        $custom = data_get($this->field, 'attributes.input');
+        $custom = $this->field->getAttr('input');
         $default = [
             $this->field->wire => $this->temp_key,
             'name' => $this->temp_key,

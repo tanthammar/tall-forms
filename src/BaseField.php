@@ -31,13 +31,12 @@ class BaseField
 
     public $errorMsg;
 
-
     public function __construct($label, $key)
     {
         $this->label = $label;
         $this->name = $key ?? \Str::snake(\Str::lower($label));
         $this->key = 'form_data.' . $this->name;
-        $this->setAttr();
+        //$this->setAttr(); replaced with __constructStatic in HasAttributes
     }
 
     //problem with collect()->firstWhere()
@@ -126,3 +125,4 @@ class BaseField
         return $this;
     }
 }
+BaseField::__constructStatic();

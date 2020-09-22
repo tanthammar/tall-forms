@@ -13,6 +13,6 @@ class ConfigAttr
      */
     public static function key($type)
     {
-        return data_get(config('tall-forms.component-attributes'), $type, []);;
+        return data_get(config('tall-forms.component-attributes'), $type, []);
     }
 }

@@ -12,12 +12,6 @@ class SpatieTags extends BaseField
     public $is_custom = true;
     public $tagsRules;
 
-    public function __construct($label, $key)
-    {
-        parent::__construct($label, $key);
-        $this->searchError = trans(config('tall-forms.spatie-tags-search-error'));
-    }
-
     public function type(string $tagType = ""): self
     {
         $this->tagType = $tagType;
