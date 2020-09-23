@@ -208,13 +208,6 @@ trait TallForm
     }
 
 
-    public function errorMessage($message, $key='', $label='')
-    {
-        $return = str_replace('form_data.', '', $message);
-        return str_replace('form data.', '', $return);
-//        return \Str::replaceFirst('form data.', '', $message);
-    }
-
     public function saveAndStayResponse()
     {
         //return redirect()->route('users.create');

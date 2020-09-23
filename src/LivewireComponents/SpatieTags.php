@@ -69,7 +69,7 @@ class SpatieTags extends Component
     public function syncTags()
     {
         $cleaned = collect(\Arr::sort($this->tags))->unique()->toArray();
-        filled($this->model)
+        filled($this->model) && $this->model->exists
             ? $this->syncModelWithLocale($cleaned)
             : $this->emitUp('tallFillField', [
             'field' => $this->field['name'],

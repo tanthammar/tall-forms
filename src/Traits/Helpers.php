@@ -37,7 +37,7 @@ trait Helpers
     protected function fieldNames(): array
     {
         return $fieldNames = collect($this->fields())->map(function ($field) {
-            return $field->name;
+            return filled($field) ? $field->name : null;
         })->toArray();
     }
 
@@ -71,9 +71,11 @@ trait Helpers
     }
 
     // in blade views to strip "form data" from field validation
-    public function errorMessage($message)
+    public function errorMessage($message, $key='', $label='')
     {
-        return str_replace('form data.', '', $message);
+        $return = str_replace('form_data.', '', $message);
+        return str_replace('form data.', '', $return);
+//        return \Str::replaceFirst('form data.', '', $message);
     }
 
     public static function unique_words(string $scentence): string

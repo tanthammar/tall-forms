@@ -36,7 +36,7 @@ class BaseField
         $this->label = $label;
         $this->name = $key ?? \Str::snake(\Str::lower($label));
         $this->key = 'form_data.' . $this->name;
-        //$this->setAttr(); replaced with __constructStatic in HasAttributes
+        $this->setAttr();
     }
 
     //problem with collect()->firstWhere()
@@ -125,4 +125,3 @@ class BaseField
         return $this;
     }
 }
-BaseField::__constructStatic();

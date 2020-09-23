@@ -15,7 +15,7 @@
         @if(!in_array($field->type, ['file', 'spatie-tags']))
             @error($temp_key)
             <p class="{{ \Tanthammar\TallForms\ConfigAttr::key('error') }}">
-                {{ $field->errorMsg ?? $this->errorMessage($message) }}
+                {{ $field->errorMsg ?? \Tanthammar\TallForms\ErrorMessage::parse($message) }}
             </p>
             @enderror
         @endif
