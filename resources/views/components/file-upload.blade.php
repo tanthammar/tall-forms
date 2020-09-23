@@ -20,7 +20,7 @@
                 wire:model="{{ $field->name }}"
                 name="{{ $field->name }}"
                 type="file"
-                @if($this->showFileUploadError) :value="null" @endif
+                @if($this->showFileUploadError && $this->showFileUploadErrorFor == $field->name) :value="null" @endif
                 {{ $field->multiple ? 'multiple' : '' }}
                 accept="{{$field->accept}}"
                 class="{{ $class() }}"/>
@@ -47,5 +47,5 @@
         @if(!$this->showFileUploadError)<p class="{{ $errorClass }}">{{ $field->errorMsg ?? $this->fileError }}</p>@endif
     @enderror
     {{--show components general validation error --}}
-    @if($this->showFileUploadError)<p class="{{ $errorClass }}">{{ $field->errorMsg ?? $this->fileError }}</p>@endif
+    @if($this->showFileUploadError && $this->showFileUploadErrorFor == $field->name)<p class="{{ $errorClass }}">{{ $field->errorMsg ?? $this->fileError }}</p>@endif
 </div>

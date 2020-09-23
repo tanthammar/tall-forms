@@ -21,12 +21,11 @@ trait TallForm
     public $showGoBack = true;
     public $custom_data = [];
 
-
     protected $rules = [];
 
     public function __construct($id = null)
     {
-        $this->rules = $this->set_rules();
+        //$this->rules = $this->get_rules();
         $this->listeners = array_merge($this->listeners, ['tallFillField']);
         $this->labelW = config('tall-forms.component-attributes.label-width');
         $this->fieldW = config('tall-forms.component-attributes.field-width');
@@ -34,7 +33,7 @@ trait TallForm
     }
 
 
-    public function set_rules()
+    public function get_rules()
     {
         $rules = [];
         foreach ($this->fields() as $field) {
@@ -100,12 +99,14 @@ trait TallForm
         $function = $this->parseFunctionNameFrom($field);
         if (method_exists($this, $function)) $this->$function($value);
 
-        $fieldType = $this->getFieldType($field);
-        if ($fieldType == 'file') {
-            // livewire native file upload
-            $this->customValidateFilesIn($field, $this->getFieldValueByKey($field, 'rules'));//this does not work for array keyval fields
-        } else {
-            $this->validateOnly($field);
+        if ($this->getFieldValueByKey($field, 'realtimeValidationOn')) {
+            $fieldType = $this->getFieldType($field);
+            if ($fieldType == 'file') {
+                // livewire native file upload
+                $this->customValidateFilesIn($field, $this->getFieldValueByKey($field, 'rules'));//this does not work for array keyval fields
+            } else {
+                $this->validateOnly($field, [$field => $this->getFieldValueByKey($field, 'rules')]);
+            }
         }
     }
 
@@ -113,7 +114,7 @@ trait TallForm
     {
         // fix for Livewire v2.5.5 returning ALL component properties
         // bug: https://github.com/livewire/livewire/issues/1649
-        $validated_data = $this->validate()['form_data'];
+        $validated_data = $this->validate($this->get_rules())['form_data'];
 
         $field_names = [];
         $relationship_names = [];
@@ -150,7 +151,8 @@ trait TallForm
         foreach ($this->fields() as $field) {
             if (filled($field)) {
                 $function = $this->parseFunctionNameFrom($field->key, 'save');
-                if (method_exists($this, $function)) $this->$function(data_get($validated_data, $field->key));
+                $validated_data = $field->type == 'file' ? $this->{$field->name} : data_get($validated_data, $field->key);
+                if (method_exists($this, $function)) $this->$function($validated_data);
             }
         }
     }

@@ -31,6 +31,8 @@ class BaseField
 
     public $errorMsg;
 
+    public $realtimeValidationOn = true;
+
     public function __construct($label, $key)
     {
         $this->label = $label;
@@ -122,6 +124,12 @@ class BaseField
     public function below(string $text): self
     {
         $this->below = $text;
+        return $this;
+    }
+
+    public function realtimeValidationOff()
+    {
+        $this->realtimeValidationOn = false;
         return $this;
     }
 }
