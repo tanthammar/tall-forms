@@ -20,7 +20,7 @@ class DummyComponent extends Component
             'showGoBack' => false, //or true
         ]);
 
-        $this->mount_form($dummymodel);
+        $this->mount_form($dummymodel); // $dummymodel from hereon, called $this->model
     }
 
     // Optional method, this already exists in the TallForm trait

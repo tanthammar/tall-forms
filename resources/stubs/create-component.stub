@@ -19,7 +19,7 @@ class DummyComponent extends Component
             'wrapWithComponent' => true, //wrap with x-pages.default or set prop $wrapComponentName to define a blade layout to wrap the form
             'showGoBack' => false, //or true
         ]);
-        $this->mount_form($dummymodel);
+        $this->mount_form($dummymodel); // $dummymodel from hereon, called $this->model
     }
 
 
