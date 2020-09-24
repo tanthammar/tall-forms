@@ -17,7 +17,7 @@ class SpatieTags extends Component
     public $errorClass;
     public $helpClass;
     public $color;
-    public $rules = ['search' => 'alpha|between:3,50']; //overriden in addFromSearch(), prevents Livewire from squeaking
+    public $rules = ['search' => 'string|between:3,50']; //overriden in addFromSearch(), prevents Livewire from squeaking
     /**
      * @param array $field
      * @param null|string $tags
@@ -124,7 +124,7 @@ class SpatieTags extends Component
     {
         $this->validateOnly(
             'search',
-            ['search' => data_get($this->field, 'tagsRules', 'alpha|between:3,50')],
+            ['search' => data_get($this->field, 'tagsRules', 'string|between:3,50')],
             null,
             ['search' => 'tag'],
         );
