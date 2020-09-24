@@ -24,9 +24,13 @@ return [
         'help' => 'leading-tight text-gray-500 text-sm',
         'error' => 'italic leading-tight text-gray-500 text-red-500 text-sm',
         'buttons-root' => 'w-full border-t border-gray-200 pt-5',
-        'buttons-wrapper' => 'space-x-3 flex justify-center sm:justify-end items-center',
+        'buttons-wrapper' => 'flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3 sm:justify-end sm:items-center',
         'inline-label-alignment' => 'text-left',
         'stacked-label-alignment' => 'text-left',
+        //Default label-, field-width for inline form layout
+        'label-width' => 'sm:w-1/3 md:w-1/5',
+        'field-width' => 'sm:w-2/3 md:w-4/5',
+        'tags-color' => 'bg-blue-100 text-blue-800'
     ],
 
     // Field attributes
@@ -59,9 +63,11 @@ return [
         //these are not applied as foreach, you can only set the class attribute here
         'label-field-wrapper-inline' => 'sm:flex',
         'label-field-wrapper-stacked' => 'w-full',
-        'label' => 'block text-sm font-medium leading-5 text-gray-700',
+        'label' => 'my-1 block text-sm font-medium leading-5 text-gray-700',
         'label-suffix' => 'italic text-black text-opacity-25 text-xs',
-        'after-label' => 'block text-sm leading-4 text-gray-700',
+        'after-label' => '-mt-1 block text-sm leading-4 text-gray-700',
+        'input' => 'my-1 flex rounded-md shadow-sm w-full relative',
+        'range-value' => 'rounded border px-2 font-medium',
         'keyval-wrapper' => 'flex flex-col',
         'keyval-wrapper-grid' => 'sm:flex sm:grid sm:grid-cols-12 sm:gap-x-2 sm:gap-y-4',
         'repeater-wrapper' => 'flex flex-col divide-y mb-2 rounded border',
@@ -114,10 +120,6 @@ return [
     'file-icon' => 'light/', //used as @svg('light/{$mime_type}', 'classes')
     'file-upload' => 'light/upload', //prefix icon for file upload field
 
-    //Default label-, field-width for inline form layout
-    'field-width' => 'sm:w-3/4 md:w-4/5',
-    'label-width' => 'sm:w-1/4 md:w-1/5',
-
     //Column span classes for the fields ->colspan() method
     //requires tailwind css v1.7.0
     //see tailwind.config.js future:{}
@@ -137,7 +139,11 @@ return [
     ],
 
     //File upload default validation message
-    'upload-file-error' => 'messages.file_upload_error',
+    'upload-file-error' => 'messages.file_upload_error', //Example: 'One or many of the uploaded files did not match the allowed filetype or size limit. Please see the fields help text, review your files and try again.'
+
+
+    //Spatie tags, search input error
+    'spatie-tags-search-error' => 'fields.tag_search_error',
 
 
     // list with blade ui kit components that this package replaces
@@ -149,5 +155,12 @@ return [
         'label-field-wrapper' => Components\LabelFieldWrapper::class,
         'field-root' => Components\FieldRoot::class,
         'input' => Components\Input::class,
+        'range' => Components\Range::class,
+        'textarea' => Components\Textarea::class,
+        'checkbox' => Components\Checkbox::class,
+        'checkboxes' => Components\Checkboxes::class,
+        'radio' => Components\Radio::class,
+        'file-upload' => Components\FileUpload::class,
+        'select' => Components\Select::class,
     ]
 ];
