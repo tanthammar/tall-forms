@@ -1,6 +1,6 @@
 <div class="bg-grey-lighter w-full">
     @error('search')<p class="{{ $errorClass }}">{{ $field['errorMsg'] ?? $message }}</p>@enderror
-    <div class="flex flex-1 flex-wrap bg-white border rounded shadow-sm pl-2 pr-4 pt-2 pb-1">
+    <div x-data @tags-search-input-{{ $field['name'] }}-focus.window="$refs.searchInput.focus()" class="flex flex-1 flex-wrap bg-white border rounded shadow-sm pl-2 pr-4 pt-2 pb-1">
         @foreach ($tags as $i => $tag)
             <span
                 class="tags-input-tag inline-flex leading-4 items-center text-sm bg-blue-300 text-blue-800 rounded py-1 px-2 mr-2 mb-1"
@@ -12,9 +12,9 @@
                 </button>
             </span>
         @endforeach
-        <input autofocus wire:model.debounce.750ms="search" wire:keydown.space.prevent="addFromSearch" name="search"
+        <input autofocus x-ref="searchInput" wire:model.debounce.500ms="search" wire:keydown.space.prevent="addFromSearch" name="search"
                class="tags-input-text flex-1 outline-none pt-1 pb-1 ml-2"
-               style="min-width:10rem" placeholder="Add tag...">
+               style="min-width:10rem" placeholder="{{ $field['placeholder'] ?? 'Add tag...' }}">
     </div>
     @if($field['help'])<p class="{{ $helpClass }} py-1">{{ $field['help'] }}</p>@endif
     <div class="flex items-center py-2">

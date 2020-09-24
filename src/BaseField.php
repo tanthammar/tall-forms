@@ -20,7 +20,6 @@ class BaseField
     public $rules = 'nullable';
 
     public $default;
-    public $placeholder;
     public $help;
 
     public $before;

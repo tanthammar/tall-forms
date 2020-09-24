@@ -11,6 +11,7 @@ class SpatieTags extends BaseField
     public $tagLocale;
     public $is_custom = true;
     public $tagsRules;
+    public $placeholder;
 
     public function type(string $tagType = ""): self
     {
@@ -33,6 +34,12 @@ class SpatieTags extends BaseField
     public function rules($rules): self
     {
         $this->tagsRules = $rules;
+        return $this;
+    }
+
+    public function placeholder(string $placeholder): self
+    {
+        $this->placeholder = $placeholder;
         return $this;
     }
 }
