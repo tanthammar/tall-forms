@@ -9,7 +9,7 @@
             </div>
         @else
             <div class="{{ $iconWrapper }}">
-                @svg(config('tall-forms.file-icon').$this->fileIcon($file->getMimeType()), "h-4 w-4")
+                @svg(config('tall-forms.file-icon').$fileIcon($file->getMimeType()), "h-4 w-4")
             </div>
         @endif
     </div>

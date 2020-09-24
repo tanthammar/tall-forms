@@ -15,13 +15,6 @@ trait UploadsFiles
         $this->resetErrorBag($field);
     }
 
-    public function getFileErrorProperty()
-    {
-        return isset($this->uploadFileError)
-            ? $this->uploadFileError
-            : trans(config('tall-forms.upload-file-error'));
-    }
-
     /**
      * @param string $field_name
      * @param string|array $rules
@@ -84,40 +77,5 @@ trait UploadsFiles
             }
         }
         return $success;
-    }
-
-    public function fileIcon($mime_type)
-    {
-        $icons = [
-            'image' => 'file-image',
-            'audio' => 'file-audio',
-            'video' => 'file-video',
-            'application/pdf' => 'file-pdf',
-            'application/msword' => 'file-word',
-            'application/vnd.ms-word' => 'file-word',
-            'application/vnd.oasis.opendocument.text' => 'file-word',
-            'application/vnd.openxmlformats-officedocument.wordprocessingml' => 'file-word',
-            'application/vnd.ms-excel' => 'file-excel',
-            'application/vnd.openxmlformats-officedocument.spreadsheetml' => 'file-excel',
-            'application/vnd.oasis.opendocument.spreadsheet' => 'file-excel',
-            'application/vnd.ms-powerpoint' => 'file-powerpoint',
-            'application/vnd.openxmlformats-officedocument.presentationml' => 'file-powerpoint',
-            'application/vnd.oasis.opendocument.presentation' => 'file-powerpoint',
-            'text/plain' => 'file-alt',
-            'text/html' => 'file-code',
-            'application/json' => 'file-code',
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'file-word',
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 'file-excel',
-            'application/vnd.openxmlformats-officedocument.presentationml.presentation' => 'file-powerpoint',
-            'application/gzip' => 'file-archive',
-            'application/zip' => 'file-archive',
-            'application/x-zip-compressed' => 'file-archive',
-            'application/octet-stream' => 'file-archive',
-        ];
-
-        if (isset($icons[$mime_type])) return $icons[$mime_type];
-        $mime_group = explode('/', $mime_type, 2)[0];
-
-        return (isset($icons[$mime_group])) ? $icons[$mime_group] : 'file';
     }
 }

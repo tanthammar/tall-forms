@@ -14,7 +14,7 @@
         @endforeach
         <input autofocus x-ref="searchInput" wire:model.debounce.500ms="search" wire:keydown.space.prevent="addFromSearch" name="search"
                class="tags-input-text flex-1 outline-none pt-1 pb-1 ml-2"
-               style="min-width:10rem" placeholder="{{ $field['placeholder'] ?? 'Add tag...' }}">
+               style="min-width:10rem" placeholder="{{ $field['placeholder'] ?? 'Add tag...' }}" />
     </div>
     @if($field['help'])<p class="{{ $helpClass }} py-1">{{ $field['help'] }}</p>@endif
     <div class="flex items-center py-2">
