@@ -2,7 +2,8 @@
 
 namespace Tanthammar\TallForms;
 
-use BladeUIKit\Components\BladeComponent;
+//use BladeUIKit\Components\BladeComponent;
+use Illuminate\View\Component as IlluminateComponent;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
@@ -53,7 +54,7 @@ class FormServiceProvider extends ServiceProvider
     {
         $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
             $prefix = 'tall';
-            /** @var BladeComponent $component */
+            /** @var IlluminateComponent $component */
             foreach (config('tall-forms.components', []) as $alias => $component) {
                 $blade->component($component, $alias, $prefix);
             }
