@@ -6,13 +6,11 @@ namespace Tanthammar\TallForms\Traits;
 
 trait HasDesign
 {
-    public $fieldW = 'sm:w-2/3';
+    public $fieldW;
     public $inline;
-    public $colspan = 6;
-    public $before;
-    public $after;
-    public $view;
+    public $colspan = 12;
     public $class;
+    public $inArray = false;
 
     /**
      * Default sm:w-2/3
@@ -25,14 +23,20 @@ trait HasDesign
         return $this;
     }
 
-    public function inline(bool $inline = true): self
+    public function inline(): self
     {
-        $this->inline = $inline;
+        $this->inline = true;
+        return $this;
+    }
+
+    public function stacked(): self
+    {
+        $this->inline = false;
         return $this;
     }
 
     /**
-     * Default 6 of 6 columns
+     * Default 12 of 12 columns
      * @param int $cols
      * @return $this
      */
@@ -42,37 +46,15 @@ trait HasDesign
         return $this;
     }
 
-    public function before(string $blade_view_to_include): self
-    {
-        $this->before = $blade_view_to_include;
-        return $this;
-    }
-
-    public function after(string $blade_view_to_include): self
-    {
-        $this->after = $blade_view_to_include;
-        return $this;
-    }
-
-    /**
-     * Display a custom view instad of the default field view
-     * @param string $view
-     * @return $this
-     */
-    public function view(string $your_on_your_own_blade_view): self
-    {
-        $this->view = $your_on_your_own_blade_view;
-        return $this;
-    }
-
     /**
      * Applied to the field wrapper
      * @param string $classes
+     * @param bool $merge
      * @return $this
      */
-    public function class(string $classes): self
+    public function class(string $classes, $merge = true): self
     {
-        $this->class = $classes;
+        $this->class = $merge ? "{$this->class} {$classes}" : $classes;
         return $this;
     }
 }

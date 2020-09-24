@@ -34,6 +34,13 @@ trait Helpers
         return $array;
     }
 
+    protected function fieldNames(): array
+    {
+        return $fieldNames = collect($this->fields())->map(function ($field) {
+            return filled($field) ? $field->name : null;
+        })->toArray();
+    }
+
 
     /**
      * Executes before field validation, creds to "@roni", livewire discord channel member
@@ -48,24 +55,31 @@ trait Helpers
 
 
 
-    public function fillField($array)
+    public function tallFillField($array)
     {
         $this->form_data[$array['field']] = $array['value'];
     }
 
-    //all other methods regarding tags are in Tanthammar\TallForms\Tags\TagsTrait
-    // This is used for action="create" forms, create() method, to sync tags after the model is created
+    // All other methods regarding tags are in Tanthammar\TallForms\SpatieTags
+    // It's intended to be called in the onCreateModel() method, to sync tags after the model is created
     public function syncTags($field, $tagType = null)
     {
         $tags = data_get($this->custom_data, $field);
-        if (filled($tags = explode(",", $tags)) && filled($this->model)) {
+        if (filled($tags = explode(",", $tags)) && $this->model->exists) {
             filled($tagType) ? $this->model->syncTagsWithType($tags, $tagType) : $this->model->syncTags($tags);
         }
     }
 
     // in blade views to strip "form data" from field validation
-    public function errorMessage($message)
+    public function errorMessage($message, $key='', $label='')
     {
-        return str_replace('form data.', '', $message);
+        $return = str_replace('form_data.', '', $message);
+        return str_replace('form data.', '', $return);
+//        return \Str::replaceFirst('form data.', '', $message);
+    }
+
+    public static function unique_words(string $scentence): string
+    {
+        return implode(' ',array_unique(explode(' ', $scentence)));
     }
 }

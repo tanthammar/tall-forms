@@ -8,6 +8,12 @@ use Illuminate\Validation\ValidationException;
 trait UploadsFiles
 {
     public $showFileUploadError = false;
+    public $showFileUploadErrorFor = '';
+
+    public function clearFileUploadError(string $field)
+    {
+        $this->resetErrorBag($field);
+    }
 
     public function getFileErrorProperty()
     {
@@ -31,6 +37,7 @@ trait UploadsFiles
                 $this->showFileUploadError = false;
             } catch (ValidationException $e) {
                 $this->showFileUploadError = true;
+                $this->showFileUploadErrorFor = $field_name;
                 $this->clearFieldAndDeleteTempFiles($field_name);
             }
         }

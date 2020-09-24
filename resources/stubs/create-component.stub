@@ -5,11 +5,11 @@ namespace App\Http\Livewire\Namespace;
 use App\ModelsPathDummyModel;
 use Livewire\Component;
 use Tanthammar\TallForms\Input;
-use Tanthammar\TallForms\LivewireForm;
+use Tanthammar\TallForms\TallForm;
 
 class DummyComponent extends Component
 {
-    use LivewireForm;
+    use TallForm;
 
     public function mount(?DummyModel $dummymodel)
     {
@@ -30,7 +30,7 @@ class DummyComponent extends Component
         $this->model = DummyModel::create($validated_data);
     }
 
-    // OPTIONAL method used for the "Save and stay" button
+    // OPTIONAL method used for the "Save and stay" button, this method already exists in the TallForm trait
     public function onUpdateModel($validated_data)
     {
         $this->model = $this->model->update($validated_data);

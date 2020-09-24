@@ -3,39 +3,37 @@
 namespace Tanthammar\TallForms;
 
 use Illuminate\Support\Arr;
-use Livewire\WithFileUploads;
 use Tanthammar\TallForms\Traits\HandlesArrays;
+use Tanthammar\TallForms\Traits\HasComponentDesign;
 use Tanthammar\TallForms\Traits\Helpers;
 use Tanthammar\TallForms\Traits\Notify;
-use Tanthammar\TallForms\Traits\UploadsFiles;
 
-trait LivewireForm
+trait TallForm
 {
-    use Notify, WithFileUploads, UploadsFiles, Helpers, HandlesArrays;
+    use Notify, Helpers, HandlesArrays, HasComponentDesign;
 
     public $model;
+    public $log;
     public $form_data;
-    public $formTitle;
-    public $inline = true;
-    public $wrapWithComponent = true;
-    public $wrapComponentName;
     public $previous;
-    public $showDelete = false;
+    public $showDelete = true;
+    public $showReset = true;
     public $showGoBack = true;
     public $custom_data = [];
-    public $form_wrapper = 'max-w-screen-lg mx-auto'; //ersatt av attribute?
-
 
     protected $rules = [];
 
     public function __construct($id = null)
     {
-        $this->rules = $this->set_rules();
-        $this->listeners[] = 'fillField'; //emitted from tags field
+        //$this->rules = $this->get_rules();
+        $this->listeners = array_merge($this->listeners, ['tallFillField']);
+        $this->labelW = config('tall-forms.component-attributes.label-width');
+        $this->fieldW = config('tall-forms.component-attributes.field-width');
         parent::__construct($id);
     }
 
-    public function set_rules()
+
+    public function get_rules()
     {
         $rules = [];
         foreach ($this->fields() as $field) {
@@ -70,6 +68,7 @@ trait LivewireForm
         $this->afterFormProperties();
         $this->previous = urlencode(\URL::previous());  //used for saveAndGoBack
         $this->wrapComponentName = config('tall-forms.wrap-component-name');
+        $this->inlineLabelAlignment = $this->inlineLabelAlignment ?? config('tall-forms.component-attributes.inline-label-alignment');
     }
 
 
@@ -81,7 +80,7 @@ trait LivewireForm
 
     public function setFormProperties()
     {
-        $this->form_data = $this->model->toArray();
+        $this->form_data = $this->model->only($this->fieldNames());
         foreach ($this->fields() as $field) {
             if (filled($field) && !isset($this->form_data[$field->name])) {
                 $array = in_array($field->type, ['checkboxes', 'file', 'multiselect']);
@@ -100,18 +99,22 @@ trait LivewireForm
         $function = $this->parseFunctionNameFrom($field);
         if (method_exists($this, $function)) $this->$function($value);
 
-        $fieldType = $this->getFieldType($field);
-        if ($fieldType == 'file') { //TODO testa file upload
-            // livewire native file upload
-            $this->customValidateFilesIn($field, $this->getFieldValueByKey($field, 'rules'));//this does not work for array keyval fields
-        } else {
-            $this->validateOnly($field);
+        if ($this->getFieldValueByKey($field, 'realtimeValidationOn')) {
+            $fieldType = $this->getFieldType($field);
+            if ($fieldType == 'file') {
+                // livewire native file upload
+                $this->customValidateFilesIn($field, $this->getFieldValueByKey($field, 'rules'));//this does not work for array keyval fields
+            } else {
+                $this->validateOnly($field, [$field => $this->getFieldValueByKey($field, 'rules')]);
+            }
         }
     }
 
     public function submit()
     {
-        $validated_data = $this->validate()['form_data'];
+        // fix for Livewire v2.5.5 returning ALL component properties
+        // bug: https://github.com/livewire/livewire/issues/1649
+        $validated_data = $this->validate($this->get_rules())['form_data'];
 
         $field_names = [];
         $relationship_names = [];
@@ -130,27 +133,26 @@ trait LivewireForm
         }
 
         $relationship_data = Arr::only($validated_data, $relationship_names);
-        $this->custom_data = Arr::only($validated_data, $custom_names); //custom_data also used by syncTags() after save if create form, therefore must be a property
+        $this->custom_data = Arr::only($validated_data, $custom_names); //custom_data also used by syncTags(), therefore must be a property
         $model_fields_data = Arr::only($validated_data, $field_names);
 
         //make sure to create the model before attaching any relations
         $this->success($model_fields_data); //creates or updates the model
 
         //save relations, group method
-        if (filled($this->model) && filled($relationship_data)) {//TODO är det mitt jobb att vara polis?
+        if ($this->model->exists) {
             $this->relations($relationship_data);
         }
 
         //save custom fields, group method
-        if (filled($this->custom_data)) {
-            $this->custom_fields($this->custom_data);
-        }
+        $this->custom_fields($this->custom_data);
 
         //saveFoo()
         foreach ($this->fields() as $field) {
             if (filled($field)) {
                 $function = $this->parseFunctionNameFrom($field->key, 'save');
-                if (method_exists($this, $function)) $this->$function(data_get($validated_data, $field->key));
+                $validated_data = $field->type == 'file' ? $this->{$field->name} : data_get($validated_data, $field->key);
+                if (method_exists($this, $function)) $this->$function($validated_data);
             }
         }
     }
@@ -168,7 +170,7 @@ trait LivewireForm
     public function success($model_fields_data)
     {
         // you have to add the methods to your component
-        $this->model->exist ? $this->onUpdateModel($model_fields_data) : $this->onCreateModel($model_fields_data);
+        $this->model->exists ? $this->onUpdateModel($model_fields_data) : $this->onCreateModel($model_fields_data);
     }
 
     public function onUpdateModel($validated_data)
@@ -179,6 +181,12 @@ trait LivewireForm
     public function onCreateModel($validated_data)
     {
         //
+    }
+
+    public function resetFormData()
+    {
+        $this->resetErrorBag();
+        $this->setFormProperties();
     }
 
     public function delete()
@@ -201,13 +209,6 @@ trait LivewireForm
         return isset($this->formWrapper) ? $this->formWrapper : $this->formWrapper = 'max-w-screen-lg mx-auto';
     }
 
-
-    public function errorMessage($message, $key='', $label='')
-    {
-        $return = str_replace('form_data.', '', $message);
-        return str_replace('form data.', '', $return);
-//        return \Str::replaceFirst('form data.', '', $message);
-    }
 
     public function saveAndStayResponse()
     {

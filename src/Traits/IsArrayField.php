@@ -4,18 +4,22 @@
 namespace Tanthammar\TallForms\Traits;
 
 
+use Tanthammar\TallForms\BaseField;
+use Tanthammar\TallForms\Exceptions\invalidArrayFieldType;
+
 trait IsArrayField
 {
     public $fields = [];
-    public $group_class = 'rounded border bg-gray-50';
+    public $array_wrapper_class; //set in parent construct
+    public $array_wrapper_grid_class; //set in parent construct
 
     public function fields($fields = []): self
     {
         foreach($fields as $field) {
-            if (!in_array($field->type, ['input', 'textarea', 'trix', 'range', 'checkbox', 'checkboxes', 'radio', 'select', 'multiselect'])) {
-                //TODO throw real error
-                dd('You can not add this field-type to Repeater or KeyVal fields');
-            }
+            throw_if(
+                in_array($field->type, ['array', 'keyval', 'repeater', 'checkboxes', 'multiselect', 'spatie-tags']),
+                new invalidArrayFieldType($field->name, $field->type)
+            );
         }
         $this->fields = $fields;
         return $this;
@@ -25,12 +29,18 @@ trait IsArrayField
      * Applied to the outer wrapper surrounding Array and KeyVal field groups
      * Default 'rounded border bg-gray-50';
      *
-     * @param $classes
+     * @param string $classes
      * @return $this
      */
-    public function groupClass(string $classes = 'rounded border bg-gray-50'): self
+    public function wrapperClass(string $classes): self
     {
-        $this->group_class = $classes;
+        $this->array_wrapper_class = $classes;
+        return $this;
+    }
+
+    public function wrapperGrid(string $classes): self
+    {
+        $this->array_wrapper_grid_class = $classes;
         return $this;
     }
 

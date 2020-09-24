@@ -6,10 +6,12 @@ use Illuminate\Support\Arr;
 use Tanthammar\TallForms\Traits\HasAttributes;
 use Tanthammar\TallForms\Traits\HasDesign;
 use Tanthammar\TallForms\Traits\HasLabels;
+use Tanthammar\TallForms\Traits\HasSharedProperties;
+use Tanthammar\TallForms\Traits\HasViews;
 
 class BaseField
 {
-    use HasLabels, HasAttributes, HasDesign;
+    use HasLabels, HasAttributes, HasSharedProperties, HasDesign, HasViews;
 
     public $label;
     public $name;
@@ -18,32 +20,37 @@ class BaseField
     public $rules = 'nullable';
 
     public $default;
-    public $placeholder;
     public $help;
 
-    public $errorMsg;
-    public $xData;
-    public $xInit;
-    public $wire = 'wire:model.lazy';
+    public $before;
+    public $after;
+    public $afterLabel;
+    public $above;
+    public $below;
 
+    public $errorMsg;
+
+    public $realtimeValidationOn = true;
 
     public function __construct($label, $key)
     {
         $this->label = $label;
         $this->name = $key ?? \Str::snake(\Str::lower($label));
         $this->key = 'form_data.' . $this->name;
+        $this->setAttr();
     }
 
+    //problem with collect()->firstWhere()
+    /*public function __get($property)
+    {
+        return $this->$property;
+    }*/
 
-    public static function make($label, $key = null)
+
+    public static function make(string $label, string $key = null)
     {
         return new static($label, $key);
     }
-
-//    public function __get($property)
-//    {
-//        return $this->$property;
-//    }
 
     /**
      * Standard Laravel validation syntax, default = 'nullable'
@@ -81,29 +88,47 @@ class BaseField
         return $this;
     }
 
-    public function xData(string $xData): self
-    {
-        $this->xData = $xData;
-        return $this;
-    }
-
-    public function xInit(string $xInit): self
-    {
-        $this->xInit = $xInit;
-        return $this;
-    }
-
-    public function wire(string $wire_model_declaration): self
-    {
-        $this->wire = $wire_model_declaration;
-        return $this;
-    }
-
     public function fieldToArray() {
         $array = array();
         foreach ($this as $key => $value) {
             $array[$key] = is_array($value) ? (array) $value : $value;
         }
         return $array;
+    }
+
+    public function before(string $text): self
+    {
+        $this->before = $text;
+        return $this;
+    }
+
+    public function after(string $text): self
+    {
+        $this->after = $text;
+        return $this;
+    }
+
+    public function afterLabel(string $text): self
+    {
+        $this->afterLabel = $text;
+        return $this;
+    }
+
+    public function above(string $text): self
+    {
+        $this->above = $text;
+        return $this;
+    }
+
+    public function below(string $text): self
+    {
+        $this->below = $text;
+        return $this;
+    }
+
+    public function realtimeValidationOff()
+    {
+        $this->realtimeValidationOn = false;
+        return $this;
     }
 }

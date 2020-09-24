@@ -5,12 +5,9 @@ namespace Tanthammar\TallForms;
 
 
 use Illuminate\Support\Str;
-use Tanthammar\TallForms\Traits\HasSharedProperties;
 
 class Input extends BaseField
 {
-    use HasSharedProperties;
-
     public $type = 'input';
     public $input_type = 'text';
     public $autocomplete;
@@ -20,10 +17,24 @@ class Input extends BaseField
     public $step = 1;
     public $min = 0;
     public $max = 100;
+    public $required = false;
 
+    public function __construct($label, $key)
+    {
+        parent::__construct($label, $key);
+        $this->class .= config('tall-forms.field-attributes.input');
+    }
 
     public function type(string $type): self
     {
+        if($type == 'hidden') {
+            $this->type = 'hidden';
+            return $this;
+        }
+        if($type == 'range') {
+            $this->type = 'range';
+            return $this;
+        }
         $this->input_type = $type;
         return $this;
     }
@@ -40,6 +51,12 @@ class Input extends BaseField
         return $this;
     }
 
+    public function required(): self
+    {
+        $this->required = true;
+        return $this;
+    }
+
     public function placeholder(string $placeholder): self
     {
         $this->placeholder = $placeholder;
@@ -52,20 +69,32 @@ class Input extends BaseField
         return $this;
     }
 
-    public function step(float $step): self
+    /**
+     * @param float|string $step
+     * @return $this
+     */
+    public function step($step): self
     {
         $this->step = $step;
         return $this;
     }
 
 
-    public function min(float $min): self
+    /**
+     * @param float|string $min
+     * @return $this
+     */
+    public function min($min): self
     {
         $this->min = $min;
         return $this;
     }
 
-    public function max(float $max): self
+    /**
+     * @param float|string $max
+     * @return $this
+     */
+    public function max($max): self
     {
         $this->max = $max;
         return $this;

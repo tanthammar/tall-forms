@@ -56,4 +56,5 @@ class ImageCropper extends BaseField
         $this->shape = 'square';
         return $this;
     }
+
 }
