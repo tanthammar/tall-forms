@@ -20,9 +20,9 @@
     ],
     "require": {
         "php": "^7.4.4",
-        "livewire/livewire": "^1.1.0",
-        "blade-ui-kit/blade-icons": "^0.4.3"
-
+        "livewire/livewire": "^2.2.6",
+        "blade-ui-kit/blade-icons": "^0.4.5",
+        "laravel/framework": "7.*" //not tested with Laravel 8 yet
     },
     "autoload": {
         "psr-4": {
