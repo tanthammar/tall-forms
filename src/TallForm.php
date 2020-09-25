@@ -80,7 +80,7 @@ trait TallForm
 
     public function setFormProperties()
     {
-        $this->form_data = $this->model->only($this->fieldNames());
+        $this->form_data = optional($this->model)->only($this->fieldNames());
         foreach ($this->fields() as $field) {
             if (filled($field) && !isset($this->form_data[$field->name])) {
                 $array = in_array($field->type, ['checkboxes', 'file', 'multiselect']);
@@ -140,7 +140,7 @@ trait TallForm
         $this->success($model_fields_data); //creates or updates the model
 
         //save relations, group method
-        if ($this->model->exists) {
+        if (optional($this->model)->exists) {
             $this->relations($relationship_data);
         }
 
@@ -170,7 +170,7 @@ trait TallForm
     public function success($model_fields_data)
     {
         // you have to add the methods to your component
-        $this->model->exists ? $this->onUpdateModel($model_fields_data) : $this->onCreateModel($model_fields_data);
+        filled($this->model) && $this->model->exists ? $this->onUpdateModel($model_fields_data) : $this->onCreateModel($model_fields_data);
     }
 
     public function onUpdateModel($validated_data)
