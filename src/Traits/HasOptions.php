@@ -32,7 +32,7 @@ trait HasOptions
      */
     public function callableOptions(callable $callable): self
     {
-        $options = is_callable($callable) ?  app()->call($callable) : [];
+        $options = is_callable($callable) ? app()->call($callable) : [];
         $this->arrayFlipOrCombine($options);
         return $this;
     }

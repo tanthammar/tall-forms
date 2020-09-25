@@ -13,7 +13,6 @@ trait TallForm
     use Notify, Helpers, HandlesArrays, HasComponentDesign;
 
     public $model;
-    public $log;
     public $form_data;
     public $previous;
     public $showDelete = true;
@@ -204,10 +203,11 @@ trait TallForm
         return isset($this->formTitle) ? $this->formTitle : $this->formTitle = null;
     }
 
-    public function getFormWrapperProperty()
-    {
-        return isset($this->formWrapper) ? $this->formWrapper : $this->formWrapper = 'max-w-screen-lg mx-auto';
-    }
+    //unused property
+//    public function getFormWrapperProperty()
+//    {
+//        return isset($this->formWrapper) ? $this->formWrapper : $this->formWrapper = 'max-w-screen-lg mx-auto';
+//    }
 
 
     public function saveAndStayResponse()
