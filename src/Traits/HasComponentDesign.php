@@ -18,8 +18,8 @@ trait HasComponentDesign
 
     public $inline = true;
     public $inlineLabelAlignment; //set in mount
-    public $wrapWithComponent = true;
-    public $wrapComponentName;
+    public $wrapWithView = true;
+    public $wrapViewPath;
 
     public $onKeyDownEnter;
 

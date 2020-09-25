@@ -16,8 +16,8 @@ class DummyComponent extends Component
         //Gate::authorize()
         $this->fill([
             'formTitle' => FormTitle,
-            'wrapWithComponent' => true, //wrap with x-pages.default or set prop $wrapComponentName to define a blade layout to wrap the form
-            'showGoBack' => false, //or true
+            'wrapWithView' => true, //see https://github.com/tanthammar/tall-forms/wiki/installation/Wrapper-Layout
+            'showGoBack' => false,
         ]);
 
         $this->mount_form($dummymodel); // $dummymodel from hereon, called $this->model
@@ -26,7 +26,6 @@ class DummyComponent extends Component
     // Optional method, this already exists in the TallForm trait
     public function onUpdateModel($validated_data)
     {
-        // Set the $model property in order to conditionally display fields when the model instance exists, on saveAndStayResponse()
         $this->model = $this->model->update($validated_data);
     }
 

@@ -75,7 +75,7 @@ return [
     ],
 
     //A Laravel 7 blade component to wrap your form if $spaMode = true, see documentation
-    'wrap-component-name' => 'tall-forms::wrapper-layout',
+    'wrap-view-path' => 'tall-forms::wrapper-layout',
 
 
     //form buttons translations

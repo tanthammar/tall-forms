@@ -1,4 +1,4 @@
-@if(empty($headView) && !$wrapWithComponent && ($formTitle || $formSubtitle))
+@if(empty($headView) && !$wrapWithView && ($formTitle || $formSubtitle))
     <div class="{{ \Tanthammar\TallForms\ConfigAttr::key('form-head') }}">
         <h1 class="{{ \Tanthammar\TallForms\ConfigAttr::key('form-title') }}">
             {{ $formTitle }}

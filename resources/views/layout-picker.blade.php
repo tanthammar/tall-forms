@@ -1,6 +1,6 @@
 <div class="display-contents">
-    @if($wrapWithComponent)
-        @include($wrapComponentName)
+    @if($wrapWithView)
+        @include($wrapViewPath)
     @else
         @include('tall-forms::form')
     @endif

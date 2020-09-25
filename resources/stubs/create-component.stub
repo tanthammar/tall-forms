@@ -16,8 +16,8 @@ class DummyComponent extends Component
         //Gate::authorize()
         $this->fill([
             'formTitle' => FormTitle,
-            'wrapWithComponent' => true, //wrap with x-pages.default or set prop $wrapComponentName to define a blade layout to wrap the form
-            'showGoBack' => false, //or true
+            'wrapWithView' => true, //see https://github.com/tanthammar/tall-forms/wiki/installation/Wrapper-Layout
+            'showGoBack' => false,
         ]);
         $this->mount_form($dummymodel); // $dummymodel from hereon, called $this->model
     }

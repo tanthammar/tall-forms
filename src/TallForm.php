@@ -67,7 +67,7 @@ trait TallForm
         $this->setFormProperties();
         $this->afterFormProperties();
         $this->previous = urlencode(\URL::previous());  //used for saveAndGoBack
-        $this->wrapComponentName = config('tall-forms.wrap-component-name');
+        $this->wrapViewPath = config('tall-forms.wrap-view-path');
         $this->inlineLabelAlignment = $this->inlineLabelAlignment ?? config('tall-forms.component-attributes.inline-label-alignment');
     }
 
