@@ -10,6 +10,8 @@ use Tanthammar\TallForms\Traits\Helpers;
 
 class FileUpload extends Component
 {
+    use Helpers;
+
     public Field $field;
     public string $spinnerWrapper = 'inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm';
     public string $ul = 'space-y-2 my-2';

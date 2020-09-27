@@ -10,6 +10,8 @@ use Tanthammar\TallForms\Range as Field;
 
 class Range extends Component
 {
+    use Helpers;
+
     public Field $field;
     public string $temp_key;
     public int $colspan;

@@ -10,6 +10,8 @@ use Tanthammar\TallForms\Traits\Helpers;
 
 class Select extends Component
 {
+    use Helpers;
+
     public Field $field;
     public string $temp_key;
 

@@ -9,6 +9,8 @@ use Tanthammar\TallForms\Traits\Helpers;
 
 class FieldRoot extends Component
 {
+    use Helpers;
+
     public bool $inArray;
     public int $colspan;
     public array $attr;
