@@ -24,7 +24,6 @@ class BaseField
 
     public $before;
     public $after;
-    public $afterLabel;
     public $above;
     public $below;
 
@@ -105,12 +104,6 @@ class BaseField
     public function after(string $text): self
     {
         $this->after = $text;
-        return $this;
-    }
-
-    public function afterLabel(string $text): self
-    {
-        $this->afterLabel = $text;
         return $this;
     }
 

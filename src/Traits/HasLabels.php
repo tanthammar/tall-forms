@@ -10,6 +10,7 @@ trait HasLabels
     public $labelW;
     public $inlineLabelAlignment;
     public $labelSuffix;
+    public $afterLabel;
     public $show_label = true;
 
     /**
@@ -33,6 +34,12 @@ trait HasLabels
     public function labelSuffix(string $string): self
     {
         $this->labelSuffix = $string;
+        return $this;
+    }
+
+    public function afterLabel(string $text): self
+    {
+        $this->afterLabel = $text;
         return $this;
     }
 

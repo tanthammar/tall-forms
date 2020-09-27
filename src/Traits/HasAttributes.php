@@ -8,8 +8,6 @@ trait HasAttributes
 {
     public array $attributes = [];
 
-    public $xData;
-    public $xInit;
     public $wire = 'wire:model.lazy';
 
     public function getAttr($type)
@@ -29,15 +27,15 @@ trait HasAttributes
         return $this;
     }
 
-    public function labelAttr(array $attributes, bool $merge = true): self
+    public function beforeAttr(array $attributes, bool $merge = true): self
     {
-        $merge ? array_merge($this->attributes['label'], $attributes) : $this->attributes['label'] = $attributes;
+        $merge ? array_merge($this->attributes['before'], $attributes) : $this->attributes['before'] = $attributes;
         return $this;
     }
 
-    public function afterLabelAttr(array $attributes, bool $merge = true): self
+    public function beforeText(array $attributes, bool $merge = true): self
     {
-        $merge ? array_merge($this->attributes['after-label'], $attributes) : $this->attributes['after-label'] = $attributes;
+        $merge ? array_merge($this->attributes['before-text'], $attributes) : $this->attributes['before-text'] = $attributes;
         return $this;
     }
 
@@ -47,15 +45,45 @@ trait HasAttributes
         return $this;
     }
 
+    public function belowAttr(array $attributes, bool $merge = true): self
+    {
+        $merge ? array_merge($this->attributes['below'], $attributes) : $this->attributes['below'] = $attributes;
+        return $this;
+    }
+
     public function belowWrapperAttr(array $attributes, bool $merge = true): self
     {
         $merge ? array_merge($this->attributes['below-wrapper'], $attributes) : $this->attributes['below-wrapper'] = $attributes;
         return $this;
     }
 
-    public function belowAttr(array $attributes, bool $merge = true): self
+    public function afterAttr(array $attributes, bool $merge = true): self
     {
-        $merge ? array_merge($this->attributes['below'], $attributes) : $this->attributes['below'] = $attributes;
+        $merge ? array_merge($this->attributes['after'], $attributes) : $this->attributes['after'] = $attributes;
+        return $this;
+    }
+
+    public function afterText(array $attributes, bool $merge = true): self
+    {
+        $merge ? array_merge($this->attributes['after-text'], $attributes) : $this->attributes['after-text'] = $attributes;
+        return $this;
+    }
+
+    public function labelAttr(array $attributes, bool $merge = true): self
+    {
+        $merge ? array_merge($this->attributes['label'], $attributes) : $this->attributes['label'] = $attributes;
+        return $this;
+    }
+
+    public function labelSuffixAttr(array $attributes, bool $merge = true): self
+    {
+        $merge ? array_merge($this->attributes['label-suffix'], $attributes) : $this->attributes['label-suffix'] = $attributes;
+        return $this;
+    }
+
+    public function afterLabelAttr(array $attributes, bool $merge = true): self
+    {
+        $merge ? array_merge($this->attributes['after-label'], $attributes) : $this->attributes['after-label'] = $attributes;
         return $this;
     }
 
