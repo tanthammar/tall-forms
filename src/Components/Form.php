@@ -9,9 +9,9 @@ use Illuminate\View\Component;
 class Form extends Component
 {
     public array $attr;
-    public string $onKeyDownEnter;
+    public ?string $onKeyDownEnter;
 
-    public function __construct(string $onKeyDownEnter = '', array $attr = [])
+    public function __construct(?string $onKeyDownEnter = null, array $attr = [])
     {
         $this->attr = $attr;
         $this->onKeyDownEnter = $onKeyDownEnter;
