@@ -22,7 +22,7 @@
         "php": "^7.4.4",
         "livewire/livewire": "^2.2.6",
         "blade-ui-kit/blade-icons": "^0.4.5",
-        "laravel/framework": "7.*|8.*"
+        "laravel/framework": "^7.0|^8.0"
     },
     "autoload": {
         "psr-4": {
