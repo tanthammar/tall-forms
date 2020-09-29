@@ -138,19 +138,19 @@ trait TallForm
         //make sure to create the model before attaching any relations
         $this->success($model_fields_data); //creates or updates the model
 
-        //save relations, group method
+        //save relations, group method, legacy method from v3
         if (optional($this->model)->exists) {
             $this->relations($relationship_data);
         }
 
-        //save custom fields, group method
+        //save custom fields, group method, legacy method from v3
         $this->custom_fields($this->custom_data);
 
-        //saveFoo()
+        //saveFoo() v4 method
         foreach ($this->fields() as $field) {
             if (filled($field)) {
                 $function = $this->parseFunctionNameFrom($field->key, 'save');
-                $validated_data = $field->type == 'file' ? $this->{$field->name} : data_get($validated_data, $field->key);
+                $validated_data = $field->type == 'file' ? $this->{$field->name} : data_get($this, $field->key);
                 if (method_exists($this, $function)) $this->$function($validated_data);
             }
         }
