@@ -23,7 +23,7 @@ trait HasOptions
 
         if (is_a($options, 'Illuminate\Support\Collection')) $options = $options->toArray();
 
-        $this->arrayFlipOrCombine(collect($options ?? [])->toArray());
+        $this->arrayFlipOrCombine($options ?? []);
         return $this;
     }
 
