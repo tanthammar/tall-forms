@@ -19,9 +19,9 @@ trait HasOptions
      */
     public function options($options): self
     {
-        if (is_callable($options)) {
-            $options = $options();
-        }
+        if (is_callable($options)) $options = $options();
+
+        if (is_a($options, 'Illuminate\Support\Collection')) $options = $options->toArray();
 
         $this->arrayFlipOrCombine(collect($options ?? [])->toArray());
         return $this;
