@@ -11,6 +11,7 @@ class ImageCropper extends BaseField
     public $type = 'single-croppie';
     public $width = 420;
     public $height = 340;
+    public $resultContainer = 'w-full h-full';
     public $shape = 'square'; //or circle
     public $dropZoneHelp = 'Drag an image here or click in this area';
 
@@ -49,6 +50,12 @@ class ImageCropper extends BaseField
     public function height(int $pixels): self
     {
         $this->height = $pixels;
+        return $this;
+    }
+
+    public function resultContainer(string $class): self
+    {
+        $this->resultContainer = $class;
         return $this;
     }
 
