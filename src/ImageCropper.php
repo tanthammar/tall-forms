@@ -9,9 +9,10 @@ class ImageCropper extends BaseField
     public $includeScript = false;
     public $is_custom = true;
     public $type = 'single-croppie';
-    public $width = 300;
-    public $height = 300;
+    public $width = 420;
+    public $height = 340;
     public $shape = 'square'; //or circle
+    public $dropZoneHelp = 'Drag an image here or click in this area';
 
     public function getCropperAttributesProperty(): array
     {
@@ -22,12 +23,18 @@ class ImageCropper extends BaseField
         ];
     }
 
+    public function dropZoneHelp($text)
+    {
+        $this->dropZoneHelp = $text;
+        return $this;
+    }
+
 
     /**
      * Push external (cdn-links) for required scripts and styles to the layout
      * Else, you must import them yourself
      */
-    public function pushScriptLinks(): self
+    public function includeExternalScripts(): self
     {
         $this->includeScript = true;
         return $this;

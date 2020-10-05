@@ -1,8 +1,4 @@
-<x-tall-field-wrapper :inline="$field->inline ?? $inline" :field="$field->name" :label="$field->label"
-                      :labelSuffix="$field->labelSuffix"
-                      :labelW="$field->labelW" :fieldW="$field->fieldW">
-    <div class="w-full max-w-2xl p-8 mx-auto bg-white rounded-lg relative hover:shadow-outline-gray">
-        {{ data_get($this, $field->key) }}
+<div wire:ignore class="w-full max-w-2xl p-8 mx-auto bg-white rounded-lg relative hover:shadow-outline-gray">
         {{-- init Alpine --}}
         <div x-data="imageData()" x-init="initCroppie()" class="active:shadow-sm active:border-blue-500">
 
@@ -22,7 +18,7 @@
                 <div class=" flex flex-col space-y-2 items-center justify-center">
                     @svg('light/cloud-upload-alt', 'h-12 w-12')
                     <label for="fileinput" class="cursor-pointer text-center uppercase text-bold py-2">
-                        Drag an image here or click in this area.
+                        {{ $field->dropZoneHelp }}
                     </label>
                     <button type="button" x-on:click="javascript:void(0)"
                             class="flex items-center mx-auto py-2 px-4 text-white text-center font-medium border border-transparent rounded-md outline-none bg-teal-700">
@@ -37,13 +33,12 @@
                 <div class="mx-auto"><img src alt x-ref="croppie" class="display-block w-full"></div>
                 <div class="py-2 flex justify-between items-center">
                     <button type="button" class="bg-red-500 text-white p-2 rounded" x-on:click="swap()">Delete</button>
-                    <button type="button" class="bg-teal-500 text-white p-2 rounded" x-on:click="saveCroppie()">Save
-                    </button>
+                    <button type="button" class="bg-teal-500 text-white p-2 rounded" x-on:click="saveCroppie()">Save</button>
                 </div>
             </div>
 
             {{-- result--}}
-            <div x-show="!showCroppie && hasImage" class="relative w-full h-full bg-blue-300">
+            <div x-show="!showCroppie && hasImage" class="relative w-full h-full">
                 <div class="z-10 absolute m-auto top-0 right-0 p-8">
                     <button type="button" class="bg-red-500 text-white p-2 rounded" x-on:click="swap()">Swap</button>
                     <button type="button" class="bg-teal-500 text-white p-2 rounded" x-on:click="edit()">Edit</button>
@@ -53,26 +48,27 @@
 
         </div>
     </div>
-</x-tall-field-wrapper>
 @if($field->includeScript)
-    @pushonce('head:cropper')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css"
-          integrity="sha512-zxBiDORGDEAYDdKLuYU9X/JaJo/DPzE42UubfBw9yg8Qvb2YRRIQ8v4KsGHOx2H1/+sdSXyXxLXv5r7tHc9ygg=="
-          crossorigin="anonymous" media="print" onload="this.media='all'"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"
-            integrity="sha512-Gs+PsXsGkmr+15rqObPJbenQ2wB3qYvTHuJO6YJzPe/dTLvhy0fmae2BcnaozxDo5iaF8emzmCZWbQ1XXiX2Ig=="
-            crossorigin="anonymous" defer></script>
-    @endpushonce
+    @once
+        @push('head')
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css"
+              integrity="sha512-zxBiDORGDEAYDdKLuYU9X/JaJo/DPzE42UubfBw9yg8Qvb2YRRIQ8v4KsGHOx2H1/+sdSXyXxLXv5r7tHc9ygg=="
+              crossorigin="anonymous" media="print" onload="this.media='all'"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"
+                integrity="sha512-Gs+PsXsGkmr+15rqObPJbenQ2wB3qYvTHuJO6YJzPe/dTLvhy0fmae2BcnaozxDo5iaF8emzmCZWbQ1XXiX2Ig=="
+                crossorigin="anonymous" defer></script>
+        @endpush
+    @endonce
 @endif
-@pushonce('scripts:single-cropper')
+ @once
+ @push('scripts')
 <script>
     function imageData() {
         return {
             showCroppie: false,
-            hasImage: {{ filled($field->key) }},
+            hasImage: @json(filled(data_get($this, $field->key))),
             originalSrc: "{{ old($field->key) }}",
             croppie: {},
-
             updatePreview() {
                 var reader,
                     files = this.$refs.input.files;
@@ -89,8 +85,8 @@
             },
             initCroppie() {
                 this.croppie = new Croppie(this.$refs.croppie, {
-                    viewport: {width: 420, height: 340, type: "square"}, //circle
-                    boundary: {width: 420, height: 340}, //default boundary container
+                    viewport: {width: {{ $field->width }}, height: {{ $field->height }}, type: "{{ $field->shape }}"}, //circle or square
+                    boundary: {width: {{ $field->width }}, height: {{ $field->height }}}, //default boundary container
                     showZoomer: true,
                     enableResize: false
                 });
@@ -118,7 +114,7 @@
                     this.$refs.result.src = croppedImage;
                     this.showCroppie = false;
                     this.hasImage = true;
-                @this.set('{{$field->key}}', croppedImage);
+                    @this.set('{{$field->key}}', croppedImage);
                 });
             },
             bindCroppie(src) { //avoid problems with croppie container not being visible when binding
@@ -129,4 +125,5 @@
         };
     }
 </script>
-@endpushonce
+ @endpush
+ @endonce
