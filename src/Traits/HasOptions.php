@@ -12,14 +12,18 @@ trait HasOptions
     public $callableOptions;
 
     /**
-     * Flat key => value based Array.
+     * Flat key => value based Array, Collection or Closure.
      * You can use a component method; ->options($this->someMethod())
-     * @param array $options
+     * @param array|\Closure|\Illuminate\Support\Collection $options
      * @return $this
      */
-    public function options(array $options = []): self
+    public function options($options): self
     {
-        $this->arrayFlipOrCombine($options);
+        if (is_callable($options)) {
+            $options = $options();
+        }
+
+        $this->arrayFlipOrCombine(collect($options ?? [])->toArray());
         return $this;
     }
 
