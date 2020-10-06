@@ -16,7 +16,7 @@ trait IsArrayField
     public function fields($fields = []): self
     {
         foreach ($fields as $field) {
-            throw_if(!$field->allowed_in_array),
+            throw_if(!$field->allowed_in_array,
                 new invalidArrayFieldType($field->name, $field->type)
             );
         }
