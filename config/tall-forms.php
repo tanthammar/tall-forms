@@ -4,6 +4,7 @@ use Tanthammar\TallForms\Components;
 return [
     //note that the word dummymodel is auto replaced with the lower case value of --model option in the make command
     'form-title' => "trans('global.create').' '.trans('crud.dummymodel.title_singular')",
+    'field-labels-as-validation-attributes' => true,
 
     // Component attributes
     'component-attributes' => [
@@ -80,7 +81,10 @@ return [
 
     //form buttons translations
     'saved' => 'global.saved',
+    'save' => 'global.save',
+    'swap' => 'global.swap',
     'delete' => 'global.delete',
+    'edit' => 'global.edit',
     'reset' => 'global.reset',
     'save-and-stay' => 'global.save',
     'save-go-back' => 'global.save_go_back',
@@ -155,6 +159,7 @@ return [
         'label-field-wrapper' => Components\LabelFieldWrapper::class,
         'field-root' => Components\FieldRoot::class,
         'input' => Components\Input::class,
+        'image-cropper' => Components\ImageCropper::class,
         'range' => Components\Range::class,
         'textarea' => Components\Textarea::class,
         'checkbox' => Components\Checkbox::class,
