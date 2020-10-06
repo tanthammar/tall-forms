@@ -11,7 +11,7 @@ class ImageCropper extends BaseField
     public $type = 'image-cropper';
     public $width = 420;
     public $height = 340;
-    public $thumbnailClass = 'w-full h-full';
+    public $thumbnail;
     public $shape = 'square'; //or circle
     public $dropZoneHelp = 'Drag an image here or click in this area';
     public $fileInfo = 'PNG, JPG, GIF, TIFF, max 1.5MB';
@@ -69,9 +69,9 @@ class ImageCropper extends BaseField
         return $this;
     }
 
-    public function thumbnailClass(string $class): self
+    public function thumbnail(string $class): self
     {
-        $this->thumbnailClass = $class;
+        $this->thumbnail = $class;
         return $this;
     }
 

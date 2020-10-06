@@ -1,12 +1,12 @@
-<div wire:ignore class="w-full p-4 mx-auto border-gray-300 border-2 border-gray-300 border-dashed rounded-lg relative hover:shadow-outline-gray">
+<div wire:ignore class="{{ $root }}">
     {{-- init Alpine --}}
-    <div x-data="imageData{{$field->name}}()" x-init="initCroppie()" class="active:shadow-sm active:border-blue-500" x-cloak>
+    <div x-data="imageData{{$field->name}}()" x-init="initCroppie()" class="{{ $wrapper }}" x-cloak>
 
         {{-- drop zone --}}
         <div x-show="!showCroppie && !hasImage">
 
             {{-- input --}}
-            <input type="file" name="fileinput"
+            <input type="file" name="fileinput{{$field->name}}"
                    class="absolute inset-0 z-50 m-0 p-0 w-full h-full outline-none opacity-0"
                    x-ref="input"
                    x-on:change="updatePreview()"
@@ -15,18 +15,17 @@
                    x-on:drop="$el.classList.remove('active')">
 
             {{-- upload icon --}}
-            <div class=" flex flex-col items-center justify-center">
-                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+            <div class="flex flex-col items-center justify-center">
+                <svg class="{{ $icon }}" stroke="currentColor" fill="none" viewBox="0 0 48 48">
                     <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
-                <label for="fileinput" class="cursor-pointer text-center uppercase text-sm text-bold text-gray-600">
+                <label for="fileinput{{$field->name}}" class="{{ $dropZone }}">
                     {{ $field->dropZoneHelp }}
                 </label>
-                <p class="text-xs text-gray-500">
+                <p class="{{ $fileInfo }}">
                     {{ $field->fileInfo }}
                 </p>
-                <button type="button" x-on:click="javascript:void(0)"
-                        class="flex items-center mx-auto mt-2 px-2 text-white text-sm text-center font-medium border border-transparent rounded outline-none bg-gray-500">
+                <button type="button" x-on:click="javascript:void(0)" class="{{ $upload }}">
                     {{ $field->uploadButton }}
                 </button>
             </div>
@@ -34,23 +33,23 @@
         </div>
 
         {{-- cropper --}}
-        <div x-show="showCroppie" class="fixed top-0 left-0 p-8 h-screen w-screen z-50 bg-white">
+        <div x-show="showCroppie" class="{{ $cropper }}">
             <div class="mx-auto my-auto"><img src alt x-ref="croppie" class="display-block w-full"></div>
             <div class="flex justify-center items-center gap-2">
-                <button type="button" class="bg-red-500 text-white p-2 rounded" x-on:click="swap()">Delete</button>
-                <button type="button" class="bg-teal-500 text-white p-2 rounded" x-on:click="saveCroppie()">Save</button>
+                <button type="button" class="{{ $delete }}" x-on:click="swap()">@lang(config('tall-forms.delete'))</button>
+                <button type="button" class="{{ $save }}" x-on:click="saveCroppie()">@lang(config('tall-forms.save'))</button>
             </div>
         </div>
 
         {{-- result--}}
-        <div x-show="!showCroppie && hasImage" class="relative {{ $field->thumbnailClass }}">
-            <div class="z-10 absolute top-0 right-0 bottom-0 left-0">
-                <div class="flex gap-2 h-full w-full items-center justify-center">
-                    <button type="button" class="bg-red-500 text-white p-2 rounded" x-on:click="swap()">Swap</button>
-                    <button type="button" class="bg-teal-500 text-white p-2 rounded" x-on:click="edit()">Edit</button>
+        <div x-show="!showCroppie && hasImage" class="relative {{ $field->thumbnail }}">
+            <div class="{{ $btnsRoot }}">
+                <div class="{{ $btnsWrapper }}">
+                    <button type="button" class="{{ $swap }}" x-on:click="swap()">@lang(config('tall-forms.swap'))</button>
+                    <button type="button" class="{{ $edit }}" x-on:click="edit()">@lang(config('tall-forms.edit'))</button>
                 </div>
             </div>
-            <div><img src="{{ old($field->key) }}" alt x-ref="result" class="display-block"></div>
+            <div><img src="{{ $imageUrl }}" alt x-ref="result" class="display-block"></div>
         </div>
 
     </div>
@@ -72,8 +71,8 @@
         function imageData{{$field->name}}() {
             return {
                 showCroppie: false,
-                hasImage: @json(filled(data_get($this, $field->key))),
-                originalSrc: "{{ old($field->key) }}",
+                hasImage: @json(filled($imageUrl)),
+                originalSrc: "{{ $imageUrl }}",
                 croppie: {},
                 updatePreview() {
                     var reader,
@@ -102,15 +101,13 @@
                     this.showCroppie = false;
                     this.hasImage = false;
                     this.$refs.result.src = "";
-                    //update som kind of array
                 },
                 edit() {
                     this.$refs.input.value = null;
                     this.showCroppie = true;
                     this.hasImage = false;
                     this.$refs.result.src = "";
-                    this.bindCroppie(this.originalSrc); //this.$refs.result.src //or some array value
-                    //update som kind of array
+                    this.bindCroppie(this.originalSrc);
                 },
                 saveCroppie() {
                     this.croppie.result({
@@ -120,7 +117,7 @@
                         this.$refs.result.src = croppedImage;
                         this.showCroppie = false;
                         this.hasImage = true;
-                    @this.set('{{$field->key}}', croppedImage);
+                        @this.set('{{ $field->key }}', croppedImage);
                     });
                 },
                 bindCroppie(src) { //avoid problems with croppie container not being visible when binding
