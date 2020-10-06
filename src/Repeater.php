@@ -11,6 +11,8 @@ class Repeater extends BaseField
 
     public $type = 'array';
     public $array_sortable = false;
+    public $align_label_top = true;
+    public $allowed_in_array = false;
 
     public function __construct($label, $key)
     {

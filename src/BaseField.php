@@ -31,6 +31,8 @@ class BaseField
 
     public $realtimeValidationOn = true;
 
+    public $allowed_in_array = true;
+
     public function __construct($label, $key)
     {
         $this->label = $label;

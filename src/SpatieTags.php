@@ -12,6 +12,8 @@ class SpatieTags extends BaseField
     public $is_custom = true;
     public $tagsRules;
     public $placeholder;
+    public $align_label_top = true;
+    public $allowed_in_array = false;
 
     public function type(string $tagType = ""): self
     {

@@ -15,9 +15,8 @@ trait IsArrayField
 
     public function fields($fields = []): self
     {
-        foreach($fields as $field) {
-            throw_if(
-                in_array($field->type, ['array', 'keyval', 'repeater', 'checkboxes', 'multiselect', 'spatie-tags']),
+        foreach ($fields as $field) {
+            throw_if(!$field->allowed_in_array),
                 new invalidArrayFieldType($field->name, $field->type)
             );
         }
@@ -44,11 +43,12 @@ trait IsArrayField
         return $this;
     }
 
-    public function fieldToArray() {
+    public function fieldToArray()
+    {
         $array = [];
-        if(filled($this->fields)) {
+        if (filled($this->fields)) {
             foreach ($this->fields as $field) {
-                $array[] = (array) $field;
+                $array[] = (array)$field;
             }
         }
         $array[$this->key] = $array;

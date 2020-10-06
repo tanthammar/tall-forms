@@ -10,6 +10,7 @@ class Textarea extends BaseField
     public $textarea_rows = 5;
     public $placeholder;
     public $required = false;
+    public $align_label_top = true;
 
     public function rows(int $rows = 5): Textarea
     {

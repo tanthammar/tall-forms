@@ -14,6 +14,7 @@ class Radio extends Component
     public string $label;
     public $value;
     public string $optionsIdx;
+    public $align_label_top = true;
 
     /**
      * Radio constructor.

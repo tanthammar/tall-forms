@@ -12,6 +12,7 @@ trait HasLabels
     public $labelSuffix;
     public $afterLabel;
     public $show_label = true;
+    public $align_label_top = false;
 
     /**
      * Used only in inline form
