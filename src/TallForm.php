@@ -104,7 +104,12 @@ trait TallForm
                 // livewire native file upload
                 $this->customValidateFilesIn($field, $this->getFieldValueByKey($field, 'rules'));//this does not work for array keyval fields
             } else {
-                $this->validateOnly($field, [$field => $this->getFieldValueByKey($field, 'rules')]);
+                $this->validateOnly(
+                    $field,
+                    [$field => $this->getFieldValueByKey($field, 'rules')],
+                    [],
+                    $this->attributes(),
+                );
             }
         }
     }
@@ -113,7 +118,11 @@ trait TallForm
     {
         // fix for Livewire v2.5.5 returning ALL component properties
         // bug: https://github.com/livewire/livewire/issues/1649
-        $validated_data = $this->validate($this->get_rules())['form_data'];
+        $validated_data = $this->validate(
+            $this->get_rules(),
+            [],
+            $this->attributes()
+        )['form_data'];
 
         $field_names = [];
         $relationship_names = [];
@@ -249,6 +258,25 @@ trait TallForm
     public function fields()
     {
         return [];
+    }
+
+    public function attributes() {
+        $attributes = [];
+
+        foreach ($this->fields() as $field) {
+            if (in_array($field->type, ['array', 'keyval'])) {
+                foreach ($field->fields as $array_field) {
+                    $key = $field->type === 'array'
+                        ? "$field->key.*.$array_field->name"
+                        : "$field->key.$array_field->name";
+                    $attributes[$key] = $array_field->label;
+                }
+            } else {
+                $attributes[$field->key] = $field->label;
+            }
+        }
+
+        return $attributes;
     }
 
 }
