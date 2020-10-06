@@ -5,7 +5,7 @@ namespace Tanthammar\TallForms\Traits;
 
 
 use Tanthammar\TallForms\BaseField;
-use Tanthammar\TallForms\Exceptions\invalidArrayFieldType;
+use Tanthammar\TallForms\Exceptions\InvalidArrayFieldType;
 
 trait IsArrayField
 {
@@ -17,7 +17,7 @@ trait IsArrayField
     {
         foreach ($fields as $field) {
             throw_if(!$field->allowed_in_array,
-                new invalidArrayFieldType($field->name, $field->type)
+                new InvalidArrayFieldType($field->name, $field->type)
             );
         }
         $this->fields = $fields;
