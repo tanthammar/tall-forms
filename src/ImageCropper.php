@@ -8,12 +8,17 @@ class ImageCropper extends BaseField
 {
     public $includeScript = false;
     public $is_custom = true;
-    public $type = 'single-croppie';
+    public $type = 'image-cropper';
     public $width = 420;
     public $height = 340;
-    public $resultContainer = 'w-full h-full';
+    public $thumbnailClass = 'w-full h-full';
     public $shape = 'square'; //or circle
     public $dropZoneHelp = 'Drag an image here or click in this area';
+    public $fileInfo = 'PNG, JPG, GIF, TIFF, max 1.5MB';
+    public $uploadButton = 'Select a file';
+    public $align_label_top = true;
+    public $allowed_in_array = false;
+
 
     public function getCropperAttributesProperty(): array
     {
@@ -30,6 +35,17 @@ class ImageCropper extends BaseField
         return $this;
     }
 
+    public function fileInfo($text)
+    {
+        $this->fileInfo = $text;
+        return $this;
+    }
+
+    public function uploadButton($text)
+    {
+        $this->uploadButton = $text;
+        return $this;
+    }
 
     /**
      * Push external (cdn-links) for required scripts and styles to the layout
@@ -53,9 +69,9 @@ class ImageCropper extends BaseField
         return $this;
     }
 
-    public function resultContainer(string $class): self
+    public function thumbnailClass(string $class): self
     {
-        $this->resultContainer = $class;
+        $this->thumbnailClass = $class;
         return $this;
     }
 
