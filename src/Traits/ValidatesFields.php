@@ -69,7 +69,7 @@ trait ValidatesFields
                 $this->validateOnly($field,
                     [$field => $this->getFieldValueByKey($field, 'rules')],
                     [],
-                    $this->validationAttributes;
+                    $this->validationAttributes
                 );
             }
         }
