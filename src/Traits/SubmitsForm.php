@@ -16,7 +16,7 @@ trait SubmitsForm
         $validated_data = $this->validate(
             $this->get_rules(),
             [],
-            $this->attributes(),
+            $this->validationAttributes,
         )['form_data'];
 
         $field_names = [];

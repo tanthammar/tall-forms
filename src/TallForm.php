@@ -22,7 +22,9 @@ trait TallForm
     public $showReset = true;
     public $showGoBack = true;
     public $custom_data = [];
+
     public $labelsAsAttributes;
+    public $validationAttributes = [];
 
     protected $rules = [];
 
@@ -45,6 +47,7 @@ trait TallForm
         $this->previous = urlencode(\URL::previous());  //used for saveAndGoBack
         $this->wrapViewPath = config('tall-forms.wrap-view-path');
         $this->inlineLabelAlignment = $this->inlineLabelAlignment ?? config('tall-forms.component-attributes.inline-label-alignment');
+        $this->validationAttributes = $this->validationAttributes();
     }
 
 

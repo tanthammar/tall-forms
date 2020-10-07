@@ -34,7 +34,7 @@ trait ValidatesFields
         return $rules;
     }
 
-    public function attributes() {
+    public function validationAttributes() {
         $attributes = [];
         if($this->labelsAsAttributes) {
             foreach ($this->fields() as $field) {
@@ -69,7 +69,7 @@ trait ValidatesFields
                 $this->validateOnly($field,
                     [$field => $this->getFieldValueByKey($field, 'rules')],
                     [],
-                    $this->attributes()
+                    $this->validationAttributes;
                 );
             }
         }
