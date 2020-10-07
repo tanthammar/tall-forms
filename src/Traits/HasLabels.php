@@ -13,6 +13,7 @@ trait HasLabels
     public $afterLabel;
     public $show_label = true;
     public $align_label_top = false;
+    public $labelAsAttribute = true;
 
     /**
      * Used only in inline form
@@ -47,6 +48,12 @@ trait HasLabels
     public function hideLabel()
     {
         $this->show_label = false;
+        return $this;
+    }
+
+    public function keyAsAttribute()
+    {
+        $this->labelAsAttribute = false;
         return $this;
     }
 
