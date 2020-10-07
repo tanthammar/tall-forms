@@ -10,6 +10,7 @@
             <x-tall-button wire:click.prevent="saveAndGoBack"
                       color="primary">@lang(config('tall-forms.save-go-back'))</x-tall-button>
         @endif
+        @if($showSave)
             <span x-data="{ open: false }"
                   x-init="@this.on('notify-saved', () => { if (open === false) setTimeout(() => { open = false }, 2500); open = true;})"
                   x-show.transition.out.duration.1000ms="open" style="display: none;"
@@ -19,5 +20,6 @@
                         <x-tall-spinner/></span>
             @lang(config('tall-forms.save-and-stay'))
         </x-tall-button>
+        @endif
     </div>
 </div>

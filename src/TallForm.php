@@ -18,6 +18,7 @@ trait TallForm
     public $model;
     public $form_data;
     public $previous;
+    public $showSave = true;
     public $showDelete = true;
     public $showReset = true;
     public $showGoBack = true;
