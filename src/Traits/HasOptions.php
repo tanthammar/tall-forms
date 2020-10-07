@@ -14,6 +14,8 @@ trait HasOptions
     /**
      * Flat key => value based Array, Collection or Closure.
      * You can use a component method; ->options($this->someMethod())
+     * OBSERVE: if you use a callable, it will be executed on EVERY re-render of the component!
+     * Maybe you should consider setting the $options in mount() instead?
      * @param array|\Closure|\Illuminate\Support\Collection $options
      * @return $this
      */

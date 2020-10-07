@@ -167,5 +167,6 @@ return [
         'radio' => Components\Radio::class,
         'file-upload' => Components\FileUpload::class,
         'select' => Components\Select::class,
+        'search' => Components\Search::class,
     ]
 ];
