@@ -16,6 +16,7 @@ class Search extends BaseField
     public $optionsKey = 'searchOptions';
     public $searchKey = 'searchInput';
     public $debounce = 500;
+    public $align_label_top = true;
 
     public function placeholder(string $placeholder): self
     {

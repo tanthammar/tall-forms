@@ -1,18 +1,19 @@
-<div x-data="{ optionsVisible: false }">
+<div>
+
     <input
-        wire:model.debounce.{{ $field->debounce }}="{{ $field->searchKey }}"
-        class="form-input"
+        x-model.debounce.{{ $field->debounce }}="searchInput"
+        class="form-input w-full"
         placeholder="{{ $field->placeholder }}"
         x-on:click="optionsVisible = true"
         x-on:click.away="optionsVisible = false" />
 
-    <input
-        wire:model="{{ $temp_key }}"
-        x-ref="selected"
-        class="form-input" />
-    <ul>
+    <ul x-show="optionsVisible">
         @foreach($options as $key => $value)
-            <li x-on:click="$refs.selected.value = '{{ $key }}'; optionsVisible = false;">{{ $value }}</li>
+            <li x-on:click="
+                searchValue = '{{ $key }}';
+                optionsVisible = false;
+                searchInput = searchValue;
+            ">{{ $value }}</li>
         @endforeach
     </ul>
 
