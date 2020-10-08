@@ -28,8 +28,8 @@ class ImageCropper extends Component
     public string $upload = 'flex items-center mx-auto mt-2 px-2 text-white text-sm text-center font-medium border border-transparent rounded outline-none bg-gray-500';
     public string $delete = 'bg-red-500 text-white p-2 rounded';
     public string $save = 'bg-teal-500 text-white p-2 rounded';
-    public string $swap = 'bg-red-500 text-white p-2 rounded';
-    public string $edit = 'bg-teal-500 text-white p-2 rounded';
+    public string $swap = 'bg-red-500 bg-opacity-75 hover:bg-opacity-100 text-white p-2 rounded';
+    public string $edit = 'bg-teal-500 bg-opacity-75 hover:bg-opacity-100 text-white p-2 rounded';
 
     public function __construct(Field $field, string $tempKey, string $imageUrl = null)
     {
