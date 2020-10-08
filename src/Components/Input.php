@@ -50,7 +50,7 @@ class Input extends Component
     {
         $class = "flex-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5";
         $class .= ($this->field->prefix || $this->field->icon) ? " rounded-none rounded-r-md" : " rounded";
-        return Helpers::unique_words($class);
+        return $class;
     }
 
     public function error()

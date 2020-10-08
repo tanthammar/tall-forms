@@ -19,6 +19,7 @@ class Search extends BaseField
     public $debounce = 500;
     public $align_label_top = true;
     public $inlineLabel = true;
+    public string $listWidth;
 
     public function placeholder(string $placeholder): self
     {
@@ -61,6 +62,12 @@ class Search extends BaseField
     public function stackedLabel()
     {
         $this->inlineLabel = false;
+        return $this;
+    }
+
+    public function listWidth(string $class): self
+    {
+        $this->listWidth = $class;
         return $this;
     }
 

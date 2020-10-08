@@ -2,12 +2,14 @@
     <div class="relative">
         <input
             x-model.debounce.{{ $field->debounce }}="searchInput"
-            class="form-input w-full"
+            type="text"
             placeholder="{{ $field->placeholder }}"
             x-on:keydown.escape="optionsVisible = false"
             x-on:input="optionsVisible = true"
             x-on:click.stop="optionsVisible = true"
-            x-on:click.stop.away="optionsVisible = false" />
+            x-on:click.stop.away="optionsVisible = false"
+            {{ $attributes->merge(['class' => $errors->has($temp_key) ? $error() : $class() ]) }}
+        />
         <div x-on:click.stop.prevent="searchInput = ''; optionsVisible = false;" class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer">
             <!-- Heroicon name: x -->
             <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -15,20 +17,6 @@
             </svg>
         </div>
     </div>
-
-
-
-
-{{--    <ul x-show="optionsVisible" class="absolute left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-xs sm:px-0 z-50">--}}
-{{--        @foreach($options as $key => $value)--}}
-{{--            <li x-on:click.stop="--}}
-{{--                field = '{{ $key }}';--}}
-{{--                optionsVisible = false;--}}
-{{--                searchInput = field;--}}
-{{--            ">{{ $value }}</li>--}}
-{{--        @endforeach--}}
-{{--    </ul>--}}
-
     <div
         x-cloak
         x-show="optionsVisible"
@@ -36,7 +24,7 @@
         x-transition:leave="transition ease-in duration-100"
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
-        class="absolute mt-1 w-full rounded-md bg-white shadow-lg">
+        class="absolute mt-1 rounded-md bg-white shadow-lg {{ $listWidth }}">
         <ul
 {{--            @keydown.enter.stop.prevent="onOptionSelect()"--}}
 {{--            @keydown.space.stop.prevent="onOptionSelect()"--}}
