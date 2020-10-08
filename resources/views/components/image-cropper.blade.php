@@ -33,11 +33,15 @@
         </div>
 
         {{-- cropper --}}
-        <div x-show="showCroppie" class="{{ $cropper }}">
-            <div class="mx-auto my-auto"><img src alt x-ref="croppie" class="display-block w-full"></div>
-            <div class="flex justify-center items-center gap-2">
-                <button type="button" class="{{ $delete }}" x-on:click="swap()">@lang(config('tall-forms.delete'))</button>
-                <button type="button" class="{{ $save }}" x-on:click="saveCroppie()">@lang(config('tall-forms.save'))</button>
+        <div x-show="showCroppie" x-on:click.prevent class="{{ $modalbg }}">
+            <div class="{{ $modal }}">
+                <div>
+                    <div class="m-auto"><img src alt x-ref="croppie" class="display-block w-full"></div>
+                    <div class="flex justify-center items-center gap-2">
+                        <button type="button" class="{{ $delete }}" x-on:click="swap()">@lang(config('tall-forms.delete'))</button>
+                        <button type="button" class="{{ $save }}" x-on:click="saveCroppie()">@lang(config('tall-forms.save'))</button>
+                    </div>
+                </div>
             </div>
         </div>
 

@@ -18,10 +18,11 @@ class ImageCropper extends Component
     public string $dropZone = 'cursor-pointer text-center uppercase text-sm text-bold text-gray-600';
     public string $fileInfo = 'text-xs text-gray-500';
     public string $icon = 'mx-auto h-12 w-12 text-gray-400';
-    public string $cropper = 'fixed top-0 left-0 p-8 h-screen w-screen z-50 bg-white';
-    public string $btnsRoot = 'z-10 absolute top-0 right-0 bottom-0 left-0';
+    public string $modalbg = 'fixed inset-0 h-screen w-screen p-2 sm:p-10 md:p-20 bg-gray-800 bg-opacity-75 z-50';
+    public string $modal = 'bg-white rounded w-full h-full flex justify-center items-center';
+    public string $btnsRoot = 'z-10 absolute inset-0';
     public string $btnsWrapper = 'flex gap-2 h-full w-full items-center justify-center';
-    public string $editBtnWrapper = 'z-10 absolute top-0 right-0 bottom-0 left-0';
+    public string $editBtnWrapper = 'z-10 absolute inset-0';
     public string $thumbnail = 'w-full h-full';
     //buttons
     public string $upload = 'flex items-center mx-auto mt-2 px-2 text-white text-sm text-center font-medium border border-transparent rounded outline-none bg-gray-500';
