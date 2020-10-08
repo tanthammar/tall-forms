@@ -4,10 +4,11 @@
             x-model.debounce.{{ $field->debounce }}="searchInput"
             class="form-input w-full"
             placeholder="{{ $field->placeholder }}"
+            x-on:keydown.escape="optionsVisible = false"
             x-on:input="optionsVisible = true"
             x-on:click.stop="optionsVisible = true"
             x-on:click.stop.away="optionsVisible = false" />
-        <div x-on:click.stop.prevent="searchInput = ''" class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer">
+        <div x-on:click.stop.prevent="searchInput = ''; optionsVisible = false;" class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer">
             <!-- Heroicon name: x -->
             <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -39,13 +40,13 @@
         <ul
 {{--            @keydown.enter.stop.prevent="onOptionSelect()"--}}
 {{--            @keydown.space.stop.prevent="onOptionSelect()"--}}
-            @keydown.escape="optionsVisible = false"
-            @keydown.arrow-up.prevent="select > 0 ? select -= 1 : select = 0"
-            @keydown.arrow-down.prevent="select < {{ optional($options)->length }} ? select += 1 : select = {{ optional($options)->length }}"
+            x-on:keydown.escape="optionsVisible = false"
+            x-on:keydown.arrow-up.prevent="select > 0 ? select -= 1 : select = 0"
+            x-on:keydown.arrow-down.prevent="select < {{ optional($options)->length }} ? select += 1 : select = {{ optional($options)->length }}"
             tabindex="-1"
             role="listbox"
             class="max-h-60 rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5" x-max="1">
-            @foreach($options as $key => $value)
+            @forelse($options as $key => $value)
             <li
                 x-description="Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation."
                 x-state:on="Highlighted"
@@ -85,7 +86,12 @@
 </svg>
               </span>
             </li>
-            @endforeach
+            @empty
+                <li class="mr-2 flex pl-2 space-x-2">
+                    <x-tall-spinner/>
+                    <span class="text-grey-500 text-xs">Searching ...</span>
+                </li>
+            @endforelse
         </ul>
     </div>
 </div>
