@@ -18,6 +18,7 @@ class Search extends BaseField
     public $displayValue = 'displayValue';
     public $debounce = 500;
     public $align_label_top = true;
+    public $inlineLabel = true;
 
     public function placeholder(string $placeholder): self
     {
@@ -40,6 +41,26 @@ class Search extends BaseField
     public function debounce(int $debounce): self
     {
         $this->debounce = $debounce;
+        return $this;
+    }
+
+    /**
+     * Display label and sublabel inline
+     * @return $this|Search
+     */
+    public function inlineLabel()
+    {
+        $this->inlineLabel = true;
+        return $this;
+    }
+
+    /**
+     * Display label and sublabel on separate rows
+     * @return $this|Search
+     */
+    public function stackedLabel()
+    {
+        $this->inlineLabel = false;
         return $this;
     }
 

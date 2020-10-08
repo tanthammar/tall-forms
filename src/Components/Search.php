@@ -15,12 +15,14 @@ class Search extends Component
     public Field $field;
     public string $temp_key;
     public array $options;
+    public string $label_array_class;
 
     public function __construct(Field $field, string $tempKey, array $options = [])
     {
         $this->field = $field;
         $this->temp_key = $tempKey;
         $this->options = $options;
+        $this->label_array_class = $field->inlineLabel ? 'flex space-x-2 items-baseline' : 'flex flex-col';
     }
 
     public function render(): View

@@ -52,27 +52,38 @@
                 x-state:on="Highlighted"
                 x-state:off="Not Highlighted"
                 role="option"
-                x-on:click.stop.prevent="field = '{{ $key }}'; selected = {{ $loop->index }}; optionsVisible = false; searchInput = '{{ $value }}';"
+                x-on:click.stop.prevent="field = '{{ $key }}'; selected = {{ $loop->index }}; optionsVisible = false; searchInput = '{{ is_array($value) ? $value[0] : $value }}';"
                 x-on:mouseenter="selected = {{ $loop->index }}"
                 x-on:mouseleave="selected = null"
                 :class="{ 'text-white bg-indigo-600': selected === {{ $loop->index }}, 'text-gray-900': !(selected === {{ $loop->index }}) }"
                 class="text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9">
-                <div class="flex space-x-2">
-                <span
-                    x-state:on="Selected"
-                    x-state:off="Not Selected"
-                    :class="{ 'font-semibold': field === '{{ $key }}', 'font-normal': !(field === '{{ $key }}') }"
-                    class="font-normal truncate">
-                  {{ $value }}
-                </span>
-                    <span
-                        x-state:on="Highlighted"
-                        x-state:off="Not Highlighted"
-                        :class="{ 'text-indigo-200': selected === {{ $loop->index }}, 'text-gray-500': !(selected === {{ $loop->index }}) }"
-                        class="text-gray-500 truncate">
-                  @wadecooper
-                </span>
-                </div>
+
+                    @if(is_array($value))
+                    <div class="{{ $label_array_class }}">
+                        <span
+                            x-state:on="Selected"
+                            x-state:off="Not Selected"
+                            :class="{ 'font-semibold': field === '{{ $key }}', 'font-normal': !(field === '{{ $key }}') }"
+                            class="font-normal truncate">
+                            {{ $value[0] }}
+                        </span>
+                        <span
+                            x-state:on="Highlighted"
+                            x-state:off="Not Highlighted"
+                            :class="{ 'text-indigo-200': selected === {{ $loop->index }}, 'text-gray-500': !(selected === {{ $loop->index }}) }"
+                            class="text-gray-500 text-xs truncate">
+                            {{ $value[1] }}
+                        </span>
+                    </div>
+                    @else
+                        <span
+                            x-state:on="Selected"
+                            x-state:off="Not Selected"
+                            :class="{ 'font-semibold': field === '{{ $key }}', 'font-normal': !(field === '{{ $key }}') }"
+                            class="font-normal truncate">
+                            {{ $value }}
+                        </span>
+                    @endif
 
                 <span
                     x-description="Checkmark, only display for selected option."
