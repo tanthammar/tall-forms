@@ -14,9 +14,9 @@ class Trix extends Component
 
     public Field $field;
     public string $temp_key;
-    public string $value;
+    public ?string $value;
 
-    public function __construct(Field $field, string $tempKey, string $value = "")
+    public function __construct(Field $field, string $tempKey, ?string $value = null)
     {
         $this->field = $field;
         $this->temp_key = $tempKey;
