@@ -168,5 +168,6 @@ return [
         'file-upload' => Components\FileUpload::class,
         'select' => Components\Select::class,
         'search' => Components\Search::class,
+        'trix' => Components\Trix::class,
     ]
 ];
