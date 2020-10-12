@@ -38,8 +38,8 @@
                 <div>
                     <div class="m-auto"><img src alt x-ref="croppie" class="display-block w-full"></div>
                     <div class="flex justify-center items-center gap-2">
-                        <button type="button" class="{{ $delete }}" x-on:click="swap()">@lang(config('tall-forms.delete'))</button>
-                        <button type="button" class="{{ $save }}" x-on:click="saveCroppie()">@lang(config('tall-forms.save'))</button>
+                        <button type="button" class="{{ $delete }}" x-on:click.prevent="swap()">@lang(config('tall-forms.delete'))</button>
+                        <button type="button" class="{{ $save }}" x-on:click.prevent="saveCroppie()">@lang(config('tall-forms.save'))</button>
                     </div>
                 </div>
             </div>
@@ -49,8 +49,8 @@
         <div x-show="!showCroppie && hasImage" class="relative {{ $field->thumbnail }}">
             <div class="{{ $btnsRoot }}">
                 <div class="{{ $btnsWrapper }}">
-                    <button type="button" class="{{ $swap }}" x-on:click="swap()">@lang(config('tall-forms.swap'))</button>
-                    <button type="button" class="{{ $edit }}" x-on:click="edit()">@lang(config('tall-forms.edit'))</button>
+                    <button type="button" class="{{ $swap }}" x-on:click.prevent="swap()">@lang(config('tall-forms.swap'))</button>
+                    <button type="button" class="{{ $edit }}" x-on:click.prevent="edit()">@lang(config('tall-forms.edit'))</button>
                 </div>
             </div>
             <div><img src="{{ $imageUrl }}" alt x-ref="result" class="display-block"></div>

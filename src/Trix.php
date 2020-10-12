@@ -25,19 +25,14 @@ class Trix extends BaseField
         return $this;
     }
 
-    public function allowAttachments(): self
-    {
-        $this->allowAttachments = true;
-        return $this;
-    }
-
     /**
      * The component property used for livewire file uploads triggerd by the Trix attachment button
      * @param string $componentPropertyName
      * @return $this
      */
-    public function attachmentKey(string $componentPropertyName): self
+    public function allowAttachments(string $componentPropertyName): self
     {
+        $this->allowAttachments = true;
         $this->attachmentKey = $componentPropertyName;
         return $this;
     }
