@@ -37,7 +37,6 @@ class Trix extends Component
 
     public function render(): View
     {
-        if($this->field->allowAttachments) return view('tall-forms::components.trix-with-attachments');
         return view('tall-forms::components.trix');
     }
 }
