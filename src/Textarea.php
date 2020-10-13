@@ -35,5 +35,5 @@ class Textarea extends BaseField
         $this->attributes['input'] = $attributes;
         return $this;
     }
-    
+
 }
