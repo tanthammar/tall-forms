@@ -14,4 +14,10 @@ class Checkboxes extends BaseField
     public $align_label_top = true;
     public $allowed_in_array = false;
 
+    public function inputAttr(array $attributes): self
+    {
+        $this->attributes['input'] = $attributes;
+        return $this;
+    }
+
 }

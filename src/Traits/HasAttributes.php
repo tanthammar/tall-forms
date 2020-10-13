@@ -8,7 +8,7 @@ trait HasAttributes
 {
     public array $attributes = [];
 
-    public $wire = 'wire:model.lazy';
+    public string $wire; // default = wire:model.lazy, in config/tall-forms, set in BaseField __construct()
 
     public function getAttr($type)
     {
@@ -93,12 +93,6 @@ trait HasAttributes
 //        $merge ? array_merge($this->attributes['input-wrapper'], $attributes) : $this->attributes['input-wrapper'] = $attributes;
 //        return $this;
 //    }
-
-    public function inputAttr(array $attributes): self
-    {
-        $this->attributes['input'] = $attributes;
-        return $this;
-    }
 
     public function wire(string $wire_model_declaration): self
     {

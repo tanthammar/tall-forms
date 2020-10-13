@@ -12,4 +12,10 @@ class Radio extends BaseField
 
     public $type = 'radio';
 
+    public function inputAttr(array $attributes): self
+    {
+        $this->attributes['input'] = $attributes;
+        return $this;
+    }
+
 }

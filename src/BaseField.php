@@ -38,6 +38,7 @@ class BaseField
         $this->label = $label;
         $this->name = $key ?? \Str::snake(\Str::lower($label));
         $this->key = 'form_data.' . $this->name;
+        $this->wire = config('tall-forms.field-attributes.wire');
         $this->setAttr();
     }
 

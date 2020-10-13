@@ -100,4 +100,10 @@ class Input extends BaseField
         return $this;
     }
 
+    public function inputAttr(array $attributes): self
+    {
+        $this->attributes['input'] = $attributes;
+        return $this;
+    }
+
 }

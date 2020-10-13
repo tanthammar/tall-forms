@@ -15,7 +15,7 @@ return [
         'fields-wrapper' => [
             'class' => 'max-w-screen-lg mx-auto divide-gray-200 divide-y sm:grid sm:grid-cols-12'
         ],
-        //these are not applied as foreach, you can only set the class attribute here
+        //these are not applied as foreach, you can only set the CLASS attribute here
         'form-head' => '',
         'form-title' => 'text-lg leading-6 font-medium text-gray-900',
         'form-sub-title' => 'mt-1 max-w-2xl text-sm leading-5 text-gray-500',
@@ -61,6 +61,8 @@ return [
         'after-text' => [
             'class' => 'block text-sm leading-5 text-gray-700 p-2'
         ],
+        //default field wire:model attribute
+        'wire' => 'wire:model.lazy',
         //these are not applied as foreach, you can only set the class attribute here
         'label-field-wrapper-inline' => 'sm:flex',
         'label-field-wrapper-stacked' => 'w-full',
