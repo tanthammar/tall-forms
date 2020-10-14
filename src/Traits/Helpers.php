@@ -4,6 +4,7 @@ namespace Tanthammar\TallForms\Traits;
 
 
 use Illuminate\Support\Arr;
+use stdClass;
 
 trait Helpers
 {
@@ -28,19 +29,11 @@ trait Helpers
     protected function fieldsToArray(): array
     {
         $array = [];
-        foreach ($this->fields() as $field) {
+        foreach ($this->getFields() as $field) {
             if (filled($field)) $array[] = $field->fieldToArray(); //in BaseField and IsArrayField
         }
         return $array;
     }
-
-    protected function fieldNames(): array
-    {
-        return $fieldNames = collect($this->fields())->map(function ($field) {
-            return filled($field) ? $field->name : null;
-        })->toArray();
-    }
-
 
     /**
      * Executes before field validation, creds to "@roni", livewire discord channel member
@@ -81,5 +74,102 @@ trait Helpers
     public static function unique_words(string $scentence): string
     {
         return implode(' ',array_unique(explode(' ', $scentence)));
+    }
+
+    public function arrayDotOnly(array $array, $keys): array
+    {
+        $newArray = [];
+        $default = new stdClass;
+        foreach ((array) $keys as $key) {
+            $value = Arr::get($array, $key, $default);
+            if ($value !== $default) {
+                Arr::set($newArray, $key, $value);
+            }
+        }
+        return $newArray;
+    }
+
+    public function getNamesByFields(): array
+    {
+        return $this->getNamesByFieldsRecursively($this->fields());
+    }
+
+    protected function getNamesByFieldsRecursively(array $fields, $prefix = ''): array
+    {
+        $field_names = [];
+        $relationship_names = [];
+        $custom_names = [];
+
+        foreach ($fields as $field) {
+            if (filled($field)) {
+                if (property_exists($field, 'fields') && is_array($field->fields) && 0 < count($field->fields)) {
+                    $results = $this->getNamesByFieldsRecursively($field->fields, $prefix . $field->name . '.');
+                    $field_names = array_merge($field_names, $results['field_names']);
+                    $relationship_names = array_merge($relationship_names, $results['relationship_names']);
+                    $custom_names = array_merge($custom_names, $results['custom_names']);
+                } else {
+                    if ($field->is_relation) {
+                        $relationship_names[] = $prefix . $field->name;
+                    } elseif ($field->is_custom) {
+                        $custom_names[] = $prefix . $field->name;
+                    } else {
+                        $field_names[] = $prefix . $field->name;
+                    }
+                }
+            }
+        }
+
+        return [
+            'field_names' => $field_names,
+            'relationship_names' => $relationship_names,
+            'custom_names' => $custom_names,
+        ];
+    }
+
+    protected function fieldNames(): array
+    {
+        return $this->fieldNamesRecursively($this->fields());
+    }
+
+    protected function fieldNamesRecursively(array $fields, $prefix = ''): array
+    {
+        $field_names = [];
+
+        foreach ($fields as $field) {
+            if (filled($field)) {
+                if (property_exists($field, 'fields') && is_array($field->fields) && 0 < count($field->fields)) {
+                    $results = $this->fieldNamesRecursively($field->fields, $prefix . $field->name . '.');
+                    $field_names = array_merge($field_names, $results);
+                } else {
+                    $field_names[] = $prefix . $field->name;
+                }
+            }
+        }
+
+        return $field_names;
+    }
+
+    protected function getFields(): array
+    {
+        return $this->getFieldsRecursively($this->fields());
+    }
+
+    protected function getFieldsRecursively(array $fields, $prefix = ''): array
+    {
+        $results = [];
+
+        foreach ($fields as $field) {
+            if (filled($field)) {
+                $key = (empty($prefix)) ? $field->key : $prefix . '.' . $field->name;
+                if (property_exists($field, 'fields') && is_array($field->fields) && 0 < count($field->fields)) {
+                    $results = array_merge($results, $this->getFieldsRecursively($field->fields, $key));
+                } else {
+                    $field->key = $key;
+                    $results[] = $field;
+                }
+            }
+        }
+
+        return $results;
     }
 }

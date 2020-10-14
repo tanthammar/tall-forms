@@ -7,37 +7,41 @@ namespace Tanthammar\TallForms\Traits;
 trait ValidatesFields
 {
 
-    public function get_rules()
+    public function validationRules($fields = [], $prefix = 'form_data')
     {
         $rules = [];
-        foreach ($this->fields() as $field) {
-            if ($field != null) {
 
-                if (!in_array($field->type, ['array', 'keyval', 'file'])) $rules[$field->key] = $field->rules ?? 'nullable';
-
+        foreach ($fields as $field) {
+            if (filled($field)) {
                 if (in_array($field->type, ['array', 'keyval'])) {
-                    foreach ($field->fields as $array_field) {
-                        $key = $field->type === 'array'
-                            ? "$field->key.*.$array_field->name"
-                            : "$field->key.$array_field->name";
-                        $rules[$key] = $array_field->rules ?? 'nullable';
+                    if (property_exists($field, 'fields') && is_array($field->fields) && 0 < count($field->fields)) {
+                        $ruleName = $field->type === 'array' ? "{$prefix}.{$field->name}.*" : "{$prefix}.{$field->name}";
+                        $rules = array_merge($rules, $this->validationRules($field->fields, $ruleName));
                     }
+                    $rules["$prefix.$field->name"] = $field->rules ?? 'nullable';
+
+                } else {
+                    if ($field->type === 'file') {
+                        $ruleName = $field->multiple ? "{$prefix}.{$field->name}.*" : "{$prefix}.{$field->name}";
+                    }
+                    elseif ($field->type === 'multiselect') {
+                        $ruleName = "{$prefix}.{$field->name}.*";
+                    } else {
+                        $ruleName = "{$prefix}.{$field->name}";
+                    }
+
+                    $rules[$ruleName] = $field->rules ?? 'nullable';
                 }
-                if ($field->type === 'file') { //use field name here, for custom handling
-                    $field->multiple
-                        ? $rules["$field->name.*"] = $field->rules ?? 'nullable'
-                        : $rules[$field->name] = $field->rules ?? 'nullable';
-                }
-                if ($field->type === 'multiselect') $rules["$field->key.*"] = $field->rules ?? 'nullable';
             }
         }
         return $rules;
     }
 
-    public function validationAttributes() {
+    public function validationAttributes()
+    {
         $attributes = [];
-        if($this->labelsAsAttributes) {
-            foreach ($this->fields() as $field) {
+        if ($this->labelsAsAttributes) {
+            foreach ($this->getFields() as $field) {
                 if ($field != null && $field->labelAsAttribute) {
                     if (in_array($field->type, ['array', 'keyval'])) {
                         foreach ($field->fields as $array_field) {

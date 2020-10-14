@@ -4,7 +4,7 @@
         <div class="{{ $keyval->array_wrapper_grid_class }}">
             @foreach($keyval->fields as $array_field)
                 @php
-                    $temp_key = "{$keyval->key}.{$array_field->name}";
+                    $temp_key = "{$parent_name}.{$array_field->name}";
                     $array_field->inline = $array_field->inline ?? false;
                     $array_field->inArray = true;
                 @endphp
