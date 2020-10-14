@@ -76,6 +76,13 @@ trait Helpers
         return implode(' ',array_unique(explode(' ', $scentence)));
     }
 
+    /**
+     * Returns only specified key/value pairs from the give array
+     * and has deeply nested array support using "dot" notation for keys.
+     * @param array $array
+     * @param mixed $keys
+     * @return array
+     */
     public function arrayDotOnly(array $array, $keys): array
     {
         $newArray = [];
@@ -89,71 +96,100 @@ trait Helpers
         return $newArray;
     }
 
+    /**
+     * @return array
+     */
     public function getNamesByFields(): array
     {
         return $this->getNamesByFieldsRecursively($this->fields());
     }
 
+    /**
+     *
+     * @param array $fields
+     * @param string $prefix
+     * @return array
+     */
     protected function getNamesByFieldsRecursively(array $fields, $prefix = ''): array
     {
-        $field_names = [];
-        $relationship_names = [];
-        $custom_names = [];
+        $fieldNames = [];
+        $relationshipNames = [];
+        $customNames = [];
 
         foreach ($fields as $field) {
             if (filled($field)) {
                 if (property_exists($field, 'fields') && is_array($field->fields) && 0 < count($field->fields)) {
                     $results = $this->getNamesByFieldsRecursively($field->fields, $prefix . $field->name . '.');
-                    $field_names = array_merge($field_names, $results['field_names']);
-                    $relationship_names = array_merge($relationship_names, $results['relationship_names']);
-                    $custom_names = array_merge($custom_names, $results['custom_names']);
+                    $fieldNames = array_merge($fieldNames, $results['field_names']);
+                    $relationshipNames = array_merge($relationshipNames, $results['relationship_names']);
+                    $customNames = array_merge($customNames, $results['custom_names']);
                 } else {
                     if ($field->is_relation) {
-                        $relationship_names[] = $prefix . $field->name;
+                        $relationshipNames[] = $prefix . $field->name;
                     } elseif ($field->is_custom) {
-                        $custom_names[] = $prefix . $field->name;
+                        $customNames[] = $prefix . $field->name;
                     } else {
-                        $field_names[] = $prefix . $field->name;
+                        $fieldNames[] = $prefix . $field->name;
                     }
                 }
             }
         }
 
         return [
-            'field_names' => $field_names,
-            'relationship_names' => $relationship_names,
-            'custom_names' => $custom_names,
+            'field_names' => $fieldNames,
+            'relationship_names' => $relationshipNames,
+            'custom_names' => $customNames,
         ];
     }
 
+    /**
+     *
+     * @return array
+     */
     protected function fieldNames(): array
     {
         return $this->fieldNamesRecursively($this->fields());
     }
 
+    /**
+     *
+     * @param array $fields
+     * @param string $prefix
+     * @return array
+     */
     protected function fieldNamesRecursively(array $fields, $prefix = ''): array
     {
-        $field_names = [];
+        $fieldNames = [];
 
         foreach ($fields as $field) {
             if (filled($field)) {
                 if (property_exists($field, 'fields') && is_array($field->fields) && 0 < count($field->fields)) {
                     $results = $this->fieldNamesRecursively($field->fields, $prefix . $field->name . '.');
-                    $field_names = array_merge($field_names, $results);
+                    $fieldNames = array_merge($fieldNames, $results);
                 } else {
-                    $field_names[] = $prefix . $field->name;
+                    $fieldNames[] = $prefix . $field->name;
                 }
             }
         }
 
-        return $field_names;
+        return $fieldNames;
     }
 
+    /**
+     *
+     * @return array
+     */
     protected function getFields(): array
     {
         return $this->getFieldsRecursively($this->fields());
     }
 
+    /**
+     *
+     * @param array $fields
+     * @param string $prefix
+     * @return array
+     */
     protected function getFieldsRecursively(array $fields, $prefix = ''): array
     {
         $results = [];

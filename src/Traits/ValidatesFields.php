@@ -7,7 +7,13 @@ namespace Tanthammar\TallForms\Traits;
 trait ValidatesFields
 {
 
-    public function validationRules($fields = [], $prefix = 'form_data')
+    /**
+     *
+     * @param array $fields
+     * @param string $prefix
+     * @return array
+     */
+    public function validationRules(array $fields = [], string $prefix = 'form_data'): array
     {
         $rules = [];
 
