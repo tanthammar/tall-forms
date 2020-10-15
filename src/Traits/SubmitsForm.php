@@ -14,7 +14,7 @@ trait SubmitsForm
         // fix for Livewire v2.5.5 returning ALL component properties
         // bug: https://github.com/livewire/livewire/issues/1649
         $validated_data = $this->validate(
-            $this->validationRules($this->fields()),
+            $this->validationRules(),
             [],
             $this->validationAttributes,
         )['form_data'];

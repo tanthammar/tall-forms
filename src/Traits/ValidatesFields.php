@@ -9,11 +9,20 @@ trait ValidatesFields
 
     /**
      *
+     * @return array
+     */
+    public function validationRules(): array
+    {
+        return $this->validationRulesRecursively($this->fields());
+    }
+
+    /**
+     *
      * @param array $fields
      * @param string $prefix
      * @return array
      */
-    public function validationRules(array $fields = [], string $prefix = 'form_data'): array
+    protected function validationRulesRecursively(array $fields, string $prefix = 'form_data'): array
     {
         $rules = [];
 
@@ -22,13 +31,13 @@ trait ValidatesFields
                 if (in_array($field->type, ['array', 'keyval'])) {
                     if (property_exists($field, 'fields') && is_array($field->fields) && 0 < count($field->fields)) {
                         $ruleName = $field->type === 'array' ? "{$prefix}.{$field->name}.*" : "{$prefix}.{$field->name}";
-                        $rules = array_merge($rules, $this->validationRules($field->fields, $ruleName));
+                        $rules = array_merge($rules, $this->validationRulesRecursively($field->fields, $ruleName));
                     }
                     $rules["$prefix.$field->name"] = $field->rules ?? 'nullable';
 
                 } else {
                     if ($field->type === 'file') {
-                        $ruleName = $field->multiple ? "{$prefix}.{$field->name}.*" : "{$prefix}.{$field->name}";
+                        $ruleName = $field->multiple ? "{$field->name}.*" : $field->name;
                     }
                     elseif ($field->type === 'multiselect') {
                         $ruleName = "{$prefix}.{$field->name}.*";
