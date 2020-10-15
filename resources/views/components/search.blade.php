@@ -40,6 +40,7 @@
                 x-state:on="Highlighted"
                 x-state:off="Not Highlighted"
                 role="option"
+                wire:key="{{ md5($key) }}"
                 x-on:click.stop.prevent="field = '{{ $key }}'; selected = {{ $loop->index }}; optionsVisible = false; searchInput = '{{ is_array($value) ? $value[0] : $value }}';"
                 x-on:mouseenter="selected = {{ $loop->index }}"
                 x-on:mouseleave="selected = null"
