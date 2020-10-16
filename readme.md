@@ -15,9 +15,19 @@ Auto-generate responsive [Laravel Livewire](https://laravel-livewire.com) (TALL-
 # Features
 * Laravel Nova like syntax to auto generate TALL-stack forms
 * Laravel 7 Blade form components
+* Auto generate views
+
+### Sponsor Heroes
+[💗 Please Sponsor 🔗](https://github.com/sponsors/laike9m) It takes a lot of time to create and maintain this package. I am forever grateful to you:
+<br><br>
+<a href="https://github.com/gavinhewitt"><img src="https://avatars2.githubusercontent.com/u/1969103?s=400&v=4" width="100px;" alt=""/><br /><sub><b>
+Gavin Hewitt</b></sub></a>
+
 
 ### Credits
-
-- [kdion4891](https://github.com/kdion4891)
+Want to give tribute to those who made TALL-stack come true. (Alphabetically ordered ;)
+- [Taylor Otwell](https://github.com/sponsors/taylorotwell) for creating Laravel
+- [Caleb Porzio](https://github.com/sponsors/calebporzio) for creating Livewire and AlpineJS
+- [Adam Wathan](https://tailwindui.com/) for TailwindCSS and TailwindUI
 
 # Documentation [See the wiki](https://github.com/tanthammar/tall-forms/wiki)
