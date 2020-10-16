@@ -15,7 +15,6 @@ class Search extends Component
     public Field $field;
     public string $temp_key;
     public array $options;
-    public string $label_array_class;
     public string $listWidth;
 
     public function __construct(Field $field, string $tempKey, array $options = [])
@@ -23,7 +22,6 @@ class Search extends Component
         $this->field = $field;
         $this->temp_key = $tempKey;
         $this->options = $options;
-        $this->label_array_class = $field->inlineLabel ? 'flex space-x-2 items-baseline' : 'flex flex-col';
         $this->listWidth = $field->listWidth ?? 'max-w-xs w-full';
     }
 
