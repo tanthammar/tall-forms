@@ -123,14 +123,13 @@ trait Helpers
                     $fieldNames = array_merge($fieldNames, $results['field_names']);
                     $relationshipNames = array_merge($relationshipNames, $results['relationship_names']);
                     $customNames = array_merge($customNames, $results['custom_names']);
+                }
+                if ($field->is_relation) {
+                    $relationshipNames[] = $prefix . $field->name;
+                } elseif ($field->is_custom) {
+                    $customNames[] = $prefix . $field->name;
                 } else {
-                    if ($field->is_relation) {
-                        $relationshipNames[] = $prefix . $field->name;
-                    } elseif ($field->is_custom) {
-                        $customNames[] = $prefix . $field->name;
-                    } else {
-                        $fieldNames[] = $prefix . $field->name;
-                    }
+                    $fieldNames[] = $prefix . $field->name;
                 }
             }
         }
@@ -166,9 +165,8 @@ trait Helpers
                 if (property_exists($field, 'fields') && is_array($field->fields) && 0 < count($field->fields)) {
                     $results = $this->fieldNamesRecursively($field->fields, $prefix . $field->name . '.');
                     $fieldNames = array_merge($fieldNames, $results);
-                } else {
-                    $fieldNames[] = $prefix . $field->name;
                 }
+                $fieldNames[] = $prefix . $field->name;
             }
         }
 
