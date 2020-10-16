@@ -42,7 +42,7 @@
     @php $errorClass = \Tanthammar\TallForms\ConfigAttr::key('error') @endphp
     @error($field->multiple ? $field->name.'.*': $field->name)
     @foreach($errors->get($field->multiple ? $field->name.'.*': $field->name) as $message)
-        <p class="{{ $errorClass }}">{{ $field->multiple ? \Tanthammar\TallForms\ErrorMessage::parse($message[0]) : \Tanthammar\TallForms\ErrorMessage::parse($message) }}</p>
+        <p wire:key="{{ $loop->index }}" class="{{ $errorClass }}">{{ $field->multiple ? \Tanthammar\TallForms\ErrorMessage::parse($message[0]) : \Tanthammar\TallForms\ErrorMessage::parse($message) }}</p>
     @endforeach
         @if(!$showFileUploadError)<p class="{{ $errorClass }}">{{ $uploadFileError }}</p>@endif
     @enderror
