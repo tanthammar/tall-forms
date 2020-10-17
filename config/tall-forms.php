@@ -110,11 +110,11 @@ return [
 
 
     //button component classes
-    'button-info' => 'text-white bg-frost-dimmed hover:bg-frost-blue focus:border-blue-700 focus:shadow-outline-blue active:bg-frost-dimmed',
-    'button-positive' => 'text-white bg-aurora-green hover:bg-green-500 focus:border-green-600 focus:shadow-outline-green active:bg-aurora-green',
-    'button-negative' => 'text-red-100 bg-aurora-red hover:bg-red-500 focus:border-red-600 focus:shadow-outline-red active:bg-aurora-red',
-    'button-warning' => 'text-orange-100 bg-aurora-orange hover:bg-orange-600 focus:border-orange-700 focus:shadow-outline-orange active:bg-orange-700',
-    'button-primary' => 'text-blue-100 bg-night-lighter hover:bg-night-dark focus:border-night-light focus:shadow-outline-blue active:bg-night-dark',
+    'button-info' => 'text-white bg-frost-dimmed hover:bg-frost-blue focus:border-blue-700 active:bg-frost-dimmed',
+    'button-positive' => 'text-white bg-aurora-green hover:bg-green-500 focus:border-green-600 active:bg-aurora-green',
+    'button-negative' => 'text-red-100 bg-aurora-red hover:bg-red-500 focus:border-red-600 active:bg-aurora-red',
+    'button-warning' => 'text-orange-100 bg-aurora-orange hover:bg-orange-600 focus:border-orange-700 active:bg-orange-700',
+    'button-primary' => 'text-blue-100 bg-night-lighter hover:bg-night-dark focus:border-night-light active:bg-night-dark',
 
 
 
