@@ -2,10 +2,10 @@
     @if($field->prefix || $field->icon)
         <span class="{{ $icon_span }}">
             @if($field->icon)
-                @svg($field->icon, 'h-4 w-4')
+                <span class="mx-1">@svg($field->icon, 'h-4 w-4')</span>
             @endif
             @if($field->prefix)
-                {{ $field->prefix }}
+                <span class="mx-1">{{ $field->prefix }}</span>
             @endif
         </span>
     @endif
