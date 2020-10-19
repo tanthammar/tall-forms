@@ -42,12 +42,12 @@ class Radio extends Component
 
     public function class()
     {
-        return "form-radio mt-1 h-4 w-4 text-indigo-600 transition duration-150 ease-in-out ";
+        return "form-radio mt-1 h-4 w-4 ";
     }
 
     public function labelClass()
     {
-        return 'text-sm leading-5 text-gray-900';
+        return 'text-sm text-gray-900';
     }
 
     public function labelSpacingClass()

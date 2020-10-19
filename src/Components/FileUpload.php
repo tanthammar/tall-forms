@@ -13,7 +13,7 @@ class FileUpload extends Component
     use Helpers;
 
     public Field $field;
-    public string $spinnerWrapper = 'inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm';
+    public string $spinnerWrapper = 'inline-flex items-center rounded-l px-3 border border-r-0 border-gray-300 text-gray-500 sm:text-sm';
     public string $ul = 'space-y-2 my-2';
     public string $li = 'w-full flex items-center px-2 py-1 border rounded';
     public string $thumbWrapper = 'border h-8 w-8 rounded-full';
@@ -38,19 +38,19 @@ class FileUpload extends Component
 
     public function class()
     {
-        return "flex-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 rounded-none rounded-r-md";
+        return "flex-1 form-input block w-full sm:text-sm rounded-none rounded-r";
     }
 
     public function inputWrapper()
     {
-        $class = "my-1 flex rounded-md shadow-sm w-full relative ";
+        $class = "flex rounded w-full relative ";
         $class .= $this->field->class;
         return Helpers::unique_words($class);
     }
 
     public function inputWrapperError()
     {
-        return Helpers::unique_words($this->inputWrapper() . " border-red-300 text-red-900 placeholder-red-300 shadow-outline-red");
+        return Helpers::unique_words($this->inputWrapper() . " border-red-500 text-red-900 placeholder-red-500");
     }
 
     public function deleteButton()

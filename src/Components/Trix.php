@@ -32,7 +32,7 @@ class Trix extends Component
 
     public function error(): string
     {
-        return Helpers::unique_words($this->class()." border-red-300 text-red-900 focus:border-red-300 focus:shadow-outline-red");
+        return Helpers::unique_words($this->class()." border-red-500 text-red-900 focus:border-red-500");
     }
 
     public function render(): View

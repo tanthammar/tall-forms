@@ -13,10 +13,10 @@ class ImageCropper extends Component
     public string $temp_key;
     public string $imageUrl;
 
-    public string $root = 'w-full p-4 mx-auto border-gray-300 border-2 border-gray-300 border-dashed rounded-lg relative hover:shadow-outline-gray';
-    public string $wrapper = 'active:shadow-sm active:border-blue-500';
-    public string $dropZone = 'cursor-pointer text-center uppercase text-sm text-bold text-gray-600';
-    public string $fileInfo = 'text-xs text-gray-500';
+    public string $root = 'w-full p-4 mx-auto border-gray-300 border bg-white rounded relative';
+    public string $wrapper = 'active:border-blue-500';
+    public string $dropZone = 'cursor-pointer text-center uppercase text-sm text-bold text-gray-700';
+    public string $fileInfo = 'text-xs text-gray-600';
     public string $icon = 'mx-auto h-12 w-12 text-gray-400';
     public string $modalbg = 'fixed inset-0 h-screen w-screen p-2 sm:p-10 md:p-20 bg-gray-800 bg-opacity-75 z-50';
     public string $modal = 'bg-white rounded w-full h-full flex justify-center items-center';

@@ -3,7 +3,7 @@
     @if(isset($form_data[$repeater->name]) && $form_data[$repeater->name])
         <div class="{{ $repeater->array_wrapper_class }}">
             @foreach($form_data[$repeater->name] as $key => $value)
-                <div class="flex px-2 space-x-3 items-center" wire:key="{{ md5($repeater->key.$loop->index) }}">
+                <div class="flex px-2 space-x-3 items-center py-2" wire:key="{{ md5($repeater->key.$loop->index) }}">
                     <div class="{{ $repeater->array_wrapper_grid_class }}">
                         @foreach($repeater->fields as $array_field)
                             @php
@@ -19,18 +19,18 @@
                     </div>
                     <div class="flex-shrink space-x-2 items-center justify-end">
                         @if($repeater->array_sortable)
-                            <button type="button" class="border rounded border px-1"
+                            <button type="button" class="border rounded border p-2"
                                     wire:click="arrayMoveUp('{{ $repeater->name }}', '{{ $key }}')">
                                 @svg(config('tall-forms.arrow-up-icon'), 'h-4 w-4')
                             </button>
 
-                            <button type="button" class="border rounded border px-1"
+                            <button type="button" class="border rounded border p-2"
                                     wire:click="arrayMoveDown('{{ $repeater->name }}', '{{ $key }}')">
                                 @svg(config('tall-forms.arrow-down-icon'), 'h-4 w-4')
                             </button>
                         @endif
 
-                        <button type="button" class="{{ config('tall-forms.negative' )}} rounded shadow px-1 text-white"
+                        <button type="button" class="{{ config('tall-forms.negative' )}} rounded shadow p-2 text-white"
                                 wire:click.prevent="arrayRemove('{{ $repeater->name }}', '{{ $key }}')">
                             @svg(config('tall-forms.trash-icon'), 'h-4 w-4')
                         </button>
@@ -39,7 +39,7 @@
             @endforeach
         </div>
     @endif
-    <button type="button" class="rounded-md shadow-sm text-white {{config('tall-forms.positive')}}"
+    <button type="button" class="rounded shadow text-white {{config('tall-forms.positive')}}"
             wire:click.prevent="arrayAdd('{{ $repeater->name }}')" style="width:fit-content">
         @svg(config('tall-forms.plus-icon'), 'h-5 w-5 m-2')
     </button>

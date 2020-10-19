@@ -45,7 +45,7 @@ class Textarea extends Component
     public function error()
     {
         return Helpers::unique_words(
-            $this->class()." border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red"
+            $this->class()." border-red-500 text-red-900 placeholder-red-500 focus:border-red-500"
         );
     }
 

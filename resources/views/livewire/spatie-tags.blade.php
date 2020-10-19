@@ -1,6 +1,6 @@
 <div class="bg-grey-lighter w-full">
     @error('search')<p class="{{ $errorClass }}">{{ $field['errorMsg'] ?? $message }}</p>@enderror
-    <div x-data @tags-search-input-{{ $field['name'] }}-focus.window="$refs.searchInput.focus()" class="flex flex-1 flex-wrap bg-white border rounded shadow-sm pl-2 pr-4 pt-2 pb-1">
+    <div x-data @tags-search-input-{{ $field['name'] }}-focus.window="$refs.searchInput.focus()" class="flex flex-1 flex-wrap bg-white border rounded pl-2 pr-4 pt-2 pb-1">
         @foreach ($tags as $i => $tag)
             <span
                 class="tags-input-tag inline-flex leading-4 items-center text-sm bg-blue-300 text-blue-800 rounded py-1 px-2 mr-2 mb-1"
