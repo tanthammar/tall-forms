@@ -36,7 +36,7 @@
         <div x-show="showCroppie" x-on:click.prevent class="{{ $modalbg }}">
             <div class="{{ $modal }}">
                 <div>
-                    <div class="m-auto"><img src alt x-ref="croppie" class="display-block w-full"></div>
+                    <div class="m-auto" x-ref="croppie"></div>
                     <div class="flex justify-center items-center gap-2">
                         <button type="button" class="{{ $delete }}" x-on:click.prevent="swap()">@lang(config('tall-forms.delete'))</button>
                         <button type="button" class="{{ $save }}" x-on:click.prevent="saveCroppie()">@lang(config('tall-forms.save'))</button>
@@ -60,14 +60,18 @@
 </div>
 @if($field->includeScript)
     @once
-    @push('styles')
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css"
-              integrity="sha512-zxBiDORGDEAYDdKLuYU9X/JaJo/DPzE42UubfBw9yg8Qvb2YRRIQ8v4KsGHOx2H1/+sdSXyXxLXv5r7tHc9ygg=="
-              crossorigin="anonymous" media="print" onload="this.media='all'"/>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"
-                integrity="sha512-Gs+PsXsGkmr+15rqObPJbenQ2wB3qYvTHuJO6YJzPe/dTLvhy0fmae2BcnaozxDo5iaF8emzmCZWbQ1XXiX2Ig=="
-                crossorigin="anonymous" defer></script>
-    @endpush
+        @push('styles')
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css"
+                  integrity="sha512-zxBiDORGDEAYDdKLuYU9X/JaJo/DPzE42UubfBw9yg8Qvb2YRRIQ8v4KsGHOx2H1/+sdSXyXxLXv5r7tHc9ygg=="
+                  crossorigin="anonymous" media="print" onload="this.media='all'"/>
+
+        @endpush
+
+        @push('scripts')
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"
+                    integrity="sha512-Gs+PsXsGkmr+15rqObPJbenQ2wB3qYvTHuJO6YJzPe/dTLvhy0fmae2BcnaozxDo5iaF8emzmCZWbQ1XXiX2Ig=="
+                    crossorigin="anonymous" defer></script>
+        @endpush
     @endonce
 @endif
 @push('scripts')
