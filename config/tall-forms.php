@@ -22,7 +22,7 @@ return [
         'form-footer' => 'border rounded sm:p-4',
         'form-footer-title' => 'text-lg leading-6 font-medium text-gray-900',
         'form-footer-sub-title' => 'mt-1 max-w-2xl text-sm leading-5 text-gray-500',
-        'help' => 'leading-tight text-gray-600 text-sm',
+        'help' => 'leading-tight text-gray-500 text-sm',
         'error' => 'italic leading-tight text-gray-500 text-red-500 text-sm',
         'buttons-root' => 'w-full border-t border-gray-200 pt-5',
         'buttons-wrapper' => 'flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3 sm:justify-end sm:items-center',
@@ -124,7 +124,7 @@ return [
     'trash-icon' => 'tall-forms/close-outline',
     'plus-icon' => 'tall-forms/add-outline',
     'file-icon' => 'tall-forms/', //used as @svg('tall-forms/{$mime_type}', 'classes')
-    'file-upload' => 'tall-forms/cloud-upload', //prefix icon for file upload field
+    'file-upload' => 'tall-forms/upload', //prefix icon for file upload field
 
     //Column span classes for the fields ->colspan() method
     //requires tailwind css v1.7.0
