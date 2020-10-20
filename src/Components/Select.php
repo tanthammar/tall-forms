@@ -34,7 +34,7 @@ class Select extends Component
 
     public function class()
     {
-        $class = "form-select w-full ";
+        $class = "form-select my-1 w-full ";
         $class .= $this->field->class;
         return Helpers::unique_words($class);
     }

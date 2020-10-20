@@ -68,7 +68,7 @@ return [
         'label-field-wrapper-stacked' => 'w-full',
         'label' => 'my-1 block uppercase tracking-wide text-gray-600 text-xs font-bold',
         'label-suffix' => 'italic text-black text-opacity-25 text-xs',
-        'after-label' => '-mt-1 block text-sm leading-4 text-gray-700',
+        'after-label' => '-mt-1 block text-sm leading-4 text-gray-500',
         'input' => 'my-1 flex rounded w-full relative',
         'range-value' => 'rounded border px-2 font-medium',
         'keyval-wrapper' => 'flex flex-col',
