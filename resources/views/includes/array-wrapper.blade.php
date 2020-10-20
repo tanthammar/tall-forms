@@ -17,22 +17,22 @@
                             @include('tall-forms::includes.field-root', ['field' => $array_field])
                         @endforeach
                     </div>
-                    <div class="flex-shrink space-x-2 items-center justify-end">
+                    <div class="flex-shrink space-x-1 items-center justify-end">
                         @if($repeater->array_sortable)
-                            <button type="button" class="border rounded border p-2"
+                            <button type="button" class="text-gray-400"
                                     wire:click="arrayMoveUp('{{ $repeater->name }}', '{{ $key }}')">
-                                @svg(config('tall-forms.arrow-up-icon'), 'h-4 w-4')
+                                @svg(config('tall-forms.arrow-up-icon'), 'h-8 w-8')
                             </button>
 
-                            <button type="button" class="border rounded border p-2"
+                            <button type="button" class="text-gray-400"
                                     wire:click="arrayMoveDown('{{ $repeater->name }}', '{{ $key }}')">
-                                @svg(config('tall-forms.arrow-down-icon'), 'h-4 w-4')
+                                @svg(config('tall-forms.arrow-down-icon'), 'h-8 w-8')
                             </button>
                         @endif
 
-                        <button type="button" class="{{ config('tall-forms.negative' )}} rounded shadow p-2 text-white"
+                        <button type="button" class="text-red-700"
                                 wire:click.prevent="arrayRemove('{{ $repeater->name }}', '{{ $key }}')">
-                            @svg(config('tall-forms.trash-icon'), 'h-4 w-4')
+                            @svg(config('tall-forms.trash-icon'), 'h-8 w-8')
                         </button>
                     </div>
                 </div>
