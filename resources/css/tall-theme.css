@@ -215,12 +215,20 @@
     }
 
     /* Shared between multiple field types, but not all */
+    /* css version */
     .tall-forms-field-error {
+        @apply border-red-500 !important;
+        @apply text-red-900 !important;
+        @apply placeholder-red-500 !important;
+        @apply focus:border-red-500 !important;
+    }
+    /* sass version */
+    /*.tall-forms-field-error {
         @apply border-red-500 #{!important};
         @apply text-red-900 #{!important};
         @apply placeholder-red-500 #{!important};
         @apply focus:border-red-500 #{!important};
-    }
+    }*/
 
 
     /* Input */
