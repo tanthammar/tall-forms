@@ -36,26 +36,26 @@ class FileUpload extends Component
         $this->fieldValue = $fieldValue;
     }
 
-    public function class()
+    public function class(): string
     {
         return "flex-1 form-input block w-full sm:text-sm rounded-none rounded-r";
     }
 
-    public function inputWrapper()
+    public function inputWrapper(): string
     {
         $class = "flex rounded w-full relative ";
         $class .= $this->field->class;
         return Helpers::unique_words($class);
     }
 
-    public function inputWrapperError()
+    public function inputWrapperError(): string
     {
-        return Helpers::unique_words($this->inputWrapper() . " border-red-500 text-red-900 placeholder-red-500");
+        return Helpers::unique_words($this->inputWrapper() . " tall-forms-field-error");
     }
 
     public function deleteButton()
     {
-        return config('tall-forms.negative') . " rounded shadow p-2 text-white flex items-center";
+        return "tall-forms-bg-negative rounded shadow p-2 text-white flex items-center";
     }
 
     public function render(): View

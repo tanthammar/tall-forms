@@ -3,10 +3,10 @@
     @if($field->show_label)
         <div class="{{ $labelWidth() }}">
             <label for="{{ $field->key }}" class="{{ $field->getAttr('label') }}">
-                {{$field->label}} <span class="{{ $labelSuffixClass() }}">{{ $field->labelSuffix }}</span>
+                {{$field->label}} <span class="tall-forms-label-suffix">{{ $field->labelSuffix }}</span>
             </label>
             @if(!$field->afterLabelView && $field->afterLabel)
-                <div class="{{ $field->getAttr('after-label') }}">
+                <div class="tall-forms-after-label">
                     {{ $field->afterLabel }}
                 </div>
             @endif

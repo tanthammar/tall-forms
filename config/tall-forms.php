@@ -4,84 +4,64 @@ use Tanthammar\TallForms\Components;
 return [
     //note that the word dummymodel is auto replaced with the lower case value of --model option in the make command
     'form-title' => "trans('global.create').' '.trans('crud.dummymodel.title_singular')",
+
+    //File upload default validation message translation, applied as trans(...) or @lang(...)
+    'upload-file-error' => 'messages.file_upload_error', //Example: 'One or many of the uploaded files did not match the allowed filetype or size limit. Please see the fields help text, review your files and try again.'
+
+    //Spatie tags, search input error translation, applied as trans(...) or @lang(...)
+    'spatie-tags-search-error' => 'fields.tag_search_error',
+
     'field-labels-as-validation-attributes' => true,
 
-    // Component attributes
+    //A Laravel 7 blade component to wrap your form if $spaMode = true, see documentation
+    'wrap-view-path' => 'tall-forms::wrapper-layout',
+
+    // Component attributes, perfect spot to add default Alpine $refs keys
     'component-attributes' => [
         // You can add anything to these attributes. Applied as @foreach($attr as key => value)
         'form' => [
-            'class' => 'w-full',
+            'class' => 'tall-forms-form',
         ],
         'fields-wrapper' => [
-            'class' => 'max-w-screen-lg mx-auto divide-gray-200 divide-y sm:grid sm:grid-cols-12'
+            'class' => 'tall-forms-fields-wrapper'
         ],
-        //these are not applied as foreach, you can only set the CLASS attribute here
-        'form-head' => '',
-        'form-title' => 'text-lg leading-6 font-medium text-gray-900',
-        'form-sub-title' => 'mt-1 max-w-2xl text-sm leading-5 text-gray-500',
-        'form-footer' => 'border rounded sm:p-4',
-        'form-footer-title' => 'text-lg leading-6 font-medium text-gray-900',
-        'form-footer-sub-title' => 'mt-1 max-w-2xl text-sm leading-5 text-gray-500',
-        'help' => 'leading-tight text-gray-500 text-sm',
-        'error' => 'italic leading-tight text-gray-500 text-red-500 text-sm',
-        'buttons-root' => 'w-full border-t border-gray-200 pt-5',
-        'buttons-wrapper' => 'flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3 sm:justify-end sm:items-center',
-        'inline-label-alignment' => 'text-left',
-        'stacked-label-alignment' => 'text-left',
-        //Default label-, field-width for inline form layout
-        'label-width' => 'sm:w-1/3 md:w-1/5',
-        'field-width' => 'sm:w-2/3 md:w-4/5',
-        'tags-color' => 'bg-blue-100 text-blue-800'
     ],
 
-    // Field attributes
+    // Field attributes, perfect spot to add default Alpine $refs keys
     'field-attributes' => [
         // You can add anything to these attributes. Applied as @foreach($attr as key => value)
         'root' => [
-            'class' => 'w-full' //do not add py-, my- or col-span-x here, see FieldRoot component.
+            'class' => 'tall-forms-fields-root' //default = w-full, do not add py-, my- or col-span-x here, see FieldRoot component.
         ],
         'before' => [
-            'class' => 'my-4 w-full border border-gray-200'
+            'class' => 'tall-forms-fields-before'
         ],
         'before-text' => [
-            'class' => 'block text-sm leading-5 text-gray-700 p-2'
+            'class' => 'tall-forms-fields-before-text'
         ],
         'above' => [
-            'class' => 'leading-4 text-gray-500 text-sm sm:pt-1'
+            'class' => 'tall-forms-fields-above'
         ],
         'below' => [
-            'class' => 'leading-tight text-gray-500 text-sm'
+            'class' => 'tall-forms-fields-below'
         ],
         'below-wrapper' => [
             'class' => ''
         ],
         'after' => [
-            'class' => 'my-4 w-full border border-gray-200'
+            'class' => 'tall-forms-fields-after'
         ],
         'after-text' => [
-            'class' => 'block text-sm leading-5 text-gray-700 p-2'
+            'class' => 'tall-forms-fields-after-text'
         ],
         //default field wire:model attribute
         'wire' => 'wire:model.lazy',
-        //these are not applied as foreach, you can only set the class attribute here
-        'label-field-wrapper-inline' => 'sm:flex',
-        'label-field-wrapper-stacked' => 'w-full',
-        'label' => 'my-1 block uppercase tracking-wide text-gray-600 text-xs font-bold',
-        'label-suffix' => 'italic text-black text-opacity-25 text-xs',
-        'after-label' => '-mt-1 block text-sm leading-4 text-gray-500',
-        'input' => 'my-1 flex rounded w-full relative',
-        'range-value' => 'rounded border px-2 font-medium',
-        'keyval-wrapper' => 'flex flex-col',
-        'keyval-wrapper-grid' => 'sm:flex sm:grid sm:grid-cols-12 sm:gap-x-2 sm:gap-y-4',
-        'repeater-wrapper' => 'flex flex-col divide-y mb-2 rounded border',
-        'repeater-wrapper-grid' => 'flex-1 sm:grid sm:grid-cols-12 gap-x-2',
     ],
 
-    //A Laravel 7 blade component to wrap your form if $spaMode = true, see documentation
-    'wrap-view-path' => 'tall-forms::wrapper-layout',
 
 
-    //form buttons translations
+
+    //form buttons translations applied as trans(...) or @lang(...)
     'saved' => 'global.saved',
     'save' => 'global.save',
     'swap' => 'global.swap',
@@ -92,30 +72,6 @@ return [
     'save-go-back' => 'global.save_go_back',
     'message-updated-success' => 'messages.updated_success',
     'are-u-sure' => 'global.areYouSure',
-
-
-    //notification trait popup bg colors
-    'positive' => 'bg-green-500',
-    'negative' => 'bg-red-500',
-    'info' => 'bg-blue-500',
-    'warning' => 'bg-orange-500',
-    'default' => 'bg-teal-500',
-
-    //text colors
-    'text-positive' => 'text-aurora-green',
-    'text-negative' => 'text-aurora-red',
-    'text-info' => 'text-frost-dimmed',
-    'text-warning' => 'text-orange-800',
-    'text-primary' => 'text-teal-800',
-
-
-    //button component classes
-    'button-info' => 'text-white bg-frost-dimmed hover:bg-frost-blue focus:border-blue-700 active:bg-frost-dimmed',
-    'button-positive' => 'text-white bg-aurora-green hover:bg-green-500 focus:border-green-600 active:bg-aurora-green',
-    'button-negative' => 'text-red-100 bg-aurora-red hover:bg-red-500 focus:border-red-600 active:bg-aurora-red',
-    'button-warning' => 'text-orange-100 bg-aurora-orange hover:bg-orange-600 focus:border-orange-700 active:bg-orange-700',
-    'button-primary' => 'text-blue-100 bg-night-lighter hover:bg-night-dark focus:border-night-light active:bg-night-dark',
-
 
 
     //icons, used as @svg('path/file-name', 'classes')
@@ -143,13 +99,6 @@ return [
         '11' => 'sm:col-span-11',
         '12' => 'sm:col-span-12',
     ],
-
-    //File upload default validation message
-    'upload-file-error' => 'messages.file_upload_error', //Example: 'One or many of the uploaded files did not match the allowed filetype or size limit. Please see the fields help text, review your files and try again.'
-
-
-    //Spatie tags, search input error
-    'spatie-tags-search-error' => 'fields.tag_search_error',
 
 
     // list with blade ui kit components that this package replaces

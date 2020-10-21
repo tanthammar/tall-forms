@@ -33,29 +33,29 @@ trait Notify
         $bg = null;
         switch ($type) {
             case 'saved':
-                $bg = config('tall-forms.positive');
+                $bg = 'tall-forms-bg-positive';
                 $message = trans(config('tall-forms.message-updated-success'));
                 $this->emitSelf('notify-saved');
                 break;
 
             case 'positive':
-                $bg = config('tall-forms.positive');
+                $bg = 'tall-forms-bg-positive';
                 break;
 
             case 'negative':
-                $bg = config('tall-forms.negative');
+                $bg = 'tall-forms-bg-negative';
                 break;
 
             case 'info':
-                $bg = config('tall-forms.info');
+                $bg = 'tall-forms-bg-info';
                 break;
 
             case 'warning':
-                $bg = config('tall-forms.warning');
+                $bg = 'tall-forms-bg-warning';
                 break;
 
             default:
-                $bg = config('tall-forms.default');
+                $bg = 'tall-forms-bg-default';
                 break;
         }
         $this->dispatchBrowserEvent(

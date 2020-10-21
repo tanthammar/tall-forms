@@ -1,9 +1,9 @@
 @if(empty($footerView) && ($formFooterTitle || $formFooterSubtitle))
-    <div class="{{ \Tanthammar\TallForms\ConfigAttr::key('form-footer') }}">
-        <h3 class="{{ \Tanthammar\TallForms\ConfigAttr::key('form-footer-title') }}">
+    <div class="tall-forms-form-footer">
+        <h3 class="tall-forms-form-footer-title">
             {{ $formFooterTitle }}
         </h3>
-        <p tag="p" class="{{ \Tanthammar\TallForms\ConfigAttr::key('form-footer-sub-title') }}">
+        <p tag="p" class="tall-forms-form-footer-sub-title">
             {{ $formFooterSubtitle }}
         </p>
     </div>

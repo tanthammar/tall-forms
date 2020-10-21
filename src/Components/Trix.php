@@ -32,8 +32,7 @@ class Trix extends Component
 
     public function error(): string
     {
-        return Helpers::unique_words($this->class()." border-red-500 text-red-900 focus:border-red-500");
-    }
+        return $this->class()." tall-forms-field-error";
 
     public function render(): View
     {

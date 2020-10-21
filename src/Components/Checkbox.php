@@ -31,17 +31,17 @@ class Checkbox extends Component
         return array_merge($default, $custom);
     }
 
-    public function class()
+    public function class(): string
     {
         return "form-checkbox mt-1";
     }
 
-    public function labelClass()
+    public function labelClass(): string
     {
         return 'text-sm text-gray-900';
     }
 
-    public function labelSpacingClass()
+    public function labelSpacingClass(): string
     {
         return 'ml-2 block';
     }

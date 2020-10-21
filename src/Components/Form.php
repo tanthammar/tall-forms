@@ -19,7 +19,7 @@ class Form extends Component
 
     public function class(): string
     {
-        return data_get($this->attr, 'class', config('tall-forms.component-attributes.form.class'));
+        return data_get($this->attr, 'class', 'tall-forms-form');
     }
 
     public function render(): View

@@ -25,9 +25,9 @@ class FieldRoot extends Component
 
     public function class(): void
     {
-        $vertical_space = $this->inArray ? ' py-0 ' : ' py-6 sm:py-5 ';
+        $vertical_space = $this->inArray ? ' tall-forms-fields-root-py-inarray ' : ' tall-forms-fields-root-py-not-inarray '; //vertical space
         $colspan = config('tall-forms.col-span-classes')[$this->colspan];
-        $class = data_get($this->attr, 'class', config('tall-forms.field-attributes.root.class'));
+        $class = data_get($this->attr, 'class', 'tall-forms-fields-root');
         data_set($this->attr, 'class', Helpers::unique_words($class . $vertical_space . $colspan));
     }
 

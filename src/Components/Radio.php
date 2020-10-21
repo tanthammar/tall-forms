@@ -40,17 +40,17 @@ class Radio extends Component
         return array_merge($default, $custom);
     }
 
-    public function class()
+    public function class(): string
     {
         return "form-radio mt-1 h-4 w-4 ";
     }
 
-    public function labelClass()
+    public function labelClass(): string
     {
         return 'text-sm text-gray-900';
     }
 
-    public function labelSpacingClass()
+    public function labelSpacingClass(): string
     {
         return 'ml-2 block';
     }

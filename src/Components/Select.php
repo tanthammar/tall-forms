@@ -32,16 +32,16 @@ class Select extends Component
         return array_merge($default, $custom);
     }
 
-    public function class()
+    public function class(): string
     {
         $class = "form-select my-1 w-full ";
         $class .= $this->field->class;
         return Helpers::unique_words($class);
     }
 
-    public function error()
+    public function error(): string
     {
-        return Helpers::unique_words($this->class()." border-red-500 text-red-900 placeholder-red-500 focus:border-red-500");
+        return $this->class()." tall-forms-field-error";
     }
 
     public function render(): View
