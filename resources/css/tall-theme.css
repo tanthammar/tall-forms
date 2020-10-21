@@ -1,0 +1,307 @@
+@layer components {
+    /* icons */
+    .svg-icon {
+        @apply inline-flex align-middle overflow-visible;
+        fill: currentColor;
+        font-size: inherit;
+        margin-top: -0.1rem;
+    }
+
+    /* honeypot field class */
+    .nosy {
+        position: absolute;
+        opacity: 0;
+    }
+
+    /* background colors */
+    .tall-forms-bg-positive {
+        @apply bg-green-500;
+    }
+    .tall-forms-bg-negative {
+        @apply bg-red-500;
+    }
+    .tall-forms-bg-info {
+        @apply bg-blue-500;
+    }
+    .tall-forms-bg-warning {
+        @apply bg-orange-500;
+    }
+    .tall-forms-bg-primary {
+        @apply bg-teal-500;
+    }
+    .tall-forms-bg-default {
+        @apply bg-teal-500;
+    }
+
+    /* text colors */
+    .tall-forms-text-positive {
+        @apply text-aurora-green;
+    }
+    .tall-forms-text-negative {
+        @apply text-aurora-red;
+    }
+    .tall-forms-text-info {
+        @apply text-frost-dimmed;
+    }
+    .tall-forms-text-warning {
+        @apply text-orange-800;
+    }
+    .tall-forms-text-primary {
+        @apply text-teal-800;
+    }
+    .tall-forms-text-default {
+        @apply text-teal-800;
+    }
+
+    /* buttons */
+    .tall-forms-button-info {
+        @apply text-white bg-frost-dimmed hover:bg-frost-blue focus:border-blue-700;
+    }
+    .tall-forms-button-positive {
+        @apply text-white bg-aurora-green hover:bg-green-500 focus:border-green-600;
+    }
+    .tall-forms-button-negative {
+        @apply text-red-100 bg-aurora-red hover:bg-red-500 focus:border-red-600;
+    }
+    .tall-forms-button-warning {
+        @apply text-orange-100 bg-aurora-orange hover:bg-orange-600 focus:border-orange-700;
+    }
+    .tall-forms-button-primary {
+        @apply text-blue-100 bg-night-lighter hover:bg-night-dark focus:border-night-light;
+    }
+    .tall-forms-button-white {
+        @apply border-gray-300 bg-white text-gray-700 hover:text-gray-500 focus:border-blue-300 focus:shadow;
+    }
+    .tall-forms-button-indigo {
+        @apply text-indigo-100 bg-indigo-500 hover:bg-indigo-600 focus:border-indigo-700 focus:shadow;
+    }
+    .tall-forms-button-blue {
+        @apply text-blue-100 bg-blue-500 hover:bg-blue-600 focus:border-blue-700 focus:shadow;
+    }
+    .tall-forms-button-green {
+        @apply text-green-100 bg-green-500 hover:bg-green-600 focus:border-green-700 focus:shadow;
+    }
+    .tall-forms-button-yellow {
+        @apply text-yellow-100 bg-yellow-500 hover:bg-yellow-600 focus:border-yellow-700 focus:shadow;
+    }
+    .tall-forms-button-red {
+        @apply text-red-100 bg-red-500 hover:bg-red-600 focus:border-red-700 focus:shadow;
+    }
+    .tall-forms-button-gray {
+        @apply text-gray-100 bg-gray-500 hover:bg-gray-600 focus:border-gray-700 focus:shadow;
+    }
+    .tall-forms-button-orange {
+        @apply text-orange-100 bg-orange-500 hover:bg-orange-600 focus:border-orange-700 focus:shadow;
+    }
+    .tall-forms-button-teal {
+        @apply text-teal-100 bg-teal-500 hover:bg-teal-600 focus:border-teal-700 focus:shadow;
+    }
+
+
+    /* form */
+    .tall-forms-form {
+        @apply w-full;
+    }
+
+    .tall-forms-form-head {
+
+    }
+
+    .tall-forms-form-title {
+        @apply text-lg leading-6 font-medium text-gray-900;
+    }
+
+    .tall-forms-form-sub-title {
+        @apply mt-1 max-w-2xl text-sm leading-5 text-gray-500;
+    }
+
+    .tall-forms-form-footer {
+        @apply border rounded sm:p-4;
+    }
+
+    .tall-forms-form-footer-title {
+        @apply text-lg leading-6 font-medium text-gray-900;
+    }
+
+    .tall-forms-form-footer-sub-title {
+        @apply mt-1 max-w-2xl text-sm leading-5 text-gray-500;
+    }
+
+    /* help and error <p> */
+    .tall-forms-help {
+        @apply leading-tight text-gray-500 text-sm;
+    }
+
+    .tall-forms-error {
+        @apply italic leading-tight text-red-500 text-sm;
+    }
+
+
+    /* Buttons */
+    .tall-forms-buttons-root {
+        @apply w-full border-t border-gray-200 pt-5;
+    }
+
+    .tall-forms-buttons-wrapper {
+        @apply flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3 sm:justify-end sm:items-center;
+    }
+
+    /* Labels */
+    .tall-forms-label {
+        @apply my-1 block uppercase tracking-wide text-gray-600 text-xs font-bold;
+    }
+    .tall-forms-label-suffix {
+        @apply italic text-black text-opacity-25 text-xs;
+    }
+    .tall-forms-after-label {
+        @apply -mt-1 block text-sm leading-4 text-gray-500;
+    }
+    .tall-forms-inline-label-alignment {
+        @apply sm:pr-4 text-left;
+    }
+    .tall-forms-stacked-label-alignment {
+        @apply text-left;
+    }
+    .tall-forms-label-width { /* for inline form layout */
+        @apply sm:w-1/3 md:w-1/5;
+    }
+    .tall-forms-label-field-wrapper-inline {
+        @apply sm:flex;
+    }
+    .tall-forms-label-field-wrapper-stacked {
+        @apply w-full;
+    }
+
+
+    /* All Fields */
+    .tall-forms-fields-wrapper {
+        @apply max-w-screen-lg mx-auto divide-gray-200 divide-y sm:grid sm:grid-cols-12;
+    }
+    .tall-forms-field-width { /* for inline form layout */
+        @apply sm:w-2/3 md:w-4/5;
+    }
+    .tall-forms-fields-root {
+        /* do not add py-, my- or col-span-x here, see FieldRoot component. */
+        @apply w-full;
+    }
+    .tall-forms-fields-root-py-inarray {
+        /* only vertical space here, see FieldRoot component */
+        @apply py-0;
+    }
+    .tall-forms-fields-root-py-not-inarray {
+        /* only vertical space here, see FieldRoot component */
+        @apply py-6 sm:py-5;
+        }
+    .tall-forms-fields-before {
+        @apply my-4 w-full border border-gray-200;
+    }
+    .tall-forms-fields-before-text {
+        @apply block text-sm leading-5 text-gray-700 p-2;
+    }
+    .tall-forms-fields-above {
+        @apply leading-4 text-gray-500 text-sm sm:pt-1;
+    }
+    .tall-forms-fields-below {
+        @apply leading-tight text-gray-500 text-sm;
+    }
+    .tall-forms-fields-below-wrapper {
+        /* null */
+    }
+    .tall-forms-fields-after {
+        @apply my-4 w-full border border-gray-200;
+    }
+    .tall-forms-fields-after-text {
+        @apply block text-sm leading-5 text-gray-700 p-2;
+    }
+
+    /* Shared between multiple field types, but not all */
+    .tall-forms-field-error {
+        @apply border-red-500 #{!important};
+        @apply text-red-900 #{!important};
+        @apply placeholder-red-500 #{!important};
+        @apply focus:border-red-500 #{!important};
+    }
+
+
+    /* Input */
+    .tall-forms-input-wrapper {
+        @apply my-1 flex rounded w-full relative;
+    }
+
+    /* Range */
+    .tall-forms-range-value {
+        @apply rounded border px-2 font-bold;
+    }
+    .tall-forms-range-labels {
+        @apply text-gray-600;
+    }
+    .tall-forms-range-wrapper {
+        @apply flex space-x-2 py-2;
+    }
+
+    /* KeyVal */
+    .tall-forms-keyval-root {
+        @apply w-full;
+    }
+    .tall-forms-keyval-wrapper {
+        @apply flex flex-col;
+    }
+    .tall-forms-keyval-wrapper-grid {
+        @apply sm:flex sm:grid sm:grid-cols-12 sm:gap-x-2 sm:gap-y-4;
+    }
+
+    /* Repeater */
+    .tall-forms-repeater-root {
+        @apply w-full my-2;
+    }
+    .tall-forms-repeater-wrapper {
+        @apply flex flex-col divide-y mb-2 rounded border;
+    }
+    .tall-forms-repeater-wrapper-outer {
+        @apply flex px-2 space-x-3 items-center py-2;
+    }
+    .tall-forms-repeater-wrapper-grid {
+        @apply flex-1 sm:grid sm:grid-cols-12 gap-x-2;
+    }
+    .tall-forms-repeater-buttons-wrapper {
+        @apply flex-shrink space-x-1 items-center justify-end;
+    }
+    .tall-forms-repeater-buttons-size {
+        @apply h-8 w-8;
+    }
+    .tall-forms-repeater-sorter-color {
+        @apply text-gray-400;
+    }
+    .tall-forms-repeater-delete-color {
+        @apply text-red-700;
+    }
+    .tall-forms-repeater-add-button {
+        @apply rounded shadow text-white tall-forms-bg-positive;
+    }
+    .tall-forms-repeater-add-button-size {
+        @apply h-5 w-5 m-2;
+    }
+
+    /* Tags */
+    .tall-forms-tags-color {
+        @apply bg-blue-100 text-blue-800;
+    }
+
+
+    /* Trix input body */
+    trix-editor > ul > li, .trix > ul > li {
+        @apply list-disc list-outside ml-4;
+    }
+
+    trix-editor > h1, .trix > h1 {
+        @apply text-2xl font-bold;
+    }
+
+    trix-editor > blockquote, .trix > blockquote {
+        @apply ml-4 p-4 my-4 bg-snow-light border-l-4 text-lg;
+    }
+
+    trix-editor > ol > li, .trix > ol > li {
+        @apply list-decimal list-outside ml-4;
+    }
+}
