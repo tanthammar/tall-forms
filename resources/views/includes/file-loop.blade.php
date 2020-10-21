@@ -1,6 +1,6 @@
 @if(!$errors->has($field->multiple ? $field->name.'.'.$loop->index : $field->name))
     {{--avoid showing files that didn't pass validation --}}
-<li class="{{ $li }}">
+<li class="{{ $li }}" wire:key="{{ md5($field->multiple ? $field->name.'.'.$loop->index : $field->name) }}">
     <div>
         {{--Temporary urls are only available for file type image--}}
         @if( \Str::startsWith($file->getMimeType(), 'image') )

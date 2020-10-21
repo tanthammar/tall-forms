@@ -13,7 +13,6 @@ class Checkboxes extends Component
     public string $temp_key;
     public string $label;
     public $value;
-    public string $optionsIdx;
 
     /**
      * Checkboxes constructor.
@@ -21,15 +20,13 @@ class Checkboxes extends Component
      * @param string $tempKey
      * @param int|string $value
      * @param string $label
-     * @param string $optionsIdx
      */
-    public function __construct(Field $field, string $tempKey, $value, string $label, string $optionsIdx)
+    public function __construct(Field $field, string $tempKey, $value, string $label)
     {
         $this->field = $field;
         $this->temp_key = $tempKey;
         $this->value = $value;
         $this->label = $label;
-        $this->optionsIdx = $optionsIdx;
     }
 
     public function options(): array

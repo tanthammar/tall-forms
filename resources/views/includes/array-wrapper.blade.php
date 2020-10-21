@@ -3,7 +3,7 @@
     @if(isset($form_data[$repeater->name]) && $form_data[$repeater->name])
         <div class="{{ $repeater->array_wrapper_class }}">
             @foreach($form_data[$repeater->name] as $key => $value)
-                <div class="flex px-2 space-x-3 items-center">
+                <div class="flex px-2 space-x-3 items-center" wire:key="{{ md5($repeater->key.$loop->index) }}">
                     <div class="{{ $repeater->array_wrapper_grid_class }}">
                         @foreach($repeater->fields as $array_field)
                             @php
