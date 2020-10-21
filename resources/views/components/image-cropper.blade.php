@@ -1,6 +1,6 @@
-<div wire:ignore class="{{ $root }}">
+<div wire:ignore class="tall-forms-cropper-root">
     {{-- init Alpine --}}
-    <div x-data="imageData{{$field->name}}()" x-init="initCroppie()" class="{{ $wrapper }}" x-cloak>
+    <div x-data="imageData{{$field->name}}()" x-init="initCroppie()" x-cloak>
 
         {{-- drop zone --}}
         <div x-show="!showCroppie && !hasImage">
@@ -16,16 +16,16 @@
 
             {{-- upload icon --}}
             <div class="flex flex-col items-center justify-center">
-                <svg class="{{ $icon }}" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg class="tall-forms-cropper-icon " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                 </svg>
-                <label for="fileinput{{$field->name}}" class="{{ $dropZone }}">
+                <label for="fileinput{{$field->name}}" class="tall-forms-cropper-drop-zone">
                     {{ $field->dropZoneHelp }}
                 </label>
-                <p class="{{ $fileInfo }}">
+                <p class="tall-forms-cropper-file-info">
                     {{ $field->fileInfo }}
                 </p>
-                <button type="button" x-on:click="javascript:void(0)" class="{{ $upload }}">
+                <button type="button" x-on:click="javascript:void(0)" class="tall-forms-cropper-upload">
                     {{ $field->uploadButton }}
                 </button>
             </div>
@@ -33,13 +33,13 @@
         </div>
 
         {{-- cropper --}}
-        <div x-show="showCroppie" x-on:click.prevent class="{{ $modalbg }}">
-            <div class="{{ $modal }}">
+        <div x-show="showCroppie" x-on:click.prevent class="tall-forms-cropper-modal-bg">
+            <div class="tall-forms-cropper-modal">
                 <div>
                     <div class="m-auto" x-ref="croppie"></div>
                     <div class="flex justify-center items-center gap-2">
-                        <button type="button" class="{{ $delete }}" x-on:click.prevent="swap()">@lang(config('tall-forms.delete'))</button>
-                        <button type="button" class="{{ $save }}" x-on:click.prevent="saveCroppie()">@lang(config('tall-forms.save'))</button>
+                        <button type="button" class="tall-forms-cropper-delete" x-on:click.prevent="swap()">@lang(config('tall-forms.delete'))</button>
+                        <button type="button" class="tall-forms-cropper-save" x-on:click.prevent="saveCroppie()">@lang(config('tall-forms.save'))</button>
                     </div>
                 </div>
             </div>
@@ -47,10 +47,10 @@
 
         {{-- result--}}
         <div x-show="!showCroppie && hasImage" class="relative {{ $field->thumbnail }}">
-            <div class="{{ $btnsRoot }}">
-                <div class="{{ $btnsWrapper }}">
-                    <button type="button" class="{{ $swap }}" x-on:click.prevent="swap()">@lang(config('tall-forms.swap'))</button>
-                    <button type="button" class="{{ $edit }}" x-on:click.prevent="edit()">@lang(config('tall-forms.edit'))</button>
+            <div class="tall-forms-cropper-btns-root">
+                <div class="tall-forms-cropper-btns-wrapper">
+                    <button type="button" class="tall-forms-cropper-swap" x-on:click.prevent="swap()">@lang(config('tall-forms.swap'))</button>
+                    <button type="button" class="tall-forms-cropper-edit" x-on:click.prevent="edit()">@lang(config('tall-forms.edit'))</button>
                 </div>
             </div>
             <div><img src="{{ $imageUrl }}" alt x-ref="result" class="display-block"></div>

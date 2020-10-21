@@ -13,12 +13,6 @@ class FileUpload extends Component
     use Helpers;
 
     public Field $field;
-    public string $spinnerWrapper = 'inline-flex items-center rounded-l px-3 border border-r-0 border-gray-300 text-gray-500 sm:text-sm';
-    public string $ul = 'space-y-2 my-2';
-    public string $li = 'w-full flex items-center px-2 py-1 border rounded';
-    public string $thumbWrapper = 'border h-8 w-8 rounded-full';
-    public string $thumbImg = 'h-8 w-full object-cover rounded-full';
-    public string $iconWrapper = 'border h-8 w-8 rounded-full flex items-center justify-around';
     public string $uploadFileError;
     public bool $showFileUploadError;
     public ?string $showFileUploadErrorFor;
@@ -38,24 +32,19 @@ class FileUpload extends Component
 
     public function class(): string
     {
-        return "flex-1 form-input block w-full sm:text-sm rounded-none rounded-r";
+        return "form-input tall-forms-file-upload";
     }
 
     public function inputWrapper(): string
     {
-        $class = "flex rounded w-full relative ";
+        $class = "tall-forms-file-upload-input-wrapper ";
         $class .= $this->field->class;
         return Helpers::unique_words($class);
     }
 
     public function inputWrapperError(): string
     {
-        return Helpers::unique_words($this->inputWrapper() . " tall-forms-field-error");
-    }
-
-    public function deleteButton()
-    {
-        return "tall-forms-bg-negative rounded shadow p-2 text-white flex items-center";
+        return $this->inputWrapper() . " tall-forms-field-error";
     }
 
     public function render(): View

@@ -191,7 +191,7 @@
     .tall-forms-fields-root-py-not-inarray {
         /* only vertical space here, see FieldRoot component */
         @apply py-6 sm:py-5;
-        }
+    }
     .tall-forms-fields-before {
         @apply my-4 w-full border border-gray-200;
     }
@@ -215,6 +215,7 @@
     }
 
     /* Shared between multiple field types, but not all */
+
     /* css version */
     .tall-forms-field-error {
         @apply border-red-500 !important;
@@ -222,6 +223,7 @@
         @apply placeholder-red-500 !important;
         @apply focus:border-red-500 !important;
     }
+
     /* sass version */
     /*.tall-forms-field-error {
         @apply border-red-500 #{!important};
@@ -293,6 +295,133 @@
     /* Tags */
     .tall-forms-tags-color {
         @apply bg-blue-100 text-blue-800;
+    }
+
+    /* Search */
+    .tall-forms-search-dropdown {
+        /* $field->listWidth will be appended */
+        @apply z-50 absolute mt-1 rounded-md bg-white shadow-lg;
+    }
+    .tall-forms-search-ul {
+        @apply rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5;
+        max-height: 15rem;
+    }
+    .tall-forms-search-li {
+        @apply text-gray-900 cursor-default select-none relative py-2 pl-3;
+        padding-right: 2.25rem;
+    }
+    .tall-forms-search-selected {
+        @apply text-white bg-indigo-600;
+    }
+    .tall-forms-search-unselected {
+        @apply text-gray-900;
+    }
+    .tall-forms-search-icon {
+        @apply absolute inset-y-0 right-0 flex items-center pr-4;
+    }
+    .tall-forms-search-icon-selected {
+        @apply text-white;
+    }
+    .tall-forms-search-icon-unselected {
+        @apply text-indigo-600;
+    }
+
+    /* Checkbox */
+    .tall-forms-checkbox {
+        @apply mt-1;
+    }
+    .tall-forms-checkbox-label {
+        @apply text-sm text-gray-900;
+    }
+    .tall-forms-checkbox-label-spacing {
+        @apply ml-2 block;
+    }
+
+    /* Radio */
+    .tall-forms-radio {
+        @apply mt-1 h-4 w-4;
+    }
+    .tall-forms-radio-label {
+        @apply text-sm text-gray-900;
+    }
+    .tall-forms-radio-label-spacing {
+        @apply ml-2 block;
+    }
+
+    /* File upload */
+    .tall-forms-file-upload {
+        @apply flex-1 block w-full sm:text-sm rounded-none rounded-r;
+    }
+    .tall-forms-file-upload-input-wrapper {
+        @apply flex rounded w-full relative;
+    }
+    .tall-forms-file-upload-spinner-wrapper {
+        @apply inline-flex items-center rounded-l px-3 border border-r-0 border-gray-300 text-gray-500 sm:text-sm;
+    }
+    .tall-forms-file-upload-ul {
+        @apply space-y-2 my-2;
+    }
+    .tall-forms-file-upload-li {
+        @apply w-full flex items-center px-2 py-1 border rounded;
+    }
+    .tall-forms-file-upload-thumb-wrapper {
+        @apply border h-8 w-8 rounded-full;
+    }
+    .tall-forms-file-upload-thumb-img {
+        @apply h-8 w-full object-cover rounded-full;
+    }
+    .tall-forms-file-upload-icon-wrapper {
+        @apply border h-8 w-8 rounded-full flex items-center justify-around;
+    }
+    .tall-forms-file-upload-delete-btn {
+        @apply tall-forms-bg-negative rounded shadow p-2 text-white flex items-center;
+    }
+
+    /* ImageCropper */
+    .tall-forms-cropper-root {
+        @apply bg-white border-2 border-dashed border-gray-300 mx-auto p-4 relative rounded w-full;
+    }
+    .tall-forms-cropper-drop-zone {
+        @apply cursor-pointer font-bold text-center text-gray-600 text-xs tracking-wide uppercase;
+    }
+    .tall-forms-cropper-file-info {
+        @apply font-hairline text-gray-600 text-xs;
+    }
+    .tall-forms-cropper-icon {
+        @apply mx-auto h-12 w-12 text-gray-500;
+    }
+    .tall-forms-cropper-modal-bg {
+        @apply fixed inset-0 h-screen w-screen p-2 sm:p-10 md:p-20 bg-gray-800 bg-opacity-75 z-50;
+    }
+    .tall-forms-cropper-modal {
+        @apply bg-white rounded w-full h-full flex justify-center items-center;
+    }
+    .tall-forms-cropper-btns-root {
+        @apply z-10 absolute inset-0;
+    }
+    .tall-forms-cropper-btns-wrapper {
+        @apply flex gap-2 h-full w-full items-center justify-center;
+    }
+    .tall-forms-cropper-edit-btn-wrapper {
+        @apply z-10 absolute inset-0;
+    }
+    .tall-forms-cropper-thumb {
+        @apply w-full h-full;
+    }
+    .tall-forms-cropper-upload {
+        @apply bg-gray-500 flex font-medium items-center mt-2 mx-auto outline-none px-2 rounded-sm text-center text-white text-xs;
+    }
+    .tall-forms-cropper-delete {
+        @apply bg-red-500 text-white p-2 rounded;
+    }
+    .tall-forms-cropper-save {
+        @apply bg-teal-500 text-white p-2 rounded;
+    }
+    .tall-forms-cropper-swap {
+        @apply bg-red-500 bg-opacity-75 hover:bg-opacity-100 text-white p-2 rounded;
+    }
+    .tall-forms-cropper-edit {
+        @apply bg-teal-500 bg-opacity-75 hover:bg-opacity-100 text-white p-2 rounded;
     }
 
 

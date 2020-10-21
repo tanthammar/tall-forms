@@ -42,18 +42,9 @@ class Radio extends Component
 
     public function class(): string
     {
-        return "form-radio mt-1 h-4 w-4 ";
+        return "form-radio tall-forms-radio ";
     }
 
-    public function labelClass(): string
-    {
-        return 'text-sm text-gray-900';
-    }
-
-    public function labelSpacingClass(): string
-    {
-        return 'ml-2 block';
-    }
 
     public function render(): View
     {

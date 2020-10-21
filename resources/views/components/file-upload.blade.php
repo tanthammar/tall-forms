@@ -1,4 +1,4 @@
-<div class="w-full">
+<div class="w-full my-1">
     @if(blank($fieldValue) || $errors->has($field->multiple ? $field->name.'.*' : $field->name))
         {{--only show the file input if the field is empty or there are validation errors, to force the user to upload new files or delete existing. --}}
         <div x-data="{ isUploading: false }"
@@ -6,7 +6,7 @@
              x-on:livewire-upload-finish="isUploading = false"
              x-on:livewire-upload-error="isUploading = false"
              class="{{ $showFileUploadError || $errors->has($field->multiple ? $field->name.'.*': $field->name) ? $inputWrapperError() : $inputWrapper() }}">
-            <div class="{{ $spinnerWrapper }}">
+            <div class="tall-forms-file-upload-spinner-wrapper">
                 {{-- <div x-cloak x-show="isUploading">--}}
                 <div wire:loading wire:target="{{ $field->name }}">
                     <x-tall-spinner/>
@@ -27,7 +27,7 @@
         </div>
     @endif
     @if(filled($fieldValue))
-        <ul class="{{ $ul }}">
+        <ul class="tall-forms-file-upload-ul">
             @if($field->multiple)
                 @foreach($fieldValue as $file)
                     @if(filled($file)) @include('tall-forms::includes.file-loop') @endif

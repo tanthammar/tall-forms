@@ -41,17 +41,7 @@ class Checkboxes extends Component
 
     public function class(): string
     {
-        return "form-checkbox mt-1";
-    }
-
-    public function labelClass(): string
-    {
-        return 'text-sm text-gray-900';
-    }
-
-    public function labelSpacingClass(): string
-    {
-        return 'ml-2 block';
+        return "form-checkbox tall-forms-checkbox";
     }
 
     public function render(): View

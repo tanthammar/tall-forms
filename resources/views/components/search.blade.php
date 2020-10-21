@@ -23,14 +23,14 @@
         x-transition:leave="transition ease-in duration-100"
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
-        class="z-50 absolute mt-1 rounded-md bg-white shadow-lg {{ $listWidth }}">
+        class="tall-forms-search-dropdown {{ $listWidth }}">
         <ul
             x-on:keydown.escape="optionsVisible = false"
             x-on:keydown.arrow-up.prevent="select > 0 ? select -= 1 : select = 0"
             x-on:keydown.arrow-down.prevent="select < {{ optional($options)->length }} ? select += 1 : select = {{ optional($options)->length }}"
             tabindex="-1"
             role="listbox"
-            class="max-h-60 rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5" x-max="1">
+            class="tall-forms-search-ul" x-max="1">
             @forelse($options as $key => $value)
             <li
                 role="option"
@@ -38,8 +38,8 @@
                 x-on:click.stop.prevent="field = '{{ $key }}'; selected = {{ $loop->index }}; optionsVisible = false; searchInput = '{{ $value }}';"
                 x-on:mouseenter="selected = {{ $loop->index }}"
                 x-on:mouseleave="selected = null"
-                :class="{ 'text-white bg-indigo-600': selected === {{ $loop->index }}, 'text-gray-900': !(selected === {{ $loop->index }}) }"
-                class="text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9">
+                :class="{ 'tall-forms-search-selected': selected === {{ $loop->index }}, 'tall-forms-search-unselected': !(selected === {{ $loop->index }}) }"
+                class="tall-forms-search-li">
                 <span
                     x-state:on="Selected"
                     x-state:off="Not Selected"
@@ -49,8 +49,8 @@
                 </span>
                 <span
                     x-show="field === '{{ $key }}'"
-                    :class="{ 'text-white': selected === {{ $loop->index }}, 'text-indigo-600': !(selected === {{ $loop->index }}) }"
-                    class="absolute inset-y-0 right-0 flex items-center pr-4">
+                    :class="{ 'tall-forms-search-icon-selected': selected === {{ $loop->index }}, 'tall-forms-search-icon-unselected': !(selected === {{ $loop->index }}) }"
+                    class="tall-forms-search-icon">
                 <svg class="h-5 w-5" x-description="Heroicon name: check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                 </svg>
