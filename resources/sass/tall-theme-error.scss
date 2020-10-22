@@ -1,0 +1,9 @@
+/* sass version */
+@layer components {
+    .tall-forms-field-error {
+        @apply border-red-500 #{!important};
+        @apply text-red-900 #{!important};
+        @apply placeholder-red-500 #{!important};
+        @apply focus:border-red-500 #{!important};
+    }
+}

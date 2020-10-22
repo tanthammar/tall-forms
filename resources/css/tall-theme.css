@@ -172,7 +172,6 @@
         @apply w-full;
     }
 
-
     /* All Fields */
     .tall-forms-fields-wrapper {
         @apply max-w-screen-lg mx-auto divide-gray-200 divide-y sm:grid sm:grid-cols-12;
@@ -213,25 +212,6 @@
     .tall-forms-fields-after-text {
         @apply block text-sm leading-5 text-gray-700 p-2;
     }
-
-    /* Shared between multiple field types, but not all */
-
-    /* css version */
-    .tall-forms-field-error {
-        @apply border-red-500 !important;
-        @apply text-red-900 !important;
-        @apply placeholder-red-500 !important;
-        @apply focus:border-red-500 !important;
-    }
-
-    /* sass version */
-    /*.tall-forms-field-error {
-        @apply border-red-500 #{!important};
-        @apply text-red-900 #{!important};
-        @apply placeholder-red-500 #{!important};
-        @apply focus:border-red-500 #{!important};
-    }*/
-
 
     /* Input */
     .tall-forms-input-wrapper {
