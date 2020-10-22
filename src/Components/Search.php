@@ -27,7 +27,7 @@ class Search extends Component
 
     public function class(): string
     {
-        $class = "form-input w-full ";
+        $class = "form-input w-full shadow-inner ";
         $class .= $this->field->class;
         return Helpers::unique_words($class);
     }

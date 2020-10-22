@@ -25,7 +25,7 @@ class Trix extends Component
 
     public function class(): string
     {
-        $class = "form-textarea w-full";
+        $class = "form-textarea w-full shadow-inner ";
         $class .= $this->field->class;
         return Helpers::unique_words($class);
     }

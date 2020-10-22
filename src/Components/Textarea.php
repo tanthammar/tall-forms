@@ -37,7 +37,7 @@ class Textarea extends Component
 
     public function class(): string
     {
-        $class = "form-textarea block w-full rounded ";
+        $class = "form-textarea block w-full rounded shadow-inner ";
         $class .= $this->field->class;
         return Helpers::unique_words($class);
     }

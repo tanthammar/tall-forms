@@ -48,7 +48,7 @@ class Input extends Component
 
     public function class(): string
     {
-        $class = "form-input block w-full";
+        $class = "form-input block w-full shadow-inner ";
         $class .= ($this->field->prefix || $this->field->icon) ? " rounded-none rounded-r" : " rounded";
         return $class;
     }
