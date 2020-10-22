@@ -329,14 +329,15 @@
     }
 
     /* File upload */
-    .tall-forms-file-upload {
+    input.tall-forms-file-upload {
         @apply flex-1 block w-full sm:text-sm rounded-none rounded-r;
     }
     .tall-forms-file-upload-input-wrapper {
         @apply flex rounded w-full relative;
     }
     .tall-forms-file-upload-spinner-wrapper {
-        @apply inline-flex items-center rounded-l px-3 border border-r-0 border-gray-300 text-gray-500 sm:text-sm;
+        @apply inline-flex items-center rounded-l px-3 border border-r-0 text-gray-600 sm:text-sm;
+        @apply border-gray-300 bg-gray-100;
     }
     .tall-forms-file-upload-ul {
         @apply space-y-2 my-2;
@@ -349,6 +350,9 @@
     }
     .tall-forms-file-upload-thumb-img {
         @apply h-8 w-full object-cover rounded-full;
+    }
+    svg.tall-forms-file-upload-icon {
+        @apply h-4 w-4 text-gray-600;
     }
     .tall-forms-file-upload-icon-wrapper {
         @apply border h-8 w-8 rounded-full flex items-center justify-around;
@@ -398,10 +402,10 @@
         @apply bg-teal-500 text-white p-2 rounded;
     }
     .tall-forms-cropper-swap {
-        @apply bg-red-500 bg-opacity-75 hover:bg-opacity-100 text-white p-2 rounded;
+        @apply bg-red-500 bg-opacity-75 hover:bg-opacity-100 text-white p-1 text-xs rounded;
     }
     .tall-forms-cropper-edit {
-        @apply bg-teal-500 bg-opacity-75 hover:bg-opacity-100 text-white p-2 rounded;
+        @apply bg-teal-500 bg-opacity-75 hover:bg-opacity-100 text-white p-1 text-xs rounded;
     }
 
 

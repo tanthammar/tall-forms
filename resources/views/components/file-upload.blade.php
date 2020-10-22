@@ -12,7 +12,7 @@
                     <x-tall-spinner/>
                 </div>
                 <div x-show="!isUploading">
-                    @svg(config('tall-forms.file-upload'), "h-4 w-4")
+                    @svg(config('tall-forms.file-upload'), "tall-forms-file-upload-icon")
                 </div>
             </div>
             {{--intentionally removed input id if multiple forms, with the same field name --}}
