@@ -136,6 +136,13 @@
         @apply italic leading-tight text-red-500 text-sm;
     }
 
+    .tall-forms-field-error {
+        @apply border-red-500;
+        @apply text-red-900;
+        @apply placeholder-red-500;
+        @apply focus:border-red-500;
+    }
+
 
     /* Buttons */
     .tall-forms-buttons-root {

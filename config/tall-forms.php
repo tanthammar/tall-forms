@@ -77,11 +77,11 @@ return [
     //icons, used as @svg('path/file-name', 'classes')
     'arrow-up-icon' => 'tall-forms/cheveron-outline-up',
     'arrow-down-icon' => 'tall-forms/cheveron-outline-down',
-    'trash-icon' => 'tall-forms/close-outline',
-    'edit-icon' => 'tall-forms/edit-crop',
-    'plus-icon' => 'tall-forms/add-outline',
-    'file-icon' => 'tall-forms/', //used as @svg('tall-forms/{$mime_type}', 'classes')
-    'file-upload' => 'tall-forms/upload', //prefix icon for file upload field
+    'trash-icon' => 'tall-forms/close-outline',//Multiple fields
+    'edit-icon' => 'tall-forms/edit-crop', //ImageCropper
+    'plus-icon' => 'tall-forms/add-outline',//Repeater
+    'file-icon' => 'tall-forms/', //FileUpload, used as @svg('tall-forms/{$mime_type}', 'classes')
+    'file-upload' => 'tall-forms/upload', //FileUpload
 
     //Column span classes for the fields ->colspan() method
     //requires tailwind css v1.7.0

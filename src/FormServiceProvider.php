@@ -21,7 +21,6 @@ class FormServiceProvider extends ServiceProvider
         $this->publishes([__DIR__ . '/../resources/svg/tall-forms' => resource_path('svg/tall-forms')], 'tall-form-icons');
         $this->publishes([__DIR__ . '/../resources/css' => resource_path('css')], 'tall-form-theme-css');
         $this->publishes([__DIR__ . '/../resources/css/tall-theme.css' => resource_path('sass/tall-theme.scss')], 'tall-form-theme-sass');
-        $this->publishes([__DIR__ . '/../resources/sass/tall-theme-error.scss' => resource_path('sass/tall-theme-error.scss')], 'tall-form-theme-sass');
 
         \Livewire::component('tall-spatie-tags', \Tanthammar\TallForms\LivewireComponents\SpatieTags::class);
 
