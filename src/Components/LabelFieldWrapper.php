@@ -32,8 +32,8 @@ class LabelFieldWrapper extends Component
     {
         $vertical = $this->field->align_label_top || filled($this->field->afterLabel) || filled($this->field->above) ? '' : ' sm:items-center';
         return $this->field->inline
-            ? 'tall-forms-label-field-wrapper-inline' . $vertical
-            : 'tall-forms-label-field-wrapper-stacked';
+            ? 'tf-label-field-wrapper-inline' . $vertical
+            : 'tf-label-field-wrapper-stacked';
     }
 
     public function fieldWidth(): string
@@ -45,7 +45,7 @@ class LabelFieldWrapper extends Component
     {
         return $this->field->inline
             ? $this->labelW . ' ' . ($field->inlineLabelAlignment ?? $this->inlineLabelAlignment)
-            : 'tall-forms-stacked-label-alignment';
+            : 'tf-stacked-label-alignment';
     }
 
     public function render(): View

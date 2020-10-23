@@ -18,7 +18,7 @@ class ImageCropper extends Component
         $this->field = $field;
         $this->temp_key = $tempKey;
         $this->imageUrl = $imageUrl ?? "";
-        $this->thumbnail = $field->thumbnail ?? 'tall-forms-cropper-thumb'; //default = h-full w-full
+        $this->thumbnail = $field->thumbnail ?? 'tf-cropper-thumb'; //default = h-full w-full
     }
 
     public function render(): View

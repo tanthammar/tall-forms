@@ -33,8 +33,8 @@ trait TallForm
     {
         //$this->rules = $this->get_rules();
         $this->listeners = array_merge($this->listeners, ['tallFillField']);
-        $this->labelW = 'tall-forms-label-width';
-        $this->fieldW = 'tall-forms-field-width';
+        $this->labelW = 'tf-label-width';
+        $this->fieldW = 'tf-field-width';
         $this->labelsAsAttributes = config('tall-forms.field-labels-as-validation-attributes');
         parent::__construct($id);
     }
@@ -47,7 +47,7 @@ trait TallForm
         $this->afterFormProperties();
         $this->previous = urlencode(\URL::previous());  //used for saveAndGoBack
         $this->wrapViewPath = config('tall-forms.wrap-view-path');
-        $this->inlineLabelAlignment = $this->inlineLabelAlignment ?? 'tall-forms-inline-label-alignment';
+        $this->inlineLabelAlignment = $this->inlineLabelAlignment ?? 'tf-inline-label-alignment';
         $this->validationAttributes = $this->validationAttributes();
     }
 

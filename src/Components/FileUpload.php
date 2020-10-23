@@ -32,19 +32,19 @@ class FileUpload extends Component
 
     public function class(): string
     {
-        return "form-input tall-forms-file-upload";
+        return "form-input tf-file-upload";
     }
 
     public function inputWrapper(): string
     {
-        $class = "tall-forms-file-upload-input-wrapper ";
+        $class = "tf-file-upload-input-wrapper ";
         $class .= $this->field->class;
         return Helpers::unique_words($class);
     }
 
     public function inputWrapperError(): string
     {
-        return $this->inputWrapper() . " tall-forms-field-error";
+        return $this->inputWrapper() . " tf-field-error";
     }
 
     public function render(): View

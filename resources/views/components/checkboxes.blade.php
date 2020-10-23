@@ -5,8 +5,8 @@
         name="{{ $temp_key }}"
         @foreach($options() as $key => $value) {{$key}}="{{$value}}" @endforeach
     />
-    <div class="tall-forms-checkbox-label-spacing">
-        <span class="tall-forms-checkbox-label">
+    <div class="tf-checkbox-label-spacing">
+        <span class="tf-checkbox-label">
             {{ $label }}
         </span>
     </div>

@@ -41,7 +41,7 @@ class Checkboxes extends Component
 
     public function class(): string
     {
-        return "form-checkbox tall-forms-checkbox";
+        return "form-checkbox tf-checkbox";
     }
 
     public function render(): View

@@ -14,404 +14,429 @@
     }
 
     /* background colors */
-    .tall-forms-bg-positive {
-        @apply bg-green-500;
+    .tf-bg-success {
+        background-color: #5cb85c;
+        border-color: #4cae4c;
     }
-    .tall-forms-bg-negative {
-        @apply bg-red-500;
+    .tf-bg-danger {
+        background-color: #d9534f;
+        border-color: #d43f3a;
     }
-    .tall-forms-bg-info {
-        @apply bg-blue-500;
+    .tf-bg-info {
+        background-color: #5bc0de;
+        border-color: #46b8da;
     }
-    .tall-forms-bg-warning {
-        @apply bg-orange-500;
+    .tf-bg-warning {
+        background-color: #f0ad4e;
+        border-color: #eea236;
     }
-    .tall-forms-bg-primary {
-        @apply bg-teal-500;
+    .tf-bg-primary {
+        background-color: #337ab7;
+        border-color: #2e6da4;
     }
-    .tall-forms-bg-default {
-        @apply bg-teal-500;
+
+    .tf-bg-secondary {
+        background-color: #5e9bd0;
+        border-color: #3886ca;
     }
 
     /* text colors */
-    .tall-forms-text-positive {
-        @apply text-aurora-green;
+    .tf-text-success {
+        @apply text-green-600;
     }
-    .tall-forms-text-negative {
-        @apply text-aurora-red;
+    .tf-text-danger {
+        @apply text-red-600;
     }
-    .tall-forms-text-info {
-        @apply text-frost-dimmed;
+    .tf-text-info {
+        @apply text-indigo-600;
     }
-    .tall-forms-text-warning {
-        @apply text-orange-800;
-    }
-    .tall-forms-text-primary {
-        @apply text-teal-800;
-    }
-    .tall-forms-text-default {
-        @apply text-teal-800;
+    .tf-text-warning {
+        @apply text-orange-500;
     }
 
     /* buttons */
-    .tall-forms-button-info {
-        @apply text-white bg-frost-dimmed hover:bg-frost-blue focus:border-blue-700;
+    .tf-btn {
+        @apply inline-flex items-center border font-semibold uppercase tracking-wider rounded focus:outline-none;
     }
-    .tall-forms-button-positive {
-        @apply text-white bg-aurora-green hover:bg-green-500 focus:border-green-600;
+    .tf-btn-info {
+        @apply text-gray-100 tf-bg-info hover:bg-blue-600 hover:text-white focus:border-blue-700;
     }
-    .tall-forms-button-negative {
-        @apply text-red-100 bg-aurora-red hover:bg-red-500 focus:border-red-600;
+    .tf-btn-success {
+        @apply text-gray-100 tf-bg-success hover:bg-green-600 hover:text-white focus:border-green-700;
     }
-    .tall-forms-button-warning {
-        @apply text-orange-100 bg-aurora-orange hover:bg-orange-600 focus:border-orange-700;
+    .tf-btn-danger {
+        @apply text-gray-100 tf-bg-danger hover:bg-red-700 hover:text-white focus:border-red-700 focus:shadow;
     }
-    .tall-forms-button-primary {
-        @apply text-blue-100 bg-night-lighter hover:bg-night-dark focus:border-night-light;
+    .tf-btn-warning {
+        @apply text-gray-100 tf-bg-warning hover:bg-orange-500 hover:text-white focus:border-orange-700 focus:shadow;
     }
-    .tall-forms-button-white {
+    .tf-btn-primary {
+        @apply text-gray-100 tf-bg-primary hover:bg-blue-800 hover:text-white focus:border-blue-800 focus:shadow;
+    }
+    .tf-btn-secondary {
+        @apply text-gray-100 tf-bg-secondary hover:bg-blue-800 hover:text-white focus:border-blue-800 focus:shadow;
+    }
+    .tf-btn-white {
         @apply border-gray-300 bg-white text-gray-700 hover:text-gray-500 focus:border-blue-300 focus:shadow;
     }
-    .tall-forms-button-indigo {
+    .tf-btn-indigo {
         @apply text-indigo-100 bg-indigo-500 hover:bg-indigo-600 focus:border-indigo-700 focus:shadow;
     }
-    .tall-forms-button-blue {
+    .tf-btn-blue {
         @apply text-blue-100 bg-blue-500 hover:bg-blue-600 focus:border-blue-700 focus:shadow;
     }
-    .tall-forms-button-green {
+    .tf-btn-green {
         @apply text-green-100 bg-green-500 hover:bg-green-600 focus:border-green-700 focus:shadow;
     }
-    .tall-forms-button-yellow {
+    .tf-btn-yellow {
         @apply text-yellow-100 bg-yellow-500 hover:bg-yellow-600 focus:border-yellow-700 focus:shadow;
     }
-    .tall-forms-button-red {
+    .tf-btn-red {
         @apply text-red-100 bg-red-500 hover:bg-red-600 focus:border-red-700 focus:shadow;
     }
-    .tall-forms-button-gray {
+    .tf-btn-gray {
         @apply text-gray-100 bg-gray-500 hover:bg-gray-600 focus:border-gray-700 focus:shadow;
     }
-    .tall-forms-button-orange {
+    .tf-btn-orange {
         @apply text-orange-100 bg-orange-500 hover:bg-orange-600 focus:border-orange-700 focus:shadow;
     }
-    .tall-forms-button-teal {
+    .tf-btn-teal {
         @apply text-teal-100 bg-teal-500 hover:bg-teal-600 focus:border-teal-700 focus:shadow;
     }
 
+    /* Notification */
+    .tf-notify-bg-default {
+        @apply bg-teal-400;
+    }
 
     /* form */
-    .tall-forms-form {
+    .tf-form {
         @apply w-full;
     }
 
-    .tall-forms-form-head {
+    .tf-form-head {
 
     }
 
-    .tall-forms-form-title {
+    .tf-form-title {
         @apply text-lg leading-6 font-medium text-gray-900;
     }
 
-    .tall-forms-form-sub-title {
+    .tf-form-sub-title {
         @apply mt-1 max-w-2xl text-sm leading-5 text-gray-500;
     }
 
-    .tall-forms-form-footer {
+    .tf-form-footer {
         @apply border rounded sm:p-4;
     }
 
-    .tall-forms-form-footer-title {
+    .tf-form-footer-title {
         @apply text-lg leading-6 font-medium text-gray-900;
     }
 
-    .tall-forms-form-footer-sub-title {
+    .tf-form-footer-sub-title {
         @apply mt-1 max-w-2xl text-sm leading-5 text-gray-500;
     }
 
     /* help and error <p> */
-    .tall-forms-help {
+    .tf-help {
         @apply leading-tight text-gray-500 text-sm;
     }
 
-    .tall-forms-error {
+    .tf-error {
         @apply italic leading-tight text-red-500 text-sm;
     }
 
-    .tall-forms-field-error {
-        @apply border-red-500;
-        @apply text-red-900;
-        @apply placeholder-red-500;
-        @apply focus:border-red-500;
+    .tf-field-error {
+        @apply border-red-500 text-red-900 placeholder-red-500 focus:border-red-500;
     }
 
 
     /* Buttons */
-    .tall-forms-buttons-root {
+    .tf-buttons-root {
         @apply w-full border-t border-gray-200 pt-5;
     }
 
-    .tall-forms-buttons-wrapper {
+    .tf-buttons-wrapper {
         @apply flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3 sm:justify-end sm:items-center;
     }
 
     /* Labels */
-    .tall-forms-label {
+    .tf-label {
         @apply my-1 block uppercase tracking-wide text-gray-600 text-xs font-bold;
     }
-    .tall-forms-label-suffix {
+    .tf-label-suffix {
         @apply italic text-black text-opacity-25 text-xs;
     }
-    .tall-forms-after-label {
+    .tf-after-label {
         @apply -mt-1 block text-sm leading-4 text-gray-500;
     }
-    .tall-forms-inline-label-alignment {
+    .tf-inline-label-alignment {
         @apply sm:pr-4 text-left;
     }
-    .tall-forms-stacked-label-alignment {
+    .tf-stacked-label-alignment {
         @apply text-left;
     }
-    .tall-forms-label-width { /* for inline form layout */
+    .tf-label-width { /* for inline form layout */
         @apply sm:w-1/3 md:w-1/5;
     }
-    .tall-forms-label-field-wrapper-inline {
+    .tf-label-field-wrapper-inline {
         @apply sm:flex;
     }
-    .tall-forms-label-field-wrapper-stacked {
+    .tf-label-field-wrapper-stacked {
         @apply w-full;
     }
 
     /* All Fields */
-    .tall-forms-fields-wrapper {
+    .tf-fields-wrapper {
         @apply max-w-screen-lg mx-auto divide-gray-200 divide-y sm:grid sm:grid-cols-12;
     }
-    .tall-forms-field-width { /* for inline form layout */
+    .tf-field-width { /* for inline form layout */
         @apply sm:w-2/3 md:w-4/5;
     }
-    .tall-forms-fields-root {
+    .tf-fields-root {
         /* do not add py-, my- or col-span-x here, see FieldRoot component. */
         @apply w-full;
     }
-    .tall-forms-fields-root-py-inarray {
+    .tf-fields-root-py-inarray {
         /* only vertical space here, see FieldRoot component */
         @apply py-0;
     }
-    .tall-forms-fields-root-py-not-inarray {
+    .tf-fields-root-py-not-inarray {
         /* only vertical space here, see FieldRoot component */
         @apply py-6 sm:py-5;
     }
-    .tall-forms-fields-before {
+    .tf-fields-before {
         @apply my-4 w-full border border-gray-200;
     }
-    .tall-forms-fields-before-text {
+    .tf-fields-before-text {
         @apply block text-sm leading-5 text-gray-700 p-2;
     }
-    .tall-forms-fields-above {
+    .tf-fields-above {
         @apply leading-4 text-gray-500 text-sm sm:pt-1;
     }
-    .tall-forms-fields-below {
+    .tf-fields-below {
         @apply leading-tight text-gray-500 text-sm;
     }
-    .tall-forms-fields-below-wrapper {
+    .tf-fields-below-wrapper {
         /* null */
     }
-    .tall-forms-fields-after {
+    .tf-fields-after {
         @apply my-4 w-full border border-gray-200;
     }
-    .tall-forms-fields-after-text {
+    .tf-fields-after-text {
         @apply block text-sm leading-5 text-gray-700 p-2;
     }
 
     /* Input */
-    .tall-forms-input-wrapper {
+    .tf-input-wrapper {
         @apply my-1 flex rounded w-full relative;
     }
 
     /* Range */
-    .tall-forms-range-value {
+    .tf-range-value {
         @apply rounded border px-2 font-bold;
     }
-    .tall-forms-range-labels {
+    .tf-range-labels {
         @apply text-gray-600;
     }
-    .tall-forms-range-wrapper {
+    .tf-range-wrapper {
         @apply flex space-x-2 py-2;
     }
 
     /* KeyVal */
-    .tall-forms-keyval-root {
+    .tf-keyval-root {
         @apply w-full;
     }
-    .tall-forms-keyval-wrapper {
+    .tf-keyval-wrapper {
         @apply flex flex-col;
     }
-    .tall-forms-keyval-wrapper-grid {
+    .tf-keyval-wrapper-grid {
         @apply sm:flex sm:grid sm:grid-cols-12 sm:gap-x-2 sm:gap-y-4;
     }
 
     /* Repeater */
-    .tall-forms-repeater-root {
+    .tf-repeater-root {
         @apply w-full my-2;
     }
-    .tall-forms-repeater-wrapper {
+    .tf-repeater-wrapper {
         @apply flex flex-col divide-y mb-2 rounded border;
     }
-    .tall-forms-repeater-wrapper-outer {
+    .tf-repeater-wrapper-outer {
         @apply flex px-2 space-x-3 items-center py-2;
     }
-    .tall-forms-repeater-wrapper-grid {
+    .tf-repeater-wrapper-grid {
         @apply flex-1 sm:grid sm:grid-cols-12 gap-x-2;
     }
-    .tall-forms-repeater-buttons-wrapper {
+    .tf-repeater-buttons-wrapper {
         @apply flex-shrink space-x-1 items-center justify-end;
     }
-    .tall-forms-repeater-buttons-size {
+    .tf-repeater-buttons-size {
         @apply h-8 w-8;
     }
-    .tall-forms-repeater-sorter-color {
+    .tf-repeater-sorter-color {
         @apply text-gray-400;
     }
-    .tall-forms-repeater-delete-color {
-        @apply text-red-700;
+    .tf-repeater-delete-color {
+        @apply tf-text-danger;
     }
-    .tall-forms-repeater-add-button {
-        @apply rounded shadow text-white tall-forms-bg-positive;
+    .tf-repeater-add-button {
+        @apply rounded shadow text-white tf-bg-primary;
     }
-    .tall-forms-repeater-add-button-size {
+    .tf-repeater-add-button-size {
         @apply h-5 w-5 m-2;
     }
 
     /* Tags */
-    .tall-forms-tags-color {
-        @apply bg-blue-100 text-blue-800;
+    .tf-tags-color {
+        @apply tf-bg-primary text-white;
+    }
+    .tf-tags-x-color {
+        @apply text-gray-200;
     }
 
     /* Search */
-    .tall-forms-search-dropdown {
+    .tf-search-dropdown {
         /* $field->listWidth will be appended */
         @apply z-50 absolute mt-1 rounded-md bg-white shadow-lg;
     }
-    .tall-forms-search-ul {
+    .tf-search-dropdown-width {
+        @apply max-w-xs w-full;
+    }
+    .tf-search-ul {
         @apply rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5;
         max-height: 15rem;
     }
-    .tall-forms-search-li {
+    .tf-search-li {
         @apply text-gray-900 cursor-default select-none relative py-2 pl-3;
         padding-right: 2.25rem;
     }
-    .tall-forms-search-selected {
-        @apply text-white bg-indigo-600;
+    .tf-search-selected {
+        @apply text-white tf-bg-primary;
     }
-    .tall-forms-search-unselected {
+    .tf-search-unselected {
         @apply text-gray-900;
     }
-    .tall-forms-search-icon {
+    .tf-search-icon {
         @apply absolute inset-y-0 right-0 flex items-center pr-4;
     }
-    .tall-forms-search-icon-selected {
+    .tf-search-icon-selected {
         @apply text-white;
     }
-    .tall-forms-search-icon-unselected {
+    .tf-search-icon-unselected {
         @apply text-indigo-600;
     }
 
+
+    /* SearchList */
+    .tf-search-label-inline {
+        @apply absolute flex space-x-2 items-baseline;
+    }
+    .tf-search-label-stacked {
+        @apply absolute flex flex-col;
+    }
+
     /* Checkbox */
-    .tall-forms-checkbox {
+    /* If you want to change the color, see tailwind custom form documentation */
+    .tf-checkbox {
         @apply mt-1;
     }
-    .tall-forms-checkbox-label {
+    .tf-checkbox-label {
         @apply text-sm text-gray-900;
     }
-    .tall-forms-checkbox-label-spacing {
+    .tf-checkbox-label-spacing {
         @apply ml-2 block;
     }
 
     /* Radio */
-    .tall-forms-radio {
+    /* If you want to change the color, see tailwind custom form documentation */
+    .tf-radio {
         @apply mt-1 h-4 w-4;
     }
-    .tall-forms-radio-label {
+    .tf-radio-label {
         @apply text-sm text-gray-900;
     }
-    .tall-forms-radio-label-spacing {
+    .tf-radio-label-spacing {
         @apply ml-2 block;
     }
 
     /* File upload */
-    input.tall-forms-file-upload {
+    input.tf-file-upload {
         @apply flex-1 block w-full sm:text-sm rounded-none rounded-r;
     }
-    .tall-forms-file-upload-input-wrapper {
+    .tf-file-upload-input-wrapper {
         @apply flex rounded w-full relative;
     }
-    .tall-forms-file-upload-spinner-wrapper {
+    .tf-file-upload-spinner-wrapper {
         @apply inline-flex items-center rounded-l px-3 border border-r-0 text-gray-600 sm:text-sm;
         @apply border-gray-300 bg-gray-100;
     }
-    .tall-forms-file-upload-ul {
+    .tf-file-upload-ul {
         @apply space-y-2 my-2;
     }
-    .tall-forms-file-upload-li {
+    .tf-file-upload-li {
         @apply w-full flex items-center px-2 py-1 border rounded;
     }
-    .tall-forms-file-upload-thumb-wrapper {
+    .tf-file-upload-thumb-wrapper {
         @apply border h-8 w-8 rounded-full;
     }
-    .tall-forms-file-upload-thumb-img {
+    .tf-file-upload-thumb-img {
         @apply h-8 w-full object-cover rounded-full;
     }
-    svg.tall-forms-file-upload-icon {
+    svg.tf-file-upload-icon {
         @apply h-4 w-4 text-gray-600;
     }
-    .tall-forms-file-upload-icon-wrapper {
+    .tf-file-upload-icon-wrapper {
         @apply border h-8 w-8 rounded-full flex items-center justify-around;
     }
-    .tall-forms-file-upload-delete-btn {
-        @apply tall-forms-bg-negative rounded shadow p-2 text-white flex items-center;
+    .tf-file-upload-delete-btn {
+        @apply bg-red-500 rounded shadow p-2 text-white flex items-center;
     }
 
     /* ImageCropper */
-    .tall-forms-cropper-root {
+    .tf-cropper-root {
         @apply bg-white border-2 border-dashed border-gray-300 mx-auto p-4 relative rounded w-full;
     }
-    .tall-forms-cropper-drop-zone {
-        @apply cursor-pointer font-bold text-center text-gray-600 text-xs tracking-wide uppercase;
+    .tf-cropper-drop-zone {
+        @apply cursor-pointer font-bold text-center text-gray-500 text-xs tracking-wide uppercase;
     }
-    .tall-forms-cropper-file-info {
-        @apply font-hairline text-gray-600 text-xs;
+    .tf-cropper-file-info {
+        @apply font-hairline text-gray-500 text-xs;
     }
-    .tall-forms-cropper-icon {
-        @apply mx-auto h-12 w-12 text-gray-500;
+    .tf-cropper-icon {
+        @apply mx-auto h-12 w-12 text-gray-400;
     }
-    .tall-forms-cropper-modal-bg {
+    .tf-cropper-modal-bg {
         @apply fixed inset-0 h-screen w-screen p-2 sm:p-10 md:p-20 bg-gray-800 bg-opacity-75 z-50;
     }
-    .tall-forms-cropper-modal {
+    .tf-cropper-modal {
         @apply bg-white rounded w-full h-full flex justify-center items-center;
     }
-    .tall-forms-cropper-btns-root {
+    .tf-cropper-btns-root {
         @apply z-10 absolute inset-0;
     }
-    .tall-forms-cropper-btns-wrapper {
+    .tf-cropper-btns-wrapper {
         @apply flex gap-2 h-full w-full items-center justify-center;
     }
-    .tall-forms-cropper-edit-btn-wrapper {
+    .tf-cropper-edit-btn-wrapper {
         @apply z-10 absolute inset-0;
     }
-    .tall-forms-cropper-thumb {
+    .tf-cropper-thumb {
         @apply w-full h-full;
     }
-    .tall-forms-cropper-upload {
-        @apply bg-gray-500 flex font-medium items-center mt-2 mx-auto outline-none px-2 rounded-sm text-center text-white text-xs;
+    .tf-cropper-upload {
+        @apply bg-gray-400 flex font-medium items-center mt-2 mx-auto outline-none px-2 rounded-sm text-center text-white text-xs;
     }
-    .tall-forms-cropper-delete {
+    .tf-cropper-delete {
         @apply bg-red-500 text-white p-2 rounded;
     }
-    .tall-forms-cropper-save {
+    .tf-cropper-save {
         @apply bg-teal-500 text-white p-2 rounded;
     }
-    .tall-forms-cropper-swap {
+    .tf-cropper-swap {
         @apply bg-red-500 bg-opacity-75 hover:bg-opacity-100 text-white p-1 text-xs rounded;
     }
-    .tall-forms-cropper-edit {
+    .tf-cropper-edit {
         @apply bg-teal-500 bg-opacity-75 hover:bg-opacity-100 text-white p-1 text-xs rounded;
     }
 
@@ -426,10 +451,11 @@
     }
 
     trix-editor > blockquote, .trix > blockquote {
-        @apply ml-4 p-4 my-4 bg-snow-light border-l-4 text-lg;
+        @apply ml-4 p-4 my-4 bg-gray-200 border-l-4 text-lg;
     }
 
     trix-editor > ol > li, .trix > ol > li {
         @apply list-decimal list-outside ml-4;
     }
+
 }

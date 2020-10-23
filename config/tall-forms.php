@@ -20,10 +20,10 @@ return [
     'component-attributes' => [
         // You can add anything to these attributes. Applied as @foreach($attr as key => value)
         'form' => [
-            'class' => 'tall-forms-form',
+            'class' => 'tf-form',
         ],
         'fields-wrapper' => [
-            'class' => 'tall-forms-fields-wrapper'
+            'class' => 'tf-fields-wrapper'
         ],
     ],
 
@@ -31,28 +31,28 @@ return [
     'field-attributes' => [
         // You can add anything to these attributes. Applied as @foreach($attr as key => value)
         'root' => [
-            'class' => 'tall-forms-fields-root' //default = w-full, do not add py-, my- or col-span-x here, see FieldRoot component.
+            'class' => 'tf-fields-root' //default = w-full, do not add py-, my- or col-span-x here, see FieldRoot component.
         ],
         'before' => [
-            'class' => 'tall-forms-fields-before'
+            'class' => 'tf-fields-before'
         ],
         'before-text' => [
-            'class' => 'tall-forms-fields-before-text'
+            'class' => 'tf-fields-before-text'
         ],
         'above' => [
-            'class' => 'tall-forms-fields-above'
+            'class' => 'tf-fields-above'
         ],
         'below' => [
-            'class' => 'tall-forms-fields-below'
+            'class' => 'tf-fields-below'
         ],
         'below-wrapper' => [
             'class' => ''
         ],
         'after' => [
-            'class' => 'tall-forms-fields-after'
+            'class' => 'tf-fields-after'
         ],
         'after-text' => [
-            'class' => 'tall-forms-fields-after-text'
+            'class' => 'tf-fields-after-text'
         ],
         //default field wire:model attribute
         'wire' => 'wire:model.lazy',

@@ -19,7 +19,7 @@ trait HasAttributes
     {
         $this->attributes = config('tall-forms.field-attributes');
         data_set($this->attributes, 'input', []);
-        data_set($this->attributes, 'label', 'tall-forms-label');
+        data_set($this->attributes, 'label', 'tf-label');
     }
 
     public function rootAttr(array $attributes, bool $merge = true): self
@@ -73,7 +73,7 @@ trait HasAttributes
     public function labelClass(string $classes, bool $merge = true): self
     {
         $merge
-            ? data_set($this->attributes, 'label', 'tall-forms-label '. $classes)
+            ? data_set($this->attributes, 'label', 'tf-label '. $classes)
             : data_set($this->attributes, 'label', $classes);
         return $this;
     }

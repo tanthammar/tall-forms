@@ -1,7 +1,7 @@
 @php $keyval = $field @endphp
-<div class="tall-forms-keyval-root">
-    <div class="{{ $keyval->array_wrapper_class ?? 'tall-forms-keyval-wrapper' }}">
-        <div class="{{ $keyval->array_wrapper_grid_class ?? 'tall-forms-keyval-wrapper-grid' }}">
+<div class="tf-keyval-root">
+    <div class="{{ $keyval->array_wrapper_class ?? 'tf-keyval-wrapper' }}">
+        <div class="{{ $keyval->array_wrapper_grid_class ?? 'tf-keyval-wrapper-grid' }}">
             @foreach($keyval->fields as $array_field)
                 @php
                     $temp_key = "{$keyval->key}.{$array_field->name}";

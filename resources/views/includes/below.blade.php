@@ -7,14 +7,14 @@
         @endif
         @if(!in_array($field->type, ['spatie-tags']))
             @if($field->help)
-                <p class="tall-forms-help">
+                <p class="tf-help">
                     {{ $field->help }}
                 </p>
             @endif
         @endif
         @if(!in_array($field->type, ['file', 'spatie-tags']))
             @error($temp_key)
-            <p class="tall-forms-error">
+            <p class="tf-error">
                 {{ $field->errorMsg ?? \Tanthammar\TallForms\ErrorMessage::parse($message) }}
             </p>
             @enderror

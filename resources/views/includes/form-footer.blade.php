@@ -1,9 +1,9 @@
 @if(empty($footerView) && ($formFooterTitle || $formFooterSubtitle))
-    <div class="tall-forms-form-footer">
-        <h3 class="tall-forms-form-footer-title">
+    <div class="tf-form-footer">
+        <h3 class="tf-form-footer-title">
             {{ $formFooterTitle }}
         </h3>
-        <p tag="p" class="tall-forms-form-footer-sub-title">
+        <p tag="p" class="tf-form-footer-sub-title">
             {{ $formFooterSubtitle }}
         </p>
     </div>

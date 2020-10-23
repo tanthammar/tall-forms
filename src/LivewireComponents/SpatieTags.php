@@ -33,9 +33,9 @@ class SpatieTags extends Component
                 ? explode(",", $tags)
                 : []
             );
-        $this->errorClass = 'tall-forms-error';
-        $this->helpClass = 'tall-forms-help';
-        $this->color = 'tall-forms-tags-color';
+        $this->errorClass = 'tf-error';
+        $this->helpClass = 'tf-help';
+        $this->color = 'tf-tags-color';
     }
 
     public function getExisting()

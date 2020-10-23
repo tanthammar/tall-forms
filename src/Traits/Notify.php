@@ -10,13 +10,13 @@ trait Notify
     you can call the notify method directly.
     example use in js to update the property
     @this.set('alert', {
-        type: 'negative',
+        type: 'danger',
         message: Locale == 'sv' //locale is shared to window
         ? "Bilden du valt överskrider max tillåten dokument storlek. Se 'Max file size' ovanför bilden."
         : "The image you uploaded exceeds max allowed file size, stated above the picture"
     });
     exeample use in js to call the notify function
-    @this.call('notify', 'negative', 'Oh No!');
+    @this.call('notify', 'danger', 'Oh No!');
     */
     public array $alert = [];
 
@@ -33,29 +33,29 @@ trait Notify
         $bg = null;
         switch ($type) {
             case 'saved':
-                $bg = 'tall-forms-bg-positive';
+                $bg = 'tf-bg-success';
                 $message = trans(config('tall-forms.message-updated-success'));
                 $this->emitSelf('notify-saved');
                 break;
 
-            case 'positive':
-                $bg = 'tall-forms-bg-positive';
+            case 'success':
+                $bg = 'tf-bg-success';
                 break;
 
-            case 'negative':
-                $bg = 'tall-forms-bg-negative';
+            case 'danger':
+                $bg = 'tf-bg-danger';
                 break;
 
             case 'info':
-                $bg = 'tall-forms-bg-info';
+                $bg = 'tf-bg-info';
                 break;
 
             case 'warning':
-                $bg = 'tall-forms-bg-warning';
+                $bg = 'tf-bg-warning';
                 break;
 
             default:
-                $bg = 'tall-forms-bg-default';
+                $bg = 'tf-notify-bg-default';
                 break;
         }
         $this->dispatchBrowserEvent(

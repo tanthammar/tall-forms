@@ -18,7 +18,7 @@ class Input extends BaseField
     public $min = 0;
     public $max = 100;
     public $required = false;
-    public $class = 'tall-forms-input-wrapper';
+    public $class = 'tf-input-wrapper';
 
 
     public function type(string $type): self

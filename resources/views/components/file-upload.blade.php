@@ -6,13 +6,13 @@
              x-on:livewire-upload-finish="isUploading = false"
              x-on:livewire-upload-error="isUploading = false"
              class="{{ $showFileUploadError || $errors->has($field->multiple ? $field->name.'.*': $field->name) ? $inputWrapperError() : $inputWrapper() }}">
-            <div class="tall-forms-file-upload-spinner-wrapper">
+            <div class="tf-file-upload-spinner-wrapper">
                 {{-- <div x-cloak x-show="isUploading">--}}
                 <div wire:loading wire:target="{{ $field->name }}">
                     <x-tall-spinner/>
                 </div>
                 <div x-show="!isUploading">
-                    @svg(config('tall-forms.file-upload'), "tall-forms-file-upload-icon")
+                    @svg(config('tall-forms.file-upload'), "tf-file-upload-icon")
                 </div>
             </div>
             {{--intentionally removed input id if multiple forms, with the same field name --}}
@@ -27,7 +27,7 @@
         </div>
     @endif
     @if(filled($fieldValue))
-        <ul class="tall-forms-file-upload-ul">
+        <ul class="tf-file-upload-ul">
             @if($field->multiple)
                 @foreach($fieldValue as $file)
                     @if(filled($file)) @include('tall-forms::includes.file-loop') @endif
@@ -41,10 +41,10 @@
     {{--show livewire file upload default validation error--}}
     @error($field->multiple ? $field->name.'.*': $field->name)
     @foreach($errors->get($field->multiple ? $field->name.'.*': $field->name) as $message)
-        <p wire:key="{{ $loop->index }}" class="tall-forms-error">{{ $field->multiple ? \Tanthammar\TallForms\ErrorMessage::parse($message[0]) : \Tanthammar\TallForms\ErrorMessage::parse($message) }}</p>
+        <p wire:key="{{ $loop->index }}" class="tf-error">{{ $field->multiple ? \Tanthammar\TallForms\ErrorMessage::parse($message[0]) : \Tanthammar\TallForms\ErrorMessage::parse($message) }}</p>
     @endforeach
-        @if(!$showFileUploadError)<p class="tall-forms-error">{{ $uploadFileError }}</p>@endif
+        @if(!$showFileUploadError)<p class="tf-error">{{ $uploadFileError }}</p>@endif
     @enderror
     {{--show components general validation error --}}
-    @if($showFileUploadError && $showFileUploadErrorFor == $field->name)<p class="tall-forms-error">{{ $uploadFileError }}</p>@endif
+    @if($showFileUploadError && $showFileUploadErrorFor == $field->name)<p class="tf-error">{{ $uploadFileError }}</p>@endif
 </div>

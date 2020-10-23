@@ -42,7 +42,7 @@ class Radio extends Component
 
     public function class(): string
     {
-        return "form-radio tall-forms-radio ";
+        return "form-radio tf-radio ";
     }
 
 

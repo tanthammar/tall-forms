@@ -55,7 +55,7 @@ class Input extends Component
 
     public function error(): string
     {
-        return $this->class()." tall-forms-field-error";
+        return $this->class()." tf-field-error";
     }
 
     public function render(): View
