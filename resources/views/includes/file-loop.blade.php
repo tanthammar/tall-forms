@@ -18,7 +18,7 @@
             onclick="confirm('{{ trans(config('tall-forms.are-u-sure')) }}') || event.stopImmediatePropagation();"
             wire:click.prevent="deleteSingleTempFile('{{ $field->name }}', '{{ isset($loop) ? $loop->index : null }}')">
         <span class="px-2" wire:loading wire:target="deleteSingleTempFile"><x-tall-spinner /></span>
-        @svg(config('tall-forms.trash-icon'), 'h-4 w-4')
+        @svg(config('tall-forms.trash-icon'), 'tf-file-upload-btn-size')
     </button>
 </li>
 @endif
