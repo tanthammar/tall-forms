@@ -17,22 +17,22 @@
                             @include('tall-forms::includes.field-root', ['field' => $array_field])
                         @endforeach
                     </div>
-                    <div class="tf-repeater-buttons-wrapper">
+                    <div class="tf-repeater-btns-wrapper">
                         @if($repeater->array_sortable)
                             <button type="button" class="tf-repeater-sorter-color"
                                     wire:click="arrayMoveUp('{{ $repeater->name }}', '{{ $key }}')">
-                                @svg(config('tall-forms.arrow-up-icon'), 'tf-repeater-buttons-size')
+                                @svg(config('tall-forms.arrow-up-icon'), 'tf-repeater-btn-size')
                             </button>
 
                             <button type="button" class="tf-repeater-sorter-color"
                                     wire:click="arrayMoveDown('{{ $repeater->name }}', '{{ $key }}')">
-                                @svg(config('tall-forms.arrow-down-icon'), 'tf-repeater-buttons-size')
+                                @svg(config('tall-forms.arrow-down-icon'), 'tf-repeater-btn-size')
                             </button>
                         @endif
 
-                        <button type="button" class="tf-repeater-delete-color"
+                        <button type="button" class="tf-repeater-delete-btn"
                                 wire:click.prevent="arrayRemove('{{ $repeater->name }}', '{{ $key }}')">
-                            @svg(config('tall-forms.trash-icon'), 'tf-repeater-buttons-size')
+                            @svg(config('tall-forms.trash-icon'), 'tf-repeater-btn-size')
                         </button>
                     </div>
                 </div>
