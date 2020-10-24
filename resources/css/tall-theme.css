@@ -42,16 +42,16 @@
 
     /* text colors */
     .tf-text-success {
-        @apply text-green-600;
+        color: #5cb85c;
     }
     .tf-text-danger {
-        @apply text-red-600;
+        color: #d9534f;
     }
     .tf-text-info {
-        @apply text-indigo-600;
+        color: #5bc0de;
     }
     .tf-text-warning {
-        @apply text-orange-500;
+        color: #eea236;
     }
 
     /* buttons */
@@ -268,16 +268,16 @@
     .tf-repeater-wrapper-grid {
         @apply flex-1 sm:grid sm:grid-cols-12 gap-x-2;
     }
-    .tf-repeater-buttons-wrapper {
+    .tf-repeater-btns-wrapper {
         @apply flex-shrink space-x-1 items-center justify-end;
     }
-    .tf-repeater-buttons-size {
+    .tf-repeater-btn-size {
         @apply h-8 w-8;
     }
     .tf-repeater-sorter-color {
         @apply text-gray-400;
     }
-    .tf-repeater-delete-color {
+    .tf-repeater-delete-btn {
         @apply tf-text-danger;
     }
     .tf-repeater-add-button {
@@ -390,7 +390,10 @@
         @apply border h-8 w-8 rounded-full flex items-center justify-around;
     }
     .tf-file-upload-delete-btn {
-        @apply bg-red-500 rounded shadow p-2 text-white flex items-center;
+        @apply tf-text-danger;
+    }
+    .tf-file-upload-btn-size {
+        @apply h-6 w-6;
     }
 
     /* ImageCropper */
@@ -401,7 +404,7 @@
         @apply cursor-pointer font-bold text-center text-gray-500 text-xs tracking-wide uppercase;
     }
     .tf-cropper-file-info {
-        @apply font-hairline text-gray-500 text-xs;
+        @apply font-thin text-gray-500 text-xs;
     }
     .tf-cropper-icon {
         @apply mx-auto h-12 w-12 text-gray-400;
@@ -425,19 +428,19 @@
         @apply w-full h-full;
     }
     .tf-cropper-upload {
-        @apply bg-gray-400 flex font-medium items-center mt-2 mx-auto outline-none px-2 rounded-sm text-center text-white text-xs;
+        @apply tf-bg-primary flex font-medium items-center mt-2 mx-auto outline-none px-2 rounded-sm text-center text-white text-xs;
     }
     .tf-cropper-delete {
-        @apply bg-red-500 text-white p-2 rounded;
+        @apply tf-bg-danger text-white p-2 rounded;
     }
     .tf-cropper-save {
-        @apply bg-teal-500 text-white p-2 rounded;
+        @apply tf-bg-success text-white p-2 rounded;
     }
     .tf-cropper-swap {
-        @apply bg-red-500 bg-opacity-75 hover:bg-opacity-100 text-white p-1 text-xs rounded;
+        @apply tf-bg-danger bg-opacity-75 hover:bg-opacity-100 text-white p-1 text-xs rounded;
     }
     .tf-cropper-edit {
-        @apply bg-teal-500 bg-opacity-75 hover:bg-opacity-100 text-white p-1 text-xs rounded;
+        @apply tf-bg-success bg-opacity-75 hover:bg-opacity-100 text-white p-1 text-xs rounded;
     }
 
 
