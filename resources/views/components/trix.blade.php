@@ -1,9 +1,7 @@
 <div class="w-full" x-data="{ trix: @entangle($temp_key).defer }">
-    <input value="{{ old($temp_key) ?? $value }}" id="{{ $field->name }}" name="{{ $field->name }}" type="hidden" />
-    <div wire:ignore
-         x-on:trix-change.debounce.500ms="trix = $refs.trixInput.value"
-         x-on:trix-file-accept="return event.preventDefault()">
-        <trix-editor x-ref="trixInput" input="{{ $field->name }}" {{ $attributes->merge(['class' => $errors->has($temp_key) ? $error() : $class() ]) }}></trix-editor>
+    <input value="{{ old($temp_key) ?? $value }}" id="{{ md5($field->name) }}" name="{{ $field->name }}" type="hidden" />
+    <div wire:ignore x-on:trix-file-accept="return event.preventDefault()">
+        <trix-editor x-model.debounce.500ms="trix" input="{{ md5($field->name) }}" {{ $attributes->merge(['class' => $errors->has($temp_key) ? $error() : $class() ]) }}></trix-editor>
     </div>
 </div>
 @once
