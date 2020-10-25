@@ -13,7 +13,7 @@ return [
 
     'field-labels-as-validation-attributes' => true,
 
-    //A Laravel 7 blade component to wrap your form if $spaMode = true, see documentation
+    //A Laravel 7 blade component to wrap your form if $wrapWithView = true, see documentation
     'wrap-view-path' => 'tall-forms::wrapper-layout',
 
     // Component attributes, perfect spot to add default Alpine $refs keys
