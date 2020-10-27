@@ -7,9 +7,15 @@ return [
 
     //File upload default validation message translation, applied as trans(...) or @lang(...)
     'upload-file-error' => 'messages.file_upload_error', //Example: 'One or many of the uploaded files did not match the allowed filetype or size limit. Please see the fields help text, review your files and try again.'
+    //Javascript alerts, used in various fields
+    'size-limit-alert' => 'messages.size_limit_alert', //'The file is too large.'
+    'one-at-the-time-alert' => 'messages.one_at_the_time_alert', //'Please upload only one file at the time.'
+    'max-attachments-alert' => 'messages.max_attachments_alert', //'Max allowed attachments:'
+    'mime-alert' => 'messages.mime_alert', //'Invalid file type, please pick another file.'
 
     //Spatie tags, search input error translation, applied as trans(...) or @lang(...)
     'spatie-tags-search-error' => 'fields.tag_search_error',
+
 
     'field-labels-as-validation-attributes' => true,
 
@@ -75,8 +81,8 @@ return [
 
 
     //icons, used as @svg('path/file-name', 'classes')
-    'arrow-up-icon' => 'tall-forms/cheveron-outline-up',
-    'arrow-down-icon' => 'tall-forms/cheveron-outline-down',
+    'arrow-up-icon' => 'tall-forms/cheveron-outline-up', //Repeater
+    'arrow-down-icon' => 'tall-forms/cheveron-outline-down',//Repeater
     'trash-icon' => 'tall-forms/close-outline',//Multiple fields
     'edit-icon' => 'tall-forms/edit-crop', //ImageCropper
     'plus-icon' => 'tall-forms/add-outline',//Repeater

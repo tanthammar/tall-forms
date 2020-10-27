@@ -1,6 +1,6 @@
 <div wire:ignore class="tf-cropper-root">
     {{-- init Alpine --}}
-    <div x-data="imageData{{$field->name}}()" x-init="initCroppie()" x-cloak>
+    <div x-data="imageData{{ md5($field->name) }}()" x-init="initCroppie()" x-cloak>
 
         {{-- drop zone --}}
         <div x-show="!showCroppie && !hasImage">
@@ -74,7 +74,7 @@
 @endif
 @push('scripts')
     <script>
-        function imageData{{$field->name}}() {
+        function imageData{{ md5($field->name) }}() {
             return {
                 showCroppie: false,
                 hasImage: @json(filled($imageUrl)),

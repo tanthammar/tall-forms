@@ -11,8 +11,9 @@ class Trix extends BaseField
     public bool $includeScript = false;
     public bool $allowAttachments = false;
     public string $attachmentKey;
+    public array $allowedMimeTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/tiff', 'image/tif', 'image/gif'];
+    public int $maxAttachments = 1;
     public int $maxKB = 1024;
-    public string $sizeLimitAlert = 'The file is larger then allowed max bytes limit.';
 
     /**
      * Push external (cdn-links) for required scripts and styles to the layout
@@ -39,6 +40,7 @@ class Trix extends BaseField
 
     /**
      * You still have to validate in backend, this is just a simple frontend validation
+     * <br>Default = 1024
      * @param int $kiloBytes
      * @return $this
      */
@@ -48,9 +50,28 @@ class Trix extends BaseField
         return $this;
     }
 
-    public function sizeLimitAlert(string $message): self
+    /**
+     * Default = 1 attachment allowed
+     * @param int $integer
+     * @return $this
+     */
+    public function maxAttachments(int $count): self
     {
-        $this->sizeLimitAlert = $message;
+        $this->maxAttachments = $count;
+        return $this;
+    }
+
+
+    /**
+     * You still have to validate in backend, this is just a simple frontend validation
+     * <br>Default = ['image/jpeg', 'image/jpg', 'image/png', 'image/tiff', 'image/tif', 'image/gif']
+     *
+     * @param array $array
+     * @return $this
+     */
+    public function allowedMimeTypes(array $array): self
+    {
+        $this->allowedMimeTypes = $array;
         return $this;
     }
 }
