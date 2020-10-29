@@ -38,7 +38,7 @@ class LabelFieldWrapper extends Component
 
     public function fieldWidth(): string
     {
-        return $this->field->inline ? "w-full {$this->fieldW}" : 'w-full';
+        return $this->field->inline ? $this->fieldW : 'w-full';
     }
 
     public function labelWidth(): string

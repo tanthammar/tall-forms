@@ -192,7 +192,7 @@
         @apply max-w-screen-lg mx-auto divide-gray-200 divide-y sm:grid sm:grid-cols-12;
     }
     .tf-field-width { /* for inline form layout */
-        @apply sm:w-2/3 md:w-4/5;
+        @apply w-full sm:w-2/3 md:w-4/5;
     }
     .tf-fields-root {
         /* do not add py-, my- or col-span-x here, see FieldRoot component. */
