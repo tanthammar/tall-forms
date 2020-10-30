@@ -443,6 +443,17 @@
         @apply tf-bg-success bg-opacity-75 hover:bg-opacity-100 text-white p-1 text-xs rounded;
     }
 
+    /* DatePicker */
+    .tf-date-picker-clear-btn {
+        @apply w-6 h-6 text-gray-400;
+    }
+    .tf-date-picker-clear-btn-size {
+        @apply w-6 h-6;
+    }
+    .tf-date-picker-calendar-icon {
+        @apply w-6 h-6 text-gray-600;
+    }
+
 
     /* Trix input body */
     trix-editor > ul > li, .trix > ul > li {
