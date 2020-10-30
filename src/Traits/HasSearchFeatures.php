@@ -10,7 +10,6 @@ namespace Tanthammar\TallForms\Traits;
 trait HasSearchFeatures
 {
     public $placeholder;
-    public $optionsKey = 'searchOptions';
     public $searchKey = 'searchInput';
     public $displayValue = 'displayValue';
     public $debounce = 500;
@@ -22,21 +21,15 @@ trait HasSearchFeatures
         return $this;
     }
 
-    public function optionsKey(string $key): self
+    public function searchKey(string $property): self
     {
-        $this->optionsKey = $key;
+        $this->searchKey = $property;
         return $this;
     }
 
-    public function searchKey(string $key): self
+    public function debounce(int $milliseconds): self
     {
-        $this->searchKey = $key;
-        return $this;
-    }
-
-    public function debounce(int $debounce): self
-    {
-        $this->debounce = $debounce;
+        $this->debounce = $milliseconds;
         return $this;
     }
 

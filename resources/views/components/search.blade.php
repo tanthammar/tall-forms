@@ -31,7 +31,7 @@
             tabindex="-1"
             role="listbox"
             class="tf-search-ul" x-max="1">
-            @forelse($options as $key => $value)
+            @forelse($options as $value => $key)
             <li
                 role="option"
                 wire:key="{{ md5($temp_key.$key) }}"
