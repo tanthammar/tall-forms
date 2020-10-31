@@ -18,7 +18,7 @@ Auto-generate responsive [Laravel Livewire](https://laravel-livewire.com) (TALL-
 * Auto generate views
 
 ### Sponsor Heroes
-[💗 Please Sponsor 🔗](https://github.com/sponsors/laike9m) It takes a lot of time to create and maintain this package. I am forever grateful to you:
+[💗 Please Sponsor 🔗](https://github.com/sponsors/tanthammar) It takes a lot of time to create and maintain this package. I am forever grateful to you:
 <br><br>
 <a href="https://github.com/gavinhewitt"><img src="https://avatars2.githubusercontent.com/u/1969103?s=400&v=4" width="100px;" alt=""/><br /><sub><b>
 Gavin Hewitt</b></sub></a>
