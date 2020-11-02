@@ -35,6 +35,7 @@ trait HasOptions
      * Maybe you should consider using the options() method and set the property in mount() instead
      * @param callable $callable
      * @return $this
+     * @deprecated use options($options) instead
      */
     public function callableOptions(callable $callable): self
     {

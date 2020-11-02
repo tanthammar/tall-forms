@@ -19,6 +19,7 @@ trait HasAttributes
     {
         $this->attributes = config('tall-forms.field-attributes');
         data_set($this->attributes, 'input', []);
+        data_set($this->attributes, 'label', 'tf-label');
     }
 
     public function rootAttr(array $attributes, bool $merge = true): self
@@ -69,30 +70,13 @@ trait HasAttributes
         return $this;
     }
 
-    public function labelAttr(array $attributes, bool $merge = true): self
+    public function labelClass(string $classes, bool $merge = true): self
     {
-        $merge ? array_merge($this->attributes['label'], $attributes) : $this->attributes['label'] = $attributes;
+        $merge
+            ? data_set($this->attributes, 'label', 'tf-label '. $classes)
+            : data_set($this->attributes, 'label', $classes);
         return $this;
     }
-
-    public function labelSuffixAttr(array $attributes, bool $merge = true): self
-    {
-        $merge ? array_merge($this->attributes['label-suffix'], $attributes) : $this->attributes['label-suffix'] = $attributes;
-        return $this;
-    }
-
-    public function afterLabelAttr(array $attributes, bool $merge = true): self
-    {
-        $merge ? array_merge($this->attributes['after-label'], $attributes) : $this->attributes['after-label'] = $attributes;
-        return $this;
-    }
-
-    // don't know if I should use this yet
-//    public function inputWrapperAttr(array $attributes, bool $merge = true): self
-//    {
-//        $merge ? array_merge($this->attributes['input-wrapper'], $attributes) : $this->attributes['input-wrapper'] = $attributes;
-//        return $this;
-//    }
 
     public function wire(string $wire_model_declaration): self
     {

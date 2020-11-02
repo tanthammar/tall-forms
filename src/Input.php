@@ -18,12 +18,8 @@ class Input extends BaseField
     public $min = 0;
     public $max = 100;
     public $required = false;
+    public $class = 'tf-input-wrapper';
 
-    public function __construct($label, $key)
-    {
-        parent::__construct($label, $key);
-        $this->class .= config('tall-forms.field-attributes.input');
-    }
 
     public function type(string $type): self
     {

@@ -20,6 +20,7 @@ trait HasComponentDesign
     public $inlineLabelAlignment; //set in mount
     public $wrapWithView = true;
     public $wrapViewPath;
+    public $layout;
 
     public $onKeyDownEnter;
 

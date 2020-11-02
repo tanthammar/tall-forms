@@ -1,9 +1,9 @@
 @if(empty($headView) && !$wrapWithView && ($formTitle || $formSubtitle))
-    <div class="{{ \Tanthammar\TallForms\ConfigAttr::key('form-head') }}">
-        <h1 class="{{ \Tanthammar\TallForms\ConfigAttr::key('form-title') }}">
+    <div class="tf-form-head">
+        <h1 class="tf-form-title">
             {{ $formTitle }}
         </h1>
-        <p class="{{ \Tanthammar\TallForms\ConfigAttr::key('form-sub-title') }}">
+        <p class="tf-form-sub-title">
             {{ $formSubtitle }}
         </p>
     </div>

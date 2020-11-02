@@ -1,5 +1,5 @@
 <svg focusable="false" width="1.5em" height="1.5em" stroke="currentColor" fill="currentColor" viewBox="0 0 64 64"
-    class="text-primary">
+    class="tf-text-primary">
     <g stroke-width="4" stroke-linecap="round">
         <line y1="17" y2="29" transform="translate(32,32) rotate(180)">
             <animate attributeName="stroke-opacity" dur="750ms" values="1;.85;.7;.65;.55;.45;.35;.25;.15;.1;0;1"

@@ -1,13 +1,13 @@
-<div wire:ignore class="{{ $root }}">
+<div wire:ignore class="tf-cropper-root">
     {{-- init Alpine --}}
-    <div x-data="imageData{{$field->name}}()" x-init="initCroppie()" class="{{ $wrapper }}" x-cloak>
+    <div x-data="imageData{{ md5($field->name) }}()" x-init="initCroppie()" x-cloak>
 
         {{-- drop zone --}}
         <div x-show="!showCroppie && !hasImage">
 
             {{-- input --}}
             <input type="file" name="fileinput{{$field->name}}"
-                   class="absolute inset-0 z-50 m-0 p-0 w-full h-full outline-none opacity-0"
+                   class="absolute inset-0 z-50 m-0 p-0 w-full h-full outline-none opacity-0 cursor-pointer"
                    x-ref="input"
                    x-on:change="updatePreview()"
                    x-on:dragover="$el.classList.add('active')"
@@ -16,16 +16,16 @@
 
             {{-- upload icon --}}
             <div class="flex flex-col items-center justify-center">
-                <svg class="{{ $icon }}" stroke="currentColor" fill="none" viewBox="0 0 48 48">
-                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <svg class="tf-cropper-icon " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                 </svg>
-                <label for="fileinput{{$field->name}}" class="{{ $dropZone }}">
+                <label for="fileinput{{$field->name}}" class="tf-cropper-drop-zone">
                     {{ $field->dropZoneHelp }}
                 </label>
-                <p class="{{ $fileInfo }}">
+                <p class="tf-cropper-file-info">
                     {{ $field->fileInfo }}
                 </p>
-                <button type="button" x-on:click="javascript:void(0)" class="{{ $upload }}">
+                <button type="button" x-on:click="javascript:void(0)" class="tf-cropper-upload">
                     {{ $field->uploadButton }}
                 </button>
             </div>
@@ -33,13 +33,13 @@
         </div>
 
         {{-- cropper --}}
-        <div x-show="showCroppie" x-on:click.prevent class="{{ $modalbg }}">
-            <div class="{{ $modal }}">
+        <div x-show="showCroppie" x-on:click.prevent class="tf-cropper-modal-bg">
+            <div class="tf-cropper-modal">
                 <div>
-                    <div class="m-auto"><img src alt x-ref="croppie" class="display-block w-full"></div>
+                    <div class="m-auto" x-ref="croppie"></div>
                     <div class="flex justify-center items-center gap-2">
-                        <button type="button" class="{{ $delete }}" x-on:click.prevent="swap()">@lang(config('tall-forms.delete'))</button>
-                        <button type="button" class="{{ $save }}" x-on:click.prevent="saveCroppie()">@lang(config('tall-forms.save'))</button>
+                        <button type="button" class="tf-cropper-delete" x-on:click.prevent="swap()">@lang(config('tall-forms.delete'))</button>
+                        <button type="button" class="tf-cropper-save" x-on:click.prevent="saveCroppie()">@lang(config('tall-forms.save'))</button>
                     </div>
                 </div>
             </div>
@@ -47,10 +47,10 @@
 
         {{-- result--}}
         <div x-show="!showCroppie && hasImage" class="relative {{ $field->thumbnail }}">
-            <div class="{{ $btnsRoot }}">
-                <div class="{{ $btnsWrapper }}">
-                    <button type="button" class="{{ $swap }}" x-on:click.prevent="swap()">@lang(config('tall-forms.swap'))</button>
-                    <button type="button" class="{{ $edit }}" x-on:click.prevent="edit()">@lang(config('tall-forms.edit'))</button>
+            <div class="tf-cropper-btns-root">
+                <div class="tf-cropper-btns-wrapper">
+                    <button type="button" class="tf-cropper-swap" x-on:click.prevent="swap()">@svg(config('tall-forms.trash-icon'), 'h-6 w-6')</button>
+                    <button type="button" class="tf-cropper-edit" x-on:click.prevent="edit()">@svg(config('tall-forms.edit-icon'), 'h-6 w-6')</button>
                 </div>
             </div>
             <div><img src="{{ $imageUrl }}" alt x-ref="result" class="display-block"></div>
@@ -60,19 +60,21 @@
 </div>
 @if($field->includeScript)
     @once
-    @push('styles')
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css"
-              integrity="sha512-zxBiDORGDEAYDdKLuYU9X/JaJo/DPzE42UubfBw9yg8Qvb2YRRIQ8v4KsGHOx2H1/+sdSXyXxLXv5r7tHc9ygg=="
-              crossorigin="anonymous" media="print" onload="this.media='all'"/>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"
-                integrity="sha512-Gs+PsXsGkmr+15rqObPJbenQ2wB3qYvTHuJO6YJzPe/dTLvhy0fmae2BcnaozxDo5iaF8emzmCZWbQ1XXiX2Ig=="
-                crossorigin="anonymous" defer></script>
-    @endpush
+        @push('styles')
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css"
+                  integrity="sha512-zxBiDORGDEAYDdKLuYU9X/JaJo/DPzE42UubfBw9yg8Qvb2YRRIQ8v4KsGHOx2H1/+sdSXyXxLXv5r7tHc9ygg=="
+                  crossorigin="anonymous" media="print" onload="this.media='all'"/>
+        @endpush
+        @push('scripts')
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"
+                    integrity="sha512-Gs+PsXsGkmr+15rqObPJbenQ2wB3qYvTHuJO6YJzPe/dTLvhy0fmae2BcnaozxDo5iaF8emzmCZWbQ1XXiX2Ig=="
+                    crossorigin="anonymous" defer></script>
+        @endpush
     @endonce
 @endif
 @push('scripts')
     <script>
-        function imageData{{$field->name}}() {
+        function imageData{{ md5($field->name) }}() {
             return {
                 showCroppie: false,
                 hasImage: @json(filled($imageUrl)),

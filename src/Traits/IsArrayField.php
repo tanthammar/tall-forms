@@ -10,8 +10,8 @@ use Tanthammar\TallForms\Exceptions\InvalidArrayFieldType;
 trait IsArrayField
 {
     public $fields = [];
-    public $array_wrapper_class; //set in parent construct
-    public $array_wrapper_grid_class; //set in parent construct
+    public $array_wrapper_class;
+    public $array_wrapper_grid_class;
 
     public function fields($fields = []): self
     {
@@ -26,7 +26,6 @@ trait IsArrayField
 
     /**
      * Applied to the outer wrapper surrounding Array and KeyVal field groups
-     * Default 'rounded border bg-gray-50';
      *
      * @param string $classes
      * @return $this

@@ -1,7 +1,7 @@
 @php $keyval = $field @endphp
-<div class="w-full">
-    <div class="{{ $keyval->array_wrapper_class }}">
-        <div class="{{ $keyval->array_wrapper_grid_class }}">
+<div class="tf-keyval-root">
+    <div class="{{ $keyval->array_wrapper_class ?? 'tf-keyval-wrapper' }}">
+        <div class="{{ $keyval->array_wrapper_grid_class ?? 'tf-keyval-wrapper-grid' }}">
             @foreach($keyval->fields as $array_field)
                 @php
                     $temp_key = "{$parent_name}.{$array_field->name}";

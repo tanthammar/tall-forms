@@ -31,20 +31,11 @@ class Checkbox extends Component
         return array_merge($default, $custom);
     }
 
-    public function class()
+    public function class(): string
     {
-        return "form-checkbox mt-1 h-4 w-4 text-indigo-600 transition duration-150 ease-in-out ";
+        return "form-checkbox tf-checkbox";
     }
 
-    public function labelClass()
-    {
-        return 'text-sm leading-5 text-gray-900';
-    }
-
-    public function labelSpacingClass()
-    {
-        return 'ml-2 block';
-    }
 
     public function render(): View
     {

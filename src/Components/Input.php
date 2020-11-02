@@ -15,7 +15,7 @@ class Input extends Component
     public Field $field;
     public string $temp_key;
     public bool $required;
-    public string $icon_span = 'inline-flex items-center px-1 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm';
+    public string $icon_span = 'flex items-center justify-center px-2 rounded-l border border-r-0 border-gray-300 bg-gray-100 text-gray-600 sm:text-sm';
 
     public function __construct(Field $field, string $tempKey)
     {
@@ -46,16 +46,16 @@ class Input extends Component
         return array_merge($default, $custom);
     }
 
-    public function class()
+    public function class(): string
     {
-        $class = "flex-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5";
-        $class .= ($this->field->prefix || $this->field->icon) ? " rounded-none rounded-r-md" : " rounded";
+        $class = "form-input block w-full shadow-inner ";
+        $class .= ($this->field->prefix || $this->field->icon) ? " rounded-none rounded-r" : " rounded";
         return $class;
     }
 
-    public function error()
+    public function error(): string
     {
-        return Helpers::unique_words($this->class()." border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red");
+        return $this->class()." tf-field-error";
     }
 
     public function render(): View

@@ -25,14 +25,14 @@ class Trix extends Component
 
     public function class(): string
     {
-        $class = "form-textarea w-full";
+        $class = "form-textarea w-full shadow-inner ";
         $class .= $this->field->class;
         return Helpers::unique_words($class);
     }
 
     public function error(): string
     {
-        return Helpers::unique_words($this->class()." border-red-300 text-red-900 focus:border-red-300 focus:shadow-outline-red");
+        return $this->class() . " tf-field-error";
     }
 
     public function render(): View

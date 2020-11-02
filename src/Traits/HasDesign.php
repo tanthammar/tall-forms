@@ -13,7 +13,8 @@ trait HasDesign
     public $inArray = false;
 
     /**
-     * Default sm:w-2/3
+     * Default w-full sm:w-2/3
+     * <br>Applying a class replaces default
      * @param $class
      * @return $this
      */

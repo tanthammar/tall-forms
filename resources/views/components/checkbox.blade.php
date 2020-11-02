@@ -4,8 +4,8 @@
     value="{{ old($temp_key) }}"
     @foreach($options() as $key => $value) {{$key}}="{{$value}}" @endforeach
     />
-    <div class="{{ $labelSpacingClass() }}">
-        <span class="{{ $labelClass() }}">
+    <div class="tf-checkbox-label-spacing">
+        <span class="tf-checkbox-label">
             {{ $label ?? ''}}
         </span>
     </div>

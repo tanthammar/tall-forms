@@ -1,0 +1,475 @@
+@layer components {
+    /* icons */
+    .svg-icon {
+        @apply inline-flex align-middle overflow-visible;
+        fill: currentColor;
+        font-size: inherit;
+        margin-top: -0.1rem;
+    }
+
+    /* honeypot field class */
+    .nosy {
+        position: absolute;
+        opacity: 0;
+    }
+
+    /* background colors */
+    .tf-bg-success {
+        background-color: #5cb85c;
+        border-color: #4cae4c;
+    }
+    .tf-bg-danger {
+        background-color: #d9534f;
+        border-color: #d43f3a;
+    }
+    .tf-bg-info {
+        background-color: #5bc0de;
+        border-color: #46b8da;
+    }
+    .tf-bg-warning {
+        background-color: #f0ad4e;
+        border-color: #eea236;
+    }
+    .tf-bg-primary {
+        background-color: #337ab7;
+        border-color: #2e6da4;
+    }
+
+    .tf-bg-secondary {
+        background-color: #5e9bd0;
+        border-color: #3886ca;
+    }
+
+    /* text colors */
+    .tf-text-success {
+        color: #5cb85c;
+    }
+    .tf-text-danger {
+        color: #d9534f;
+    }
+    .tf-text-info {
+        color: #5bc0de;
+    }
+    .tf-text-warning {
+        color: #eea236;
+    }
+
+    /* buttons */
+    .tf-btn {
+        @apply inline-flex items-center border font-semibold uppercase tracking-wider rounded focus:outline-none;
+    }
+    .tf-btn-info {
+        @apply text-gray-100 tf-bg-info hover:bg-blue-600 hover:text-white focus:border-blue-700;
+    }
+    .tf-btn-success {
+        @apply text-gray-100 tf-bg-success hover:bg-green-600 hover:text-white focus:border-green-700;
+    }
+    .tf-btn-danger {
+        @apply text-gray-100 tf-bg-danger hover:bg-red-700 hover:text-white focus:border-red-700 focus:shadow;
+    }
+    .tf-btn-warning {
+        @apply text-gray-100 tf-bg-warning hover:bg-orange-500 hover:text-white focus:border-orange-700 focus:shadow;
+    }
+    .tf-btn-primary {
+        @apply text-gray-100 tf-bg-primary hover:bg-blue-800 hover:text-white focus:border-blue-800 focus:shadow;
+    }
+    .tf-btn-secondary {
+        @apply text-gray-100 tf-bg-secondary hover:bg-blue-800 hover:text-white focus:border-blue-800 focus:shadow;
+    }
+    .tf-btn-white {
+        @apply border-gray-300 bg-white text-gray-700 hover:text-gray-500 focus:border-blue-300 focus:shadow;
+    }
+    .tf-btn-indigo {
+        @apply text-indigo-100 bg-indigo-500 hover:bg-indigo-600 focus:border-indigo-700 focus:shadow;
+    }
+    .tf-btn-blue {
+        @apply text-blue-100 bg-blue-500 hover:bg-blue-600 focus:border-blue-700 focus:shadow;
+    }
+    .tf-btn-green {
+        @apply text-green-100 bg-green-500 hover:bg-green-600 focus:border-green-700 focus:shadow;
+    }
+    .tf-btn-yellow {
+        @apply text-yellow-100 bg-yellow-500 hover:bg-yellow-600 focus:border-yellow-700 focus:shadow;
+    }
+    .tf-btn-red {
+        @apply text-red-100 bg-red-500 hover:bg-red-600 focus:border-red-700 focus:shadow;
+    }
+    .tf-btn-gray {
+        @apply text-gray-100 bg-gray-500 hover:bg-gray-600 focus:border-gray-700 focus:shadow;
+    }
+    .tf-btn-orange {
+        @apply text-orange-100 bg-orange-500 hover:bg-orange-600 focus:border-orange-700 focus:shadow;
+    }
+    .tf-btn-teal {
+        @apply text-teal-100 bg-teal-500 hover:bg-teal-600 focus:border-teal-700 focus:shadow;
+    }
+
+    /* Notification */
+    .tf-notify-bg-default {
+        @apply bg-teal-400;
+    }
+
+    /* form */
+    .tf-form {
+        @apply w-full;
+    }
+
+    .tf-form-head {
+
+    }
+
+    .tf-form-title {
+        @apply text-lg leading-6 font-medium text-gray-900;
+    }
+
+    .tf-form-sub-title {
+        @apply mt-1 max-w-2xl text-sm leading-5 text-gray-500;
+    }
+
+    .tf-form-footer {
+        @apply border rounded sm:p-4;
+    }
+
+    .tf-form-footer-title {
+        @apply text-lg leading-6 font-medium text-gray-900;
+    }
+
+    .tf-form-footer-sub-title {
+        @apply mt-1 max-w-2xl text-sm leading-5 text-gray-500;
+    }
+
+    /* help and error <p> */
+    .tf-help {
+        @apply leading-tight text-gray-500 text-sm;
+    }
+
+    .tf-error {
+        @apply italic leading-tight text-red-500 text-sm;
+    }
+
+    .tf-field-error {
+        @apply border-red-500 text-red-900 placeholder-red-500 focus:border-red-500;
+    }
+
+
+    /* Buttons */
+    .tf-buttons-root {
+        @apply w-full border-t border-gray-200 pt-5;
+    }
+
+    .tf-buttons-wrapper {
+        @apply flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3 sm:justify-end sm:items-center;
+    }
+
+    /* Labels */
+    .tf-label {
+        @apply my-1 block uppercase tracking-wide text-gray-600 text-xs font-bold;
+    }
+    .tf-label-suffix {
+        @apply italic text-black text-opacity-25 text-xs;
+    }
+    .tf-after-label {
+        @apply -mt-1 block text-sm leading-4 text-gray-500;
+    }
+    .tf-inline-label-alignment {
+        @apply sm:pr-4 text-left;
+    }
+    .tf-stacked-label-alignment {
+        @apply text-left;
+    }
+    .tf-label-width { /* for inline form layout */
+        @apply sm:w-1/3 md:w-1/5;
+    }
+    .tf-label-field-wrapper-inline {
+        @apply sm:flex;
+    }
+    .tf-label-field-wrapper-stacked {
+        @apply w-full;
+    }
+
+    /* All Fields */
+    .tf-fields-wrapper {
+        @apply max-w-screen-lg mx-auto divide-gray-200 divide-y sm:grid sm:grid-cols-12;
+    }
+    .tf-field-width { /* for inline form layout */
+        @apply w-full sm:w-2/3 md:w-4/5;
+    }
+    .tf-fields-root {
+        /* do not add py-, my- or col-span-x here, see FieldRoot component. */
+        @apply w-full;
+    }
+    .tf-fields-root-py-inarray {
+        /* only vertical space here, see FieldRoot component */
+        @apply py-0;
+    }
+    .tf-fields-root-py-not-inarray {
+        /* only vertical space here, see FieldRoot component */
+        @apply py-6 sm:py-5;
+    }
+    .tf-fields-before {
+        @apply my-4 w-full border border-gray-200;
+    }
+    .tf-fields-before-text {
+        @apply block text-sm leading-5 text-gray-700 p-2;
+    }
+    .tf-fields-above {
+        @apply leading-4 text-gray-500 text-sm sm:pt-1;
+    }
+    .tf-fields-below {
+        @apply leading-tight text-gray-500 text-sm;
+    }
+    .tf-fields-below-wrapper {
+        /* null */
+    }
+    .tf-fields-after {
+        @apply my-4 w-full border border-gray-200;
+    }
+    .tf-fields-after-text {
+        @apply block text-sm leading-5 text-gray-700 p-2;
+    }
+
+    /* Input */
+    .tf-input-wrapper {
+        @apply my-1 flex rounded w-full relative;
+    }
+
+    /* Range */
+    .tf-range-value {
+        @apply rounded border px-2 font-bold;
+    }
+    .tf-range-labels {
+        @apply text-gray-600;
+    }
+    .tf-range-wrapper {
+        @apply flex space-x-2 py-2;
+    }
+
+    /* KeyVal */
+    .tf-keyval-root {
+        @apply w-full;
+    }
+    .tf-keyval-wrapper {
+        @apply flex flex-col;
+    }
+    .tf-keyval-wrapper-grid {
+        @apply sm:flex sm:grid sm:grid-cols-12 sm:gap-x-2 sm:gap-y-4;
+    }
+
+    /* Repeater */
+    .tf-repeater-root {
+        @apply w-full my-2;
+    }
+    .tf-repeater-wrapper {
+        @apply flex flex-col divide-y mb-2 rounded border;
+    }
+    .tf-repeater-wrapper-outer {
+        @apply flex px-2 space-x-3 items-center py-2;
+    }
+    .tf-repeater-wrapper-grid {
+        @apply flex-1 sm:grid sm:grid-cols-12 gap-x-2;
+    }
+    .tf-repeater-btns-wrapper {
+        @apply flex-shrink space-x-1 items-center justify-end;
+    }
+    .tf-repeater-btn-size {
+        @apply h-8 w-8;
+    }
+    .tf-repeater-sorter-color {
+        @apply text-gray-400;
+    }
+    .tf-repeater-delete-btn {
+        @apply tf-text-danger;
+    }
+    .tf-repeater-add-button {
+        @apply rounded shadow text-white tf-bg-primary;
+    }
+    .tf-repeater-add-button-size {
+        @apply h-5 w-5 m-2;
+    }
+
+    /* Tags */
+    .tf-tags-color {
+        @apply tf-bg-primary text-white;
+    }
+    .tf-tags-x-color {
+        @apply text-gray-200;
+    }
+
+    /* Search */
+    .tf-search-dropdown {
+        /* $field->listWidth will be appended */
+        @apply z-50 absolute mt-1 rounded-md bg-white shadow-lg;
+    }
+    .tf-search-dropdown-width {
+        @apply max-w-xs w-full;
+    }
+    .tf-search-ul {
+        @apply rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5;
+        max-height: 15rem;
+    }
+    .tf-search-li {
+        @apply text-gray-900 cursor-default select-none relative py-2 pl-3;
+        padding-right: 2.25rem;
+    }
+    .tf-search-selected {
+        @apply text-white tf-bg-primary;
+    }
+    .tf-search-unselected {
+        @apply text-gray-900;
+    }
+    .tf-search-icon {
+        @apply absolute inset-y-0 right-0 flex items-center pr-4;
+    }
+    .tf-search-icon-selected {
+        @apply text-white;
+    }
+    .tf-search-icon-unselected {
+        @apply text-indigo-600;
+    }
+
+
+    /* SearchList */
+    .tf-search-label-inline {
+        @apply absolute flex space-x-2 items-baseline;
+    }
+    .tf-search-label-stacked {
+        @apply absolute flex flex-col;
+    }
+
+    /* Checkbox */
+    /* If you want to change the color, see tailwind custom form documentation */
+    .tf-checkbox {
+        @apply mt-1;
+    }
+    .tf-checkbox-label {
+        @apply text-sm text-gray-900;
+    }
+    .tf-checkbox-label-spacing {
+        @apply ml-2 block;
+    }
+
+    /* Radio */
+    /* If you want to change the color, see tailwind custom form documentation */
+    .tf-radio {
+        @apply mt-1 h-4 w-4;
+    }
+    .tf-radio-label {
+        @apply text-sm text-gray-900;
+    }
+    .tf-radio-label-spacing {
+        @apply ml-2 block;
+    }
+
+    /* File upload */
+    input.tf-file-upload {
+        @apply flex-1 block w-full sm:text-sm rounded-none rounded-r;
+    }
+    .tf-file-upload-input-wrapper {
+        @apply flex rounded w-full relative;
+    }
+    .tf-file-upload-spinner-wrapper {
+        @apply inline-flex items-center rounded-l px-3 border border-r-0 text-gray-600 sm:text-sm;
+        @apply border-gray-300 bg-gray-100;
+    }
+    .tf-file-upload-ul {
+        @apply space-y-2 my-2;
+    }
+    .tf-file-upload-li {
+        @apply w-full flex items-center px-2 py-1 border rounded;
+    }
+    .tf-file-upload-thumb-wrapper {
+        @apply border h-8 w-8 rounded-full;
+    }
+    .tf-file-upload-thumb-img {
+        @apply h-8 w-full object-cover rounded-full;
+    }
+    svg.tf-file-upload-icon {
+        @apply h-4 w-4 text-gray-600;
+    }
+    .tf-file-upload-icon-wrapper {
+        @apply border h-8 w-8 rounded-full flex items-center justify-around;
+    }
+    .tf-file-upload-delete-btn {
+        @apply tf-text-danger;
+    }
+    .tf-file-upload-btn-size {
+        @apply h-6 w-6;
+    }
+
+    /* ImageCropper */
+    .tf-cropper-root {
+        @apply bg-white border-2 border-dashed border-gray-300 mx-auto p-4 relative rounded w-full;
+    }
+    .tf-cropper-drop-zone {
+        @apply cursor-pointer font-bold text-center text-gray-500 text-xs tracking-wide uppercase;
+    }
+    .tf-cropper-file-info {
+        @apply font-thin text-gray-500 text-xs;
+    }
+    .tf-cropper-icon {
+        @apply mx-auto h-12 w-12 text-gray-400;
+    }
+    .tf-cropper-modal-bg {
+        @apply fixed inset-0 h-screen w-screen p-2 sm:p-10 md:p-20 bg-gray-800 bg-opacity-75 z-50;
+    }
+    .tf-cropper-modal {
+        @apply bg-white rounded w-full h-full flex justify-center items-center;
+    }
+    .tf-cropper-btns-root {
+        @apply z-10 absolute inset-0;
+    }
+    .tf-cropper-btns-wrapper {
+        @apply flex gap-2 h-full w-full items-center justify-center;
+    }
+    .tf-cropper-edit-btn-wrapper {
+        @apply z-10 absolute inset-0;
+    }
+    .tf-cropper-thumb {
+        @apply w-full h-full;
+    }
+    .tf-cropper-upload {
+        @apply tf-bg-primary flex font-medium items-center mt-2 mx-auto outline-none px-2 rounded-sm text-center text-white text-xs;
+    }
+    .tf-cropper-delete {
+        @apply tf-bg-danger text-white p-2 rounded;
+    }
+    .tf-cropper-save {
+        @apply tf-bg-success text-white p-2 rounded;
+    }
+    .tf-cropper-swap {
+        @apply tf-bg-danger bg-opacity-75 hover:bg-opacity-100 text-white p-1 text-xs rounded;
+    }
+    .tf-cropper-edit {
+        @apply tf-bg-success bg-opacity-75 hover:bg-opacity-100 text-white p-1 text-xs rounded;
+    }
+
+    /* DatePicker */
+    .tf-date-picker-clear-btn {
+        @apply w-6 h-6 text-gray-400;
+    }
+    .tf-date-picker-clear-btn-size {
+        @apply w-6 h-6;
+    }
+    .tf-date-picker-calendar-icon {
+        @apply w-6 h-6 text-gray-600;
+    }
+
+
+    /* Trix input body */
+    trix-editor > ul > li, .trix > ul > li {
+        @apply list-disc list-outside ml-4;
+    }
+
+    trix-editor > h1, .trix > h1 {
+        @apply text-2xl font-bold;
+    }
+
+    trix-editor > blockquote, .trix > blockquote {
+        @apply ml-4 p-4 my-4 bg-gray-200 border-l-4 text-lg;
+    }
+
+    trix-editor > ol > li, .trix > ol > li {
+        @apply list-decimal list-outside ml-4;
+    }
+
+}

@@ -7,7 +7,7 @@
     <x-tall-search-list
         :field="$field"
         :temp-key="$temp_key"
-        :options="${$field->optionsKey}"
+        :options="$field->options"
     />
 </div>
 

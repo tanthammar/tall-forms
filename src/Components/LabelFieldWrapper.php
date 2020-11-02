@@ -32,26 +32,20 @@ class LabelFieldWrapper extends Component
     {
         $vertical = $this->field->align_label_top || filled($this->field->afterLabel) || filled($this->field->above) ? '' : ' sm:items-center';
         return $this->field->inline
-            ? config('tall-forms.field-attributes.label-field-wrapper-inline') . $vertical
-            : config('tall-forms.field-attributes.label-field-wrapper-stacked');
+            ? 'tf-label-field-wrapper-inline' . $vertical
+            : 'tf-label-field-wrapper-stacked';
     }
 
     public function fieldWidth(): string
     {
-        return $this->field->inline ? "w-full {$this->fieldW}" : 'w-full';
+        return $this->field->inline ? $this->fieldW : 'w-full';
     }
 
     public function labelWidth(): string
     {
-        $base = 'w-full sm:pr-4 ';
         return $this->field->inline
-            ? $base . $this->labelW . ' ' . ($field->inlineLabelAlignment ?? $this->inlineLabelAlignment)
-            : $base . config('tall-forms.component-attributes.stacked-label-alignment');
-    }
-
-    public function labelSuffixClass(): string
-    {
-        return config('tall-forms.field-attributes.label-suffix');
+            ? $this->labelW . ' ' . ($field->inlineLabelAlignment ?? $this->inlineLabelAlignment)
+            : 'tf-stacked-label-alignment';
     }
 
     public function render(): View
