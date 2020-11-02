@@ -4,5 +4,5 @@
         :temp-key="$temp_key"
         :value="$value"
         :label="$label"
-        wire:key="{{ md5($value.$label.$loop->index) }}" />
+        wire:key="{{ md5($temp_key.$value.$label.$loop->index) }}" />
 @endforeach
