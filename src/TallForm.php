@@ -93,9 +93,11 @@ trait TallForm
 
     public function formView()
     {
-        return view('tall-forms::layout-picker', [
+        $view = view('tall-forms::layout-picker', [
             'fields' => $this->fields(),
         ]);
+        if($this->layout) $view->layout($this->layout);
+        return $view;
     }
 
     public function fields()
