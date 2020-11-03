@@ -197,10 +197,9 @@ trait Helpers
                 $key = (empty($prefix)) ? $field->key : $prefix . '.' . $field->name;
                 if (property_exists($field, 'fields') && is_array($field->fields) && 0 < count($field->fields)) {
                     $results = array_merge($results, $this->getFieldsRecursively($field->fields, $key));
-                } else {
-                    $field->key = $key;
-                    $results[] = $field;
                 }
+                $field->key = $key;
+                $results[] = $field;
             }
         }
 
