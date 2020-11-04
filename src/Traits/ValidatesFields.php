@@ -13,7 +13,7 @@ trait ValidatesFields
         foreach ($this->fields() as $field) {
             if ($field != null) {
 
-                if (!in_array($field->type, ['array', 'keyval', 'file'])) $rules[$field->key] = $field->rules ?? 'nullable';
+                if (!in_array($field->type, ['array', 'keyval', 'file', 'select'])) $rules[$field->key] = $field->rules ?? 'nullable';
 
                 if (in_array($field->type, ['array', 'keyval'])) {
                     foreach ($field->fields as $array_field) {
@@ -28,7 +28,11 @@ trait ValidatesFields
                         ? $rules["$field->name.*"] = $field->rules ?? 'nullable'
                         : $rules[$field->name] = $field->rules ?? 'nullable';
                 }
-                if ($field->type === 'multiselect') $rules["$field->key.*"] = $field->rules ?? 'nullable';
+                if ($field->type === 'select') {
+                    $field->multiple
+                        ? $rules["$field->key.*"] = $field->rules ?? 'nullable'
+                        : $rules[$field->key] = $field->rules ?? 'nullable';
+                }
             }
         }
         return $rules;
@@ -66,7 +70,8 @@ trait ValidatesFields
                 // livewire native file upload
                 $this->customValidateFilesIn($field, $this->getFieldValueByKey($field, 'rules'));//this does not work for array keyval fields
             } else {
-                $this->validateOnly($field,
+                $this->validateOnly(
+                    ($fieldType == 'select' && $this->getFieldValueByKey($field, 'multiple') ? $field.'.*' : $field),
                     [$field => $this->getFieldValueByKey($field, 'rules')],
                     [],
                     $this->validationAttributes
