@@ -38,9 +38,10 @@ trait ValidatesFields
         return $rules;
     }
 
-    public function validationAttributes() {
+    public function validationAttributes()
+    {
         $attributes = [];
-        if($this->labelsAsAttributes) {
+        if ($this->labelsAsAttributes) {
             foreach ($this->fields() as $field) {
                 if ($field != null && $field->labelAsAttribute) {
                     if (in_array($field->type, ['array', 'keyval'])) {
@@ -64,15 +65,16 @@ trait ValidatesFields
         $function = $this->parseFunctionNameFrom($field);
         if (method_exists($this, $function)) $this->$function($value);
 
-        if ($this->getFieldValueByKey($field, 'realtimeValidationOn')) {
-            $fieldType = $this->getFieldType($field);
+        if (filled($fieldCollection = $this->collectField($field)) && $fieldCollection->get('realtimeValidationOn')) {
+            $fieldRule = $fieldCollection->get('rules') ?? 'nullable';
+            $fieldType = $fieldCollection->get('type');
+            if ($fieldType == 'select' && $fieldCollection->get('multiple')) $field = $field . '.*';
             if ($fieldType == 'file') {
                 // livewire native file upload
-                $this->customValidateFilesIn($field, $this->getFieldValueByKey($field, 'rules'));//this does not work for array keyval fields
+                $this->customValidateFilesIn($field, $fieldRule);
             } else {
-                $this->validateOnly(
-                    ($fieldType == 'select' && $this->getFieldValueByKey($field, 'multiple') ? $field.'.*' : $field),
-                    [$field => $this->getFieldValueByKey($field, 'rules')],
+                $this->validateOnly($field,
+                    [$field => $fieldRule],
                     [],
                     $this->validationAttributes
                 );

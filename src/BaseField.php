@@ -122,6 +122,10 @@ class BaseField
         return $this;
     }
 
+    /**
+     * Consider using ->wire('wire:model.defer') instead
+     * @return $this
+     */
     public function realtimeValidationOff()
     {
         $this->realtimeValidationOn = false;
