@@ -2,22 +2,32 @@
 
 namespace Tanthammar\TallForms\Traits;
 
-
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use stdClass;
 
 trait Helpers
 {
-    //TODO expand method to include keyval and array fields
-    //you cannot get rules for keyval or array fields with this method
     protected function getFieldValueByKey(string $fieldKey, string $fieldValue)
     {
+        return $this->collectField($fieldKey)->get($fieldValue);
+    }
 
-        $fieldName = \Str::replaceFirst('form_data.', '', $fieldKey);
-        $fieldsArray = $this->fieldsToArray();
-        $field = collect($fieldsArray)->firstWhere('name', $fieldName) ?? collect($fieldsArray)->firstWhere('key', $fieldKey);
-//        $field = Arr::first($fieldsArray, (fn($value) => $value['name'] === $fieldName)) ?? Arr::first($fieldsArray, (fn($value) => $value['key'] === $fieldKey));
-        return optional($field)[$fieldValue];
+    protected function collectField(string $fieldKey)
+    {
+        $fieldName = Str::replaceFirst('form_data.', '', $fieldKey);
+        $fieldsCollection = collect($this->getFields());
+        $field = $fieldsCollection->firstWhere('key', $fieldKey) ?? $fieldsCollection->firstWhere('name', $fieldName);
+        if (empty($field)) {
+            $field = $fieldsCollection->filter(function ($item) use ($fieldName) {
+                $exploded = explode('.', $fieldName);
+                return (
+                    Str::startsWith($item->key, 'form_data.' . head($exploded))
+                    && Str::endsWith($item->key, last($exploded))
+                );
+            })->first();
+        }
+        return collect($field);
     }
 
     protected function getFieldType(string $fieldKey)
@@ -25,18 +35,8 @@ trait Helpers
         return $this->getFieldValueByKey($fieldKey, 'type');
     }
 
-    //Does not convert Array or KeyVal fields, they remain as objects!!
-    protected function fieldsToArray(): array
-    {
-        $array = [];
-        foreach ($this->getFields() as $field) {
-            if (filled($field)) $array[] = $field->fieldToArray(); //in BaseField and IsArrayField
-        }
-        return $array;
-    }
-
     /**
-     * Executes before field validation, creds to "@roni", livewire discord channel member
+     * Executes before field validation, creds to "@roni", livewire discord channel member.
      * @param string $field
      * @param string $hook
      * @return string
@@ -45,8 +45,6 @@ trait Helpers
     {
         return $hook . \Str::of($field)->replace('.', '_')->studly()->replaceFirst('FormData', '');
     }
-
-
 
     public function tallFillField($array)
     {
@@ -58,13 +56,13 @@ trait Helpers
     public function syncTags($field, $tagType = null)
     {
         $tags = data_get($this->custom_data, $field);
-        if (filled($tags = explode(",", $tags)) && optional($this->model)->exists) {
+        if (filled($tags = explode(',', $tags)) && optional($this->model)->exists) {
             filled($tagType) ? $this->model->syncTagsWithType($tags, $tagType) : $this->model->syncTags($tags);
         }
     }
 
     // in blade views to strip "form data" from field validation
-    public function errorMessage($message, $key='', $label='')
+    public function errorMessage($message, $key = '', $label = '')
     {
         $return = str_replace('form_data.', '', $message);
         return str_replace('form data.', '', $return);
@@ -73,7 +71,7 @@ trait Helpers
 
     public static function unique_words(string $scentence): string
     {
-        return implode(' ',array_unique(explode(' ', $scentence)));
+        return implode(' ', array_unique(explode(' ', $scentence)));
     }
 
     /**

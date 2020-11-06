@@ -39,7 +39,7 @@ trait ValidatesFields
                     if ($field->type === 'file') {
                         $ruleName = $field->multiple ? "{$field->name}.*" : $field->name;
                     }
-                    elseif ($field->type === 'multiselect') {
+                    elseif ($field->type === 'select') {
                         $ruleName = "{$prefix}.{$field->name}.*";
                     } else {
                         $ruleName = "{$prefix}.{$field->name}";
@@ -79,14 +79,29 @@ trait ValidatesFields
         $function = $this->parseFunctionNameFrom($field);
         if (method_exists($this, $function)) $this->$function($value);
 
-        if ($this->getFieldValueByKey($field, 'realtimeValidationOn')) {
-            $fieldType = $this->getFieldType($field);
+        // if ($this->getFieldValueByKey($field, 'realtimeValidationOn')) {
+        //     $fieldType = $this->getFieldType($field);
+        //     if ($fieldType == 'file') {
+        //         // livewire native file upload
+        //         $this->customValidateFilesIn($field, $this->getFieldValueByKey($field, 'rules'));//this does not work for array keyval fields
+        //     } else {
+        //         $this->validateOnly($field,
+        //             [$field => $this->getFieldValueByKey($field, 'rules')],
+        //             [],
+        //             $this->validationAttributes
+        //         );
+        //     }
+        // }
+        if (filled($fieldCollection = $this->collectField($field)) && $fieldCollection->get('realtimeValidationOn')) {
+            $fieldRule = $fieldCollection->get('rules') ?? 'nullable';
+            $fieldType = $fieldCollection->get('type');
+            if ($fieldType == 'select' && $fieldCollection->get('multiple')) $field = $field . '.*';
             if ($fieldType == 'file') {
                 // livewire native file upload
-                $this->customValidateFilesIn($field, $this->getFieldValueByKey($field, 'rules'));//this does not work for array keyval fields
+                $this->customValidateFilesIn($field, $fieldRule);
             } else {
                 $this->validateOnly($field,
-                    [$field => $this->getFieldValueByKey($field, 'rules')],
+                    [$field => $fieldRule],
                     [],
                     $this->validationAttributes
                 );
