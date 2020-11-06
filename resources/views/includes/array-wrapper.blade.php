@@ -19,29 +19,25 @@
                     </div>
                     <div class="tf-repeater-btns-wrapper">
                         @if($repeater->array_sortable)
-                            <button type="button" class="tf-repeater-sorter-color"
-                                    wire:click="arrayMoveUp('{{ $repeater->name }}', '{{ $key }}')">
-                                @svg(config('tall-forms.arrow-up-icon'), 'tf-repeater-btn-size')
+                            <button type="button" class="tf-repeater-sorter-color" wire:click="arrayMoveUp('{{ $repeater->name }}', '{{ $key }}')">
+                                <x-tall-svg :path="config('tall-forms.arrow-up-icon')" class="tf-repeater-btn-size" />
                             </button>
 
-                            <button type="button" class="tf-repeater-sorter-color"
-                                    wire:click="arrayMoveDown('{{ $repeater->name }}', '{{ $key }}')">
-                                @svg(config('tall-forms.arrow-down-icon'), 'tf-repeater-btn-size')
+                            <button type="button" class="tf-repeater-sorter-color" wire:click="arrayMoveDown('{{ $repeater->name }}', '{{ $key }}')">
+                                <x-tall-svg :path="config('tall-forms.arrow-down-icon')" class="tf-repeater-btn-size" />
                             </button>
                         @endif
 
-                        <button type="button" class="tf-repeater-delete-btn"
-                                wire:click.prevent="arrayRemove('{{ $repeater->name }}', '{{ $key }}')">
-                            @svg(config('tall-forms.trash-icon'), 'tf-repeater-btn-size')
+                        <button type="button" class="tf-repeater-delete-btn" wire:click.prevent="arrayRemove('{{ $repeater->name }}', '{{ $key }}')">
+                            <x-tall-svg :path="config('tall-forms.trash-icon')" class="tf-repeater-btn-size" />
                         </button>
                     </div>
                 </div>
             @endforeach
         </div>
     @endif
-    <button type="button" class="tf-repeater-add-button"
-            wire:click.prevent="arrayAdd('{{ $repeater->name }}')" style="width:fit-content">
-        @svg(config('tall-forms.plus-icon'), 'tf-repeater-add-button-size')
+    <button type="button" class="tf-repeater-add-button" wire:click.prevent="arrayAdd('{{ $repeater->name }}')" style="width:fit-content">
+        <x-tall-svg :path="config('tall-forms.plus-icon')" class="tf-repeater-add-button-size" />
     </button>
 </div>
 {{-- after field --}}

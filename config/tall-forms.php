@@ -80,14 +80,14 @@ return [
     'are-u-sure' => 'global.areYouSure',
 
 
-    //icons, used as @svg('path/file-name', 'classes')
-    'arrow-up-icon' => 'tall-forms/cheveron-outline-up', //Repeater
-    'arrow-down-icon' => 'tall-forms/cheveron-outline-down',//Repeater
-    'trash-icon' => 'tall-forms/close-outline',//Multiple fields
-    'edit-icon' => 'tall-forms/edit-crop', //ImageCropper
-    'plus-icon' => 'tall-forms/add-outline',//Repeater
-    'file-icon' => 'tall-forms/', //FileUpload, used as @svg('tall-forms/{$mime_type}', 'classes')
-    'file-upload' => 'tall-forms/upload', //FileUpload
+    //You can swap the icons component view path. The path is relative to resources/views/components
+    'arrow-up-icon' => 'icons.cheveron-outline-up', //Repeater
+    'arrow-down-icon' => 'icons.cheveron-outline-down',//Repeater
+    'trash-icon' => 'icons.close-outline',//Multiple fields
+    'edit-icon' => 'icons.edit-crop', //ImageCropper
+    'plus-icon' => 'icons.add-outline',//Repeater
+    'file-icon' => 'icons.', //FileUpload field, all icons with "file-" prefix.
+    'file-upload' => 'icons.upload', //FileUpload
 
     //Column span classes for the fields ->colspan() method
     //requires tailwind css v1.7.0
@@ -127,5 +127,6 @@ return [
         'select' => Components\Select::class,
         'search' => Components\Search::class,
         'trix' => Components\Trix::class,
+        'svg' => Components\Svg::class,
     ]
 ];

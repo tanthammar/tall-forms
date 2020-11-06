@@ -39,5 +39,5 @@
 <{{$tag}} {{ $attributes->merge([
     'class' => "{$sizes[$size]} {$colors[$color]} tf-btn",
     'type' => ($tag == 'a') ? 'text/html' : $type
-    ]) }}>@if(isset($icon))@svg($icon, $icons[$size])@endif{{ $text ?? null }}{{ $slot }}
+    ]) }}>@if(isset($icon))<x-tall-svg :path="$icon" :class="$icons[$size]" />@endif{{ $text ?? null }}{{ $slot }}
 </{{$tag}}>

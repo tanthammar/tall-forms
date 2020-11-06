@@ -49,8 +49,8 @@
         <div x-show="!showCroppie && hasImage" class="relative {{ $field->thumbnail }}">
             <div class="tf-cropper-btns-root">
                 <div class="tf-cropper-btns-wrapper">
-                    <button type="button" class="tf-cropper-swap" x-on:click.prevent="swap()">@svg(config('tall-forms.trash-icon'), 'h-6 w-6')</button>
-                    <button type="button" class="tf-cropper-edit" x-on:click.prevent="edit()">@svg(config('tall-forms.edit-icon'), 'h-6 w-6')</button>
+                    <button type="button" class="tf-cropper-swap" x-on:click.prevent="swap()"><x-tall-svg :path="config('tall-forms.trash-icon')" class="h-6 w-6" /></button>
+                    <button type="button" class="tf-cropper-edit" x-on:click.prevent="edit()"><x-tall-svg :path="config('tall-forms.edit-icon')" class="h-6 w-6" /></button>
                 </div>
             </div>
             <div><img src="{{ $imageUrl }}" alt x-ref="result" class="display-block"></div>
