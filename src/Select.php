@@ -12,6 +12,7 @@ class Select extends BaseField
     public $type = 'select';
     public $placeholder;
     public $multiple = false;
+    public $allowed_in_array = true;
 
     public function placeholder(string $placeholder): self
     {
@@ -19,11 +20,11 @@ class Select extends BaseField
         return $this;
     }
 
-    //TODO add support for mulitple select
+    //renders a different view in the blade component class
     public function multiple(): self
     {
-        $this->type = 'multiselect';
         $this->multiple = true;
+        $this->allowed_in_array = false;
         return $this;
     }
 

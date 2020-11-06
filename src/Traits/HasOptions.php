@@ -17,15 +17,16 @@ trait HasOptions
      * OBSERVE: if you use a callable, it will be executed on EVERY re-render of the component!
      * Maybe you should consider setting the $options in mount() instead?
      * @param array|\Closure|\Illuminate\Support\Collection $options
+     * @param bool $flip_key_value
      * @return $this
      */
-    public function options($options): self
+    public function options($options, $flip_key_value = true): self
     {
         if (is_callable($options)) $options = $options();
 
         if ($options instanceof \Illuminate\Support\Collection) $options = $options->toArray();
 
-        $this->arrayFlipOrCombine($options);
+        $flip_key_value ? $this->arrayFlipOrCombine($options) : $this->options = $options;
         return $this;
     }
 
