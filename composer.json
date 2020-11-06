@@ -20,7 +20,7 @@
     ],
     "require": {
         "php": "^7.4.0",
-        "livewire/livewire": "^2.2.6",
+        "livewire/livewire": "2.3.0",
         "blade-ui-kit/blade-icons": "^0.4.5",
         "laravel/framework": "^7.0|^8.0"
     },
