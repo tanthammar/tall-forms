@@ -47,10 +47,11 @@ trait IsArrayField
         $array = [];
         if (filled($this->fields)) {
             foreach ($this->fields as $field) {
+                $field->key = $this->key.'.'.$field->name;
                 $array[] = (array)$field;
             }
         }
-        $array[$this->key] = $array;
+//        $array['parent'] = $this->key;
         return $array;
     }
 
