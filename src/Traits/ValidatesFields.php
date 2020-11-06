@@ -11,7 +11,7 @@ trait ValidatesFields
      *
      * @return array
      */
-    protected function rules(): array
+    protected function rules()
     {
         return $this->validationRulesRecursively($this->fields());
     }
