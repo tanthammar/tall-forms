@@ -7,7 +7,7 @@ namespace Tanthammar\TallForms\Traits;
 trait ValidatesFields
 {
 
-    protected function rules()
+    protected function get_rules()
     {
         $rules = [];
         foreach ($this->fields() as $field) {
@@ -73,7 +73,7 @@ trait ValidatesFields
                 // livewire native file upload
                 $this->customValidateFilesIn($field, $fieldRule);
             } else {
-                $this->validateOnly($field);
+                $this->validateOnly($field, $this->get_rules());
             }
         }
     }
