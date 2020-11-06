@@ -7,10 +7,6 @@ namespace Tanthammar\TallForms\Traits;
 trait ValidatesFields
 {
 
-    /**
-     *
-     * @return array
-     */
     protected function rules()
     {
         return $this->validationRulesRecursively($this->fields());
