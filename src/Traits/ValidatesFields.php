@@ -11,7 +11,7 @@ trait ValidatesFields
      *
      * @return array
      */
-    public function validationRules(): array
+    protected function rules(): array
     {
         return $this->validationRulesRecursively($this->fields());
     }
@@ -52,7 +52,7 @@ trait ValidatesFields
         return $rules;
     }
 
-    public function validationAttributes()
+    protected function validationAttributes()
     {
         $attributes = [];
         if ($this->labelsAsAttributes) {
@@ -79,19 +79,6 @@ trait ValidatesFields
         $function = $this->parseFunctionNameFrom($field);
         if (method_exists($this, $function)) $this->$function($value);
 
-        // if ($this->getFieldValueByKey($field, 'realtimeValidationOn')) {
-        //     $fieldType = $this->getFieldType($field);
-        //     if ($fieldType == 'file') {
-        //         // livewire native file upload
-        //         $this->customValidateFilesIn($field, $this->getFieldValueByKey($field, 'rules'));//this does not work for array keyval fields
-        //     } else {
-        //         $this->validateOnly($field,
-        //             [$field => $this->getFieldValueByKey($field, 'rules')],
-        //             [],
-        //             $this->validationAttributes
-        //         );
-        //     }
-        // }
         if (filled($fieldCollection = $this->collectField($field)) && $fieldCollection->get('realtimeValidationOn')) {
             $fieldRule = $fieldCollection->get('rules') ?? 'nullable';
             $fieldType = $fieldCollection->get('type');
@@ -100,11 +87,7 @@ trait ValidatesFields
                 // livewire native file upload
                 $this->customValidateFilesIn($field, $fieldRule);
             } else {
-                $this->validateOnly($field,
-                    [$field => $fieldRule],
-                    [],
-                    $this->validationAttributes
-                );
+                $this->validateOnly($field);
             }
         }
     }

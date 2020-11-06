@@ -25,13 +25,9 @@ trait TallForm
     public $custom_data = [];
 
     public $labelsAsAttributes;
-    public $validationAttributes = [];
-
-    protected $rules = [];
 
     public function __construct($id = null)
     {
-        //$this->rules = $this->get_rules();
         $this->listeners = array_merge($this->listeners, ['tallFillField']);
         $this->labelW = 'tf-label-width';
         $this->fieldW = 'tf-field-width';
@@ -48,7 +44,6 @@ trait TallForm
         $this->previous = urlencode(\URL::previous());  //used for saveAndGoBack
         $this->wrapViewPath = config('tall-forms.wrap-view-path');
         $this->inlineLabelAlignment = $this->inlineLabelAlignment ?? 'tf-inline-label-alignment';
-        $this->validationAttributes = $this->validationAttributes(); //ValidatesFields trait
     }
 
 
