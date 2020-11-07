@@ -74,7 +74,7 @@ trait ValidatesFields
     {
         $function = $this->parseFunctionNameFrom($field);
         if (method_exists($this, $function)) $this->$function($value);
-
+//        dd($field, $value, $function, $this->get_rules(), $this->validationAttributes(), $this->collectField($field));
         if (filled($fieldCollection = $this->collectField($field)) && $fieldCollection->get('realtimeValidationOn')) {
             $fieldRule = $fieldCollection->get('rules') ?? 'nullable';
             $fieldType = $fieldCollection->get('type');
@@ -83,11 +83,7 @@ trait ValidatesFields
                 // livewire native file upload
                 $this->customValidateFilesIn($field, $fieldRule);
             } else {
-                $this->validateOnly($field,
-                    [$field => $fieldRule],
-                    [],
-                    $this->validationAttributes
-                );
+                $this->validateOnly($field, $this->get_rules());
             }
         }
     }
