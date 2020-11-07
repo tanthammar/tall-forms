@@ -7,31 +7,41 @@ namespace Tanthammar\TallForms\Traits;
 trait ValidatesFields
 {
 
-    protected function get_rules()
+    public function validationRules()
+    {
+        return $this->validationRulesRecursively($this->fields());
+    }
+
+    /**
+     *
+     * @param array $fields
+     * @param string $prefix
+     * @return array
+     */
+    protected function validationRulesRecursively(array $fields, string $prefix = 'form_data'): array
     {
         $rules = [];
-        foreach ($this->fields() as $field) {
-            if ($field != null) {
 
-                if (!in_array($field->type, ['array', 'keyval', 'file', 'select'])) $rules[$field->key] = $field->rules ?? 'nullable';
-
+        foreach ($fields as $field) {
+            if (filled($field)) {
                 if (in_array($field->type, ['array', 'keyval'])) {
-                    foreach ($field->fields as $array_field) {
-                        $key = $field->type === 'array'
-                            ? "$field->key.*.$array_field->name"
-                            : "$field->key.$array_field->name";
-                        $rules[$key] = $array_field->rules ?? 'nullable';
+                    if (property_exists($field, 'fields') && is_array($field->fields) && 0 < count($field->fields)) {
+                        $ruleName = $field->type === 'array' ? "{$prefix}.{$field->name}.*" : "{$prefix}.{$field->name}";
+                        $rules = array_merge($rules, $this->validationRulesRecursively($field->fields, $ruleName));
                     }
-                }
-                if ($field->type === 'file') { //use field name here, for custom handling
-                    $field->multiple
-                        ? $rules["$field->name.*"] = $field->rules ?? 'nullable'
-                        : $rules[$field->name] = $field->rules ?? 'nullable';
-                }
-                if ($field->type === 'select') {
-                    $field->multiple
-                        ? $rules["$field->key.*"] = $field->rules ?? 'nullable'
-                        : $rules[$field->key] = $field->rules ?? 'nullable';
+                    $rules["$prefix.$field->name"] = $field->rules ?? 'nullable';
+
+                } else {
+                    if ($field->type === 'file') {
+                        $ruleName = $field->multiple ? "{$field->name}.*" : $field->name;
+                    }
+                    elseif ($field->type === 'select') {
+                        $ruleName = "{$prefix}.{$field->name}.*";
+                    } else {
+                        $ruleName = "{$prefix}.{$field->name}";
+                    }
+
+                    $rules[$ruleName] = $field->rules ?? 'nullable';
                 }
             }
         }
@@ -42,7 +52,7 @@ trait ValidatesFields
     {
         $attributes = [];
         if ($this->labelsAsAttributes) {
-            foreach ($this->fields() as $field) {
+            foreach ($this->getFields() as $field) {
                 if ($field != null && $field->labelAsAttribute) {
                     if (in_array($field->type, ['array', 'keyval'])) {
                         foreach ($field->fields as $array_field) {
@@ -73,7 +83,11 @@ trait ValidatesFields
                 // livewire native file upload
                 $this->customValidateFilesIn($field, $fieldRule);
             } else {
-                $this->validateOnly($field, $this->get_rules());
+                $this->validateOnly($field,
+                    [$field => $fieldRule],
+                    [],
+                    $this->validationAttributes
+                );
             }
         }
     }
