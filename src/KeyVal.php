@@ -10,5 +10,5 @@ class KeyVal extends BaseField
 
     public $type = 'keyval';
     public $align_label_top = true;
-    public $allowed_in_array = false;
+    public $allowed_in_array = true;
 }
