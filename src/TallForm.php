@@ -25,9 +25,6 @@ trait TallForm
     public $custom_data = [];
 
     public $labelsAsAttributes;
-    public $validationAttributes = [];
-
-    protected $rules = [];
 
     public function __construct($id = null)
     {
@@ -47,7 +44,6 @@ trait TallForm
         $this->previous = urlencode(\URL::previous());  //used for saveAndGoBack
         $this->wrapViewPath = config('tall-forms.wrap-view-path');
         $this->inlineLabelAlignment = $this->inlineLabelAlignment ?? 'tf-inline-label-alignment';
-        $this->validationAttributes = $this->validationAttributes(); //ValidatesFields trait
     }
 
 
