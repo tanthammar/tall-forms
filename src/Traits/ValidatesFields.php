@@ -7,7 +7,7 @@ namespace Tanthammar\TallForms\Traits;
 trait ValidatesFields
 {
 
-    public function validationRules()
+    protected function get_rules()
     {
         return $this->validationRulesRecursively($this->fields());
     }
