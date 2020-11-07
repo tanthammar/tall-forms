@@ -11,10 +11,7 @@ trait SubmitsForm
 
     public function submit()
     {
-        // fix for Livewire v2.5.5 returning ALL component properties
-        // bug: https://github.com/livewire/livewire/issues/1649
-        $validated_data = $this->validate()['form_data'];
-
+        $validated_data = $this->validate($this->get_rules())['form_data'];
         $field_names = [];
         $relationship_names = [];
         $custom_names = [];
