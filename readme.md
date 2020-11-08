@@ -20,8 +20,15 @@ Auto-generate responsive [Laravel Livewire](https://laravel-livewire.com) (TALL-
 ### Sponsor Heroes
 [💗 Please Sponsor 🔗](https://github.com/sponsors/tanthammar) It takes a lot of time to create and maintain this package. I am forever grateful to you:
 <br><br>
-<a href="https://github.com/gavinhewitt"><img src="https://avatars2.githubusercontent.com/u/1969103?s=400&v=4" width="100px;" alt=""/><br /><sub><b>
-Gavin Hewitt</b></sub></a>
+<table>
+<tbody>
+<tr>
+<td><a href="https://github.com/gavinhewitt"><img src="https://avatars2.githubusercontent.com/u/1969103?s=400&v=4" width="100px;" alt=""/><br /><sub><b>Gavin Hewitt</b></sub></a></td>
+<td><a href="https://github.com/MichaelGatuma"><img src="https://avatars0.githubusercontent.com/u/50529359?s=460&u=53cff27075ea04ec3032fe03976f05ac86f0e3b7&v=4" width="100px;" alt=""/><br /><sub><b>Michael Gatuma</b></sub></a></td>
+<td><a href="https://github.com/lalov"><img src="https://avatars3.githubusercontent.com/u/3465648?s=460&u=60998db0098beca7b3ceef52ac5055f72eebe69e&v=4" width="100px;" alt=""/><br /><sub><b>Lars Erik Løvhaug</b></sub></a></td>
+</tr>
+</tbody>
+</table>
 
 
 ### Credits
