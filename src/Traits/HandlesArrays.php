@@ -15,14 +15,11 @@ trait HandlesArrays
     {
         $array_fields = [];
 
-        foreach ($this->getFields() as $field) {
-            if (filled($field)) {
-                if (str_replace('form_data.', '', $field->key) === $field_name) {
-                    foreach ($field->fields as $array_field) {
-                        $array_fields[$array_field->name] = $array_field->default ?? ($array_field->type == 'checkboxes' ? [] : null);
-                    }
-                    break;
-                }
+        $field = collect($this->getFields())->firstWhere('key', 'form_data.' . $field_name);
+
+        if (filled($field)) {
+            foreach ($field->fields as $array_field) {
+                $array_fields[$array_field->name] = $array_field->default ?? ($array_field->type == 'checkboxes' ? [] : null);
             }
         }
 

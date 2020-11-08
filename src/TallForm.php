@@ -3,6 +3,7 @@
 namespace Tanthammar\TallForms;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Tanthammar\TallForms\Traits\HandlesArrays;
 use Tanthammar\TallForms\Traits\HasButtons;
 use Tanthammar\TallForms\Traits\HasComponentDesign;
@@ -56,10 +57,28 @@ trait TallForm
     public function setFormProperties()
     {
         $this->form_data = $this->arrayDotOnly(optional($this->model)->toArray(), $this->fieldNames());
-        foreach ($this->getFields() as $field) {
-            if (filled($field) && !isset($this->form_data[$field->name])) {
+
+        // foreach ($this->getFields(false) as $field) {
+        //     if (filled($field) && !isset($this->form_data[$field->name])) {
+        //         $array = in_array($field->type, ['checkboxes', 'file', 'multiselect']);
+        //         $this->form_data[$field->name] = $field->default ?? ($array ? [] : null);
+        //     }
+        // }
+
+        $fields = $this->getFields(false);
+        $this->setFormPropertiesRecursively($fields);
+    }
+
+    protected function setFormPropertiesRecursively(array $fields)
+    {
+        foreach ($fields as $field) {
+            $fieldKey = str_replace('form_data.', '', $field->key);
+            if (filled($field) && false === Str::contains($fieldKey, ['*']) && is_null(data_get($this->form_data, $fieldKey, null))) {
                 $array = in_array($field->type, ['checkboxes', 'file', 'multiselect']);
-                $this->form_data[$field->name] = $field->default ?? ($array ? [] : null);
+                data_set($this->form_data, $fieldKey, $field->default ?? ($array ? [] : null));
+                if (property_exists($field, 'fields') && is_array($field->fields) && 0 < count($field->fields)) {
+                    $this->setFormPropertiesRecursively($field->fields);
+                }
             }
         }
     }
@@ -89,7 +108,7 @@ trait TallForm
     public function formView()
     {
         $view = view('tall-forms::layout-picker', [
-            'fields' => $this->fields(),
+            'fields' => $this->getFields(false),
         ]);
         if($this->layout) $view->layout($this->layout);
         return $view;

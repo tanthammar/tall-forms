@@ -36,7 +36,7 @@ trait ValidatesFields
                         $ruleName = $field->multiple ? "{$field->name}.*" : $field->name;
                     }
                     elseif ($field->type === 'select') {
-                        $ruleName = "{$prefix}.{$field->name}.*";
+                        $ruleName = $field->multiple ? "{$prefix}.{$field->name}.*" : "{$prefix}.{$field->name}";
                     } else {
                         $ruleName = "{$prefix}.{$field->name}";
                     }
@@ -74,7 +74,7 @@ trait ValidatesFields
     {
         $function = $this->parseFunctionNameFrom($field);
         if (method_exists($this, $function)) $this->$function($value);
-//        dd($field, $value, $function, $this->get_rules(), $this->validationAttributes(), $this->collectField($field));
+
         if (filled($fieldCollection = $this->collectField($field)) && $fieldCollection->get('realtimeValidationOn')) {
             $fieldRule = $fieldCollection->get('rules') ?? 'nullable';
             $fieldType = $fieldCollection->get('type');

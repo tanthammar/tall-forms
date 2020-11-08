@@ -173,34 +173,42 @@ trait Helpers
 
     /**
      *
+     * @param bool $flatten
      * @return array
      */
-    protected function getFields(): array
+    protected function getFields(bool $flatten = true): array
     {
-        return $this->getFieldsRecursively($this->fields());
+        return $this->getFieldsRecursively($this->fields(), '', $flatten);
     }
 
     /**
      *
      * @param array $fields
      * @param string $prefix
+     * @param bool $flatten
      * @return array
      */
-    protected function getFieldsRecursively(array $fields, $prefix = ''): array
+    protected function getFieldsRecursively(array $fields, $prefix = '', bool $flatten = true): array
     {
         $results = [];
 
-        foreach ($fields as $field) {
+        foreach ($fields as &$field) {
             if (filled($field)) {
-                $key = (empty($prefix)) ? $field->key : $prefix . '.' . $field->name;
+                $fieldKey = (empty($prefix)) ? $field->key : $prefix . '.' . $field->name;
+                $field->key = $fieldKey;
+                $fieldKey = ($field->type === 'array') ? "{$fieldKey}.*" : $fieldKey;
                 if (property_exists($field, 'fields') && is_array($field->fields) && 0 < count($field->fields)) {
-                    $results = array_merge($results, $this->getFieldsRecursively($field->fields, $key));
+                    $fieldResults = $this->getFieldsRecursively($field->fields, $fieldKey, $flatten);
+                    if ($flatten) {
+                        $results = array_merge($results, $fieldResults);
+                    } else {
+                        $field->fields = $fieldResults;
+                    }
                 }
-                $field->key = $key;
                 $results[] = $field;
             }
         }
 
-        return $results;
+        return $flatten ? $results : $fields;
     }
 }
