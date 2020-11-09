@@ -56,7 +56,7 @@ trait TallForm
 
     public function setFormProperties()
     {
-        $this->form_data = $this->arrayDotOnly(optional($this->model)->toArray(), $this->fieldNames());
+        $this->form_data = $this->model->only($this->firstLevelfieldNames());
 
         // foreach ($this->getFields(false) as $field) {
         //     if (filled($field) && !isset($this->form_data[$field->name])) {

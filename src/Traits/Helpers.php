@@ -139,14 +139,19 @@ trait Helpers
         ];
     }
 
-    /**
-     *
-     * @return array
-     */
+    protected function firstLevelfieldNames(): array
+    {
+        return $fieldNames = collect($this->fields())->map(function ($field) {
+            return filled($field) ? $field->name : null;
+        })->toArray();
+    }
+
+
     protected function fieldNames(): array
     {
         return $this->fieldNamesRecursively($this->fields());
     }
+
 
     /**
      *
