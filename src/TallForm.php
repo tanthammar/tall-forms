@@ -56,11 +56,11 @@ trait TallForm
 
     public function setFormProperties()
     {
-        $this->form_data = optional($this->model)->only($this->firstLevelfieldNames()) ?? [];
+        $this->form_data = $this->model->only($this->firstLevelfieldNames());
 
         // foreach ($this->getFields(false) as $field) {
         //     if (filled($field) && !isset($this->form_data[$field->name])) {
-        //         $array = in_array($field->type, ['checkboxes', 'file', 'multiselect']);
+        //         $array = (in_array($field->type, ['checkboxes', 'file']) || ($field->type === 'select' && $field->multiple));
         //         $this->form_data[$field->name] = $field->default ?? ($array ? [] : null);
         //     }
         // }
