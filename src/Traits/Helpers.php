@@ -70,7 +70,8 @@ trait Helpers
 
     public function tallFillField($array)
     {
-        $this->form_data[$array['field']] = $array['value'];
+//        $this->form_data[$array['field']] = $array['value'];
+        data_set($this->form_data, $array['field'], $array['value']);
     }
 
     // All other methods regarding tags are in Tanthammar\TallForms\SpatieTags
