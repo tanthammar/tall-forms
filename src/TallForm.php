@@ -58,7 +58,7 @@ trait TallForm
         $this->form_data = optional($this->model)->only($this->fieldNames());
         foreach ($this->fields() as $field) {
             if (filled($field) && !isset($this->form_data[$field->name])) {
-                $array = in_array($field->type, ['checkboxes', 'file', 'multiselect']);
+                $array = (in_array($field->type, ['checkboxes', 'file']) || ($field->type === 'select' && $field->multiple));
                 $this->form_data[$field->name] = $field->default ?? ($array ? [] : null);
             }
         }
