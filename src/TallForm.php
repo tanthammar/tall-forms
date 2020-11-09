@@ -65,19 +65,21 @@ trait TallForm
         //     }
         // }
 
-        $fields = $this->getFields(false);
-        $this->setFormPropertiesRecursively($fields);
+        $fields = $this->getFields(false); //set nested field key names
+        $this->setFormPropertiesRecursively($fields); // fill form_data with default values if not exists on the model
     }
 
     protected function setFormPropertiesRecursively(array $fields)
     {
         foreach ($fields as $field) {
-            $fieldKey = str_replace('form_data.', '', $field->key);
-            if (filled($field) && false === Str::contains($fieldKey, ['*']) && is_null(data_get($this->form_data, $fieldKey, null))) {
-                $array = (in_array($field->type, ['checkboxes', 'file']) || ($field->type === 'select' && $field->multiple));
-                data_set($this->form_data, $fieldKey, $field->default ?? ($array ? [] : null));
-                if (property_exists($field, 'fields') && is_array($field->fields) && 0 < count($field->fields)) {
-                    $this->setFormPropertiesRecursively($field->fields);
+            if (filled($field)) {
+                $fieldKey = str_replace('form_data.', '', $field->key);
+                if (false === Str::contains($fieldKey, ['*']) && is_null(data_get($this->form_data, $fieldKey, null))) {
+                    $array = (in_array($field->type, ['checkboxes', 'file']) || ($field->type === 'select' && $field->multiple));
+                    data_set($this->form_data, $fieldKey, $field->default ?? ($array ? [] : null));
+                    if (property_exists($field, 'fields') && is_array($field->fields) && 0 < count($field->fields)) {
+                        $this->setFormPropertiesRecursively($field->fields);
+                    }
                 }
             }
         }
