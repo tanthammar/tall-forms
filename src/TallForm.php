@@ -55,7 +55,7 @@ trait TallForm
 
     public function setFormProperties()
     {
-        $this->form_data = optional($this->model)->only($this->fieldNames());
+        $this->form_data = $this->model->only($this->fieldNames());
         foreach ($this->fields() as $field) {
             if (filled($field) && !isset($this->form_data[$field->name])) {
                 $array = (in_array($field->type, ['checkboxes', 'file']) || ($field->type === 'select' && $field->multiple));
