@@ -74,7 +74,7 @@ trait TallForm
         foreach ($fields as $field) {
             $fieldKey = str_replace('form_data.', '', $field->key);
             if (filled($field) && false === Str::contains($fieldKey, ['*']) && is_null(data_get($this->form_data, $fieldKey, null))) {
-                $array = in_array($field->type, ['checkboxes', 'file', 'multiselect']);
+                $array = (in_array($field->type, ['checkboxes', 'file']) || ($field->type === 'select' && $field->multiple));
                 data_set($this->form_data, $fieldKey, $field->default ?? ($array ? [] : null));
                 if (property_exists($field, 'fields') && is_array($field->fields) && 0 < count($field->fields)) {
                     $this->setFormPropertiesRecursively($field->fields);
