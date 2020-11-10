@@ -12,12 +12,23 @@ trait SubmitsForm
     public function submit()
     {
         $validated_data = $this->validate($this->get_rules())['form_data'];
+        // dd($this->form_data);
 
-        $names = $this->getNamesByFields();
+        $groupedFieldNames = collect($this->getFields())->mapToGroups(function ($item, $key) {
+            $indexName = 'field_names';
+            if ($item->is_custom) {
+                $indexName = 'custom_names';
+            }
+            if ($item->is_relation) {
+                $indexName = 'relationship_names';
+            }
+            $fieldName = str_replace(['form_data.', '*.'], '', $item->key);
+            return [$indexName => $fieldName];
+        })->toArray();
 
-        $field_names = $names['field_names'];
-        $relationship_names = $names['relationship_names'];
-        $custom_names = $names['custom_names'];
+        $field_names = $groupedFieldNames['field_names'] ?? [];
+        $relationship_names = $groupedFieldNames['relationship_names'] ?? [];
+        $custom_names = $groupedFieldNames['custom_names'] ?? [];
 
         $relationship_data = $this->arrayDotOnly($validated_data, $relationship_names);
         $this->custom_data = $this->arrayDotOnly($validated_data, $custom_names); //custom_data also used by syncTags(), therefore must be a property

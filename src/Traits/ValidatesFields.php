@@ -7,19 +7,15 @@ namespace Tanthammar\TallForms\Traits;
 trait ValidatesFields
 {
 
-    protected function get_rules()
-    {
-        return $this->validationRulesRecursively($this->fields());
-    }
-
     /**
      *
      * @param array $fields
      * @param string $prefix
      * @return array
      */
-    protected function validationRulesRecursively(array $fields, string $prefix = 'form_data'): array
+    protected function get_rules($fields = null, string $prefix = 'form_data'): array
     {
+        $fields = is_null($fields) || !is_array($fields) ? $this->fields() : $fields;
         $rules = [];
 
         foreach ($fields as $field) {
@@ -27,7 +23,7 @@ trait ValidatesFields
                 if (in_array($field->type, ['array', 'keyval'])) {
                     if (property_exists($field, 'fields') && is_array($field->fields) && 0 < count($field->fields)) {
                         $ruleName = $field->type === 'array' ? "{$prefix}.{$field->name}.*" : "{$prefix}.{$field->name}";
-                        $rules = array_merge($rules, $this->validationRulesRecursively($field->fields, $ruleName));
+                        $rules = array_merge($rules, $this->get_rules($field->fields, $ruleName));
                     }
                     $rules["$prefix.$field->name"] = $field->rules ?? 'nullable';
 
