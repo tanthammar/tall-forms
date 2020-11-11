@@ -94,6 +94,13 @@ trait Helpers
         return $newArray;
     }
 
+    protected function firstLevelfieldNames(): array
+    {
+        return $fieldNames = collect($this->fields())->map(function ($field) {
+            return filled($field) ? $field->name : null;
+        })->toArray();
+    }
+
     /**
      *
      * @param array $fields

@@ -56,10 +56,7 @@ trait TallForm
 
     public function setFormProperties()
     {
-        $fieldNames = collect($this->getFields())->map(function ($item, $key) {
-            return str_replace(['form_data.', '*.'], '', $item->key);
-        })->all();
-        $this->form_data = $this->arrayDotOnly($this->model->toArray(), $fieldNames);
+        $this->form_data = $this->model->only($this->firstLevelfieldNames());
         $fields = $this->getFields(null, '', false);
         $this->setFormPropertiesRecursively($fields);
     }
@@ -67,24 +64,28 @@ trait TallForm
     protected function setFormPropertiesRecursively(array $fields)
     {
         foreach ($fields as $field) {
-            $fieldKey = str_replace('form_data.', '', $field->key);
-            if (filled($field) && false === Str::contains($fieldKey, ['*']) && is_null(data_get($this->form_data, $fieldKey, null))) {
-                $array = (in_array($field->type, ['checkboxes', 'file']) || ($field->type === 'select' && $field->multiple));
-                data_set($this->form_data, $fieldKey, $field->default ?? ($array ? [] : null));
-                if (property_exists($field, 'fields') && is_array($field->fields) && 0 < count($field->fields)) {
-                    $this->setFormPropertiesRecursively($field->fields);
+            if (filled($field)) {
+                $fieldKey = str_replace('form_data.', '', $field->key);
+                if (false === Str::contains($fieldKey, ['*']) && is_null(data_get($this->form_data, $fieldKey, null))) {
+                    $array = (in_array($field->type, ['checkboxes', 'file']) || ($field->type === 'select' && $field->multiple));
+                    data_set($this->form_data, $fieldKey, $field->default ?? ($array ? [] : null));
+                    if (property_exists($field, 'fields') && is_array($field->fields) && 0 < count($field->fields)) {
+                        $this->setFormPropertiesRecursively($field->fields);
+                    }
                 }
             }
         }
     }
 
-    public function afterFormProperties()
+    public
+    function afterFormProperties()
     {
         return;
     }
 
 
-    public function getFormTitleProperty()
+    public
+    function getFormTitleProperty()
     {
         return isset($this->formTitle) ? $this->formTitle : $this->formTitle = null;
     }
@@ -95,21 +96,24 @@ trait TallForm
 //        return isset($this->formWrapper) ? $this->formWrapper : $this->formWrapper = 'max-w-screen-lg mx-auto';
 //    }
 
-    public function render()
+    public
+    function render()
     {
         return $this->formView();
     }
 
-    public function formView()
+    public
+    function formView()
     {
         $view = view('tall-forms::layout-picker', [
             'fields' => $this->getFields(null, '', false),
         ]);
-        if($this->layout) $view->layout($this->layout);
+        if ($this->layout) $view->layout($this->layout);
         return $view;
     }
 
-    public function fields()
+    public
+    function fields()
     {
         return [];
     }
