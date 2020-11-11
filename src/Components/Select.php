@@ -14,13 +14,11 @@ class Select extends Component
 
     public Field $field;
     public string $temp_key;
-    public bool $is_selected;
 
-    public function __construct(Field $field, string $tempKey, $selected = null)
+    public function __construct(Field $field, string $tempKey)
     {
         $this->field = $field;
         $this->temp_key = $tempKey;
-        $this->is_selected = filled($selected);
     }
 
     public function options(): array
