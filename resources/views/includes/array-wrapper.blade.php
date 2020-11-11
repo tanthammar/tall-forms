@@ -1,13 +1,17 @@
-@php $repeater = $field @endphp
+@php
+    $repeater = $field;
+    $short_parent_name = str_replace('form_data.', '', $parent_name);
+    $repeater_form_data = data_get($form_data, $short_parent_name, false);
+@endphp
 <div class="tf-repeater-root">
-    @if(isset($form_data[$repeater->name]) && $form_data[$repeater->name])
+    @if(is_array($repeater_form_data) && 0 < count($repeater_form_data))
         <div class="{{ $repeater->array_wrapper_class ?? 'tf-repeater-wrapper' }}">
-            @foreach($form_data[$repeater->name] as $key => $value)
+            @foreach($repeater_form_data as $key => $value)
                 <div class="tf-repeater-wrapper-outer" wire:key="{{ md5($repeater->key.$loop->index) }}">
                     <div class="{{ $repeater->array_wrapper_grid_class ?? 'tf-repeater-wrapper-grid' }}">
                         @foreach($repeater->fields as $array_field)
                             @php
-                                $temp_key = "{$repeater->key}.{$key}.{$array_field->name}";
+                                $temp_key = "{$parent_name}.{$key}.{$array_field->name}";
                                 $array_field->show_label = $key === 0;
                                 $array_field->inline = $array_field->inline ?? false;
                                 $array_field->inArray = true;
@@ -19,16 +23,16 @@
                     </div>
                     <div class="tf-repeater-btns-wrapper">
                         @if($repeater->array_sortable)
-                            <button type="button" class="tf-repeater-sorter-color" wire:click="arrayMoveUp('{{ $repeater->name }}', '{{ $key }}')">
+                            <button type="button" class="tf-repeater-sorter-color" wire:click="arrayMoveUp('{{ $short_parent_name }}', '{{ $key }}')">
                                 <x-tall-svg :path="config('tall-forms.arrow-up-icon')" class="tf-repeater-btn-size" />
                             </button>
 
-                            <button type="button" class="tf-repeater-sorter-color" wire:click="arrayMoveDown('{{ $repeater->name }}', '{{ $key }}')">
+                            <button type="button" class="tf-repeater-sorter-color" wire:click="arrayMoveDown('{{ $short_parent_name }}', '{{ $key }}')">
                                 <x-tall-svg :path="config('tall-forms.arrow-down-icon')" class="tf-repeater-btn-size" />
                             </button>
                         @endif
 
-                        <button type="button" class="tf-repeater-delete-btn" wire:click.prevent="arrayRemove('{{ $repeater->name }}', '{{ $key }}')">
+                        <button type="button" class="tf-repeater-delete-btn" wire:click.prevent="arrayRemove('{{ $short_parent_name }}', '{{ $key }}')">
                             <x-tall-svg :path="config('tall-forms.trash-icon')" class="tf-repeater-btn-size" />
                         </button>
                     </div>
@@ -36,7 +40,7 @@
             @endforeach
         </div>
     @endif
-    <button type="button" class="tf-repeater-add-button" wire:click.prevent="arrayAdd('{{ $repeater->name }}')" style="width:fit-content">
+    <button type="button" class="tf-repeater-add-button" wire:click.prevent="arrayAdd('{{ $short_parent_name }}')" style="width:fit-content">
         <x-tall-svg :path="config('tall-forms.plus-icon')" class="tf-repeater-add-button-size" />
     </button>
 </div>

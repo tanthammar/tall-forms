@@ -13,18 +13,20 @@ trait SubmitsForm
     {
         $validated_data = $this->validate($this->get_rules())['form_data'];
 
+        //filter out custom-, and relationship-fields
         $field_names = [];
-        foreach ($this->fields() as $field) {
-            if (filled($field) && !$field->is_relation && !$field->is_custom) $field_names[] = $field->name;
+        foreach ($this->getFields() as $field) {
+            if (filled($field) && !$field->is_relation && !$field->is_custom) {
+                $field_names[] = str_replace(['form_data.', '*.'], '', $field->key);
+            }
         }
-
-        $model_fields_data = Arr::only($validated_data, $field_names);
+        $model_fields_data = $this->arrayDotOnly($validated_data, $field_names);
 
         //make sure to create the model before attaching any relations
         $this->success($model_fields_data); //creates or updates the model
 
-        //saveFoo()
-        foreach ($this->fields() as $field) {
+        //saveFoo(), for all fields, no matter if it's custom, relation or base field
+        foreach ($this->getFields() as $field) {
             if (filled($field)) {
                 $function = $this->parseFunctionNameFrom($field->key, 'save');
                 $validated_data = $field->type == 'file' ? $this->{$field->name} : data_get($this, $field->key);
