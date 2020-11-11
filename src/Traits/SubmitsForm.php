@@ -12,17 +12,12 @@ trait SubmitsForm
     public function submit()
     {
         $validated_data = $this->validate($this->get_rules())['form_data'];
-        $field_names = [];
-        $custom_names = [];
 
+        $field_names = [];
         foreach ($this->fields() as $field) {
-            if (filled($field)) {
-                if ($field->is_custom) $custom_names[] = $field->name;
-                if (!$field->is_relation && !$field->is_custom) $field_names[] = $field->name;
-            }
+            if (filled($field) && !$field->is_relation && !$field->is_custom) $field_names[] = $field->name;
         }
 
-        $this->custom_data = Arr::only($validated_data, $custom_names); //custom_data also used by syncTags(), therefore must be a property
         $model_fields_data = Arr::only($validated_data, $field_names);
 
         //make sure to create the model before attaching any relations

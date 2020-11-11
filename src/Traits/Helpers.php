@@ -77,7 +77,7 @@ trait Helpers
     // It's intended to be called in the onCreateModel() method, to sync tags after the model is created
     public function syncTags($field, $tagType = null)
     {
-        $tags = data_get($this->custom_data, $field);
+        $tags = data_get($this->form_data, $field); //data is already validated on submit()
         if (filled($tags = explode(",", $tags)) && optional($this->model)->exists) {
             filled($tagType) ? $this->model->syncTagsWithType($tags, $tagType) : $this->model->syncTags($tags);
         }
