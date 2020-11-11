@@ -79,6 +79,7 @@ trait ValidatesFields
                 // livewire native file upload
                 $this->customValidateFilesIn($field, $fieldRule);
             } else {
+                dd($field, $this->get_rules(), $this->validationAttributes());
                 $this->validateOnly($field, $this->get_rules());
             }
         }

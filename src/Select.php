@@ -24,7 +24,6 @@ class Select extends BaseField
     public function multiple(): self
     {
         $this->multiple = true;
-        $this->allowed_in_array = false;
         return $this;
     }
 
