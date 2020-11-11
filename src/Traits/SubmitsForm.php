@@ -12,7 +12,6 @@ trait SubmitsForm
     public function submit()
     {
         $validated_data = $this->validate($this->get_rules())['form_data'];
-        // dd($this->form_data);
 
         $groupedFieldNames = collect($this->getFields())->mapToGroups(function ($item) {
             $indexName = 'field_names';
@@ -22,8 +21,6 @@ trait SubmitsForm
             return [$indexName => $fieldName];
         })->toArray();
 
-        $relationship_data = $this->arrayDotOnly($validated_data, $groupedFieldNames['relationship_names'] ?? []);
-        $this->custom_data = $this->arrayDotOnly($validated_data, $groupedFieldNames['custom_names'] ?? []); //custom_data also used by syncTags(), therefore must be a property
         $model_fields_data = $this->arrayDotOnly($validated_data, $groupedFieldNames['field_names'] ?? []);
 
         //make sure to create the model before attaching any relations
