@@ -24,6 +24,7 @@ class Select extends BaseField
     public function multiple(): self
     {
         $this->multiple = true;
+        $this->type = 'multiselect';
         return $this;
     }
 
