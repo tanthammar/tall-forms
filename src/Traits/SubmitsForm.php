@@ -13,20 +13,19 @@ trait SubmitsForm
     {
         $validated_data = $this->validate($this->get_rules())['form_data'];
 
-        $groupedFieldNames = collect($this->getFields())->mapToGroups(function ($item) {
-            $indexName = 'field_names';
-            if ($item->is_custom) $indexName = 'custom_names';
-            if ($item->is_relation) $indexName = 'relationship_names';
-            $fieldName = str_replace(['form_data.', '*.'], '', $item->key);
-            return [$indexName => $fieldName];
-        })->toArray();
-
-        $model_fields_data = $this->arrayDotOnly($validated_data, $groupedFieldNames['field_names'] ?? []);
+        //filter out custom-, and relationship-fields
+        $field_names = [];
+        foreach ($this->getFields() as $field) {
+            if (filled($field) && !$field->is_relation && !$field->is_custom) {
+                $field_names[] = str_replace(['form_data.', '*.'], '', $field->key);
+            }
+        }
+        $model_fields_data = $this->arrayDotOnly($validated_data, $field_names);
 
         //make sure to create the model before attaching any relations
         $this->success($model_fields_data); //creates or updates the model
 
-        //saveFoo()
+        //saveFoo(), for all fields, no matter if it's custom, relation or base field
         foreach ($this->getFields() as $field) {
             if (filled($field)) {
                 $function = $this->parseFunctionNameFrom($field->key, 'save');

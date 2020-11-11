@@ -4,7 +4,6 @@ namespace Tanthammar\TallForms\Traits;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use stdClass;
 
 trait Helpers
 {
@@ -61,14 +60,6 @@ trait Helpers
         }
     }
 
-    // in blade views to strip "form data" from field validation
-    public function errorMessage($message, $key = '', $label = '')
-    {
-        $return = str_replace('form_data.', '', $message);
-        return str_replace('form data.', '', $return);
-//        return \Str::replaceFirst('form data.', '', $message);
-    }
-
     public static function unique_words(string $scentence): string
     {
         return implode(' ', array_unique(explode(' ', $scentence)));
@@ -84,8 +75,8 @@ trait Helpers
     public function arrayDotOnly(array $array, $keys): array
     {
         $newArray = [];
-        foreach ((array) $keys as $key) {
-            if(($value = Arr::get($array, $key)) !== null) Arr::set($newArray, $key, $value);
+        foreach ((array)$keys as $key) {
+            if (($value = Arr::get($array, $key)) !== null) Arr::set($newArray, $key, $value);
         }
         return $newArray;
     }
@@ -93,7 +84,7 @@ trait Helpers
     protected function firstLevelFieldNames(): array
     {
         $fieldNames = [];
-        foreach($this->fields() as $field) {
+        foreach ($this->fields() as $field) {
             if (filled($field)) $fieldNames[] = $field->name;
         }
         return $fieldNames;
@@ -101,7 +92,7 @@ trait Helpers
 
     /**
      *
-     * @param array $fields
+     * @param ?array|string $fields
      * @param string $prefix
      * @param bool $flatten
      * @return array
@@ -129,5 +120,21 @@ trait Helpers
         }
 
         return $flatten ? $results : $fields;
+    }
+
+    protected function setFormPropertiesRecursively(array $fields)
+    {
+        foreach ($fields as $field) {
+            if (filled($field)) {
+                $fieldKey = str_replace('form_data.', '', $field->key);
+                if (false === Str::contains($fieldKey, ['*']) && is_null(data_get($this->form_data, $fieldKey, null))) {
+                    $array = (in_array($field->type, ['checkboxes', 'file']) || ($field->type === 'select' && $field->multiple));
+                    data_set($this->form_data, $fieldKey, $field->default ?? ($array ? [] : null));
+                    if (property_exists($field, 'fields') && is_array($field->fields) && 0 < count($field->fields)) {
+                        $this->setFormPropertiesRecursively($field->fields);
+                    }
+                }
+            }
+        }
     }
 }

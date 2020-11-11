@@ -61,49 +61,24 @@ trait TallForm
         $this->setFormPropertiesRecursively($fields);
     }
 
-    protected function setFormPropertiesRecursively(array $fields)
-    {
-        foreach ($fields as $field) {
-            if (filled($field)) {
-                $fieldKey = str_replace('form_data.', '', $field->key);
-                if (false === Str::contains($fieldKey, ['*']) && is_null(data_get($this->form_data, $fieldKey, null))) {
-                    $array = (in_array($field->type, ['checkboxes', 'file']) || ($field->type === 'select' && $field->multiple));
-                    data_set($this->form_data, $fieldKey, $field->default ?? ($array ? [] : null));
-                    if (property_exists($field, 'fields') && is_array($field->fields) && 0 < count($field->fields)) {
-                        $this->setFormPropertiesRecursively($field->fields);
-                    }
-                }
-            }
-        }
-    }
-
-    public
-    function afterFormProperties()
+    public function afterFormProperties()
     {
         return;
     }
 
 
-    public
-    function getFormTitleProperty()
+    public function getFormTitleProperty()
     {
         return isset($this->formTitle) ? $this->formTitle : $this->formTitle = null;
     }
 
-    //unused property
-//    public function getFormWrapperProperty()
-//    {
-//        return isset($this->formWrapper) ? $this->formWrapper : $this->formWrapper = 'max-w-screen-lg mx-auto';
-//    }
 
-    public
-    function render()
+    public function render()
     {
         return $this->formView();
     }
 
-    public
-    function formView()
+    public function formView()
     {
         $view = view('tall-forms::layout-picker', [
             'fields' => $this->getFields(null, '', false),
@@ -112,8 +87,7 @@ trait TallForm
         return $view;
     }
 
-    public
-    function fields()
+    public function fields()
     {
         return [];
     }
