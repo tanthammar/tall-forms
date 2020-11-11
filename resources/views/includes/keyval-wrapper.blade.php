@@ -4,7 +4,7 @@
         <div class="{{ $keyval->array_wrapper_grid_class ?? 'tf-keyval-wrapper-grid' }}">
             @foreach($keyval->fields as $array_field)
                 @php
-                    $temp_key = "{$parent_name}.{$array_field->name}";
+                    $temp_key = "{$keyval_parent_key}.{$array_field->name}";
                     $array_field->inline = $array_field->inline ?? false;
                     $array_field->inArray = true;
                 @endphp
