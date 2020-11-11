@@ -12,10 +12,11 @@ trait SubmitsForm
     public function submit()
     {
         $validated_data = $this->validate($this->get_rules())['form_data'];
+        $fields = $this->getFields();
 
         //filter out custom-, and relationship-fields
         $field_names = [];
-        foreach ($this->getFields() as $field) {
+        foreach ($fields as $field) {
             if (filled($field) && !$field->is_relation && !$field->is_custom) {
                 $field_names[] = str_replace(['form_data.', '*.'], '', $field->key);
             }
@@ -26,7 +27,7 @@ trait SubmitsForm
         $this->success($model_fields_data); //creates or updates the model
 
         //saveFoo(), for all fields, no matter if it's custom, relation or base field
-        foreach ($this->getFields() as $field) {
+        foreach ($fields as $field) {
             if (filled($field)) {
                 $function = $this->parseFunctionNameFrom($field->key, 'save');
                 $validated_data = $field->type == 'file' ? $this->{$field->name} : data_get($this, $field->key);

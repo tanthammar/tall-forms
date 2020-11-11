@@ -14,6 +14,8 @@ class Input extends BaseField
     public $placeholder;
     public $prefix;
     public $icon;
+    public $tallIcon;
+    public $htmlIcon;
     public $step = 1;
     public $min = 0;
     public $max = 100;
@@ -59,9 +61,21 @@ class Input extends BaseField
         return $this;
     }
 
-    public function icon(string $icon): self
+    public function icon(string $blade_ui_icon_path): self
     {
-        $this->icon = $icon;
+        $this->icon = $blade_ui_icon_path;
+        return $this;
+    }
+
+    public function tallIcon(string $blade_file_path): self
+    {
+        $this->tallIcon = $blade_file_path;
+        return $this;
+    }
+
+    public function htmlIcon(string $html): self
+    {
+        $this->htmlIcon = $html;
         return $this;
     }
 
