@@ -85,7 +85,7 @@ trait Helpers
     {
         $newArray = [];
         foreach ((array) $keys as $key) {
-            if(($value = Arr::get($array, $key, null)) !== null) Arr::set($newArray, $key, $value);
+            if(($value = Arr::get($array, $key)) !== null) Arr::set($newArray, $key, $value);
         }
         return $newArray;
     }
