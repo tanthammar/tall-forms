@@ -84,21 +84,19 @@ trait Helpers
     public function arrayDotOnly(array $array, $keys): array
     {
         $newArray = [];
-        $default = new stdClass;
         foreach ((array) $keys as $key) {
-            $value = Arr::get($array, $key, $default);
-            if ($value !== $default) {
-                Arr::set($newArray, $key, $value);
-            }
+            if(($value = Arr::get($array, $key, null)) !== null) Arr::set($newArray, $key, $value);
         }
         return $newArray;
     }
 
-    protected function firstLevelfieldNames(): array
+    protected function firstLevelFieldNames(): array
     {
-        return $fieldNames = collect($this->fields())->map(function ($field) {
-            return filled($field) ? $field->name : null;
-        })->toArray();
+        $fieldNames = [];
+        foreach($this->fields() as $field) {
+            if (filled($field)) $fieldNames[] = $field->name;
+        }
+        return $fieldNames;
     }
 
     /**
