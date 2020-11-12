@@ -13,17 +13,15 @@ class Range extends Component
     use Helpers;
 
     public Field $field;
-    public string $temp_key;
     public int $colspan;
     public array $attr;
     public float $step;
     public float $min;
     public float $max;
 
-    public function __construct(Field $field, string $tempKey, array $attr = [])
+    public function __construct(Field $field, array $attr = [])
     {
         $this->field = $field;
-        $this->temp_key = $tempKey;
         $this->colspan = $field->colspan;
         $this->attr = $attr ?? $field->getAttr('input');
         $this->step = $field->step;

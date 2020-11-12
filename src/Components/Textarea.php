@@ -13,13 +13,11 @@ class Textarea extends Component
     use Helpers;
 
     public Field $field;
-    public string $temp_key;
     public bool $required;
 
-    public function __construct(Field $field, string $tempKey)
+    public function __construct(Field $field)
     {
         $this->field = $field;
-        $this->temp_key = $tempKey;
         $this->required = $field->required;
     }
 
@@ -27,8 +25,8 @@ class Textarea extends Component
     {
         $custom = $this->field->getAttr('input');
         $default = [
-            $this->field->wire => $this->temp_key,
-            'name' => $this->temp_key,
+            $this->field->wire => $this->field->key,
+            'name' => $this->field->key,
             'placeholder' => $this->field->placeholder,
             'rows' => $this->field->textarea_rows,
         ];

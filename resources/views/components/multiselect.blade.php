@@ -4,7 +4,7 @@
     </div>
     <select x-cloak x-show="open || field.length" x-model="field" x-on:click.away.stop="open = false" multiple @foreach($options() as $key => $value) {{$key}}="{{$value}}" @endforeach>
         @forelse($field->options as $value => $label)
-            <option class="p-2" wire:key="{{ md5($temp_key.$value) }}" value="{{ $value }}">{{ $label }}</option>
+            <option class="p-2" wire:key="{{ md5($field->key.$value) }}" value="{{ $value }}">{{ $label }}</option>
         @empty
             <option value="" disabled>...</option>
         @endforelse

@@ -1,4 +1,4 @@
-@if($field->below || $field->help || $errors->has($temp_key))
+@if($field->below || $field->help || $errors->has($field->key))
     <x-tall-attr :attr="$field->getAttr('below-wrapper')">
         @if($field->below)
             <x-tall-attr :attr="$field->getAttr('below')">
@@ -13,7 +13,7 @@
             @endif
         @endif
         @if(!in_array($field->type, ['file', 'spatie-tags']))
-            @error($temp_key)
+            @error($field->key)
             <p class="tf-error">
                 {{ $field->errorMsg ?? \Tanthammar\TallForms\ErrorMessage::parse($message) }}
             </p>

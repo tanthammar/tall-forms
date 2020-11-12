@@ -80,7 +80,8 @@ return [
     'are-u-sure' => 'global.areYouSure',
 
 
-    //You can swap the icons component view path. The path is relative to resources/views/components
+    //You can swap the icons blade view path. The path is relative to resources/views/components
+    //(publish the icons: php artisan vendor:publish --tag=tall-form-icons)
     'arrow-up-icon' => 'icons.cheveron-outline-up', //Repeater
     'arrow-down-icon' => 'icons.cheveron-outline-down',//Repeater
     'trash-icon' => 'icons.close-outline',//Multiple fields

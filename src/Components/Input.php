@@ -13,14 +13,12 @@ class Input extends Component
     use Helpers;
 
     public Field $field;
-    public string $temp_key;
     public bool $required;
     public string $icon_span = 'flex items-center justify-center px-2 rounded-l border border-r-0 border-gray-300 bg-gray-100 text-gray-600 sm:text-sm';
 
-    public function __construct(Field $field, string $tempKey)
+    public function __construct(Field $field)
     {
         $this->field = $field;
-        $this->temp_key = $tempKey;
         $this->required = $field->required;
     }
 
@@ -28,8 +26,8 @@ class Input extends Component
     {
         $custom = $this->field->getAttr('input');
         $default = [
-            $this->field->wire => $this->temp_key,
-            'name' => $this->temp_key,
+            $this->field->wire => $this->field->key,
+            'name' => $this->field->key,
             'type' => $this->field->input_type,
             'autocomplete' => $this->field->autocomplete,
             'placeholder' => $this->field->placeholder,

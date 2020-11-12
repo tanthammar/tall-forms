@@ -12,7 +12,7 @@ trait SubmitsForm
     public function submit()
     {
         $validated_data = $this->validate($this->get_rules())['form_data'];
-        $fields = $this->getFields();
+        $fields = $this->getFieldsFlat();
 
         //filter out custom-, and relationship-fields
         $field_names = [];

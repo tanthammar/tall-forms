@@ -15,7 +15,7 @@ trait Helpers
     protected function collectField(string $fieldKey)
     {
         $fieldName = Str::replaceFirst('form_data.', '', $fieldKey);
-        $fieldsCollection = collect($this->getFields());
+        $fieldsCollection = collect($this->getFieldsFlat());
         $field = $fieldsCollection->firstWhere('key', $fieldKey) ?? $fieldsCollection->firstWhere('name', $fieldName);
         if (empty($field)) {
             $field = $fieldsCollection->filter(function ($item) use ($fieldName) {
@@ -90,8 +90,18 @@ trait Helpers
         return $fieldNames;
     }
 
+    protected function getFieldsFlat()
+    {
+        return $this->getFields(null, '', true);
+    }
+
+    protected function getFieldsNested()
+    {
+        return $this->getFields(null, '', false);
+    }
+
     /**
-     *
+     * Recursive
      * @param ?array|string $fields
      * @param string $prefix
      * @param bool $flatten
@@ -108,7 +118,7 @@ trait Helpers
                 $field->key = $fieldKey;
                 $fieldKey = ($field->type === 'array') ? "{$fieldKey}.*" : $fieldKey;
                 if (property_exists($field, 'fields') && is_array($field->fields) && 0 < count($field->fields)) {
-                    $fieldResults = $this->getFields($field->fields, $fieldKey, $flatten);
+                    $fieldResults = $this->getFields($field->fields, $fieldKey, $flatten); //recursive
                     if ($flatten) {
                         $results = array_merge($results, $fieldResults);
                     } else {

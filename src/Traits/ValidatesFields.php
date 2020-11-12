@@ -48,7 +48,7 @@ trait ValidatesFields
     {
         $attributes = [];
         if ($this->labelsAsAttributes) {
-            foreach ($this->getFields() as $field) {
+            foreach ($this->getFieldsFlat() as $field) {
                 if ($field != null && $field->labelAsAttribute) {
                     if (in_array($field->type, ['array', 'keyval'])) {
                         foreach ($field->fields as $array_field) {

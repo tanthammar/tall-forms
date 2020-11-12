@@ -13,14 +13,12 @@ class Search extends Component
     use Helpers;
 
     public Field $field;
-    public string $temp_key;
     public array $options;
     public string $listWidth;
 
-    public function __construct(Field $field, string $tempKey, array $options = [])
+    public function __construct(Field $field, array $options = [])
     {
         $this->field = $field;
-        $this->temp_key = $tempKey;
         $this->options = $options;
         $this->listWidth = $field->listWidth ?? 'tf-search-dropdown-width';
     }

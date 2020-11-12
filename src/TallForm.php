@@ -57,7 +57,7 @@ trait TallForm
     public function setFormProperties()
     {
         $this->form_data = $this->model->only($this->firstLevelFieldNames());
-        $this->setFieldValues($this->getFields(null, '', true));
+        $this->setFieldValues($this->getFieldsFlat());
     }
 
     public function afterFormProperties()
@@ -80,7 +80,7 @@ trait TallForm
     public function formView()
     {
         $view = view('tall-forms::layout-picker', [
-            'fields' => $this->getFields(null, '', false),
+            'fields' => $this->getFieldsNested(),
         ]);
         if ($this->layout) $view->layout($this->layout);
         return $view;

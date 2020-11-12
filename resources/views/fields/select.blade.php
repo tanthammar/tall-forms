@@ -1,1 +1,1 @@
-<x-tall-select :field="$field" :temp-key="$temp_key" />
+<x-tall-select :field="$field" />

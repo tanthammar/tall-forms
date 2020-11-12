@@ -13,13 +13,11 @@ class Select extends Component
     use Helpers;
 
     public Field $field;
-    public string $temp_key;
     public array $value;
 
-    public function __construct(Field $field, string $tempKey, array $value = [])
+    public function __construct(Field $field, array $value = [])
     {
         $this->field = $field;
-        $this->temp_key = $tempKey;
         $this->value = $value;
     }
 
@@ -27,8 +25,8 @@ class Select extends Component
     {
         $custom = $this->field->getAttr('input');
         $default = [
-            $this->field->wire => $this->temp_key,
-            'name' => $this->temp_key,
+            $this->field->wire => $this->field->key,
+            'name' => $this->field->key,
             'class' => $this->class()
         ];
         return array_merge($default, $custom);

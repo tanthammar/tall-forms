@@ -1,1 +1,1 @@
-<x-tall-select :field="$field" :temp-key="$temp_key" :value="data_get($this, $temp_key)" />
+<x-tall-select :field="$field" :value="data_get($this, $field->key)" />

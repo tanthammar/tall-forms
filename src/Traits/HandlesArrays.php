@@ -15,7 +15,7 @@ trait HandlesArrays
     {
         $array_fields = [];
 
-        $field = collect($this->getFields())->firstWhere('key', 'form_data.' . $field_name);
+        $field = collect($this->getFieldsFlat())->firstWhere('key', 'form_data.' . $field_name);
 
         if (filled($field)) {
             foreach ($field->fields as $array_field) {

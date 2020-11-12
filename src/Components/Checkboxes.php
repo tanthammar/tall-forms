@@ -10,7 +10,6 @@ use Tanthammar\TallForms\Checkboxes as Field;
 class Checkboxes extends Component
 {
     public Field $field;
-    public string $temp_key;
     public string $label;
     public $value;
 
@@ -21,10 +20,9 @@ class Checkboxes extends Component
      * @param int|string $value
      * @param string $label
      */
-    public function __construct(Field $field, string $tempKey, $value, string $label)
+    public function __construct(Field $field, $value, string $label)
     {
         $this->field = $field;
-        $this->temp_key = $tempKey;
         $this->value = $value;
         $this->label = $label;
     }
@@ -33,7 +31,7 @@ class Checkboxes extends Component
     {
         $custom = $this->field->getAttr('input');
         $default = [
-            $this->field->wire => $this->temp_key,
+            $this->field->wire => $this->field->key,
             'class' => $this->class()
         ];
         return array_merge($default, $custom);

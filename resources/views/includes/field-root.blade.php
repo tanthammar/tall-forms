@@ -1,6 +1,3 @@
-@php
-    $keyval_parent_key = (!empty($keyval_parent_key)) ? $keyval_parent_key . '.' . $field->name : $field->key;
-@endphp
 <x-tall-field-root
     :in-array="$field->inArray"
     :colspan="$field->colspan ?? 12"
@@ -27,7 +24,7 @@
             @if($field->type === 'array')
                 @include('tall-forms::includes.array-wrapper')
             @elseif($field->type === 'keyval')
-                @include('tall-forms::includes.keyval-wrapper', ['keyval_parent_key' => $keyval_parent_key])
+                @include('tall-forms::includes.keyval-wrapper')
             @else
                 @include('tall-forms::includes.field-wrapper')
             @endif

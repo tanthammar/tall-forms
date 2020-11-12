@@ -16,12 +16,12 @@
         </span>
     @endif
     <input
-        value="{{ old($temp_key) }}"
+        value="{{ old($field->key) }}"
         @if($required) required @endif
         @foreach($options() as $key => $value) {{$key}}="{{$value}}" @endforeach
-        {{ $attributes->merge(['class' => $errors->has($temp_key) ? $error() : $class() ]) }}
+        {{ $attributes->merge(['class' => $errors->has($field->key) ? $error() : $class() ]) }}
     />
-    @error($temp_key)
+    @error($field->key)
     <x-tall-error-icon
         :right="in_array($field->input_type, ['date', 'datetime-local', 'time']) ? 'right-6' : 'right-0'"/>
     @enderror
