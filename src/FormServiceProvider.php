@@ -6,6 +6,7 @@ use Illuminate\View\Component as IlluminateComponent;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
+use Tanthammar\TallForms\Commands\InstallTallForms;
 use Tanthammar\TallForms\Commands\MakeForm;
 
 class FormServiceProvider extends ServiceProvider
@@ -13,7 +14,10 @@ class FormServiceProvider extends ServiceProvider
     public function boot()
     {
         if ($this->app->runningInConsole()) {
-            $this->commands([MakeForm::class]);
+            $this->commands([
+                MakeForm::class,
+                InstallTallForms::class,
+            ]);
         }
 
         $this->publishes([__DIR__ . '/../config/tall-forms.php' => config_path('tall-forms.php')], 'tall-form-config');
