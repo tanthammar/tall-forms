@@ -6,4 +6,5 @@ mix.js('resources/js/app.js', 'public/js')
         require('postcss-import'),
         cssNesting(),
         require('tailwindcss'),
-    ]);
+    ])
+    .webpackConfig(require('./webpack.config'));

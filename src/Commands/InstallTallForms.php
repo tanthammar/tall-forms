@@ -22,8 +22,9 @@ class InstallTallForms extends Command
         } else {
             if ($this->confirm('!!!!!! -----HAVE YOU BACKED UP YOUR REPO?------- !!!!!!!')) {
                 $this->runInstallation();
+            } else {
+                $this->info('Installation aborted');
             }
-            $this->info('Installation aborted');
         }
 
     }
@@ -111,7 +112,7 @@ class InstallTallForms extends Command
             File::put(resource_path('css/app.css'), $app_css);
 
             $this->info('Creating webpack.mix.js');
-            $mix = File::get(__DIR__ . '/../../resources/stubs/webpack8.mix.js.stub');
+            $mix = File::get(__DIR__ . '/../../resources/stubs/webpackCSS.mix.js.stub');
             File::put(base_path('webpack.mix.js'), $mix);
         } else {
             $this->info('Publishing the theme');
@@ -125,7 +126,7 @@ class InstallTallForms extends Command
             File::put(resource_path('sass/app.scss'), $app_scss);
 
             $this->info('Creating webpack.mix.js');
-            $mix = File::get(__DIR__ . '/../../resources/stubs/webpack7.mix.js.stub');
+            $mix = File::get(__DIR__ . '/../../resources/stubs/webpackSASS.mix.js.stub');
             File::put(base_path('webpack.mix.js'), $mix);
         }
     }
