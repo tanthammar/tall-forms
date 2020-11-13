@@ -65,8 +65,8 @@ class InstallTallForms extends Command
             $this->jetstream();
             $wrapper = File::get(__DIR__ . '/../../resources/stubs/wrapperJetstream.blade.php.stub');
         }
-
-        File::put(resource_path('resources/views/components/pages/default.blade.php'), $wrapper);
+        if (!File::isDirectory(resource_path('views/components/pages'))) File::makeDirectory(resource_path('views/components/pages'));
+        File::put(resource_path('views/components/pages/default.blade.php'), $wrapper);
     }
 
     public function jetstream()
