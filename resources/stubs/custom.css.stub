@@ -5,10 +5,11 @@
 input:invalid, textarea:invalid, select:invalid {
     box-shadow: none;
 }
+
 input, select, textarea, button, div, a {
-&:focus, &:active, &:hover {
-                        outline: none;
-                    }
+    &:focus, &:active, &:hover {
+        outline: none;
+    }
 }
 
 /**

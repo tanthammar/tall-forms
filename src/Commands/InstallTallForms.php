@@ -35,8 +35,8 @@ class InstallTallForms extends Command
         // $this->icons(); //not needed to publish the icons
         $this->wrapper();
 
-        $this->info('Compiling css');
-        $this->info(exec('npm run dev'));
+//        $this->info('Compiling css');
+//        $this->info(exec('npm run dev'));
 
         $this->info('Installation complete. Please support this package if you find in useful :-)');
     }
@@ -65,7 +65,8 @@ class InstallTallForms extends Command
             $this->jetstream();
             $wrapper = File::get(__DIR__ . '/../../resources/stubs/wrapperJetstream.blade.php.stub');
         }
-        if (!File::isDirectory(resource_path('views/components/pages'))) File::makeDirectory(resource_path('views/components/pages'));
+
+        if (!is_dir($directory = resource_path('views/components/pages'))) File::makeDirectory($directory, 0755, true);
         File::put(resource_path('views/components/pages/default.blade.php'), $wrapper);
     }
 
@@ -75,7 +76,7 @@ class InstallTallForms extends Command
         $app_blade = File::get(resource_path('views/layouts/app.blade.php'));
         $app_blade = str_replace('{{ $header }}', '{{ $header ?? null }}', $app_blade);
         $app_blade = str_replace('{{ $slot }}', '{{ $slot ?? null }}', $app_blade);
-        File::put(base_path('tailwind.config.js'), $app_blade);
+        File::put(resource_path('views/layouts/app.blade.php'), $app_blade);
     }
 
     public function icons()
@@ -91,9 +92,13 @@ class InstallTallForms extends Command
         $css = $this->confirm('Do you use y=CSS or n=SASS ?');
         $custom_css = File::get(__DIR__ . '/../../resources/stubs/custom.css.stub');
         $app_css = File::get(__DIR__ . '/../../resources/stubs/app.css.stub');
+        $app_scss = File::get(__DIR__ . '/../../resources/stubs/app.scss.stub');
         if ($css) {
             $this->info('Adding support for nested css');
             $this->info(exec('npm install postcss-nesting --save-dev'));
+
+            $this->info('Adding support for postcss import');
+            $this->info(exec('npm install postcss-import --save-dev'));
 
             $this->info('Publishing the theme');
             $this->call('vendor:publish', [
@@ -106,7 +111,7 @@ class InstallTallForms extends Command
             File::put(resource_path('css/app.css'), $app_css);
 
             $this->info('Creating webpack.mix.js');
-            $mix = File::get(__DIR__ . '/../../resources/stubs/webpack.mix.js.stub');
+            $mix = File::get(__DIR__ . '/../../resources/stubs/webpack8.mix.js.stub');
             File::put(base_path('webpack.mix.js'), $mix);
         } else {
             $this->info('Publishing the theme');
@@ -117,7 +122,11 @@ class InstallTallForms extends Command
             File::put(resource_path('sass/custom.scss'), $custom_css);
 
             $this->info('Creating app.scss');
-            File::put(resource_path('sass/app.scss'), $app_css);
+            File::put(resource_path('sass/app.scss'), $app_scss);
+
+            $this->info('Creating webpack.mix.js');
+            $mix = File::get(__DIR__ . '/../../resources/stubs/webpack7.mix.js.stub');
+            File::put(base_path('webpack.mix.js'), $mix);
         }
     }
 
@@ -147,18 +156,18 @@ class InstallTallForms extends Command
         $tailwind = File::get(__DIR__ . '/../../resources/stubs/tailwind.config.js.stub');
         if ($ui) {
             $plugins = "
-            plugins: [
-                require('@tailwindcss/ui')({
-                    layout: 'sidebar',
-                }),
-                require('@tailwindcss/typography'),
-            ],";
+    plugins: [
+        require('@tailwindcss/ui')({
+            layout: 'sidebar',
+        }),
+        require('@tailwindcss/typography'),
+    ],";
         } else {
             $plugins = "
-            plugins: [
-                require('@tailwindcss/custom-forms'),
-                require('@tailwindcss/typography'),
-            ],";
+    plugins: [
+        require('@tailwindcss/custom-forms'),
+        require('@tailwindcss/typography'),
+    ],";
         }
         $tailwind = str_replace('REPLACE PLUGINS', $plugins, $tailwind);
         File::put(base_path('tailwind.config.js'), $tailwind);
