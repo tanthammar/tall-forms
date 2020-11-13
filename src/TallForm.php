@@ -3,6 +3,7 @@
 namespace Tanthammar\TallForms;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Tanthammar\TallForms\Traits\HandlesArrays;
 use Tanthammar\TallForms\Traits\HasButtons;
 use Tanthammar\TallForms\Traits\HasComponentDesign;
@@ -55,13 +56,8 @@ trait TallForm
 
     public function setFormProperties()
     {
-        $this->form_data = $this->model->only($this->fieldNames());
-        foreach ($this->fields() as $field) {
-            if (filled($field) && !isset($this->form_data[$field->name])) {
-                $array = (in_array($field->type, ['checkboxes', 'file']) || ($field->type === 'select' && $field->multiple));
-                $this->form_data[$field->name] = $field->default ?? ($array ? [] : null);
-            }
-        }
+        $this->form_data = $this->model->only($this->firstLevelFieldNames());
+        $this->setFieldValues($this->getFieldsFlat());
     }
 
     public function afterFormProperties()
@@ -75,11 +71,6 @@ trait TallForm
         return isset($this->formTitle) ? $this->formTitle : $this->formTitle = null;
     }
 
-    //unused property
-//    public function getFormWrapperProperty()
-//    {
-//        return isset($this->formWrapper) ? $this->formWrapper : $this->formWrapper = 'max-w-screen-lg mx-auto';
-//    }
 
     public function render()
     {
@@ -89,9 +80,9 @@ trait TallForm
     public function formView()
     {
         $view = view('tall-forms::layout-picker', [
-            'fields' => $this->fields(),
+            'fields' => $this->getFieldsNested(),
         ]);
-        if($this->layout) $view->layout($this->layout);
+        if ($this->layout) $view->layout($this->layout);
         return $view;
     }
 

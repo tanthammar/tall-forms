@@ -6,6 +6,7 @@ use Illuminate\View\Component as IlluminateComponent;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
+use Tanthammar\TallForms\Commands\InstallTallForms;
 use Tanthammar\TallForms\Commands\MakeForm;
 
 class FormServiceProvider extends ServiceProvider
@@ -13,12 +14,15 @@ class FormServiceProvider extends ServiceProvider
     public function boot()
     {
         if ($this->app->runningInConsole()) {
-            $this->commands([MakeForm::class]);
+            $this->commands([
+                MakeForm::class,
+                InstallTallForms::class,
+            ]);
         }
 
         $this->publishes([__DIR__ . '/../config/tall-forms.php' => config_path('tall-forms.php')], 'tall-form-config');
         $this->publishes([__DIR__ . '/../resources/views' => resource_path('views/vendor/tall-forms')], 'tall-form-views');
-        $this->publishes([__DIR__ . '/../resources/svg/tall-forms' => resource_path('svg/tall-forms')], 'tall-form-icons');
+        $this->publishes([__DIR__ . '/../resources/views/icons' => resource_path('views/vendor/tall-forms/views/icons')], 'tall-form-icons');
         $this->publishes([__DIR__ . '/../resources/css/tall-theme.css' => resource_path('css/tall-theme.css')], 'tall-form-theme-css');
         $this->publishes([__DIR__ . '/../resources/css/tall-theme.css' => resource_path('sass/tall-theme.scss')], 'tall-form-theme-sass');
 

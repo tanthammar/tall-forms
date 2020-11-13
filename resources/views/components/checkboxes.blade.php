@@ -2,7 +2,7 @@
     <input
         type="checkbox"
         value="{{ $value }}"
-        name="{{ $temp_key }}"
+        name="{{ $field->key }}"
         @foreach($options() as $key => $value) {{$key}}="{{$value}}" @endforeach
     />
     <div class="tf-checkbox-label-spacing">

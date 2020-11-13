@@ -1,48 +1,43 @@
-@php $repeater = $field @endphp
 <div class="tf-repeater-root">
-    @if(isset($form_data[$repeater->name]) && $form_data[$repeater->name])
-        <div class="{{ $repeater->array_wrapper_class ?? 'tf-repeater-wrapper' }}">
-            @foreach($form_data[$repeater->name] as $key => $value)
-                <div class="tf-repeater-wrapper-outer" wire:key="{{ md5($repeater->key.$loop->index) }}">
-                    <div class="{{ $repeater->array_wrapper_grid_class ?? 'tf-repeater-wrapper-grid' }}">
-                        @foreach($repeater->fields as $array_field)
+    @if(filled($field->form_data = data_get($form_data, $field->name)))
+        <div class="{{ $field->array_wrapper_class ?? 'tf-repeater-wrapper' }}">
+            @foreach($field->form_data as $key => $value)
+                <div class="tf-repeater-wrapper-outer" wire:key="{{ md5($field->key.$loop->index) }}">
+                    <div class="{{ $field->array_wrapper_grid_class ?? 'tf-repeater-wrapper-grid' }}">
+                        @foreach($field->fields as $nested_field)
                             @php
-                                $temp_key = "{$repeater->key}.{$key}.{$array_field->name}";
-                                $array_field->show_label = $key === 0;
-                                $array_field->inline = $array_field->inline ?? false;
-                                $array_field->inArray = true;
-                                $array_field->help = $key === 0 ? $array_field->help : null;
-                                $array_field->placeholder = $array_field->placeholder ?? $array_field->label;
+                                $nested_field->key = "{$field->key}.{$key}.{$nested_field->name}";
+                                $nested_field->show_label = $key === 0;
+                                $nested_field->inline = $nested_field->inline ?? false;
+                                $nested_field->inArray = true;
+                                $nested_field->help = $key === 0 ? $nested_field->help : null;
+                                $nested_field->placeholder = $nested_field->placeholder ?? $nested_field->label;
                             @endphp
-                            @include('tall-forms::includes.field-root', ['field' => $array_field])
+                            @include('tall-forms::includes.field-root', ['field' => $nested_field])
                         @endforeach
                     </div>
                     <div class="tf-repeater-btns-wrapper">
-                        @if($repeater->array_sortable)
-                            <button type="button" class="tf-repeater-sorter-color"
-                                    wire:click="arrayMoveUp('{{ $repeater->name }}', '{{ $key }}')">
-                                @svg(config('tall-forms.arrow-up-icon'), 'tf-repeater-btn-size')
+                        @if($field->array_sortable)
+                            <button type="button" class="tf-repeater-sorter-color" wire:click="arrayMoveUp('{{ $field->name }}', '{{ $key }}')">
+                                <x-tall-svg :path="config('tall-forms.arrow-up-icon')" class="tf-repeater-btn-size" />
                             </button>
 
-                            <button type="button" class="tf-repeater-sorter-color"
-                                    wire:click="arrayMoveDown('{{ $repeater->name }}', '{{ $key }}')">
-                                @svg(config('tall-forms.arrow-down-icon'), 'tf-repeater-btn-size')
+                            <button type="button" class="tf-repeater-sorter-color" wire:click="arrayMoveDown('{{ $field->name }}', '{{ $key }}')">
+                                <x-tall-svg :path="config('tall-forms.arrow-down-icon')" class="tf-repeater-btn-size" />
                             </button>
                         @endif
 
-                        <button type="button" class="tf-repeater-delete-btn"
-                                wire:click.prevent="arrayRemove('{{ $repeater->name }}', '{{ $key }}')">
-                            @svg(config('tall-forms.trash-icon'), 'tf-repeater-btn-size')
+                        <button type="button" class="tf-repeater-delete-btn" wire:click.prevent="arrayRemove('{{ $field->name }}', '{{ $key }}')">
+                            <x-tall-svg :path="config('tall-forms.trash-icon')" class="tf-repeater-btn-size" />
                         </button>
                     </div>
                 </div>
             @endforeach
         </div>
     @endif
-    <button type="button" class="tf-repeater-add-button"
-            wire:click.prevent="arrayAdd('{{ $repeater->name }}')" style="width:fit-content">
-        @svg(config('tall-forms.plus-icon'), 'tf-repeater-add-button-size')
+    <button type="button" class="tf-repeater-add-button" wire:click.prevent="arrayAdd('{{ $field->name }}')" style="width:fit-content">
+        <x-tall-svg :path="config('tall-forms.plus-icon')" class="tf-repeater-add-button-size" />
     </button>
 </div>
 {{-- after field --}}
-@include('tall-forms::includes.below', ['temp_key' => $repeater->key ])
+@include('tall-forms::includes.below')

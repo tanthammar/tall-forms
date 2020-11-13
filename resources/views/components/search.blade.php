@@ -8,7 +8,7 @@
             x-on:input="optionsVisible = true"
             x-on:click.stop="optionsVisible = true"
             x-on:click.stop.away="optionsVisible = false"
-            {{ $attributes->merge(['class' => $errors->has($temp_key) ? $error() : $class() ]) }}
+            {{ $attributes->merge(['class' => $errors->has($field->key) ? $error() : $class() ]) }}
         />
         <div x-on:click.stop.prevent="searchInput = ''; optionsVisible = false;" class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer">
             <!-- Heroicon name: x -->
@@ -34,7 +34,7 @@
             @forelse($options as $value => $key)
             <li
                 role="option"
-                wire:key="{{ md5($temp_key.$key) }}"
+                wire:key="{{ md5($field->key.$key) }}"
                 x-on:click.stop.prevent="field = '{{ $key }}'; selected = {{ $loop->index }}; optionsVisible = false; searchInput = '{{ $value }}';"
                 x-on:mouseenter="selected = {{ $loop->index }}"
                 x-on:mouseleave="selected = null"

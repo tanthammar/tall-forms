@@ -1,1 +1,1 @@
-<x-tall-textarea :field="$field" :temp-key="$temp_key"/>
+<x-tall-textarea :field="$field" />

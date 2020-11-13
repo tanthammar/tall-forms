@@ -263,13 +263,13 @@
         @apply flex flex-col divide-y mb-2 rounded border;
     }
     .tf-repeater-wrapper-outer {
-        @apply flex px-2 space-x-3 items-center py-2;
+        @apply flex flex-col sm:flex-row px-2 sm:space-x-3 items-center py-2;
     }
     .tf-repeater-wrapper-grid {
         @apply flex-1 sm:grid sm:grid-cols-12 gap-x-2;
     }
     .tf-repeater-btns-wrapper {
-        @apply flex-shrink space-x-1 items-center justify-end;
+        @apply my-4 sm:my-0 flex-shrink space-x-1 items-center justify-end;
     }
     .tf-repeater-btn-size {
         @apply h-8 w-8;

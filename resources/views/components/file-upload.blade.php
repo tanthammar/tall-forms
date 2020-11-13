@@ -12,7 +12,7 @@
                     <x-tall-spinner/>
                 </div>
                 <div x-show="!isUploading">
-                    @svg(config('tall-forms.file-upload'), "tf-file-upload-icon")
+                    <x-tall-svg :path="config('tall-forms.file-upload')" class="tf-file-upload-icon" />
                 </div>
             </div>
             {{--intentionally removed input id if multiple forms, with the same field name --}}

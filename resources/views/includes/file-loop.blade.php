@@ -9,7 +9,7 @@
             </div>
         @else
             <div class="tf-file-upload-icon-wrapper">
-                @svg(config('tall-forms.file-icon').$fileIcon($file->getMimeType()), "h-4 w-4")
+                <x-tall-svg :path="config('tall-forms.file-icon').$fileIcon($file->getMimeType())" class="h-4 w-4" />
             </div>
         @endif
     </div>
@@ -18,7 +18,7 @@
             onclick="confirm('{{ trans(config('tall-forms.are-u-sure')) }}') || event.stopImmediatePropagation();"
             wire:click.prevent="deleteSingleTempFile('{{ $field->name }}', '{{ isset($loop) ? $loop->index : null }}')">
         <span class="px-2" wire:loading wire:target="deleteSingleTempFile"><x-tall-spinner /></span>
-        @svg(config('tall-forms.trash-icon'), 'tf-file-upload-btn-size')
+        <x-tall-svg :path="config('tall-forms.trash-icon')" class="tf-file-upload-btn-size" />
     </button>
 </li>
 @endif

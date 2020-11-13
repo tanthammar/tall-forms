@@ -1,0 +1,19 @@
+/**
+ * Remove the default box-shadow for invalid elements to prevent inputs in Livewire components showing with a red border by default in Firefox.
+ * Src: https://github.com/laravel-frontend-presets/tall/issues/7
+ */
+input:invalid, textarea:invalid, select:invalid {
+    box-shadow: none;
+}
+input, select, textarea, button, div, a {
+&:focus, &:active, &:hover {
+                        outline: none;
+                    }
+}
+
+/**
+* For AlpineJS
+ */
+[x-cloak] {
+    display: none;
+}

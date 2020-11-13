@@ -13,13 +13,11 @@ class Trix extends Component
     use Helpers;
 
     public Field $field;
-    public string $temp_key;
     public ?string $value;
 
-    public function __construct(Field $field, string $tempKey, ?string $value = null)
+    public function __construct(Field $field, ?string $value = null)
     {
         $this->field = $field;
-        $this->temp_key = $tempKey;
         $this->value = $value;
     }
 

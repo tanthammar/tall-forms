@@ -1,4 +1,1 @@
-<x-tall-checkbox
-    :field="$field"
-    :temp-key="$temp_key"
-/>
+<x-tall-checkbox :field="$field" />

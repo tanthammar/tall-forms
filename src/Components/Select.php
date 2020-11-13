@@ -13,20 +13,20 @@ class Select extends Component
     use Helpers;
 
     public Field $field;
-    public string $temp_key;
+    public array $value;
 
-    public function __construct(Field $field, string $tempKey)
+    public function __construct(Field $field, array $value = [])
     {
         $this->field = $field;
-        $this->temp_key = $tempKey;
+        $this->value = $value;
     }
 
     public function options(): array
     {
         $custom = $this->field->getAttr('input');
         $default = [
-            $this->field->wire => $this->temp_key,
-            'name' => $this->temp_key,
+            $this->field->wire => $this->field->key,
+            'name' => $this->field->key,
             'class' => $this->class()
         ];
         return array_merge($default, $custom);
@@ -34,7 +34,7 @@ class Select extends Component
 
     public function class(): string
     {
-        $class = ($this->field->multiple) ? "form-input my-1 w-full shadow " : "form-select my-1 w-full shadow ";
+        $class = ($this->field->multiple) ? "form-input my-1 w-full shadow px-0 divide-y " : "form-select my-1 w-full shadow ";
         $class .= $this->field->class;
         return Helpers::unique_words($class);
     }
