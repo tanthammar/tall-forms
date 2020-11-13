@@ -13,18 +13,46 @@ class InstallTallForms extends Command
 
     public function handle()
     {
-        //git commit
-        if ($this->confirm('!!!!!! -----HAVE YOU BACKED UP YOUR REPO?------- !!!!!!!')) {
-            $this->tailwind();
-            $this->theme();
-//            $this->icons(); //not needed to publish the icons
-            $this->wrapper();
-
-            $this->info('Compiling css');
-            $this->info(exec('npm run dev'));
-
-            $this->info('Installation complete. Please support this package if you find in useful :-)');
+        //Check if current directory is a Git repository
+        $inGitRepo = exec('git rev-parse --is-inside-work-tree 2>/dev/null') == "true";
+        if ($inGitRepo) {
+            $this->gitStart();
+            $this->runInstallation();
+            $this->gitEnd();
+        } else {
+            if ($this->confirm('!!!!!! -----HAVE YOU BACKED UP YOUR REPO?------- !!!!!!!')) {
+                $this->runInstallation();
+            }
+            $this->info('Installation aborted');
         }
+
+    }
+
+    public function runInstallation()
+    {
+        $this->tailwind();
+        $this->theme();
+        // $this->icons(); //not needed to publish the icons
+        $this->wrapper();
+
+        $this->info('Compiling css');
+        $this->info(exec('npm run dev'));
+
+        $this->info('Installation complete. Please support this package if you find in useful :-)');
+    }
+
+    public function gitStart()
+    {
+        $this->info('git commit "Before Tall Forms Installation"');
+        exec('git add .');
+        exec('git commit -m "Before Tall Forms Installation"');
+    }
+
+    public function gitEnd()
+    {
+        $this->info('git commit "After Tall Forms Installation"');
+        exec('git add .');
+        exec('git commit -m "After Tall Forms Installation"');
     }
 
     public function wrapper()
@@ -33,7 +61,7 @@ class InstallTallForms extends Command
         $wrapper = File::get(__DIR__ . '/../../resources/stubs/wrapper.blade.php.stub');
 
         $v8 = $this->confirm('Do you use y=Laravel 8 or n=Laravel 7 ?');
-        if($v8 && $this->confirm('Do you use Jetstream y/n ?')) {
+        if ($v8 && $this->confirm('Do you use Jetstream y/n ?')) {
             $this->jetstream();
             $wrapper = File::get(__DIR__ . '/../../resources/stubs/wrapperJetstream.blade.php.stub');
         }
@@ -58,7 +86,8 @@ class InstallTallForms extends Command
         ]);
     }
 
-    public function theme() {
+    public function theme()
+    {
         $css = $this->confirm('Do you use y=CSS or n=SASS ?');
         $custom_css = File::get(__DIR__ . '/../../resources/stubs/custom.css.stub');
         $app_css = File::get(__DIR__ . '/../../resources/stubs/app.css.stub');
