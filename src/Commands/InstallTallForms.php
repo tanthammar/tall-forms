@@ -135,7 +135,16 @@ class InstallTallForms extends Command
     {
         //install tailwind
         $this->info('Installing Tailwind CSS');
-        $this->info(exec('npm install tailwindcss@latest --save-dev'));
+
+        $tw19 = $this->confirm('Do you want to use y=Tailwind 1.9.x or n=Tailwind 1.8.x');
+        if($tw19) {
+            $this->info(exec('npm install tailwindcss@1.9 --save-dev'));
+            $config = File::get(__DIR__ . '/../../resources/stubs/tailwindcss/1.9/tailwind.config.js.stub');
+        } else {
+            $this->info(exec('npm install tailwindcss@1.8 --save-dev'));
+            $config = File::get(__DIR__ . '/../../resources/stubs/tailwindcss/1.8/tailwind.config.js.stub');
+        }
+
 
         //install typography plugin
         $this->info('Installing Tailwind Typography plugin');
@@ -153,8 +162,7 @@ class InstallTallForms extends Command
             $this->info(exec('npm install @tailwindcss/custom-forms --save-dev'));
         }
 
-        //setup tailwind.config.js
-        $tailwind = File::get(__DIR__ . '/../../resources/stubs/tailwind.config.js.stub');
+        //set plugins in tailwind.config.js
         if ($ui) {
             $plugins = "
     plugins: [
@@ -170,8 +178,8 @@ class InstallTallForms extends Command
         require('@tailwindcss/typography'),
     ],";
         }
-        $tailwind = str_replace('REPLACE PLUGINS', $plugins, $tailwind);
-        File::put(base_path('tailwind.config.js'), $tailwind);
+        $config = str_replace('REPLACE PLUGINS', $plugins, $config);
+        File::put(base_path('tailwind.config.js'), $config);
     }
 
 }

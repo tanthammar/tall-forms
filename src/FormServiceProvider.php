@@ -30,6 +30,7 @@ class FormServiceProvider extends ServiceProvider
 
         $this->bootViews();
         $this->prefixComponents();
+        $this->bladeDirectives();
     }
 
     public function register()
@@ -55,6 +56,22 @@ class FormServiceProvider extends ServiceProvider
             foreach (config('tall-forms.components', []) as $alias => $component) {
                 $blade->component($component, $alias, $prefix);
             }
+        });
+    }
+
+    private function bladeDirectives()
+    {
+        //@tfonce
+        Blade::directive('tfonce', function ($expression) {
+            [$pushName, $pushSub] = explode(':', trim(substr($expression, 1, -1)));
+
+            $key = '__pushonce_' . str_replace('-', '_', $pushName) . '_' . str_replace('-', '_', $pushSub);
+
+            return "<?php if(! isset(\$__env->{$key})): \$__env->{$key} = 1; \$__env->startPush('{$pushName}'); ?>";
+        });
+
+        Blade::directive('endtfonce', function () {
+            return '<?php $__env->stopPush(); endif; ?>';
         });
     }
 }

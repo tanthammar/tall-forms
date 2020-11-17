@@ -59,18 +59,16 @@
     </div>
 </div>
 @if($field->includeScript)
-    @once
-        @push('styles')
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css"
-                  integrity="sha512-zxBiDORGDEAYDdKLuYU9X/JaJo/DPzE42UubfBw9yg8Qvb2YRRIQ8v4KsGHOx2H1/+sdSXyXxLXv5r7tHc9ygg=="
-                  crossorigin="anonymous" media="print" onload="this.media='all'"/>
-        @endpush
-        @push('scripts')
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"
-                    integrity="sha512-Gs+PsXsGkmr+15rqObPJbenQ2wB3qYvTHuJO6YJzPe/dTLvhy0fmae2BcnaozxDo5iaF8emzmCZWbQ1XXiX2Ig=="
-                    crossorigin="anonymous" defer></script>
-        @endpush
-    @endonce
+@tfonce('styles:imagecropper')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css"
+      integrity="sha512-zxBiDORGDEAYDdKLuYU9X/JaJo/DPzE42UubfBw9yg8Qvb2YRRIQ8v4KsGHOx2H1/+sdSXyXxLXv5r7tHc9ygg=="
+      crossorigin="anonymous" media="print" onload="this.media='all'"/>
+@endtfonce
+@tfonce('scripts:imagecropper')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"
+        integrity="sha512-Gs+PsXsGkmr+15rqObPJbenQ2wB3qYvTHuJO6YJzPe/dTLvhy0fmae2BcnaozxDo5iaF8emzmCZWbQ1XXiX2Ig=="
+        crossorigin="anonymous" defer></script>
+@endtfonce
 @endif
 @push('scripts')
     <script>

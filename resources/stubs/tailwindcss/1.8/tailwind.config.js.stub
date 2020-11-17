@@ -2,13 +2,13 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
     experimental: {
-        applyComplexClasses: true,
+        applyComplexClasses: true
     },
 
     future: {
         // Upcoming changes for TailwindCSS v2
         removeDeprecatedGapUtilities: true,
-        purgeLayersByDefault: true,
+        purgeLayersByDefault: true
     },
 
     purge: {
@@ -30,16 +30,16 @@ module.exports = {
         ],
         options: {
             defaultExtractor: (content) => content.match(/[^<>"'`\s]*[^<>"'`\s:]/g) || [],
-            whitelistPatterns: [/-active$/, /-enter$/, /-leave-to$/, /show$/],
-        },
+            whitelistPatterns: [/-active$/, /-enter$/, /-leave-to$/, /show$/]
+        }
     },
 
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
-            },
-        },
+                sans: ['Nunito', ...defaultTheme.fontFamily.sans]
+            }
+        }
     },
 
     variants: {
