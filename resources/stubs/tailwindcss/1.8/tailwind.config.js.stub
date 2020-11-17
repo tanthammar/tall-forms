@@ -4,10 +4,13 @@ module.exports = {
     experimental: {
         applyComplexClasses: true,
     },
+
     future: {
+        // Upcoming changes for TailwindCSS v2
         removeDeprecatedGapUtilities: true,
         purgeLayersByDefault: true,
     },
+
     purge: {
         content: [
             './vendor/laravel/jetstream/**/*.blade.php',
