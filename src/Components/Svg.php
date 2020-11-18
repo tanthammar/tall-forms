@@ -19,6 +19,8 @@ class Svg extends Component
 
     public function render(): View
     {
-        return view("tall-forms::{$this->path}");
+        return strpos($this->path, '::') != false
+            ? view($this->path)
+            : view("tall-forms::{$this->path}");
     }
 }
