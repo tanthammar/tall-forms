@@ -67,8 +67,18 @@ class InstallTallForms extends Command
             $wrapper = File::get(__DIR__ . '/../../resources/stubs/wrapperJetstream.blade.php.stub');
         }
 
-        if (!is_dir($directory = resource_path('views/components/pages'))) File::makeDirectory($directory, 0755, true);
-        File::put(resource_path('views/components/pages/default.blade.php'), $wrapper);
+        if (!is_dir($directory = resource_path('views/layouts'))) File::makeDirectory($directory, 0755, true);
+        File::put(resource_path('views/layouts/tall-form-wrapper-layout.blade.php'), $wrapper);
+
+        $this->info('Publishing the config file');
+        $this->call('vendor:publish', [
+            '--tag' => 'tall-form-config'
+        ]);
+
+        $this->info('Updating the wrapper view name in config');
+        $config = File::get(config_path('tall-forms.php'));
+        $config = str_replace('tall-forms::wrapper-layout', 'layouts.tall-form-wrapper-layout', $config);
+        File::put(config_path('tall-forms.php'), $config);
     }
 
     public function jetstream()
@@ -138,9 +148,11 @@ class InstallTallForms extends Command
 
         $tw19 = $this->confirm('Do you want to use y=Tailwind 1.9.x or n=Tailwind 1.8.x');
         if($tw19) {
+            $this->info('Installing Tailwind 1.9.x');
             $this->info(exec('npm install tailwindcss@1.9 --save-dev'));
             $config = File::get(__DIR__ . '/../../resources/stubs/tailwindcss/1.9/tailwind.config.js.stub');
         } else {
+            $this->info('Installing Tailwind 1.8.x');
             $this->info(exec('npm install tailwindcss@1.8 --save-dev'));
             $config = File::get(__DIR__ . '/../../resources/stubs/tailwindcss/1.8/tailwind.config.js.stub');
         }
