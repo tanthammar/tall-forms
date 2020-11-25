@@ -13,6 +13,7 @@ class Select extends BaseField
     public $placeholder;
     public $multiple = false;
     public $allowed_in_array = true;
+    public $align_label_top = false;
 
     public function placeholder(string $placeholder): self
     {
@@ -25,6 +26,7 @@ class Select extends BaseField
     {
         $this->multiple = true;
         $this->type = 'multiselect';
+        $this->align_label_top = true;
         return $this;
     }
 

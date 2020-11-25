@@ -19,6 +19,22 @@ class Select extends Component
     {
         $this->field = $field;
         $this->value = $value;
+        $this->field->help = $this->field->help ?? $this->help();
+        $this->field->placeholder = $this->field->placeholder ?? $this->placeholder();
+    }
+
+    public function help()
+    {
+        return $this->field->multiple
+            ? trans(config('tall-forms.multiselect-help'))
+            : null;
+    }
+
+    public function placeholder()
+    {
+        return $this->field->multiple
+            ? trans(config('tall-forms.multiselect-placeholder'))
+            : trans(config('tall-forms.select-placeholder'));
     }
 
     public function options(): array
