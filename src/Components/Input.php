@@ -32,7 +32,7 @@ class Input extends Component
             'autocomplete' => $this->field->autocomplete,
             'placeholder' => $this->field->placeholder,
         ];
-        if (in_array($this->field->type, ['number', 'range', 'date', 'datetime-local', 'month', 'time', 'week'])) {
+        if (in_array($this->field->input_type, ['number', 'range', 'date', 'datetime-local', 'month', 'time', 'week'])) {
             $limits = [
                 'min' => $this->field->min,
                 'max' => $this->field->max,
