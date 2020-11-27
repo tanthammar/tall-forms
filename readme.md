@@ -2,7 +2,7 @@
 
 # TALL-stack form generator
 
-Auto-generate responsive [Laravel Livewire](https://laravel-livewire.com) (TALL-stack) form components with realtime validation, file uploads, array fields, blade form input components and more.
+[Laravel Livewire](https://laravel-livewire.com), Tailwind forms with auto-generated views.
 
 [![Latest Stable Version](https://poser.pugx.org/tanthammar/tall-forms/v)](//packagist.org/packages/tanthammar/tall-forms) 
 [![Total Downloads](https://poser.pugx.org/tanthammar/tall-forms/downloads)](//packagist.org/packages/tanthammar/tall-forms) 
@@ -14,8 +14,7 @@ Auto-generate responsive [Laravel Livewire](https://laravel-livewire.com) (TALL-
 
 # Features
 * Laravel Nova like syntax to auto generate TALL-stack forms
-* Laravel 7 Blade form components
-* Auto generate views
+* Auto-generated views
 
 ### Sponsor Heroes
 [💗 Please Sponsor 🔗](https://github.com/sponsors/tanthammar) It takes a lot of time to create and maintain this package. I am forever grateful to you:
@@ -26,6 +25,7 @@ Auto-generate responsive [Laravel Livewire](https://laravel-livewire.com) (TALL-
 <td><a href="https://github.com/gavinhewitt"><img src="https://avatars2.githubusercontent.com/u/1969103?s=400&v=4" width="100px;" alt=""/><br /><sub><b>Gavin Hewitt</b></sub></a></td>
 <td><a href="https://github.com/MichaelGatuma"><img src="https://avatars0.githubusercontent.com/u/50529359?s=460&u=53cff27075ea04ec3032fe03976f05ac86f0e3b7&v=4" width="100px;" alt=""/><br /><sub><b>Michael Gatuma</b></sub></a></td>
 <td><a href="https://github.com/lalov"><img src="https://avatars3.githubusercontent.com/u/3465648?s=460&u=60998db0098beca7b3ceef52ac5055f72eebe69e&v=4" width="100px;" alt=""/><br /><sub><b>Lars Erik Løvhaug</b></sub></a></td>
+<td><a href="https://github.com/ioanschmitt"><img src="https://avatars3.githubusercontent.com/u/69044609?s=460&v=4" width="100px;" alt=""/><br /><sub><b>Ioan</b></sub></a></td>
 </tr>
 </tbody>
 </table>
