@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class MakeForm extends Command
 {
-    protected $signature = 'make:tall-form {name} {--model=Model} {--path=Http/Livewire/Forms} {--modelspath=Models/} {--action=create} {--overwrite=false}';
+    protected $signature = 'make:tall-form {name} {--model=Model} {--path=Http/Livewire/Forms} {--modelspath=Models/} {--action=create} {--overwrite=false} {--fields=""}';
     protected $description = 'Make a new Laravel Livewire form component.';
 
     public function handle()
@@ -26,6 +26,10 @@ class MakeForm extends Command
         //$stub = str_replace('DummyRoute', Str::slug(Str::plural($this->option('model'))), $stub);
         $namespace = Str::of($this->option('path'))->replace('/', "\\");
         $stub = str_replace('Namespace', $namespace, $stub);
+
+        if (filled($fields = $this->option('fields'))) {
+            $stub = str_replace("Input::make('Name')->rules('required'),", $fields, $stub);
+        }
 
         $path = Str::of($this->option('path'))->replace('\\', "/")->finish('/');
         $file_name = app_path($path . $this->argument('name') . '.php');
