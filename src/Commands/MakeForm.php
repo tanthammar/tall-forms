@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class MakeForm extends Command
 {
-    protected $signature = 'make:tall-form {name} {--model=Model} {--path=Http/Livewire/Forms} {--modelspath=Models/} {--action=create} {--overwrite=false} {--fields=""}';
+    protected $signature = 'make:tall-form {name} {--model=Model} {--path=Http/Livewire/Forms} {--modelspath=Models/} {--action=create} {--overwrite=false} {--skipexisting=true} {--fields=""}';
     protected $description = 'Make a new Laravel Livewire form component.';
 
     public function handle()
@@ -27,8 +27,17 @@ class MakeForm extends Command
         $namespace = Str::of($this->option('path'))->replace('/', "\\");
         $stub = str_replace('Namespace', $namespace, $stub);
 
+        //mass create forms from sponsor pkg
         if (filled($fields = $this->option('fields'))) {
             $stub = str_replace("Input::make('Name')->rules('required'),", $fields, $stub);
+            $use = "use Tanthammar\TallForms\Input;" . PHP_EOL;
+            if(Str::contains($fields, 'Checkbox::make')) $use .= "use Tanthammar\TallForms\Checkbox;" . PHP_EOL;
+            if(Str::contains($fields, 'Keyval::make')) $use .= "use Tanthammar\TallForms\KeyVal;" . PHP_EOL;
+            if(Str::contains($fields, 'Repeater::make')) $use .= "use Tanthammar\TallForms\Repeater;" . PHP_EOL;
+            if(Str::contains($fields, 'Textarea::make')) $use .= "use Tanthammar\TallForms\Textarea;" . PHP_EOL;
+            if(Str::contains($fields, 'DatePicker::make')) $use .= "use Tanthammar\TallFormsSponsors\DatePicker;" . PHP_EOL;
+            if(Str::contains($fields, 'Number::make')) $use .= "use Tanthammar\TallFormsSponsors\Number;" . PHP_EOL;
+            $stub = str_replace("use Tanthammar\TallForms\Input;", $use, $stub);
         }
 
         $path = Str::of($this->option('path'))->replace('\\', "/")->finish('/');
@@ -36,7 +45,11 @@ class MakeForm extends Command
 
         if (!is_dir(app_path($path))) File::makeDirectory(app_path($path), 0755, true);
 
-        if (!File::exists($file_name) || $this->option('overwrite') == 'true' ||  $this->confirm($this->argument('name') . ' already exists. Overwrite it?')) {
+        if (
+            !File::exists($file_name)
+            || $this->option('overwrite') == 'true'
+            || ($this->option('skipexisting') == 'false' && $this->confirm($this->argument('name') . ' for ' . $this->option('model') . ' model, already exists. Overwrite it?'))
+        ) {
             File::put($file_name, $stub);
             $this->info('App/' . $path . $this->argument('name') . ' was made!');
         }
