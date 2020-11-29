@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class MakeForm extends Command
 {
-    protected $signature = 'make:tall-form {name} {--model=Model} {--path=Http/Livewire/Forms} {--modelspath=Models/} {--action=create}';
+    protected $signature = 'make:tall-form {name} {--model=Model} {--path=Http/Livewire/Forms} {--modelspath=Models/} {--action=create} {--overwrite=false}';
     protected $description = 'Make a new Laravel Livewire form component.';
 
     public function handle()
@@ -33,7 +33,7 @@ class MakeForm extends Command
 
         if (!is_dir(app_path($path))) File::makeDirectory(app_path($path), 0755, true);
 
-        if (!File::exists($file_name) || $this->confirm($this->argument('name') . ' already exists. Overwrite it?')) {
+        if (!File::exists($file_name) || $this->option('overwrite') == 'true' ||  $this->confirm($this->argument('name') . ' already exists. Overwrite it?')) {
             File::put($file_name, $stub);
             $this->info('App/' . $path . $this->argument('name') . ' was made!');
         }
