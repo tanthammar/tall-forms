@@ -27,8 +27,7 @@ class MakeForm extends Command
         $namespace = Str::of($this->option('path'))->replace('/', "\\");
         $stub = str_replace('Namespace', $namespace, $stub);
 
-        $path = Str::of($this->option('path'))->replace('\\', "/");
-        if (!Str::of($path)->endsWith('/')) $path .= "/";
+        $path = Str::of($this->option('path'))->replace('\\', "/")->finish('/');
         $file_name = app_path($path . $this->argument('name') . '.php');
 
         if (!is_dir(app_path($path))) File::makeDirectory(app_path($path), 0755, true);
