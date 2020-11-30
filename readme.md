@@ -38,4 +38,16 @@ Want to give tribute to those who made TALL-stack come true. (Alphabetically ord
 - [Caleb Porzio](https://github.com/sponsors/calebporzio) for creating Livewire and AlpineJS
 - [Adam Wathan](https://tailwindui.com/) for TailwindCSS and TailwindUI
 
+
+
+# 🙋 Help wanted
+- If you like this package, please help me with the documentation and tests. Send me a PM.
+- **Pull Requests** I appreciate any input that improves the functionality and usability of this package. **Please contribute!**
+
+# 💬 Questions/Chat - Discord
+Discuss with other tall-form users on the official Livewire Discord channel. 
+You'll find me in the "partners/tall-forms" channel.
+
+🔗 https://discord.gg/livewire
+
 # Documentation [See the wiki](https://github.com/tanthammar/tall-forms/wiki)
