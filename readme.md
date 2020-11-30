@@ -14,6 +14,7 @@
 
 # Features
 * Laravel Nova like syntax to auto generate TALL-stack forms
+* Auto generate forms, with fields for all Eloquent Models - using a single artisan command.
 * Auto-generated views
 
 ### Sponsor Heroes
