@@ -7,7 +7,7 @@
             <x-tall-button size="sm" type="reset" wire:click.prevent="resetFormData" :text="trans(config('tall-forms.reset'))" color="warning"/>
         @endif
         @if($showGoBack)
-            <x-tall-button size="sm" wire:click.prevent="saveAndGoBack" color="secondary">@lang(config('tall-forms.save-go-back'))</x-tall-button>
+            <x-tall-button size="sm" wire:click.prevent="saveAndGoBack" color="secondary">{{ $saveBackBtnTxt ?? trans(config('tall-forms.save-go-back')) }}</x-tall-button>
         @endif
         @if($showSave)
             <span x-data="{ open: false }"
@@ -17,7 +17,7 @@
             <x-tall-button size="sm" type="submit" wire:click.prevent="saveAndStay" wire:loading.attr="disabled" color="primary">
                         <span class="mr-2" wire:loading wire:target="saveAndStay">
                             <x-tall-spinner/></span>
-                        @lang(config('tall-forms.save-and-stay'))
+                        {{ $saveStayBtnTxt ?? trans(config('tall-forms.save-and-stay')) }}
             </x-tall-button>
         @endif
     </div>
