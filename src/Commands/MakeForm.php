@@ -29,7 +29,7 @@ class MakeForm extends Command
 
         //mass create forms from sponsor pkg
         $fields = $this->option('fields');
-        if ($fields != "") {
+        if ($fields != '""') {
             $stub = str_replace("Input::make('Name')->rules('required'),", $fields, $stub);
             $use = "use Tanthammar\TallForms\Input;" . PHP_EOL;
             if(Str::contains($fields, 'Checkbox::make')) $use .= "use Tanthammar\TallForms\Checkbox;" . PHP_EOL;
