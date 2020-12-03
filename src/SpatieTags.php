@@ -13,7 +13,8 @@ class SpatieTags extends BaseField
     public $tagsRules;
     public $placeholder;
     public $align_label_top = true;
-    public $allowed_in_array = false;
+    public $allowed_in_repeater = false;
+    public $allowed_in_keyval = false;
 
     public function type(string $tagType = ""): self
     {

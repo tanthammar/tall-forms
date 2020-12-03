@@ -6,10 +6,15 @@ namespace Tanthammar\TallForms\Exceptions;
 
 class InvalidArrayFieldType extends \Exception
 {
-    public function __construct($fieldname, $fieldtype)
+    public function __construct($fieldname, $fieldtype, $parenttype)
     {
+        $lookup = [
+            'array' => 'Repeater',
+            'keyval' => 'Keyval'
+        ];
+
         parent::__construct(
-            "You can not add field type [{$fieldtype}] to Repeater or KeyVal field: [{$fieldname}]"
+            "Error for field: [$fieldname], type: [$fieldtype] is not allowed in [$lookup[$parenttype]]"
         );
     }
 }

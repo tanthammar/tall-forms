@@ -12,7 +12,7 @@ class Checkboxes extends BaseField
 
     public $type = 'checkboxes';
     public $align_label_top = true;
-    public $allowed_in_array = true;
+    public $allowed_in_repeater = true;
 
     public function inputAttr(array $attributes): self
     {

@@ -17,7 +17,8 @@ class ImageCropper extends BaseField
     public $fileInfo = 'PNG, JPG, GIF, TIFF, max 1.5MB';
     public $uploadButton = 'Select a file';
     public $align_label_top = true;
-    public $allowed_in_array = false;
+    public $allowed_in_repeater = false;
+    public $allowed_in_keyval = false;
 
 
     public function dropZoneHelp(string $text): self

@@ -16,8 +16,11 @@ trait IsArrayField
     public function fields($fields = []): self
     {
         foreach ($fields as $field) {
-            throw_if(!$field->allowed_in_array,
-                new InvalidArrayFieldType($field->name, $field->type)
+            throw_if($this->type == 'array' && !$field->allowed_in_repeater,
+                new InvalidArrayFieldType($field->name, $field->type, $this->type)
+            );
+            throw_if($this->type == 'keyval' && !$field->allowed_in_keyval,
+                new InvalidArrayFieldType($field->name, $field->type, $this->type)
             );
         }
         $this->fields = $fields;
