@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class MakeForm extends Command
 {
-    protected $signature = 'make:tall-form {name} {--model=Model} {--path=Http/Livewire/Forms} {--modelspath=Models/} {--action=create} {--overwrite=false} {--skipexisting=false} {--fields=""}';
+    protected $signature = 'make:tall-form {name} {--model=Model} {--path=Http/Livewire/Forms} {--modelspath=Models} {--action=create} {--overwrite=false} {--skipexisting=false} {--fields=""}';
     protected $description = 'Make a new Laravel Livewire form component.';
 
     public function handle()
@@ -19,7 +19,8 @@ class MakeForm extends Command
         $stub = str_replace('DummyModel', $this->option('model'), $stub);
         $stub = str_replace('dummymodel', Str::lower($this->option('model')), $stub);
 
-        $modelspath = Str::of($this->option('modelspath'))->replace('/', "\\");
+        $modelspath = $this->option('modelspath') == "Models" ? "App\\Models\\" : $this->option('modelspath');
+        $modelspath = Str::of($modelspath)->replace('/', "\\")->finish('\\');
         $stub = str_replace('ModelsPath', $modelspath, $stub);
 
         //$stub = str_replace('Action', $this->option('action'), $stub);

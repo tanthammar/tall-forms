@@ -2,7 +2,7 @@
 
 namespace App\Namespace;
 
-use App\ModelsPathDummyModel;
+use ModelsPathDummyModel;
 use Livewire\Component;
 use Tanthammar\TallForms\Input;
 use Tanthammar\TallForms\TallForm;
