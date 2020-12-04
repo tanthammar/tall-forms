@@ -7,7 +7,7 @@
                         @foreach($field->fields as $nested_field)
                             @php
                                 $nested_field->key = "{$field->key}.{$key}.{$nested_field->name}";
-                                $nested_field->show_label = $key === 0;
+                                if (!$field->labelEachRow) $nested_field->show_label = $key === 0;
                                 $nested_field->inline = $nested_field->inline ?? false;
                                 $nested_field->inArray = true;
                                 $nested_field->help = $key === 0 ? $nested_field->help : null;

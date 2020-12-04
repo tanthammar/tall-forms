@@ -10,6 +10,7 @@ class Repeater extends BaseField
     use IsArrayField;
 
     public $type = 'array';
+    public $labelEachRow = false;
     public $array_sortable = false;
     public $align_label_top = true;
     public $allowed_in_repeater = false;
@@ -18,6 +19,12 @@ class Repeater extends BaseField
     public function sortable(): self
     {
         $this->array_sortable = true;
+        return $this;
+    }
+
+    public function labelEachRow(): self
+    {
+        $this->labelEachRow = true;
         return $this;
     }
 }
