@@ -239,13 +239,11 @@ class InstallTallForms extends Command
 
         //set plugins in tailwind.config.js
         if ($ui) {
-            $tailwindW = "
-            require('@tailwindcss/ui')({
+            $tailwindW = "require('@tailwindcss/ui')({
                 layout: 'sidebar',
             })";
         } else {
-            $tailwindW = "
-            require('@tailwindcss/custom-forms')";
+            $tailwindW = "require('@tailwindcss/custom-forms')";
         }
         $config = str_replace('TAILWINDV', $tailwindW, $config);
         File::put(base_path('tailwind.config.js'), $config);
