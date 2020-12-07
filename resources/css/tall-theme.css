@@ -73,7 +73,7 @@
         @apply text-gray-100 tf-bg-danger hover:bg-red-700 hover:text-white focus:border-red-700 focus:shadow;
     }
     .tf-btn-warning {
-        @apply text-gray-100 tf-bg-warning hover:bg-yellow-600 hover:text-white focus:border-orange-700 focus:shadow;
+        @apply text-gray-100 tf-bg-warning hover:bg-yellow-600 hover:text-white focus:border-yellow-700 focus:shadow;
     }
     .tf-btn-primary {
         @apply text-gray-100 tf-bg-primary hover:bg-blue-800 hover:text-white focus:border-blue-800 focus:shadow;
@@ -94,7 +94,7 @@
         @apply text-green-100 bg-green-500 hover:bg-green-600 focus:border-green-700 focus:shadow;
     }
     .tf-btn-yellow {
-        @apply text-yellow-100 bg-yellow-500 hover:bg-yellow-600 focus:border-yellow-700 focus:shadow;
+        @apply text-yellow-50 bg-yellow-300 hover:bg-yellow-400 focus:border-yellow-500 focus:shadow;
     }
     .tf-btn-red {
         @apply text-red-100 bg-red-500 hover:bg-red-600 focus:border-red-700 focus:shadow;
@@ -103,7 +103,7 @@
         @apply text-gray-100 bg-gray-500 hover:bg-gray-600 focus:border-gray-700 focus:shadow;
     }
     .tf-btn-orange {
-        @apply text-orange-100 bg-yellow-500 hover:bg-orange-600 focus:border-orange-700 focus:shadow;
+        @apply text-yellow-50 bg-yellow-500 hover:bg-yellow-600 focus:border-yellow-700 focus:shadow;
     }
     .tf-btn-teal {
         @apply text-teal-100 bg-teal-500 hover:bg-teal-600 focus:border-teal-700 focus:shadow;

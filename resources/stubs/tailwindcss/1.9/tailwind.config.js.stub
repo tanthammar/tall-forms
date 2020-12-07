@@ -1,3 +1,5 @@
+// const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
     future: {
         // Upcoming changes for TailwindCSS v2
