@@ -199,7 +199,7 @@ class InstallTallForms extends Command
         $this->info('Installing @tailwindcss/typography');
         $this->info('Installing @tailwindcss/aspect-ratio');
 
-        $this->info(exec('tailwindcss@npm:@tailwindcss/postcss7-compat postcss-import autoprefixer alpinejs @tailwindcss/forms @tailwindcss/typography @tailwindcss/aspect-ratio --save-dev'));
+        $this->info(exec('npm install tailwindcss@npm:@tailwindcss/postcss7-compat postcss-import autoprefixer alpinejs @tailwindcss/forms @tailwindcss/typography @tailwindcss/aspect-ratio --save-dev'));
         $config = File::get(__DIR__ . '/../../resources/stubs/tailwindcss/2.0/tailwind.config.js.stub');
         File::put(base_path('tailwind.config.js'), $config);
     }
