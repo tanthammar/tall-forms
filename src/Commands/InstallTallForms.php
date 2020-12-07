@@ -200,7 +200,7 @@ class InstallTallForms extends Command
         $this->info('Installing @tailwindcss/aspect-ratio');
 
         $this->info(exec('tailwindcss@npm:@tailwindcss/postcss7-compat postcss-import autoprefixer alpinejs @tailwindcss/forms @tailwindcss/typography @tailwindcss/aspect-ratio --save-dev'));
-        $config = File::get(__DIR__ . '/../../resources/stubs/tailwindcss/20/tailwind.config.js.stub');
+        $config = File::get(__DIR__ . '/../../resources/stubs/tailwindcss/2.0/tailwind.config.js.stub');
         File::put(base_path('tailwind.config.js'), $config);
     }
 
@@ -209,15 +209,15 @@ class InstallTallForms extends Command
         $this->tw2 = false;
         $this->info('Installing Tailwind CSS v1.x');
 
-        $tw19 = $this->confirm('Do you want to use y=Tailwind 19.x or n=Tailwind 18.x');
+        $tw19 = $this->confirm('Do you want to use y=Tailwind 1.9.x or n=Tailwind 1.8.x');
         if($tw19) {
-            $this->info('Installing Tailwind 19.x');
+            $this->info('Installing Tailwind 1.9.x');
             $this->info(exec('npm install tailwindcss@1.9 --save-dev'));
-            $config = File::get(__DIR__ . '/../../resources/stubs/tailwindcss/19/tailwind.config.js.stub');
+            $config = File::get(__DIR__ . '/../../resources/stubs/tailwindcss/1.9/tailwind.config.js.stub');
         } else {
-            $this->info('Installing Tailwind 18.x');
+            $this->info('Installing Tailwind 1.8.x');
             $this->info(exec('npm install tailwindcss@1.8 --save-dev'));
-            $config = File::get(__DIR__ . '/../../resources/stubs/tailwindcss/18/tailwind.config.js.stub');
+            $config = File::get(__DIR__ . '/../../resources/stubs/tailwindcss/1.8/tailwind.config.js.stub');
         }
 
 

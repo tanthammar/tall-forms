@@ -7,7 +7,7 @@ module.exports = {
     },
 
     presets: [
-        require('./vendor/tanthammar/tall-forms/resources/stubs/tailwindcss/20/tall-forms-preset.js'),
+        require('./vendor/tanthammar/tall-forms/resources/stubs/tailwindcss/2.0/tall-forms-preset.js'),
     ],
 
     theme: {
