@@ -74,8 +74,8 @@ class InstallTallForms extends Command
         $this->info('Installing wrapper view');
         $wrapper = File::get(__DIR__ . '/../../resources/stubs/wrapper.blade.php.stub');
 
-        if ($this->lv8 && $this->confirm('Do you use Jetstream or Breeze y/n ?')) {
-            $this->jetstream();
+        if (filled($this->jetstream) || filled($this->breeze)) {
+            $this->fixAppLayout();
             $wrapper = File::get(__DIR__ . '/../../resources/stubs/wrapperJetstream.blade.php.stub');
         }
 
@@ -93,7 +93,7 @@ class InstallTallForms extends Command
         File::put(config_path('tall-forms.php'), $config);
     }
 
-    public function jetstream()
+    public function fixAppLayout()
     {
         $this->info('Checking app.blade.php ...');
         $app_blade = File::get(resource_path('views/layouts/app.blade.php'));
