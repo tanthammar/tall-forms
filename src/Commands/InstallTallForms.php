@@ -212,11 +212,11 @@ class InstallTallForms extends Command
         $tw19 = $this->confirm('Do you want to use y=Tailwind 19.x or n=Tailwind 18.x');
         if($tw19) {
             $this->info('Installing Tailwind 19.x');
-            $this->info(exec('npm install tailwindcss@19 --save-dev'));
+            $this->info(exec('npm install tailwindcss@1.9 --save-dev'));
             $config = File::get(__DIR__ . '/../../resources/stubs/tailwindcss/19/tailwind.config.js.stub');
         } else {
             $this->info('Installing Tailwind 18.x');
-            $this->info(exec('npm install tailwindcss@18 --save-dev'));
+            $this->info(exec('npm install tailwindcss@1.8 --save-dev'));
             $config = File::get(__DIR__ . '/../../resources/stubs/tailwindcss/18/tailwind.config.js.stub');
         }
 
