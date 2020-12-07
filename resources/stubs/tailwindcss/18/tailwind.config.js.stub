@@ -46,5 +46,8 @@ module.exports = {
         opacity: ['responsive', 'hover', 'focus', 'disabled'],
     },
 
-    REPLACE PLUGINS
+    plugins: [
+            TAILWINDV,
+            require('@tailwindcss/typography'),
+    ],
 };

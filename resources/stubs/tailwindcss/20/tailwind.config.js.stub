@@ -1,0 +1,18 @@
+module.exports = {
+    purge: {
+        options: {
+            defaultExtractor: (content) => content.match(/[^<>"'`\s]*[^<>"'`\s:]/g) || [],
+            safeList: [/-active$/, /-enter$/, /-leave-to$/, /show$/],
+        },
+    },
+
+    presets: [
+        require('./vendor/tanthammar/tall-forms/resources/stubs/tailwindcss/20/tall-forms-preset.js'),
+    ],
+
+    theme: {
+        extend: {}
+    },
+
+    variants: {},
+};

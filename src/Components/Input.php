@@ -14,7 +14,7 @@ class Input extends Component
 
     public Field $field;
     public bool $required;
-    public string $icon_span = 'flex items-center justify-center px-2 rounded-l border border-r-0 border-gray-300 bg-gray-100 text-gray-600 sm:text-sm';
+    public string $icon_span = 'flex items-center justify-center px-2 rounded-l border border-r-0 border-gray-300 bg-gray-100 text-gray-600 sm:text-sm leading-normal';
 
     public function __construct(Field $field)
     {

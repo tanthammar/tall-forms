@@ -24,5 +24,8 @@ module.exports = {
 
     variants: {},
 
-    REPLACE PLUGINS
+    plugins: [
+            TAILWINDV,
+            require('@tailwindcss/typography'),
+    ],
 };

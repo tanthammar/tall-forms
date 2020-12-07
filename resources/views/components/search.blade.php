@@ -59,7 +59,7 @@
             @empty
                 <li class="mr-2 flex pl-2 space-x-2">
                     <x-tall-spinner/>
-                    <span class="text-grey-500 text-xs">Searching ...</span>
+                    <span class="text-grey-500 text-xs leading-normal">Searching ...</span>
                 </li>
             @endforelse
         </ul>

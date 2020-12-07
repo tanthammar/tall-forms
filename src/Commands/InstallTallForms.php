@@ -11,8 +11,20 @@ class InstallTallForms extends Command
     protected $signature = 'make:tall-forms-installation';
     protected $description = 'Install tall-forms presets';
 
+    protected bool $lv8;
+    protected bool $css;
+    protected bool $tw2;
+    protected $jetstream;
+    protected bool $jetstreamV1 = false;
+    protected bool $jetstreamV2 = false;
+    protected $breeze;
+    protected bool $breezeV0 = false;
+    //protected bool $breezeV1 = false; //not released yet, see setEnvironment()
+
     public function handle()
     {
+        $this->setEnvironment();
+
         //Check if current directory is a Git repository
         $inGitRepo = exec('git rev-parse --is-inside-work-tree 2>/dev/null') == "true";
         if ($inGitRepo) {
@@ -31,9 +43,10 @@ class InstallTallForms extends Command
 
     public function runInstallation()
     {
-        $this->tailwind();
+        $this->tailwind(); //sets $tw2 prop
         $this->theme();
         // $this->icons(); //not needed to publish the icons
+        $this->laravelMix();
         $this->wrapper();
 
 //        $this->info('Compiling css');
@@ -61,8 +74,7 @@ class InstallTallForms extends Command
         $this->info('Installing wrapper view');
         $wrapper = File::get(__DIR__ . '/../../resources/stubs/wrapper.blade.php.stub');
 
-        $v8 = $this->confirm('Do you use y=Laravel 8 or n=Laravel 7 ?');
-        if ($v8 && $this->confirm('Do you use Jetstream y/n ?')) {
+        if ($this->lv8 && $this->confirm('Do you use Jetstream or Breeze y/n ?')) {
             $this->jetstream();
             $wrapper = File::get(__DIR__ . '/../../resources/stubs/wrapperJetstream.blade.php.stub');
         }
@@ -100,11 +112,10 @@ class InstallTallForms extends Command
 
     public function theme()
     {
-        $css = $this->confirm('Do you use y=CSS or n=SASS ?');
         $custom_css = File::get(__DIR__ . '/../../resources/stubs/custom.css.stub');
         $app_css = File::get(__DIR__ . '/../../resources/stubs/app.css.stub');
         $app_scss = File::get(__DIR__ . '/../../resources/stubs/app.scss.stub');
-        if ($css) {
+        if ($this->css) {
             $this->info('Adding support for nested css');
             $this->info(exec('npm install postcss-nesting --save-dev'));
 
@@ -112,49 +123,101 @@ class InstallTallForms extends Command
             $this->info(exec('npm install postcss-import --save-dev'));
 
             $this->info('Publishing the theme');
-            $this->call('vendor:publish', [
-                '--tag' => 'tall-form-theme-css'
-            ]);
+            if($this->tw2) {
+                $this->call('vendor:publish', [
+                    '--tag' => 'tall-form-theme-css'
+                ]);
+            } else {
+                $this->call('vendor:publish', [
+                    '--tag' => 'tall-form-theme-tw1x-css'
+                ]);
+            }
+
             $this->info('Creating custom.css');
             File::put(resource_path('css/custom.css'), $custom_css);
 
             $this->info('Creating app.css');
             File::put(resource_path('css/app.css'), $app_css);
-
-            $this->info('Creating webpack.mix.js');
-            $mix = File::get(__DIR__ . '/../../resources/stubs/webpackCSS.mix.js.stub');
-            File::put(base_path('webpack.mix.js'), $mix);
         } else {
             $this->info('Publishing the theme');
-            $this->call('vendor:publish', [
-                '--tag' => 'tall-form-theme-sass'
-            ]);
+
+            if($this->tw2) {
+                $this->call('vendor:publish', [
+                    '--tag' => 'tall-form-theme-sass'
+                ]);
+            } else {
+                $this->call('vendor:publish', [
+                    '--tag' => 'tall-form-theme-tw1x-sass'
+                ]);
+            }
+
             $this->info('Creating custom.scss');
             File::put(resource_path('sass/custom.scss'), $custom_css);
 
             $this->info('Creating app.scss');
             File::put(resource_path('sass/app.scss'), $app_scss);
 
-            $this->info('Creating webpack.mix.js');
-            $mix = File::get(__DIR__ . '/../../resources/stubs/webpackSASS.mix.js.stub');
-            File::put(base_path('webpack.mix.js'), $mix);
         }
     }
 
     public function tailwind()
     {
-        //install tailwind
-        $this->info('Installing Tailwind CSS');
+        if (filled($this->breeze)) {
+            $this->tailwindTwo();
+            return;
+        }
 
-        $tw19 = $this->confirm('Do you want to use y=Tailwind 1.9.x or n=Tailwind 1.8.x');
-        if($tw19) {
-            $this->info('Installing Tailwind 1.9.x');
-            $this->info(exec('npm install tailwindcss@1.9 --save-dev'));
-            $config = File::get(__DIR__ . '/../../resources/stubs/tailwindcss/1.9/tailwind.config.js.stub');
+        if (filled($this->jetstream)) {
+            if ($this->jetstreamV1) {
+                $this->tailwindOne();
+                return;
+            }
+            if ($this->jetstreamV2) {
+                $this->tailwindTwo();
+                return;
+            }
+        }
+
+        $tw2 = $this->confirm('Are you on y=Tailwind 2.x or n=Tailwind 1.x');
+
+        if ($tw2) {
+            $this->tailwindTwo();
         } else {
-            $this->info('Installing Tailwind 1.8.x');
-            $this->info(exec('npm install tailwindcss@1.8 --save-dev'));
-            $config = File::get(__DIR__ . '/../../resources/stubs/tailwindcss/1.8/tailwind.config.js.stub');
+            $this->tailwindOne();
+        }
+
+    }
+
+    public function tailwindTwo()
+    {
+        $this->tw2 = true;
+        $this->info('Installing Tailwind CSS v2.x');
+        $this->info('Installing postcss-import');
+        $this->info('Installing autoprefixer');
+        $this->info('Installing alpinejs');
+        $this->info('Installing @tailwindcss/forms');
+        $this->info('Installing @tailwindcss/typography');
+        $this->info('Installing @tailwindcss/aspect-ratio');
+
+        $this->info(exec('tailwindcss@npm:@tailwindcss/postcss7-compat postcss-import autoprefixer alpinejs @tailwindcss/forms @tailwindcss/typography @tailwindcss/aspect-ratio --save-dev'));
+        $config = File::get(__DIR__ . '/../../resources/stubs/tailwindcss/20/tailwind.config.js.stub');
+        File::put(base_path('tailwind.config.js'), $config);
+    }
+
+    private function tailwindOne()
+    {
+        $this->tw2 = false;
+        $this->info('Installing Tailwind CSS v1.x');
+
+        $tw19 = $this->confirm('Do you want to use y=Tailwind 19.x or n=Tailwind 18.x');
+        if($tw19) {
+            $this->info('Installing Tailwind 19.x');
+            $this->info(exec('npm install tailwindcss@19 --save-dev'));
+            $config = File::get(__DIR__ . '/../../resources/stubs/tailwindcss/19/tailwind.config.js.stub');
+        } else {
+            $this->info('Installing Tailwind 18.x');
+            $this->info(exec('npm install tailwindcss@18 --save-dev'));
+            $config = File::get(__DIR__ . '/../../resources/stubs/tailwindcss/18/tailwind.config.js.stub');
         }
 
 
@@ -176,22 +239,61 @@ class InstallTallForms extends Command
 
         //set plugins in tailwind.config.js
         if ($ui) {
-            $plugins = "
-    plugins: [
-        require('@tailwindcss/ui')({
-            layout: 'sidebar',
-        }),
-        require('@tailwindcss/typography'),
-    ],";
+            $tailwindW = "
+            require('@tailwindcss/ui')({
+                layout: 'sidebar',
+            })";
         } else {
-            $plugins = "
-    plugins: [
-        require('@tailwindcss/custom-forms'),
-        require('@tailwindcss/typography'),
-    ],";
+            $tailwindW = "
+            require('@tailwindcss/custom-forms')";
         }
-        $config = str_replace('REPLACE PLUGINS', $plugins, $config);
+        $config = str_replace('TAILWINDV', $tailwindW, $config);
         File::put(base_path('tailwind.config.js'), $config);
     }
 
+    private function laravelMix()
+    {
+        $this->info('Creating webpack.mix.js');
+
+        //Jetstream v2 & Breeze 0.x use the same webpack.mix.js
+        //plain lv8 setup as Breeze
+        $mix = File::get(__DIR__ . '/../../resources/stubs/webpackCSS.mix.js.stub');
+
+        if(!$this->lv8) { //sass lv7
+            $mix = File::get(__DIR__ . '/../../resources/stubs/webpackSASS.mix.js.stub');
+        } elseif ($this->jetstreamV1) { // jetstream v1.x has a require('./webpack.config') statement
+            $mix = File::get(__DIR__ . '/../../resources/stubs/webpackJetstreamv1.mix.js.stub');
+        }
+
+        File::put(base_path('webpack.mix.js'), $mix);
+    }
+
+    private function setEnvironment()
+    {
+        //Laravel 8 or 7
+        $this->lv8 = \Illuminate\Foundation\Application::VERSION >= 8;
+
+        // Css or Sass
+        $this->css = $this->lv8 ? true : false;
+
+        //Jetstream or Breeze
+        if ($this->lv8) {
+            try {
+                $this->jetstream = \Composer\InstalledVersions::getVersion('laravel/jetstream');
+                //2020-12-07 v1 Jetstream has different webpack.mix.js than v2 Jetstream
+                $this->jetstreamV1 = $this->jetstream != 'dev-master' && $this->jetstream <= "1.9.9";
+                $this->jetstreamV2 = $this->jetstream == 'dev-master' || $this->jetstream >= "2";
+            } catch (\Throwable $e) {
+                $this->jetstream = null;
+            }
+            try {
+                $this->breeze = \Composer\InstalledVersions::getVersion('laravel/breeze');
+                //v0 Breeze and Jetstream v2 has the same webpack.mix.js
+                $this->breezeV0 = $this->breeze == 'dev-master' || $this->breeze <= "1"; //change dev-master to != when v1 is released
+                //$this->breezeV1 = $this->breeze == 'dev-master' || $this->breeze <= "1"; //2020-12-07 uncomment when v1 is released, $this->laravelMix() to apply correct webpack mix stub
+            } catch (\Throwable $e) {
+                $this->breeze = null;
+            }
+        }
+    }
 }

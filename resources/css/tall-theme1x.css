@@ -7,11 +7,6 @@
         margin-top: -0.1rem;
     }
 
-    /* v1 fall-back */
-    .tf-shadow-xs {
-        @apply ring-1 ring-black ring-opacity-5;
-    }
-
     /* honeypot field class */
     .nosy {
         position: absolute;
@@ -73,7 +68,7 @@
         @apply text-gray-100 tf-bg-danger hover:bg-red-700 hover:text-white focus:border-red-700 focus:shadow;
     }
     .tf-btn-warning {
-        @apply text-gray-100 tf-bg-warning hover:bg-yellow-600 hover:text-white focus:border-orange-700 focus:shadow;
+        @apply text-gray-100 tf-bg-warning hover:bg-orange-500 hover:text-white focus:border-orange-700 focus:shadow;
     }
     .tf-btn-primary {
         @apply text-gray-100 tf-bg-primary hover:bg-blue-800 hover:text-white focus:border-blue-800 focus:shadow;
@@ -103,7 +98,7 @@
         @apply text-gray-100 bg-gray-500 hover:bg-gray-600 focus:border-gray-700 focus:shadow;
     }
     .tf-btn-orange {
-        @apply text-orange-100 bg-yellow-500 hover:bg-orange-600 focus:border-orange-700 focus:shadow;
+        @apply text-orange-100 bg-orange-500 hover:bg-orange-600 focus:border-orange-700 focus:shadow;
     }
     .tf-btn-teal {
         @apply text-teal-100 bg-teal-500 hover:bg-teal-600 focus:border-teal-700 focus:shadow;
@@ -168,10 +163,10 @@
 
     /* Labels */
     .tf-label {
-        @apply my-1 block uppercase tracking-wide text-gray-600 text-xs leading-normal font-bold;
+        @apply my-1 block uppercase tracking-wide text-gray-600 text-xs font-bold;
     }
     .tf-label-suffix {
-        @apply italic text-black text-opacity-25 text-xs leading-normal;
+        @apply italic text-black text-opacity-25 text-xs;
     }
     .tf-after-label {
         @apply -mt-1 block text-sm leading-4 text-gray-500;
@@ -309,7 +304,7 @@
         @apply max-w-xs w-full;
     }
     .tf-search-ul {
-        @apply rounded-md py-1 text-base leading-6 tf-shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5;
+        @apply rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5;
         max-height: 15rem;
     }
     .tf-search-li {
@@ -347,7 +342,7 @@
         @apply mt-1;
     }
     .tf-checkbox-label {
-        @apply text-sm text-gray-900 leading-normal;
+        @apply text-sm text-gray-900;
     }
     .tf-checkbox-label-spacing {
         @apply ml-2 block;
@@ -359,7 +354,7 @@
         @apply mt-1 h-4 w-4;
     }
     .tf-radio-label {
-        @apply text-sm text-gray-900 leading-normal;
+        @apply text-sm text-gray-900;
     }
     .tf-radio-label-spacing {
         @apply ml-2 block;
@@ -367,13 +362,13 @@
 
     /* File upload */
     input.tf-file-upload {
-        @apply flex-1 block w-full sm:text-sm leading-normal rounded-none rounded-r;
+        @apply flex-1 block w-full sm:text-sm rounded-none rounded-r;
     }
     .tf-file-upload-input-wrapper {
         @apply flex rounded w-full relative;
     }
     .tf-file-upload-spinner-wrapper {
-        @apply inline-flex items-center rounded-l px-3 border border-r-0 text-gray-600 sm:text-sm leading-normal;
+        @apply inline-flex items-center rounded-l px-3 border border-r-0 text-gray-600 sm:text-sm;
         @apply border-gray-300 bg-gray-100;
     }
     .tf-file-upload-ul {
@@ -409,7 +404,7 @@
         @apply cursor-pointer font-bold text-center text-gray-500 text-xs tracking-wide uppercase;
     }
     .tf-cropper-file-info {
-        @apply font-extralight text-gray-500 text-xs;
+        @apply font-thin text-gray-500 text-xs;
     }
     .tf-cropper-icon {
         @apply mx-auto h-12 w-12 text-gray-400;
