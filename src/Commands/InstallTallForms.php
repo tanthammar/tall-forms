@@ -52,7 +52,8 @@ class InstallTallForms extends Command
 //        $this->info('Compiling css');
 //        $this->info(exec('npm run dev'));
 
-        $this->info('Installation complete. Please support this package if you find in useful :-)');
+        $this->info("Installation complete. DON'T FORGET @stack('styles') and @stack('scripts') + npm install && npm run dev");
+        $this->info('Please support this package if you find in useful :-)');
     }
 
     public function gitStart()
