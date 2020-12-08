@@ -97,6 +97,8 @@ class InstallTallForms extends Command
     {
         $this->info('Checking app.blade.php ...');
         $app_blade = File::get(resource_path('views/layouts/app.blade.php'));
+        $app_blade = str_replace('@livewireStyles', '@livewireStyles' . PHP_EOL. '@stack("styles")', $app_blade);
+        $app_blade = str_replace('@livewireScripts', '@livewireScripts' . PHP_EOL. '@stack("scripts")', $app_blade);
         $app_blade = str_replace('{{ $header }}', '{{ $header ?? null }}', $app_blade);
         $app_blade = str_replace('{{ $slot }}', '{{ $slot ?? null }}', $app_blade);
         File::put(resource_path('views/layouts/app.blade.php'), $app_blade);

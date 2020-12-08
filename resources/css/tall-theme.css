@@ -7,9 +7,24 @@
         margin-top: -0.1rem;
     }
 
-    /* v1 fall-back */
-    .tf-shadow-xs {
+    /* Tailwind v1 fall-back */
+    .shadow-xs {
         @apply ring-1 ring-black ring-opacity-5;
+    }
+    .form-input {
+        @apply focus:ring-gray-400 focus:border-gray-400 focus:shadow-md border-gray-300
+    }
+    .form-textarea {
+        @apply focus:ring-gray-400 focus:border-gray-400 focus:shadow-md border-gray-300
+    }
+    .form-select {
+        @apply focus:ring-gray-400 focus:border-gray-400 focus:shadow-md border-gray-300 rounded
+    }
+    .form-checkbox {
+        @apply focus:ring-blue-400 text-blue-500 border-gray-300 rounded
+    }
+    .form-radio {
+        @apply focus:ring-blue-400 text-blue-500 border-gray-300
     }
 
     /* honeypot field class */
@@ -32,7 +47,7 @@
         border-color: #46b8da;
     }
     .tf-bg-warning {
-        background-color: #f0ad4e;
+        background-color: #f69a19;
         border-color: #eea236;
     }
     .tf-bg-primary {
@@ -309,7 +324,7 @@
         @apply max-w-xs w-full;
     }
     .tf-search-ul {
-        @apply rounded-md py-1 text-base leading-6 tf-shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5;
+        @apply rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5;
         max-height: 15rem;
     }
     .tf-search-li {
