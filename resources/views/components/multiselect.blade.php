@@ -1,5 +1,5 @@
 <div x-data="{ open: false, field: {{ json_encode($value) }} }">
-    <div x-cloak x-show="!field.length" class="form-select my-1" x-on:click="open = ! open">
+    <div x-cloak x-show="!field.length" type="text" class="form-select my-1" x-on:click="open = ! open">
         {{ $field->placeholder ?? 'Select an option ...' }}
     </div>
     <select x-cloak x-show="open || field.length" x-model="field" x-on:click.away.stop="open = false" multiple @foreach($options() as $key => $value) {{$key}}="{{$value}}" @endforeach>
