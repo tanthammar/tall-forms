@@ -12,10 +12,10 @@
         @apply ring-1 ring-black ring-opacity-5;
     }
     .form-input {
-        @apply focus:ring-gray-400 focus:border-gray-400 focus:shadow-md border-gray-300
+        @apply focus:ring-gray-400 focus:border-gray-400 focus:shadow-md border-gray-300 rounded
     }
     .form-textarea {
-        @apply focus:ring-gray-400 focus:border-gray-400 focus:shadow-md border-gray-300
+        @apply focus:ring-gray-400 focus:border-gray-400 focus:shadow-md border-gray-300 rounded
     }
     .form-select {
         @apply focus:ring-gray-400 focus:border-gray-400 focus:shadow-md border-gray-300 rounded
