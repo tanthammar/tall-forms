@@ -4,6 +4,8 @@
 namespace Tanthammar\TallForms\Traits;
 
 
+use Illuminate\Support\Arr;
+
 trait HasAttributes
 {
     public array $attributes = [];
@@ -22,54 +24,64 @@ trait HasAttributes
         data_set($this->attributes, 'label', 'tf-label');
     }
 
-    public function rootAttr(array $attributes, bool $merge = true): self
+    protected function mergeClasses(string $key, array $custom)
     {
-        $merge ? array_merge($this->attributes['root'], $attributes) : $this->attributes['root'] = $attributes;
+        $merged = array_merge_recursive($this->attributes[$key], $custom);
+        if(Arr::has($merged, 'class')) {
+            $merged['class'] = implode(" ", $merged['class']);
+        }
+        $this->attributes[$key] = $merged;
+    }
+
+    public function rootAttr(array $attributes, bool $mergeClass = true): self
+    {
+        $mergeClass ? $this->mergeClasses('root', $attributes) : $this->attributes['root'] = $attributes;
         return $this;
     }
 
-    public function beforeAttr(array $attributes, bool $merge = true): self
+    public function beforeAttr(array $attributes, bool $mergeClass = true): self
     {
-        $merge ? array_merge($this->attributes['before'], $attributes) : $this->attributes['before'] = $attributes;
+        $mergeClass ? $this->mergeClasses('before', $attributes) : $this->attributes['before'] = $attributes;
         return $this;
     }
 
-    public function beforeText(array $attributes, bool $merge = true): self
+    public function beforeText(array $attributes, bool $mergeClass = true): self
     {
-        $merge ? array_merge($this->attributes['before-text'], $attributes) : $this->attributes['before-text'] = $attributes;
+        $mergeClass ? $this->mergeClasses('before-text', $attributes) : $this->attributes['before-text'] = $attributes;
         return $this;
     }
 
-    public function aboveAttr(array $attributes, bool $merge = true): self
+    public function aboveAttr(array $attributes, bool $mergeClass = true): self
     {
-        $merge ? array_merge($this->attributes['above'], $attributes) : $this->attributes['above'] = $attributes;
+        $mergeClass ? $this->mergeClasses('above', $attributes) : $this->attributes['above'] = $attributes;
         return $this;
     }
 
-    public function belowAttr(array $attributes, bool $merge = true): self
+    public function belowAttr(array $attributes, bool $mergeClass = true): self
     {
-        $merge ? array_merge($this->attributes['below'], $attributes) : $this->attributes['below'] = $attributes;
+        $mergeClass ? $this->mergeClasses('below', $attributes) : $this->attributes['below'] = $attributes;
         return $this;
     }
 
-    public function belowWrapperAttr(array $attributes, bool $merge = true): self
+    public function belowWrapperAttr(array $attributes, bool $mergeClass = true): self
     {
-        $merge ? array_merge($this->attributes['below-wrapper'], $attributes) : $this->attributes['below-wrapper'] = $attributes;
+        $mergeClass ? $this->mergeClasses('below-wrapper', $attributes) : $this->attributes['below-wrapper'] = $attributes;
         return $this;
     }
 
-    public function afterAttr(array $attributes, bool $merge = true): self
+    public function afterAttr(array $attributes, bool $mergeClass = true): self
     {
-        $merge ? array_merge($this->attributes['after'], $attributes) : $this->attributes['after'] = $attributes;
+        $mergeClass ? $this->mergeClasses('after', $attributes) : $this->attributes['after'] = $attributes;
         return $this;
     }
 
-    public function afterText(array $attributes, bool $merge = true): self
+    public function afterText(array $attributes, bool $mergeClass = true): self
     {
-        $merge ? array_merge($this->attributes['after-text'], $attributes) : $this->attributes['after-text'] = $attributes;
+        $mergeClass ? $this->mergeClasses('after-text', $attributes) : $this->attributes['after-text'] = $attributes;
         return $this;
     }
 
+    //observe, not an array
     public function labelClass(string $classes, bool $merge = true): self
     {
         $merge

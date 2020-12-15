@@ -3,6 +3,7 @@
 namespace Tanthammar\TallForms;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Tanthammar\TallForms\Traits\HasAttributes;
 use Tanthammar\TallForms\Traits\HasDesign;
 use Tanthammar\TallForms\Traits\HasLabels;
@@ -37,7 +38,7 @@ class BaseField
     public function __construct($label, $key)
     {
         $this->label = $label;
-        $this->name = $key ?? \Str::snake(\Str::lower($label));
+        $this->name = $key ?? Str::snake(Str::lower($label));
         $this->key = 'form_data.' . $this->name;
         $this->wire = config('tall-forms.field-attributes.wire');
         $this->setAttr();
