@@ -22,14 +22,17 @@ trait IsArrayField
             throw_if($this->type == 'keyval' && !$field->allowed_in_keyval,
                 new InvalidArrayFieldType($field->name, $field->type, $this->type)
             );
+            throw_if($this->type == 'tab' && !$field->allowed_in_tab,
+                new InvalidArrayFieldType($field->name, $field->type, $this->type)
+            );
         }
         $this->fields = $fields;
         return $this;
     }
 
     /**
-     * Applied to the outer wrapper surrounding Array and KeyVal field groups
-     *
+     * Applied to the outer wrapper
+     * <br>Only Repeater and Keyval
      * @param string $classes
      * @return $this
      */
@@ -39,6 +42,11 @@ trait IsArrayField
         return $this;
     }
 
+    /**
+     * Only applied to Repeater and KeyVal
+     * @param string $classes
+     * @return $this
+     */
     public function wrapperGrid(string $classes): self
     {
         $this->array_wrapper_grid_class = $classes;
