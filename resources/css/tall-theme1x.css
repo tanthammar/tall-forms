@@ -508,4 +508,5 @@
     .tf-group-wrapper-grid {
         @apply sm:flex sm:grid sm:grid-cols-12 sm:gap-x-2 sm:gap-y-4;
     }
+
 }

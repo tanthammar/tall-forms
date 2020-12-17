@@ -503,4 +503,29 @@
         @apply list-decimal list-outside ml-4;
     }
 
+    /* Tabs */
+    .tf-tab-active {
+        @apply text-blue-800 bg-blue-100;
+    }
+    .tf-tab-inactive {
+        @apply text-gray-700 bg-gray-100 hover:bg-gray-200;
+    }
+    .tf-tab {
+        @apply flex flex-row items-center rounded mr-2 px-4 py-2;
+    }
+    .tf-tab-icon {
+        @apply h-5 w-5;
+    }
+    .tf-tab-label {
+        @apply ml-2;
+    }
+    .tf-tab-errors-callout {
+        @apply rounded-md bg-red-100 p-4 mx-auto text-white mb-2;
+    }
+    .tf-tab-error-icon {
+        @apply text-red-700 h-8 w-8;
+    }
+    .tf-tab-error-ul {
+        @apply text-sm text-red-900 list-disc pl-5 space-y-1;
+    }
 }
