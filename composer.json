@@ -1,5 +1,5 @@
 {
-    "name": "mertasan/tall-forms",
+    "name": "tanthammar/tall-forms",
     "description": "A dynamic, responsive Laravel Livewire form generator with realtime validation, file uploads, array fields, and more.",
     "keywords": [
         "tailwind",
