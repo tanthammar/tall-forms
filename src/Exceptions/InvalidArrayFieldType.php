@@ -10,7 +10,8 @@ class InvalidArrayFieldType extends \Exception
     {
         $lookup = [
             'array' => 'Repeater',
-            'keyval' => 'Keyval'
+            'keyval' => 'Keyval',
+            'group' => 'Grup'
         ];
 
         parent::__construct(

@@ -35,6 +35,7 @@ class MakeForm extends Command
             $use = "use Tanthammar\TallForms\Input;" . PHP_EOL;
             if(Str::contains($fields, 'Checkbox::make')) $use .= "use Tanthammar\TallForms\Checkbox;" . PHP_EOL;
             if(Str::contains($fields, 'KeyVal::make')) $use .= "use Tanthammar\TallForms\KeyVal;" . PHP_EOL;
+            if(Str::contains($fields, 'Group::make')) $use .= "use Tanthammar\TallForms\Group;" . PHP_EOL;
             if(Str::contains($fields, 'Repeater::make')) $use .= "use Tanthammar\TallForms\Repeater;" . PHP_EOL;
             if(Str::contains($fields, 'Textarea::make')) $use .= "use Tanthammar\TallForms\Textarea;" . PHP_EOL;
             if(Str::contains($fields, 'DatePicker::make')) $use .= "use Tanthammar\TallFormsSponsors\DatePicker;" . PHP_EOL;

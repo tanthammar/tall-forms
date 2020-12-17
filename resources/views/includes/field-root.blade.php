@@ -25,6 +25,8 @@
                 @include('tall-forms::includes.array-wrapper')
             @elseif($field->type === 'keyval')
                 @include('tall-forms::includes.keyval-wrapper')
+            @elseif($field->type === 'group')
+                @include('tall-forms::includes.group-wrapper')
             @else
                 @include('tall-forms::includes.field-wrapper')
             @endif

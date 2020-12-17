@@ -22,13 +22,16 @@ trait IsArrayField
             throw_if($this->type == 'keyval' && !$field->allowed_in_keyval,
                 new InvalidArrayFieldType($field->name, $field->type, $this->type)
             );
+            throw_if($this->type == 'group' && !$field->allowed_in_group,
+                new InvalidArrayFieldType($field->name, $field->type, $this->type)
+            );
         }
         $this->fields = $fields;
         return $this;
     }
 
     /**
-     * Applied to the outer wrapper surrounding Array and KeyVal field groups
+     * Applied to the outer wrapper surrounding Array, KeyVal and Group field groups
      *
      * @param string $classes
      * @return $this
