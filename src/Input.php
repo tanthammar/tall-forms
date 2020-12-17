@@ -4,24 +4,22 @@
 namespace Tanthammar\TallForms;
 
 
-use Illuminate\Support\Str;
+use Tanthammar\TallForms\Traits\HasIcons;
 
 class Input extends BaseField
 {
+    use HasIcons;
+
     public $type = 'input';
     public $input_type = 'text';
     public $autocomplete;
     public $placeholder;
     public $prefix;
-    public $icon;
-    public $tallIcon;
-    public $htmlIcon;
     public $step = 1;
     public $min = 0;
     public $max = 100;
     public $required = false;
     public $class = 'tf-input-wrapper';
-    public bool $hasIcon = false;
 
 
     public function type(string $type): self
@@ -59,42 +57,6 @@ class Input extends BaseField
     public function placeholder(string $placeholder): self
     {
         $this->placeholder = $placeholder;
-        return $this;
-    }
-
-    /**
-     * Requires Blade UI Icons
-     * @param string $blade_ui_icon_path
-     * @return $this
-     */
-    public function icon(string $blade_ui_icon_path): self
-    {
-        $this->icon = $blade_ui_icon_path;
-        $this->hasIcon = true;
-        return $this;
-    }
-
-    /**
-     * Requires you to create a blade file on the defined path
-     * @param string $blade_file_path
-     * @return $this
-     */
-    public function tallIcon(string $blade_file_path): self
-    {
-        $this->tallIcon = $blade_file_path;
-        $this->hasIcon = true;
-        return $this;
-    }
-
-    /**
-     * Any valid html, example: fontawesome <i></i>
-     * @param string $html
-     * @return $this
-     */
-    public function htmlIcon(string $html): self
-    {
-        $this->htmlIcon = $html;
-        $this->hasIcon = true;
         return $this;
     }
 

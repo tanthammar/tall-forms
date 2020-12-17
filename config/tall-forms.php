@@ -99,6 +99,7 @@ return [
     'plus-icon' => 'icons.add-outline',//Repeater
     'file-icon' => 'icons.', //FileUpload field, all icons with "file-" prefix.
     'file-upload' => 'icons.upload', //FileUpload
+    'exclamation' => 'icons.exclamation', //Tab, validation errors notification
 
     //Column span classes for the fields ->colspan() method
     'col-span-classes' => [

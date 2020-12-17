@@ -20,12 +20,13 @@ trait ValidatesFields
 
         foreach ($fields as $field) {
             if (filled($field)) {
-                if (in_array($field->type, ['array', 'keyval', 'group'])) {
+                if (in_array($field->type, ['array', 'keyval', 'tab', 'group'])) {
                     if (property_exists($field, 'fields') && is_array($field->fields) && 0 < count($field->fields)) {
                         $ruleName = $field->type === 'array' ? "{$prefix}.{$field->name}.*" : ($field->type === 'group' ? "{$prefix}" : "{$prefix}.{$field->name}");
                         $rules = array_merge($rules, $this->get_rules($field->fields, $ruleName));
                     }
                     $rules["$prefix.$field->name"] = $field->rules ?? 'nullable';
+
                 } else {
                     if ($field->type === 'file') {
                         $ruleName = $field->multiple ? "{$field->name}.*" : $field->name;
@@ -35,6 +36,7 @@ trait ValidatesFields
                     } else {
                         $ruleName = "{$prefix}.{$field->name}";
                     }
+
                     $rules[$ruleName] = $field->rules ?? 'nullable';
                 }
             }
@@ -49,7 +51,7 @@ trait ValidatesFields
             foreach ($this->getFieldsFlat() as $field) {
                 if ($field != null && $field->labelAsAttribute) {
                     if($field->type === "group") continue;
-                    if (in_array($field->type, ['array', 'keyval'])) {
+                    if (in_array($field->type, ['array', 'keyval', 'tab'])) {
                         foreach ($field->fields as $array_field) {
                             $key = $field->type === 'array'
                                 ? "$field->key.*.$array_field->name"
