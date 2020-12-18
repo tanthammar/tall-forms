@@ -517,4 +517,24 @@
     .tf-tab-error-ul {
         @apply text-sm text-red-900 list-disc pl-5 space-y-1;
     }
+
+    /* Panel */
+    .tf-panel-wrapper {
+        @apply flex flex-col;
+    }
+    .tf-panel-wrapper-grid {
+        @apply sm:flex sm:grid sm:grid-cols-12 sm:gap-x-2 sm:gap-y-4;
+    }
+    .tf-panel-active {
+        @apply text-blue-500 border-blue-400;
+    }
+    .tf-panel-inactive {
+        @apply text-gray-500 border-gray-400 hover:text-gray-600 hover:bg-gray-100;
+    }
+    .tf-panel {
+        @apply flex flex-row items-center rounded px-4 py-2 w-full border-2;
+    }
+    .tf-panel-icon {
+        @apply h-5 w-5;
+    }
 }

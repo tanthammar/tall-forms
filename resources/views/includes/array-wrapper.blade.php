@@ -9,6 +9,7 @@
                                 $nested_field->key = "{$field->key}.{$key}.{$nested_field->name}";
                                 if (!$field->labelEachRow) $nested_field->show_label = $key === 0;
                                 $nested_field->inline = $nested_field->inline ?? false;
+                                $nested_field->colspan = $field->childCols ?? $nested_field->colspan;
                                 $nested_field->inArray = true;
                                 $nested_field->help = $key === 0 ? $nested_field->help : null;
                                 $nested_field->placeholder = $nested_field->placeholder ?? $nested_field->label;

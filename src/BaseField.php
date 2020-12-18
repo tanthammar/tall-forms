@@ -94,14 +94,15 @@ class BaseField
         $this->errorMsg = $string;
         return $this;
     }
-
-    public function fieldToArray() {
+//redundant
+/*    public function fieldToArray(): array
+    {
         $array = array();
         foreach ($this as $key => $value) {
             $array[$key] = is_array($value) ? (array) $value : $value;
         }
         return $array;
-    }
+    }*/
 
     public function before(string $text): self
     {

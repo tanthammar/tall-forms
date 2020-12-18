@@ -12,6 +12,7 @@ class InvalidArrayFieldType extends \Exception
             'array' => 'Repeater',
             'keyval' => 'Keyval',
             'tab' => 'Tab',
+            'panel' => 'Panel',
         ];
 
         parent::__construct(

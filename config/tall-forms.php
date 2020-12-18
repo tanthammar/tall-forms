@@ -92,8 +92,8 @@ return [
 
     //You can swap the icons blade view path. The path is relative to resources/views/components
     //(publish the icons: php artisan vendor:publish --tag=tall-form-icons)
-    'arrow-up-icon' => 'icons.cheveron-outline-up', //Repeater
-    'arrow-down-icon' => 'icons.cheveron-outline-down',//Repeater
+    'arrow-up-icon' => 'icons.cheveron-outline-up', //Repeater, Panel
+    'arrow-down-icon' => 'icons.cheveron-outline-down',//Repeater, Panel
     'trash-icon' => 'icons.close-outline',//Multiple fields
     'edit-icon' => 'icons.edit-crop', //ImageCropper
     'plus-icon' => 'icons.add-outline',//Repeater

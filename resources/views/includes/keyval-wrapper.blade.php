@@ -4,6 +4,7 @@
             @foreach($field->fields as $nested_field)
                 @php
                     $nested_field->inline = $nested_field->inline ?? false;
+                    $nested_field->colspan = $field->childCols ?? $nested_field->colspan;
                     $nested_field->inArray = true;
                 @endphp
                 @include('tall-forms::includes.field-root', ['field' => $nested_field])
