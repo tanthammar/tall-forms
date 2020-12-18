@@ -25,9 +25,6 @@ trait IsArrayField
             throw_if($this->type == 'tab' && !$field->allowed_in_tab,
                 new InvalidArrayFieldType($field->name, $field->type, $this->type)
             );
-            throw_if($this->type == 'group' && !$field->allowed_in_group,
-                new InvalidArrayFieldType($field->name, $field->type, $this->type)
-            );
         }
         $this->fields = $fields;
         return $this;
@@ -35,7 +32,7 @@ trait IsArrayField
 
     /**
      * Applied to the outer wrapper
-     * <br>Only Repeater, Group and Keyval
+     * <br>Only Repeater and Keyval
      * @param string $classes
      * @return $this
      */
@@ -46,7 +43,7 @@ trait IsArrayField
     }
 
     /**
-     * Only applied to Repeater, Group and KeyVal
+     * Only applied to Repeater and KeyVal
      * @param string $classes
      * @return $this
      */

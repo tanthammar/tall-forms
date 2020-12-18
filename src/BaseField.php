@@ -35,7 +35,6 @@ class BaseField
     public $allowed_in_repeater = true;
     public $allowed_in_keyval = true;
     public $allowed_in_tab = true;
-    public $allowed_in_group = true;
 
     public function __construct($label, $key)
     {

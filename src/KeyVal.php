@@ -13,5 +13,4 @@ class KeyVal extends BaseField
     public $allowed_in_repeater = false;
     public $allowed_in_keyval = true;
     public $allowed_in_tab = true;
-    public $allowed_in_group = true;
 }

@@ -517,15 +517,4 @@
     .tf-tab-error-ul {
         @apply text-sm text-red-900 list-disc pl-5 space-y-1;
     }
-
-    /* Groups */
-    .tf-group-root {
-        @apply w-full;
-    }
-    .tf-group-wrapper {
-        @apply flex flex-col;
-    }
-    .tf-group-wrapper-grid {
-        @apply sm:flex sm:grid sm:grid-cols-12 sm:gap-x-2 sm:gap-y-4;
-    }
 }

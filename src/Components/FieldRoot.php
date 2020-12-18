@@ -17,7 +17,7 @@ class FieldRoot extends Component
 
     public function __construct(bool $inArray, int $colspan = 12, array $attr = [])
     {
-        $this->inArray = $inArray; // if this field is inside a Keyval, Group or Repeater
+        $this->inArray = $inArray; // if this field is inside a Keyval or Repeater
         $this->colspan = $colspan;
         $this->attr = $attr;
         $this->class();
