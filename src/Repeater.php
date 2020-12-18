@@ -16,6 +16,7 @@ class Repeater extends BaseField
     public $allowed_in_repeater = false;
     public $allowed_in_keyval = false;
     public $allowed_in_tab = false;
+    public $allowed_in_group = false;
 
     public function sortable(): self
     {

@@ -39,6 +39,7 @@ class MakeForm extends Command
             if(Str::contains($fields, 'Textarea::make')) $use .= "use Tanthammar\TallForms\Textarea;" . PHP_EOL;
             if(Str::contains($fields, 'DatePicker::make')) $use .= "use Tanthammar\TallFormsSponsors\DatePicker;" . PHP_EOL;
             if(Str::contains($fields, 'Number::make')) $use .= "use Tanthammar\TallFormsSponsors\Number;" . PHP_EOL;
+            if(Str::contains($fields, 'Group::make')) $use .= "use Tanthammar\TallForms\Group;" . PHP_EOL;
             $stub = str_replace("use Tanthammar\TallForms\Input;", $use, $stub);
         }
 
