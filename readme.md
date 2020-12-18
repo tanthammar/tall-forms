@@ -23,11 +23,16 @@
 <table>
 <tbody>
 <tr>
-<td><a href="https://github.com/MichaelGatuma"><img src="https://avatars0.githubusercontent.com/u/50529359?s=460&u=53cff27075ea04ec3032fe03976f05ac86f0e3b7&v=4" width="100px;" alt=""/><br /><sub><b>Michael Gatuma</b></sub></a></td>
 <td><a href="https://github.com/lalov"><img src="https://avatars3.githubusercontent.com/u/3465648?s=460&u=60998db0098beca7b3ceef52ac5055f72eebe69e&v=4" width="100px;" alt=""/><br /><sub><b>Lars Erik Løvhaug</b></sub></a></td>
 <td><a href="https://github.com/ioanschmitt"><img src="https://avatars3.githubusercontent.com/u/69044609?s=460&v=4" width="100px;" alt=""/><br /><sub><b>Ioan</b></sub></a></td>
 <td><a href="https://github.com/pprt"><img src="https://avatars0.githubusercontent.com/u/24870391?s=400&v=4" width="100px;" alt=""/><br /><sub><b>
 pprt</b></sub></a></td>
+<td><a href="https://github.com/JuTu83"><img src="https://avatars2.githubusercontent.com/u/1850265?s=460&v=4" width="100px;" alt=""/><br /><sub><b>
+Jussi Tuoma</b></sub></a></td>
+<td><a href="https://github.com/jongravois"><img src="https://avatars1.githubusercontent.com/u/6824241?s=460&v=4" width="100px;" alt=""/><br /><sub><b>
+Jonathan Gravois</b></sub></a></td>
+<td><a href="https://github.com/mertasan"><img src="https://avatars1.githubusercontent.com/u/13007665?s=460&u=e1ce645efdeeecf8d1ee52f53d3eecda1b851bb6&v=4" width="100px;" alt=""/><br /><sub><b>
+Mert Aşan</b></sub></a></td>
 </tr>
 </tbody>
 </table>
