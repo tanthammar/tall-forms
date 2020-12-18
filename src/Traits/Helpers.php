@@ -86,7 +86,7 @@ trait Helpers
         $fieldNames = [];
         foreach ($this->fields() as $field) {
             if (filled($field)){
-                if($field->type === "tab" && isset($field->fields)){
+                if(in_array($field->type, ['tab','group']) && isset($field->fields)){
                     foreach ($field->fields as $tabField) {
                         $fieldNames[] = $tabField->name;
                     }
@@ -122,7 +122,7 @@ trait Helpers
 
         foreach ($fields as &$field) {
             if (filled($field)) {
-                $fieldKey = $field->type === 'tab' ? "" : ((empty($prefix)) ? $field->key : $prefix . '.' . $field->name);
+                $fieldKey = in_array($field->type, ['tab','group']) ? "" : ((empty($prefix)) ? $field->key : $prefix . '.' . $field->name);
                 $field->key = $fieldKey;
                 $fieldKey = ($field->type === 'array') ? "{$fieldKey}.*" : $fieldKey;
                 if (property_exists($field, 'fields') && is_array($field->fields) && 0 < count($field->fields)) {
