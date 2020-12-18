@@ -22,7 +22,7 @@ trait ValidatesFields
             if (filled($field)) {
                 if (in_array($field->type, ['array', 'keyval', 'tab'])) {
                     if (property_exists($field, 'fields') && is_array($field->fields) && 0 < count($field->fields)) {
-                        $ruleName = $field->type === 'array' ? "{$prefix}.{$field->name}.*" : "{$prefix}.{$field->name}";
+                        $ruleName = $field->type === 'array' ? "{$prefix}.{$field->name}.*" : ($field->type === 'tab' ? "{$prefix}" : "{$prefix}.{$field->name}");
                         $rules = array_merge($rules, $this->get_rules($field->fields, $ruleName));
                     }
                     $rules["$prefix.$field->name"] = $field->rules ?? 'nullable';
@@ -50,6 +50,7 @@ trait ValidatesFields
         if ($this->labelsAsAttributes) {
             foreach ($this->getFieldsFlat() as $field) {
                 if ($field != null && $field->labelAsAttribute) {
+                    if($field->type === "tab") continue;
                     if (in_array($field->type, ['array', 'keyval', 'tab'])) {
                         foreach ($field->fields as $array_field) {
                             $key = $field->type === 'array'
