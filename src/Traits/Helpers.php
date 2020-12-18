@@ -139,10 +139,10 @@ trait Helpers
         return $flatten ? $results : $fields;
     }
 
-    protected function setFieldValues(array $fields)
+    protected function setFieldValues(array $fields) //expects flattened field list
     {
         foreach ($fields as $field) {
-            if (filled($field)) {
+            if (filled($field) && !$field->ignored) {
                 $fieldKey = str_replace('form_data.', '', $field->key);
                 if (false === Str::contains($fieldKey, ['*']) && is_null(data_get($this->form_data, $fieldKey, null))) {
                     $array = in_array($field->type, ['checkboxes', 'file', 'multiselect']);
