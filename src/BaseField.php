@@ -36,6 +36,9 @@ class BaseField
     public $allowed_in_keyval = true;
     public $allowed_in_tab = true;
 
+    //Tabs, Groups, Panels and similar design elements that has a field array but should be ignored in form_data and validation
+    public bool $ignored = false;
+
     public function __construct($label, $key)
     {
         $this->label = $label;
