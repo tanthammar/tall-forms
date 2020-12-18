@@ -33,6 +33,8 @@ Jussi Tuoma</b></sub></a></td>
 Jonathan Gravois</b></sub></a></td>
 <td><a href="https://github.com/mertasan"><img src="https://avatars1.githubusercontent.com/u/13007665?s=460&u=e1ce645efdeeecf8d1ee52f53d3eecda1b851bb6&v=4" width="100px;" alt=""/><br /><sub><b>
 Mert Aşan</b></sub></a></td>
+<td><a href="https://github.com/bubblegumtom"><img src="https://avatars2.githubusercontent.com/u/10128562?s=460&v=4" width="100px;" alt=""/><br /><sub><b>
+Francesco Tomasi</b></sub></a></td>
 </tr>
 </tbody>
 </table>
