@@ -12,7 +12,7 @@ trait Helpers
         return $this->collectField($fieldKey)->get($fieldValue);
     }
 
-    protected function collectField(string $fieldKey)
+    protected function collectField(string $fieldKey): \Illuminate\Support\Collection
     {
         $fieldName = Str::replaceFirst('form_data.', '', $fieldKey);
         $fieldsCollection = collect($this->getFieldsFlat());
@@ -85,17 +85,22 @@ trait Helpers
     {
         $fieldNames = [];
         foreach ($this->fields() as $field) {
-            if (filled($field)) $fieldNames[] = $field->name;
+            if (filled($field) && !$field->ignored) $fieldNames[] = $field->name;
+            if (filled($field) && $field->ignored && isset($field->fields) && filled($field->fields)){
+                foreach ($field->fields as $nested_field) {
+                    $fieldNames[] = $nested_field->name;
+                }
+            }
         }
         return $fieldNames;
     }
 
-    protected function getFieldsFlat()
+    protected function getFieldsFlat(): array
     {
         return $this->getFields(null, '', true);
     }
 
-    protected function getFieldsNested()
+    protected function getFieldsNested(): array
     {
         return $this->getFields(null, '', false);
     }
@@ -114,10 +119,12 @@ trait Helpers
 
         foreach ($fields as &$field) {
             if (filled($field)) {
-                $fieldKey = (empty($prefix)) ? $field->key : $prefix . '.' . $field->name;
+                $fieldKey = $field->ignored
+                    ? ""
+                    : (empty($prefix) ? $field->key : $prefix . '.' . $field->name);
                 $field->key = $fieldKey;
-                $fieldKey = ($field->type === 'array') ? "{$fieldKey}.*" : $fieldKey;
-                if (property_exists($field, 'fields') && is_array($field->fields) && 0 < count($field->fields)) {
+                $fieldKey = ($field->type === 'array') ? "$fieldKey.*" : $fieldKey;
+                if (isset($field->fields) && filled($field->fields)) {
                     $fieldResults = $this->getFields($field->fields, $fieldKey, $flatten); //recursive
                     if ($flatten) {
                         $results = array_merge($results, $fieldResults);
@@ -132,10 +139,10 @@ trait Helpers
         return $flatten ? $results : $fields;
     }
 
-    protected function setFieldValues(array $fields)
+    protected function setFieldValues(array $fields) //expects flattened field list
     {
         foreach ($fields as $field) {
-            if (filled($field)) {
+            if (filled($field) && !$field->ignored) {
                 $fieldKey = str_replace('form_data.', '', $field->key);
                 if (false === Str::contains($fieldKey, ['*']) && is_null(data_get($this->form_data, $fieldKey, null))) {
                     $array = in_array($field->type, ['checkboxes', 'file', 'multiselect']);

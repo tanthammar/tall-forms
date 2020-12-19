@@ -12,6 +12,7 @@ trait IsArrayField
     public $fields = [];
     public $array_wrapper_class;
     public $array_wrapper_grid_class;
+    public $childCols;
 
     public function fields($fields = []): self
     {
@@ -20,9 +21,6 @@ trait IsArrayField
                 new InvalidArrayFieldType($field->name, $field->type, $this->type)
             );
             throw_if($this->type == 'keyval' && !$field->allowed_in_keyval,
-                new InvalidArrayFieldType($field->name, $field->type, $this->type)
-            );
-            throw_if($this->type == 'tab' && !$field->allowed_in_tab,
                 new InvalidArrayFieldType($field->name, $field->type, $this->type)
             );
         }
@@ -53,7 +51,19 @@ trait IsArrayField
         return $this;
     }
 
-    public function fieldToArray()
+    /**
+     * Overrides nested field->colspan() Default 12 of 12 columns
+     * @param int $cols
+     * @return $this
+     */
+    public function childColspan(int $cols): self
+    {
+        $this->childCols = $cols;
+        return $this;
+    }
+
+    //Redundant
+/*    public function fieldToArray()
     {
         $array = [];
         if (filled($this->fields)) {
@@ -64,6 +74,6 @@ trait IsArrayField
         }
 //        $array['parent'] = $this->key;
         return $array;
-    }
+    }*/
 
 }

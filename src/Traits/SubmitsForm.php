@@ -17,7 +17,7 @@ trait SubmitsForm
         //filter out custom-, and relationship-fields
         $field_names = [];
         foreach ($fields as $field) {
-            if (filled($field) && !$field->is_relation && !$field->is_custom) {
+            if (filled($field) && !$field->is_relation && !$field->is_custom && !$field->ignored) {
                 $field_names[] = str_replace(['form_data.', '*.'], '', $field->key);
             }
         }
@@ -28,7 +28,7 @@ trait SubmitsForm
 
         //saveFoo(), for all fields, no matter if it's custom, relation or base field
         foreach ($fields as $field) {
-            if (filled($field)) {
+            if (filled($field) && !$field->ignored) {
                 $function = $this->parseFunctionNameFrom($field->key, 'save');
                 $validated_data = $field->type == 'file' ? $this->{$field->name} : data_get($this, $field->key);
                 if (method_exists($this, $function)) $this->$function($validated_data);

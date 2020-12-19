@@ -34,7 +34,9 @@ class BaseField
 
     public $allowed_in_repeater = true;
     public $allowed_in_keyval = true;
-    public $allowed_in_tab = true;
+
+    //Tabs, Groups, Panels and similar design elements that has a field array but should be ignored in form_data and validation
+    public bool $ignored = false;
 
     public function __construct($label, $key)
     {
@@ -92,14 +94,15 @@ class BaseField
         $this->errorMsg = $string;
         return $this;
     }
-
-    public function fieldToArray() {
+//redundant
+/*    public function fieldToArray(): array
+    {
         $array = array();
         foreach ($this as $key => $value) {
             $array[$key] = is_array($value) ? (array) $value : $value;
         }
         return $array;
-    }
+    }*/
 
     public function before(string $text): self
     {
