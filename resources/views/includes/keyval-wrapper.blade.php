@@ -3,7 +3,7 @@
         <div class="{{ $field->array_wrapper_grid_class ?? 'tf-keyval-wrapper-grid' }}">
             @foreach($field->fields as $nested_field)
                 @php
-                    $nested_field->inline = $nested_field->inline ?? false;
+                    $nested_field->inline = $nested_field->inline ?? $field->inline;
                     $nested_field->colspan = $field->childCols ?? $nested_field->colspan;
                     $nested_field->inArray = true;
                 @endphp

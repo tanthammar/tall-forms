@@ -14,16 +14,43 @@ trait HasLabels
     public $show_label = true;
     public $align_label_top = false;
     public $labelAsAttribute = true;
+    public $labelWrapperClass;
+    public $labelClass = 'tf-label';
 
     /**
      * Used only in inline form
-     * Default sm:w-1/3
+     * <br>Default sm:w-1/3
+     * <br>Appended to ->labelWrapperClass()
      * @param string $class
      * @return $this
      */
     public function labelWidth(string $class): self
     {
         $this->labelW = $class;
+        return $this;
+    }
+
+    /**
+     * Appended to ->labelWidth()
+     * <br>Default null
+     * @param string $classes
+     * @return $this
+     */
+    public function labelWrapperClass(string $classes): self
+    {
+        $this->labelWrapperClass = $classes;
+        return $this;
+    }
+
+    /**
+     * Default tf-label
+     * @param string $classes
+     * @param bool $merge
+     * @return $this
+     */
+    public function labelClass(string $classes, bool $merge = true): self
+    {
+        $this->labelClass = $merge ? "$this->labelClass $classes" : $classes;
         return $this;
     }
 

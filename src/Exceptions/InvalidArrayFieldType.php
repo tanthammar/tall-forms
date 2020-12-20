@@ -13,6 +13,7 @@ class InvalidArrayFieldType extends \Exception
             'keyval' => 'Keyval',
             'tab' => 'Tab',
             'panel' => 'Panel',
+            'group' => 'Group',
         ];
 
         parent::__construct(

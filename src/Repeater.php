@@ -15,6 +15,7 @@ class Repeater extends BaseField
     public $align_label_top = true;
     public $allowed_in_repeater = false;
     public $allowed_in_keyval = false;
+    public $inline = false;
 
     public function sortable(): self
     {
