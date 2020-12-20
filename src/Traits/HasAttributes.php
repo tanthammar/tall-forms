@@ -21,7 +21,6 @@ trait HasAttributes
     {
         $this->attributes = config('tall-forms.field-attributes');
         data_set($this->attributes, 'input', []);
-        data_set($this->attributes, 'label', 'tf-label');
     }
 
     protected function mergeClasses(string $key, array $custom)
@@ -78,15 +77,6 @@ trait HasAttributes
     public function afterText(array $attributes, bool $mergeClass = true): self
     {
         $mergeClass ? $this->mergeClasses('after-text', $attributes) : $this->attributes['after-text'] = $attributes;
-        return $this;
-    }
-
-    //observe, not an array
-    public function labelClass(string $classes, bool $merge = true): self
-    {
-        $merge
-            ? data_set($this->attributes, 'label', 'tf-label '. $classes)
-            : data_set($this->attributes, 'label', $classes);
         return $this;
     }
 

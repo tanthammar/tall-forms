@@ -41,6 +41,10 @@ class LabelFieldWrapper extends Component
         return $this->field->inline ? $this->fieldW : 'w-full';
     }
 
+    /**
+     * Appended to ->labelWrapperClass()
+     * @return string
+     */
     public function labelWidth(): string
     {
         return $this->field->inline

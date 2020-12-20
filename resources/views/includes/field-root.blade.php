@@ -25,8 +25,6 @@
                 @include('tall-forms::includes.array-wrapper')
             @elseif($field->type === 'keyval')
                 @include('tall-forms::includes.keyval-wrapper')
-            @elseif($field->type === 'panel')
-                @include('tall-forms::fields.panel')
             @else
                 @include('tall-forms::includes.field-wrapper')
             @endif
