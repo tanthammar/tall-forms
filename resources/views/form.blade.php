@@ -1,7 +1,7 @@
 @if($beforeFormView)
     @include($beforeFormView)
 @endif
-<x-tall-form :onKeyDownEnter="$onKeyDownEnter" :attr="[]">
+<x-tall-form :onKeyDownEnter="$onKeyDownEnter" :attr="\Tanthammar\TallForms\ConfigAttr::key('form')">
     @include('tall-forms::includes.form-head')
     @if(isset($isTabs) && $isTabs)
         @include('tall-forms::fields.tabs')
