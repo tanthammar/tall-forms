@@ -12,8 +12,11 @@ use Tanthammar\TallForms\Traits\HasViews;
 
 class BaseField
 {
-    use HasLabels, HasAttributes, HasSharedProperties, HasDesign, HasViews;
-
+    use HasLabels, HasAttributes, HasSharedProperties, HasDesign, HasViews
+    {
+        HasLabels::labelClass insteadof HasAttributes;
+    }
+    
     public $label;
     public $name;
     public $key;
