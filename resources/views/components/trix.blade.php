@@ -1,7 +1,7 @@
 <div class="w-full" x-data="{ trix: @entangle($field->key).defer }">
-    <input value="{{ old($field->key) ?? $value }}" id="{{ md5($field->name) }}" name="{{ $field->name }}" type="hidden" />
+    <input value="{{ old($field->key) ?? $value }}" id="trix{{ md5($field->key) }}" name="trix{{ md5($field->key) }}" type="hidden" />
     <div wire:ignore x-on:trix-file-accept="return event.preventDefault()" class="no-upload">
-        <trix-editor x-model.debounce.500ms="trix" input="{{ md5($field->name) }}" {{ $attributes->merge(['class' => $errors->has($field->key) ? $error() : $class() ]) }}></trix-editor>
+        <trix-editor x-model.debounce.500ms="trix" input="trix{{ md5($field->key) }}" {{ $attributes->merge(['class' => $errors->has($field->key) ? $error() : $class() ]) }}></trix-editor>
     </div>
 </div>
 @if($field->includeScript)
