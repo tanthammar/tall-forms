@@ -16,7 +16,7 @@ class DummyComponent extends Component
         //Gate::authorize()
         $this->fill([
             'formTitle' => FormTitle,
-            'wrapWithView' => true, //see https://github.com/tanthammar/tall-forms/wiki/installation/Wrapper-Layout
+            'wrapWithView' => true, //see https://github.com/tanthammar/tall-forms/wiki/Wrapper-Layout
             'showGoBack' => false,
         ]);
 
