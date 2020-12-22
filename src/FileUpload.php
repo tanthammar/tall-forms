@@ -9,13 +9,17 @@ class FileUpload extends BaseField
 {
 
     public $type = 'file';
-    public $is_custom = true;
     public $multiple = false;
     public $livewireComponent;
     public $accept = "";
     public $maxBytes = null;
     public $sizeLimitAlert;
 
+    public function init()
+    {
+        $this->is_custom = true;
+        return $this;
+    }
 
     public function multiple(): self
     {

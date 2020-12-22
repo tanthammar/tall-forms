@@ -11,6 +11,10 @@ class Search extends BaseField
     use HasOptions, HasSearchFeatures;
 
     public $type = 'search';
-    public $align_label_top = true;
 
+    public function init()
+    {
+        $this->align_label_top = true;
+        return $this;
+    }
 }

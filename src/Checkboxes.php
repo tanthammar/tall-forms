@@ -11,10 +11,15 @@ class Checkboxes extends BaseField
     use HasOptions;
 
     public $type = 'checkboxes';
-    public $align_label_top = true;
-    public $allowed_in_repeater = true;
 
-    public function inputAttr(array $attributes): self
+    public function init ()
+    {
+        $this->align_label_top = true;
+        $this->allowed_in_repeater = true;
+        return $this;
+    }
+
+    public function inputAttr (array $attributes): self
     {
         $this->attributes['input'] = $attributes;
         return $this;

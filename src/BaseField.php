@@ -54,9 +54,15 @@ class BaseField
     }*/
 
 
+    public function init()
+    {
+        return $this;
+    }
+
     public static function make(string $label, string $key = null)
     {
-        return new static($label, $key);
+        $make = new static($label, $key);
+        return $make->init();
     }
 
     /**

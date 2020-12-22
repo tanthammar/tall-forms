@@ -7,13 +7,18 @@ namespace Tanthammar\TallForms;
 class Trix extends BaseField
 {
     public $type = 'trix';
-    public $align_label_top = true;
     public bool $includeScript = false;
     public bool $allowAttachments = false;
     public string $attachmentKey;
     public array $allowedMimeTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/tiff', 'image/tif', 'image/gif'];
     public int $maxAttachments = 1;
     public int $maxKB = 1024;
+
+    public function init()
+    {
+        $this->align_label_top = true;
+        return $this;
+    }
 
     /**
      * Push external (cdn-links) for required scripts and styles to the layout

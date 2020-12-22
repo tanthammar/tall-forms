@@ -12,8 +12,13 @@ class Select extends BaseField
     public $type = 'select';
     public $placeholder;
     public $multiple = false;
-    public $allowed_in_repeater = true;
-    public $align_label_top = false;
+
+    public function init()
+    {
+        $this->allowed_in_repeater = true;
+        $this->align_label_top = false;
+        return $this;
+    }
 
     public function placeholder(string $placeholder): self
     {

@@ -12,10 +12,15 @@ class Repeater extends BaseField
     public $type = 'array';
     public $labelEachRow = false;
     public $array_sortable = false;
-    public $align_label_top = true;
-    public $allowed_in_repeater = false;
-    public $allowed_in_keyval = false;
-    public $inline = false;
+
+    public function init()
+    {
+        $this->align_label_top = true;
+        $this->allowed_in_repeater = false;
+        $this->allowed_in_keyval = false;
+        $this->inline = false;
+        return $this;
+    }
 
     public function sortable(): self
     {
