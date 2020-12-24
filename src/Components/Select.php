@@ -42,8 +42,7 @@ class Select extends Component
         $custom = $this->field->getAttr('input');
         $default = [
             $this->field->wire => $this->field->key,
-            'name' => $this->field->key,
-            'class' => $this->class()
+            'name' => $this->field->key
         ];
         return array_merge($default, $custom);
     }
