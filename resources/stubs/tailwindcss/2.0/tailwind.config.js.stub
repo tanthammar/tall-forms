@@ -1,13 +1,6 @@
 // const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-    purge: {
-        options: {
-            defaultExtractor: (content) => content.match(/[^<>"'`\s]*[^<>"'`\s:]/g) || [],
-            safeList: [/-active$/, /-enter$/, /-leave-to$/, /show$/],
-        },
-    },
-
     presets: [
         // the preset merges, fonts, variants, plugins, colors and purge content
         require('./vendor/tanthammar/tall-forms/resources/stubs/tailwindcss/2.0/tall-forms-preset.js'),

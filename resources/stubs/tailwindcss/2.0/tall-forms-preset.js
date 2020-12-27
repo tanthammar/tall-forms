@@ -2,6 +2,10 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
     purge: {
+        options: {
+            defaultExtractor: (content) => content.match(/[^<>"'`\s]*[^<>"'`\s:]/g) || [],
+            safeList: [/-active$/, /-enter$/, /-leave-to$/, /show$/],
+        },
         content: [
             './app/**/*.php',
             //if Jetstream
