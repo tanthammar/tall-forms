@@ -14,7 +14,7 @@ module.exports = {
             './vendor/tanthammar/tall-forms/**/*.php',
             './vendor/tanthammar/tall-forms-sponsors/**/*.php',
             // Tall-forms end
-            // Add the file formats applicable to your project
+            // File formats applicable to most projects
             './resources/**/*.html',
             './resources/**/*.js',
             './resources/**/*.jsx',
@@ -24,6 +24,10 @@ module.exports = {
             './resources/**/*.vue',
             './resources/**/*.twig',
         ],
+        options: {
+            defaultExtractor: (content) => content.match(/[^<>"'`\s]*[^<>"'`\s:]/g) || [],
+            safeList: [/-active$/, /-enter$/, /-leave-to$/, /show$/],
+        },
     },
 
     theme: {
@@ -32,12 +36,14 @@ module.exports = {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
             colors: {
+                //missing TWv1x colors
                 teal: {
                     100: '#e6fffa',
                     200: '#b2f5ea',
                     300: '#81e6d9',
                     400: '#4fd1c5',
                     500: '#38b2ac',
+                    DEFAULT: '#38b2ac',
                     600: '#319795',
                     700: '#2c7a7b',
                     800: '#285e61',
@@ -48,7 +54,9 @@ module.exports = {
     },
 
     variants: {
-        opacity: ['responsive', 'hover', 'focus', 'disabled'],
+        extend: {
+            opacity: ['responsive', 'hover', 'focus', 'disabled'],
+        },
     },
 
     plugins: [

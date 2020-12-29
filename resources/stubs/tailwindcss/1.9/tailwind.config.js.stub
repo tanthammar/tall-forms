@@ -1,6 +1,9 @@
 // const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
+    presets: [
+        require('./vendor/tanthammar/tall-forms/resources/stubs/tailwindcss/1.9/tall-forms-preset.js'),
+    ],
     future: {
         // Upcoming changes for TailwindCSS v2
         removeDeprecatedGapUtilities: true,
@@ -8,17 +11,9 @@ module.exports = {
         // defaultLineHeights: true,
         // standardFontWeights: true,
     },
-
-    purge: {
-        options: {
-            defaultExtractor: (content) => content.match(/[^<>"'`\s]*[^<>"'`\s:]/g) || [],
-            whitelistPatterns: [/-active$/, /-enter$/, /-leave-to$/, /show$/],
-        },
+    experimental: {
+        applyComplexClasses: true,
     },
-
-    presets: [
-        require('./vendor/tanthammar/tall-forms/resources/stubs/tailwindcss/1.9/tall-forms-preset.js'),
-    ],
 
     theme: {
         extend: {}

@@ -1,10 +1,6 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-    experimental: {
-        applyComplexClasses: true,
-    },
-
     purge: {
         content: [
             './vendor/laravel/jetstream/**/*.blade.php',
@@ -22,6 +18,10 @@ module.exports = {
             './resources/**/*.vue',
             './resources/**/*.twig',
         ],
+        options: {
+            defaultExtractor: (content) => content.match(/[^<>"'`\s]*[^<>"'`\s:]/g) || [],
+            whitelistPatterns: [/-active$/, /-enter$/, /-leave-to$/, /show$/],
+        },
     },
 
     theme: {
@@ -33,6 +33,8 @@ module.exports = {
     },
 
     variants: {
-        opacity: ['responsive', 'hover', 'focus', 'disabled'],
+        extend: {
+            opacity: ['responsive', 'hover', 'focus', 'disabled'],
+        }
     },
 };
