@@ -6,10 +6,15 @@ namespace Tanthammar\TallForms;
 
 class Range extends BaseField
 {
-    public $type = 'range';
     public $step = 1;
     public $min = 1;
     public $max = 100;
+
+    protected function overrides(): self
+    {
+        $this->type = 'range';
+        return $this;
+    }
 
     public function step(float $step): self
     {

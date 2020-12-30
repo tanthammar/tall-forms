@@ -9,11 +9,16 @@ class Select extends BaseField
 {
     use HasOptions;
 
-    public $type = 'select';
     public $placeholder;
     public $multiple = false;
-    public $allowed_in_repeater = true;
-    public $align_label_top = false;
+
+    protected function overrides(): self
+    {
+        $this->type = 'select';
+        $this->allowed_in_repeater = true;
+        $this->align_label_top = false;
+        return $this;
+    }
 
     public function placeholder(string $placeholder): self
     {

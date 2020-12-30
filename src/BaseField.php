@@ -53,10 +53,16 @@ class BaseField
         return $this->$property;
     }*/
 
-
-    public static function make(string $label, string $key = null)
+    //used to avoid property inheritance errors
+    protected function overrides(): self
     {
-        return new static($label, $key);
+        return $this;
+    }
+
+    public static function make(string $label, string $key = null): self
+    {
+        $make = new static($label, $key);
+        return $make->overrides();
     }
 
     /**

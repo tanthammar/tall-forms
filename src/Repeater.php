@@ -9,13 +9,20 @@ class Repeater extends BaseField
 {
     use IsArrayField;
 
-    public $type = 'array';
     public $labelEachRow = false;
     public $array_sortable = false;
-    public $align_label_top = true;
-    public $allowed_in_repeater = false;
-    public $allowed_in_keyval = false;
-    public $inline = false;
+
+
+    protected function overrides(): self
+    {
+        $this->type = 'array';
+        $this->align_label_top = true;
+        $this->allowed_in_repeater = false;
+        $this->allowed_in_keyval = false;
+        $this->inline = false;
+        return $this;
+    }
+
 
     public function sortable(): self
     {

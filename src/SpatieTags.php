@@ -6,15 +6,20 @@ namespace Tanthammar\TallForms;
 
 class SpatieTags extends BaseField
 {
-    public $type = 'spatie-tags';
     public $tagType = "";
     public $tagLocale;
-    public $is_custom = true;
     public $tagsRules;
     public $placeholder;
-    public $align_label_top = true;
-    public $allowed_in_repeater = false;
-    public $allowed_in_keyval = false;
+
+    protected function overrides(): self
+    {
+        $this->type = 'spatie-tags';
+        $this->is_custom = true;
+        $this->align_label_top = true;
+        $this->allowed_in_repeater = false;
+        $this->allowed_in_keyval = false;
+        return $this;
+    }
 
     public function type(string $tagType = ""): self
     {

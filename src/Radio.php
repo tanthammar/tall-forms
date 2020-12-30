@@ -10,7 +10,11 @@ class Radio extends BaseField
 {
     use HasOptions;
 
-    public $type = 'radio';
+    protected function overrides(): self
+    {
+        $this->type = 'radio';
+        return $this;
+    }
 
     public function inputAttr(array $attributes): self
     {

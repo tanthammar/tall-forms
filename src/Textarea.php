@@ -6,11 +6,16 @@ namespace Tanthammar\TallForms;
 
 class Textarea extends BaseField
 {
-    public $type = 'textarea';
     public $textarea_rows = 5;
     public $placeholder;
     public $required = false;
-    public $align_label_top = true;
+
+    protected function overrides(): self
+    {
+        $this->type = 'textarea';
+        $this->align_label_top = true;
+        return $this;
+    }
 
     public function rows(int $rows = 5): Textarea
     {

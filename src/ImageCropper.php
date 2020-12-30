@@ -7,8 +7,6 @@ namespace Tanthammar\TallForms;
 class ImageCropper extends BaseField
 {
     public $includeScript = false;
-    public $is_custom = true;
-    public $type = 'image-cropper';
     public $width = 420;
     public $height = 340;
     public $thumbnail;
@@ -16,10 +14,17 @@ class ImageCropper extends BaseField
     public $dropZoneHelp = 'Drag an image here or click in this area';
     public $fileInfo = 'PNG, JPG, GIF, TIFF, max 1.5MB';
     public $uploadButton = 'Select a file';
-    public $align_label_top = true;
-    public $allowed_in_repeater = false;
-    public $allowed_in_keyval = false;
 
+
+    protected function overrides(): self
+    {
+        $this->type = 'image-cropper';
+        $this->is_custom = true;
+        $this->align_label_top = true;
+        $this->allowed_in_repeater = false;
+        $this->allowed_in_keyval = false;
+        return $this;
+    }
 
     public function dropZoneHelp(string $text): self
     {

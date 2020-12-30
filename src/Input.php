@@ -10,7 +10,6 @@ class Input extends BaseField
 {
     use HasIcons;
 
-    public $type = 'input';
     public $input_type = 'text';
     public $autocomplete;
     public $placeholder;
@@ -21,6 +20,11 @@ class Input extends BaseField
     public $required = false;
     public $class = 'tf-input-wrapper';
 
+    protected function overrides(): self
+    {
+        $this->type = 'input';
+        return $this;
+    }
 
     public function type(string $type): self
     {

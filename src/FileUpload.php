@@ -8,14 +8,18 @@ namespace Tanthammar\TallForms;
 class FileUpload extends BaseField
 {
 
-    public $type = 'file';
-    public $is_custom = true;
     public $multiple = false;
     public $livewireComponent;
     public $accept = "";
     public $maxBytes = null;
     public $sizeLimitAlert;
 
+    protected function overrides(): self
+    {
+        $this->type = 'file';
+        $this->is_custom = true;
+        return $this;
+    }
 
     public function multiple(): self
     {

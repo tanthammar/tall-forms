@@ -8,9 +8,13 @@ class KeyVal extends BaseField
 {
     use IsArrayField;
 
-    public $type = 'keyval';
-    public $align_label_top = true;
-    public $allowed_in_repeater = false;
-    public $allowed_in_keyval = true;
-    public $inline = false;
+    protected function overrides(): self
+    {
+        $this->type = 'keyval';
+        $this->align_label_top = true;
+        $this->allowed_in_repeater = false;
+        $this->allowed_in_keyval = true;
+        $this->inline = false;
+        return $this;
+    }
 }

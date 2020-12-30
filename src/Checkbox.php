@@ -7,8 +7,13 @@ namespace Tanthammar\TallForms;
 class Checkbox extends BaseField
 {
 
-    public $type = 'checkbox';
     public $placeholder;
+
+    protected function overrides(): self
+    {
+        $this->type = 'checkbox';
+        return $this;
+    }
 
     public function placeholder(string $placeholder): self
     {
