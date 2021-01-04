@@ -13,6 +13,7 @@ trait IsArrayField
     public $array_wrapper_class;
     public $array_wrapper_grid_class;
     public $childCols;
+    public $childInline = false;
 
     public function fields($fields = []): self
     {
@@ -59,6 +60,26 @@ trait IsArrayField
     public function childColspan(int $cols): self
     {
         $this->childCols = $cols;
+        return $this;
+    }
+
+    /**
+     * Display nested field labels stacked
+     * @return $this
+     */
+    public function childStacked(): self
+    {
+        $this->childInline = false;
+        return $this;
+    }
+
+    /**
+     * Display nested field labels inline
+     * @return $this
+     */
+    public function childInline(): self
+    {
+        $this->childInline = true;
         return $this;
     }
 
