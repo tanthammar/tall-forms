@@ -563,7 +563,7 @@
         @apply w-5 h-5 text-indigo-900;
     }
     .tf-heading {
-        @apply text-xl capitalize text-indigo-900 text-bold;
+        @apply text-xl capitalize text-indigo-900 font-bold;
     }
     .tf-subtitle {
         @apply text-sm text-gray-800;
