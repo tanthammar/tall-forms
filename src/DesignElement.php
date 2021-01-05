@@ -56,4 +56,10 @@ class DesignElement
         return new static($label, $key);
     }
 
+    //only needed to avoid errors in blade
+    public function getAttr($type): array
+    {
+        return [];
+    }
+
 }
