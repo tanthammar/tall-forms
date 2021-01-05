@@ -45,6 +45,7 @@ class BaseField
         $this->key = 'form_data.' . $this->name;
         $this->wire = config('tall-forms.field-attributes.wire');
         $this->setAttr();
+        $this->overrides();
     }
 
     //problem with collect()->firstWhere()
@@ -53,16 +54,15 @@ class BaseField
         return $this->$property;
     }*/
 
-    //used to avoid property inheritance errors
     protected function overrides(): self
     {
         return $this;
     }
 
-    public static function make(string $label, string $key = null): self
+
+    public static function make(string $label, string $key = null)
     {
-        $make = new static($label, $key);
-        return $make->overrides();
+        return new static($label, $key);
     }
 
     /**
