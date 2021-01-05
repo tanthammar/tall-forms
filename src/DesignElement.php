@@ -27,6 +27,22 @@ class DesignElement
     public bool $allowed_in_keyval = true;
     public bool $labelAsAttribute = true;
 
+    // avoid render errors if not base field
+    public string $view = '';
+    public string $livewireComponent = '';
+    public string $before = '';
+    public string $beforeView = '';
+    public string $afterView = '';
+    public string $above = '';
+    public string $below = '';
+    public string $after = '';
+    public string $help = '';
+    public bool $align_label_top = false;
+    public bool $inline = false;
+    public string $afterLabel = '';
+    public bool $show_label = false;
+    public bool $inArray = false;
+
 
     public function __construct($label, $key)
     {

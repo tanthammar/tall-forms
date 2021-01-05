@@ -528,4 +528,24 @@
     .tf-group-wrapper-grid {
         @apply sm:flex sm:grid sm:grid-cols-12 sm:gap-x-2 sm:gap-y-4;
     }
+
+    /* Heading */
+    .tf-heading-root {
+        @apply w-full rounded mt-8 mb-4 bg-indigo-50 px-4 py-2 border;
+    }
+    .tf-heading-wrapper {
+        @apply flex items-center;
+    }
+    .tf-heading-icon-col {
+        @apply flex-shrink-0 mr-4;
+    }
+    .tf-heading-icon {
+        @apply w-5 h-5 text-indigo-900;
+    }
+    .tf-heading {
+        @apply text-xl capitalize text-indigo-900;
+    }
+    .tf-subtitle {
+        @apply text-sm text-gray-800;
+    }
 }
