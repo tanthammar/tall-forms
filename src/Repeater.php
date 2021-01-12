@@ -20,6 +20,7 @@ class Repeater extends BaseField
         $this->allowed_in_repeater = false;
         $this->allowed_in_keyval = false;
         $this->inline = false;
+        $this->wire = '';
         return $this;
     }
 

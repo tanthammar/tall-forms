@@ -15,6 +15,7 @@ class KeyVal extends BaseField
         $this->allowed_in_repeater = false;
         $this->allowed_in_keyval = true;
         $this->inline = false;
+        $this->wire = '';
         return $this;
     }
 }

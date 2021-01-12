@@ -6,6 +6,7 @@
                     $nested_field->inline = $nested_field->inline ?? $field->childInline;
                     $nested_field->colspan = $field->childCols ?? $nested_field->colspan;
                     $nested_field->inArray = true;
+                    $nested_field->wire = filled($field->wire) ? $field->wire : $nested_field->wire;
                 @endphp
                 @include('tall-forms::includes.field-root', ['field' => $nested_field])
             @endforeach
