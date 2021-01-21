@@ -20,6 +20,9 @@
     .form-select {
         @apply focus:ring-gray-400 focus:border-gray-400 focus:shadow-md border-gray-300 rounded
     }
+    .form-multiselect {
+        @apply appearance-none bg-white border-gray-400 rounded border-solid border box-border cursor-default block leading-normal mx-0 mb-0 mt-1 py-0 px-0 normal-case whitespace-nowrap w-full focus:border-gray-400 focus:shadow-md
+    }
     .form-checkbox {
         @apply focus:ring-blue-400 text-blue-500 border-gray-300 rounded
     }

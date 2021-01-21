@@ -10,7 +10,7 @@ use Tanthammar\TallForms\Traits\HasLabels;
 use Tanthammar\TallForms\Traits\HasSharedProperties;
 use Tanthammar\TallForms\Traits\HasViews;
 
-class BaseField
+abstract class BaseField
 {
     use HasLabels, HasAttributes, HasSharedProperties, HasDesign, HasViews;
 
