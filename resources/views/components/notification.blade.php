@@ -1,7 +1,13 @@
+@props([
+    'show' => session()->has('notify') ? 'true' : 'false',
+    'message' => session('notify')['message'] ?? '',
+    'bg' => session('notify')['bg'] ?? 'tf-bg-success'
+])
+
 <div
     class="fixed inset-0 flex items-end justify-center px-4 py-6 pointer-events-none sm:p-6 sm:items-start sm:justify-end"
     style="margin-top: 50px">
-    <div x-cloak x-data="{ show: {{ $show ?? 'false' }}, message: '{{ $message ?? '' }}', bg: '{{ $bg ?? 'tf-bg-success'}}' }"
+    <div x-cloak x-data="{ show: {{ $show }}, message: '{{ $message }}', bg: '{{ $bg }}' }"
          x-on:notify.window="
     show = true;
     message = $event.detail.message;
