@@ -19,6 +19,7 @@ trait Notify
     @this.call('notify', 'danger', 'Oh No!');
     */
     public array $alert = [];
+    private bool $_withSession = false;
 
     public function updatedAlert()
     {
@@ -27,6 +28,13 @@ trait Notify
             array_get($this->alert, 'message', trans(config('tall-forms.message-updated-success')))
         );
     }
+
+    public function withSession()
+	{
+		$this->_withSession = true;
+
+		return $this;
+	}
 
     public function notify($type = "saved", $message = "")
     {
@@ -58,12 +66,18 @@ trait Notify
                 $bg = 'tf-notify-bg-default';
                 break;
         }
-        $this->dispatchBrowserEvent(
-            'notify',
-            [
-                'bg' => $bg,
-                'message' =>  $message,
-            ]
-        );
+
+        $payload = [
+			'bg'      => $bg,
+			'message' => $message,
+		];
+
+		if ($this->_withSession) {
+			session()->flash('notify', $payload);
+
+			return;
+		}
+
+		$this->dispatchBrowserEvent('notify', $payload);
     }
 }
