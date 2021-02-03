@@ -14,7 +14,9 @@ class Input extends Component
 
     public Field $field;
     public bool $required;
-    public string $icon_span = 'flex items-center justify-center px-2 rounded-l border border-r-0 border-gray-300 bg-gray-100 text-gray-600 sm:text-sm leading-normal';
+    public string $icon_span = 'flex items-center justify-center px-2 border border-gray-300 bg-gray-100 text-gray-600 sm:text-sm leading-normal';
+    public string $left_border = 'rounded-l border-r-0';
+    public string $right_border = 'rounded-r border-l-0';
 
     public function __construct(Field $field)
     {
@@ -48,7 +50,20 @@ class Input extends Component
     {
         $class = "form-input block w-full shadow-inner ";
         $class .= $this->field->input_type == 'color' ? "h-11 p-1 " : null;
-        $class .= ($this->field->prefix || $this->field->hasIcon) ? " rounded-none rounded-r" : " rounded";
+//        $class .= ($this->field->prefix || $this->field->hasIcon) ? " rounded-none rounded-r" : " rounded";
+        $leftRounded = ($this->field->prefix || $this->field->hasIcon);
+        $rightRounded = ($this->field->suffix || $this->field->sfxHasIcon);
+
+        if($leftRounded || $rightRounded){
+            $class .= " rounded-none";
+            if($leftRounded && !$rightRounded){
+                $class .= " rounded-r";
+            } else if(!$leftRounded && $rightRounded){
+                $class .= " rounded-l";
+            }
+        } else {
+            $class .= " rounded";
+        }
         return $class;
     }
 

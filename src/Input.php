@@ -20,6 +20,12 @@ class Input extends BaseField
     public $required = false;
     public $class = 'tf-input-wrapper';
 
+    public $suffix;
+    public $sfxIcon;
+    public $sfxTallIcon;
+    public $sfxHtmlIcon;
+    public bool $sfxHasIcon = false;
+
     protected function overrides(): self
     {
         $this->type = 'input';
@@ -49,6 +55,12 @@ class Input extends BaseField
     public function prefix(string $prefix): self
     {
         $this->prefix = $prefix;
+        return $this;
+    }
+
+    public function suffix(string $suffix): self
+    {
+        $this->suffix = $suffix;
         return $this;
     }
 
@@ -98,6 +110,42 @@ class Input extends BaseField
     public function inputAttr(array $attributes): self
     {
         $this->attributes['input'] = $attributes;
+        return $this;
+    }
+
+    /**
+     * Requires Blade UI Icons
+     * @param string $blade_ui_icon_path
+     * @return $this
+     */
+    public function suffixIcon(string $blade_ui_icon_path): self
+    {
+        $this->sfxIcon = $blade_ui_icon_path;
+        $this->sfxHasIcon = true;
+        return $this;
+    }
+
+    /**
+     * Requires you to create a blade file on the defined path
+     * @param string $blade_file_path
+     * @return $this
+     */
+    public function suffixTallIcon(string $blade_file_path): self
+    {
+        $this->sfxTallIcon = $blade_file_path;
+        $this->sfxHasIcon = true;
+        return $this;
+    }
+
+    /**
+     * Any valid html, example: fontawesome <i></i>
+     * @param string $html
+     * @return $this
+     */
+    public function suffixHtmlIcon(string $html): self
+    {
+        $this->sfxHtmlIcon = $html;
+        $this->sfxHasIcon = true;
         return $this;
     }
 
