@@ -14,7 +14,7 @@ class Input extends BaseField
     public $autocomplete;
     public $placeholder;
     public $prefix;
-    public $appendPrefix;
+    public $suffix;
     public $step = 1;
     public $min = 0;
     public $max = 100;
@@ -47,19 +47,15 @@ class Input extends BaseField
         return $this;
     }
 
-    public function prefix(string $prefix, bool $append = false): self
+    public function prefix(string $prefix): self
     {
-        if(!$append){
-            $this->prefix = $prefix;
-        } else {
-            $this->appendPrefix = $prefix;
-        }
+        $this->prefix = $prefix;
         return $this;
     }
 
-    public function appendPrefix(string $prefix): self
+    public function suffix(string $prefix): self
     {
-        $this->appendPrefix = $prefix;
+        $this->suffix = $prefix;
         return $this;
     }
 

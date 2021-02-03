@@ -1,5 +1,5 @@
 <div class="{{$field->class}}">
-    @if($field->appendPrefix || $field->hasAppendIcon)
+    @if($field->suffix || $field->hasAfterIcon)
         <div class="w-full flex"> {{-- flex wrapper --}}
             <div class="w-full justify-self-start relative">  {{-- input & left icons/prefixes wrapper --}}
                 @endif
@@ -31,26 +31,26 @@
                     </div>  {{-- /left icons/prefixes and input wrapper --}}
                 @endif
 
-                @if($field->appendPrefix || $field->hasAppendIcon)
+                @if($field->suffix || $field->hasAfterIcon)
                     @error($field->key)
                     <x-tall-error-icon
                             :right="in_array($field->input_type, ['date', 'datetime-local', 'time']) ? 'right-6' : 'right-0'"/>
                     @enderror
             </div>  {{-- /left icons/prefixes and input wrapper --}}
-            <div class="justify-self-end {{ $append_iconWrapper_span }}">
+            <div class="justify-self-end {{ $after_iconWrapper_span }}">
 
-                <span class="{{ $append_icon_span }}">
-                    @if($field->appendIcon)
-                        <span class="mx-1">@svg($field->appendIcon, 'h-6 w-6')</span>
+                <span class="{{ $after_icon_span }}">
+                    @if($field->afterIcon)
+                        <span class="mx-1">@svg($field->afterIcon, 'h-6 w-6')</span>
                     @endif
-                    @if($field->tallAppendIcon)
-                        <span class="mx-1"><x-tall-svg :path="$field->tallAppendIcon" class="h-6 w-6" /></span>
+                    @if($field->tallAfterIcon)
+                        <span class="mx-1"><x-tall-svg :path="$field->tallAfterIcon" class="h-6 w-6" /></span>
                     @endif
-                    @if($field->htmlAppendIcon)
-                        <span class="mx-1">{!! $field->htmlAppendIcon !!}</span>
+                    @if($field->htmlAfterIcon)
+                        <span class="mx-1">{!! $field->htmlAfterIcon !!}</span>
                     @endif
-                    @if($field->appendPrefix)
-                        <span class="mx-1 whitespace-no-wrap">{{ $field->appendPrefix }}</span>
+                    @if($field->suffix)
+                        <span class="mx-1 whitespace-no-wrap">{{ $field->suffix }}</span>
                     @endif
                 </span>
             </div>
