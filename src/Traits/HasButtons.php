@@ -30,11 +30,17 @@ trait HasButtons
     public function delete()
     {
         if (optional($this->model)->exists) {
-            $this->model->delete();
-            session()->flash('success', 'The object was deleted');
-            return redirect(urldecode($this->previous));
+            $this->onDeleteModel();
         }
         return null;
+    }
+
+    public function onDeleteModel()
+    {
+        $className = $this->model->getClassName();
+        $this->model->delete();
+        session()->flash('success', "The {$className} was deleted");
+        return redirect(urldecode($this->previous));
     }
 
     public function saveAndStayResponse()
