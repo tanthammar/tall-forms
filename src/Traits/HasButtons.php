@@ -25,6 +25,7 @@ trait HasButtons
     {
         $this->resetErrorBag();
         $this->setFormProperties();
+        $this->emitSelf('resetForm');
     }
 
     public function delete()
