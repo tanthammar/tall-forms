@@ -26,7 +26,10 @@ class Select extends BaseField
         return $this;
     }
 
-    //renders a different view in the blade component class
+    /*
+     * Renders a different view in the blade component class
+     * @deprecated use MultiSelect instead
+     */
     public function multiple(): self
     {
         $this->multiple = true;
