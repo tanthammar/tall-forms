@@ -29,7 +29,9 @@
                             </button>
                         @endif
 
-                        <button type="button" class="tf-repeater-delete-btn" wire:click.prevent="arrayRemove('{{ $field->name }}', '{{ $key }}')">
+                        <button type="button" class="tf-repeater-delete-btn"
+                                @if($field->confirm_delete) onclick="confirm('{{ trans($field->confirm_msg) }}') || event.stopImmediatePropagation();" @endif
+                                wire:click.prevent="arrayRemove('{{ $field->name }}', '{{ $key }}')">
                             <x-tall-svg :path="config('tall-forms.trash-icon')" class="tf-repeater-btn-size" />
                         </button>
                     </div>

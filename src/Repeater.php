@@ -11,6 +11,8 @@ class Repeater extends BaseField
 
     public $labelEachRow = false;
     public $array_sortable = false;
+    public $confirm_delete = false;
+    public $confirm_msg = '';
 
 
     protected function overrides(): self
@@ -34,6 +36,13 @@ class Repeater extends BaseField
     public function labelEachRow(): self
     {
         $this->labelEachRow = true;
+        return $this;
+    }
+
+    public function confirmDelete($message = ''): self
+    {
+        $this->confirm_delete = true;
+        $this->confirm_msg = filled($message) ? $message : config('tall-forms.are-u-sure');
         return $this;
     }
 }

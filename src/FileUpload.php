@@ -14,6 +14,12 @@ class FileUpload extends BaseField
     public $maxBytes = null;
     public $sizeLimitAlert;
 
+    //TODO Next major release, see confirmDelete() below
+    /*
+    public $confirm_delete = false;
+    public $confirm_msg = '';
+    */
+
     protected function overrides(): self
     {
         $this->type = 'file';
@@ -48,5 +54,16 @@ class FileUpload extends BaseField
         return $this;
     }
 
+    //TODO Decide default setting in next major release, see blade view resources/views/includes/file-loop.blade.php
+    /*
+     * Breaking change, until next release default behaviour is to confirm deletion.
+     * This MIGHT change to align with default setting in Repeater.
+    public function confirmDelete($message = ''): self
+    {
+        $this->confirm_delete = true;
+        $this->confirm_msg = filled($message) ? $message : config('tall-forms.are-u-sure');
+        return $this;
+    }
+    */
 }
 
