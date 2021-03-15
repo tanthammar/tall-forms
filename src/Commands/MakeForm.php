@@ -11,6 +11,17 @@ class MakeForm extends Command
     protected $signature = 'make:tall-form {name} {--model=Model} {--path=Http/Livewire/Forms} {--modelspath=Models} {--action=create} {--overwrite=false} {--skipexisting=false} {--fields=""}';
     protected $description = 'Make a new Laravel Livewire form component.';
 
+    public static function strReplaceModelsPath(string $modelspath = "App\\Models\\"): string
+    {
+        if($modelspath === "Models" || $modelspath === "") $modelspath = "App\\Models\\";
+        return Str::of($modelspath)->replace('/', "\\")->finish('\\');
+    }
+
+    public static function strReplacePath(string $path = ""): string
+    {
+        return Str::of($path)->replace('\\', "/")->finish('/');
+    }
+
     public function handle()
     {
         $stub = $this->option('action') == 'create' ? File::get(__DIR__ . '/../../resources/stubs/create-component.stub') : File::get(__DIR__ . '/../../resources/stubs/update-component.stub');
@@ -18,10 +29,7 @@ class MakeForm extends Command
         $stub = str_replace('DummyComponent', $this->argument('name'), $stub);
         $stub = str_replace('DummyModel', $this->option('model'), $stub);
         $stub = str_replace('dummymodel', Str::lower($this->option('model')), $stub);
-
-        $modelspath = $this->option('modelspath') == "Models" ? "App\\Models\\" : $this->option('modelspath');
-        $modelspath = Str::of($modelspath)->replace('/', "\\")->finish('\\');
-        $stub = str_replace('ModelsPath', $modelspath, $stub);
+        $stub = str_replace('ModelsPath', self::strReplaceModelsPath($this->option('modelspath')), $stub);
 
         //$stub = str_replace('Action', $this->option('action'), $stub);
         //$stub = str_replace('DummyRoute', Str::slug(Str::plural($this->option('model'))), $stub);
@@ -41,8 +49,7 @@ class MakeForm extends Command
             if(Str::contains($fields, 'Number::make')) $use .= "use Tanthammar\TallFormsSponsors\Number;" . PHP_EOL;
             $stub = str_replace("use Tanthammar\TallForms\Input;", $use, $stub);
         }
-
-        $path = Str::of($this->option('path'))->replace('\\', "/")->finish('/');
+        $path = self::strReplacePath($this->option('path'));
         $file_name = app_path($path . $this->argument('name') . '.php');
 
         if (!is_dir(app_path($path))) File::makeDirectory(app_path($path), 0755, true);
