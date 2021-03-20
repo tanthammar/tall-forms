@@ -9,12 +9,11 @@ use Tanthammar\TallForms\Checkbox as Field;
 
 class Checkbox extends Component
 {
-    public Field $field;
-    public string $label;
 
-    public function __construct(Field $field)
+    public function __construct(
+        public Field $field,
+        public string $label = "")
     {
-        $this->field = $field;
         $this->label = $field->placeholder ?? $field->label;
     }
 
@@ -22,7 +21,8 @@ class Checkbox extends Component
     {
         $custom = $this->field->getAttr('input');
         $default = [
-            $this->field->wire => $this->field->key,
+//            $this->field->wire => $this->field->key,
+            'x-model' => 'checkbox',
             'name' => $this->field->key,
             'class' => $this->class()
         ];
