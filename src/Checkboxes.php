@@ -14,7 +14,7 @@ class Checkboxes extends BaseField
     {
         $this->type = 'checkboxes';
         $this->align_label_top = true;
-        $this->allowed_in_repeater = true;
+        $this->allowed_in_repeater = false;
         return $this;
     }
 
