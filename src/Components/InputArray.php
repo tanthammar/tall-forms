@@ -4,9 +4,11 @@
 namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
+use Illuminate\View\Component;
 use Tanthammar\TallForms\InputArray as Field;
+use Tanthammar\TallForms\Traits\Helpers;
 
-class InputArray
+class InputArray extends Component
 {
     public Field $field;
 
@@ -39,6 +41,6 @@ class InputArray
 
     public function render(): View
     {
-        return view('components.input-array'); //observe the file name
+        return view('tall-forms::components.input-array');
     }
 }
