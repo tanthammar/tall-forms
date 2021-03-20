@@ -294,18 +294,22 @@
     .tf-repeater-btns-wrapper {
         @apply my-4 sm:my-0 flex-shrink space-x-1 items-center justify-end;
     }
+    /* also used in InputArray */
     .tf-repeater-btn-size {
-        @apply h-8 w-8;
+        @apply h-6 w-6 md:h-8 md:w-8;
     }
     .tf-repeater-sorter-color {
         @apply text-gray-400;
     }
+    /* also used in InputArray */
     .tf-repeater-delete-btn {
         @apply tf-text-danger;
     }
+    /* also used in InputArray */
     .tf-repeater-add-button {
         @apply rounded shadow text-white tf-bg-primary;
     }
+    /* also used in InputArray */
     .tf-repeater-add-button-size {
         @apply h-5 w-5 m-2;
     }

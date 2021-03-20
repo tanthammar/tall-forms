@@ -10,7 +10,8 @@ namespace Tanthammar\TallForms;
 class InputArray extends BaseField
 {
     public string $input_type = 'text';
-    public ?string $defer = null;
+    public string $defer = ".defer";
+    public string $placeholder = "";
 
     protected function overrides(): self
     {
@@ -34,13 +35,25 @@ class InputArray extends BaseField
         return $this;
     }
 
+    public function placeholder(string $placeholder): self
+    {
+        $this->placeholder = $placeholder;
+        return $this;
+    }
+
+    public function showEmptyItem(): self
+    {
+        $this->default = [''];
+        return $this;
+    }
+
     /**
-     * Defer alpine entangle until the form is submitted
+     * Entangle the field on every keystroke
      * @return $this
      */
-    public function defer(): self
+    public function noDefer(): self
     {
-        $this->defer = '.defer';
+        $this->defer = "";
         return $this;
     }
 }

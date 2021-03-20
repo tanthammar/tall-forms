@@ -33,7 +33,7 @@ trait ValidatesFields
                     if ($field->type === 'file') {
                         $ruleName = $field->multiple ? "$field->name.*" : $field->name;
                     }
-                    elseif ($field->type === 'multiselect') {
+                    elseif (in_array($field->type, ['multiselect', 'input-array'])) {
                         $ruleName = "$prefix.$field->name.*";
                     } else {
                         $ruleName = "$prefix.$field->name";
@@ -76,7 +76,7 @@ trait ValidatesFields
         if (filled($fieldCollection = $this->collectField($field)) && $fieldCollection->get('realtimeValidationOn')) {
             $fieldRule = $fieldCollection->get('rules') ?? 'nullable';
             $fieldType = $fieldCollection->get('type');
-            if ($fieldType == 'multiselect') $field = $field . '.*';
+            if (in_array($fieldType, ['multiselect', 'input-array'])) $field = $field . '.*';
             if ($fieldType == 'file') {
                 // livewire native file upload
                 $this->customValidateFilesIn($field, $fieldRule);

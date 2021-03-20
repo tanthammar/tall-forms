@@ -145,7 +145,7 @@ trait Helpers
             if (filled($field) && !$field->ignored) {
                 $fieldKey = str_replace('form_data.', '', $field->key);
                 if (false === Str::contains($fieldKey, ['*']) && is_null(data_get($this->form_data, $fieldKey, null))) {
-                    $array = in_array($field->type, ['checkboxes', 'file', 'multiselect']);
+                    $array = in_array($field->type, ['checkboxes', 'file', 'multiselect', 'input-array']);
                     data_set($this->form_data, $fieldKey, $field->default ?? ($array ? [] : null));
                 }
             }

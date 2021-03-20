@@ -22,21 +22,22 @@ class InputArray extends Component
         $custom = $this->field->getAttr('input');
         $default = [
             'type' => $this->field->input_type,
+            'placeholder' => $this->field->placeholder,
             'class' => $this->class()
         ];
         return array_merge($default, $custom);
     }
 
-    public function class()
+    public function class(): string
     {
         $class = "form-input my-1 w-full "; //example class from a default input field
         $class .= $this->field->class;
         return Helpers::unique_words($class);
     }
 
-    public function error()//example class from a default input field
+    public function error(): string //applied to the outer div surrounding the inputs
     {
-        return Helpers::unique_words($this->class()." border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red");
+        return "border rounded border-red-500 p-2 md:p-4 mb-2";
     }
 
     public function render(): View
