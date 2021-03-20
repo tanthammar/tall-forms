@@ -10,7 +10,6 @@ class MultiSelect extends Select
     protected function overrides(): self
     {
         $this->type = 'multiselect';
-        $this->allowed_in_repeater = false;
         $this->align_label_top = true;
         $this->allowed_in_repeater = false;
         return $this;
