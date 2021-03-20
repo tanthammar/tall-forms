@@ -33,7 +33,7 @@ trait HasOptions
     /**
      * The callable should return a flat key => value array.
      * OBSERVE: that this call will be executed on EVERY re-render of the component!
-     * Maybe you should consider using the options() method and set the property in mount() instead
+     * Maybe you should consider setting the $options in mount() instead?
      * @param callable $callable
      * @return $this
      * @deprecated use options($options) instead
