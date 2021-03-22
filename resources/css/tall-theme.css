@@ -499,6 +499,11 @@
         @apply list-decimal list-outside ml-4;
     }
 
+    /* Tnx Filament */
+    trix-editor:empty:not(:focus)::before {
+        @apply text-gray-400 opacity-100;
+    }
+
     /* Tabs */
     .tf-tab-active {
         @apply text-blue-800 bg-blue-100;

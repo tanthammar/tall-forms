@@ -12,6 +12,8 @@ class InputArray extends BaseField
     public string $input_type = 'text';
     public string $defer = ".defer";
     public string $placeholder = "";
+    public int $maxItems = 0;
+    public int $minItems = 0;
 
     protected function overrides(): self
     {
@@ -41,9 +43,14 @@ class InputArray extends BaseField
         return $this;
     }
 
-    public function showEmptyItem(): self
+    public function showEmptyItem($count = 1): self
     {
         $this->default = [''];
+        if ($count >= 2) {
+            for ($i = 2; $i <= $count; $i++) {
+                $this->default[] = '';
+            }
+        }
         return $this;
     }
 
@@ -54,6 +61,19 @@ class InputArray extends BaseField
     public function noDefer(): self
     {
         $this->defer = "";
+        return $this;
+    }
+
+    public function minItems(int $min = 1):self
+    {
+        if($min >= 1) $this->minItems = $min;
+        $this->showEmptyItem($min);
+        return $this;
+    }
+
+    public function maxItems(int $max = 0):self
+    {
+        if($max >= 1) $this->maxItems = $max;
         return $this;
     }
 }
