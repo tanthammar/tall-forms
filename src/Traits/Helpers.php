@@ -66,7 +66,7 @@ trait Helpers
     }
 
     /**
-     * Returns only specified key/value pairs from the give array
+     * Returns only specified key/value pairs from the given array
      * and has deeply nested array support using "dot" notation for keys.
      * @param array $array
      * @param mixed $keys
@@ -76,7 +76,8 @@ trait Helpers
     {
         $newArray = [];
         foreach ((array)$keys as $key) {
-            if (($value = Arr::get($array, $key)) !== null) Arr::set($newArray, $key, $value);
+            $value = Arr::get($array, $key);
+            Arr::set($newArray, $key, $value);
         }
         return $newArray;
     }
