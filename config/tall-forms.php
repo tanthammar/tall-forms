@@ -127,6 +127,7 @@ return [
         'label-field-wrapper' => Components\LabelFieldWrapper::class,
         'field-root' => Components\FieldRoot::class,
         'input' => Components\Input::class,
+        'input-array' => Components\InputArray::class,
         'image-cropper' => Components\ImageCropper::class,
         'range' => Components\Range::class,
         'textarea' => Components\Textarea::class,
