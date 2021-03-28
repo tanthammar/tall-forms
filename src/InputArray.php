@@ -64,14 +64,14 @@ class InputArray extends BaseField
         return $this;
     }
 
-    public function minItems(int $min = 1):self
+    public function minItems(int $min = 1): self
     {
         if($min >= 1) $this->minItems = $min;
         $this->showEmptyItem($min);
         return $this;
     }
 
-    public function maxItems(int $max = 0):self
+    public function maxItems(int $max = 0): self
     {
         if($max >= 1) $this->maxItems = $max;
         return $this;
