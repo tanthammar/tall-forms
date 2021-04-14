@@ -21,6 +21,8 @@ trait SubmitsForm
                 $field_names[] = str_replace(['form_data.', '*.'], '', $field->key);
             }
         }
+
+        //remove any unwanted request data
         $model_fields_data = $this->arrayDotOnly($validated_data, $field_names);
 
         //make sure to create the model before attaching any relations
