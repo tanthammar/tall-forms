@@ -12,6 +12,7 @@ class Checkboxes extends Component
     public Field $field;
     public string $label;
     public $value;
+    public string $id;
 
     /**
      * Checkboxes constructor.
@@ -25,6 +26,7 @@ class Checkboxes extends Component
         $this->field = $field;
         $this->value = $value;
         $this->label = $label;
+        $this->id = \Str::slug($field->key.$value);
     }
 
     public function options(): array

@@ -3,11 +3,12 @@
         type="checkbox"
         value="{{ $value }}"
         name="{{ $field->key }}"
+        id="{{ $id }}"
         @foreach($options() as $key => $value) {{$key}}="{{$value}}" @endforeach
     />
     <div class="tf-checkbox-label-spacing">
-        <span class="tf-checkbox-label">
+        <label for="{{ $id }}" class="tf-checkbox-label">
             {{ $label }}
-        </span>
+        </label>
     </div>
 </div>

@@ -3,11 +3,12 @@
         type="radio"
         value="{{ $value }}"
         name="{{ $field->key }}"
+        id="{{ $id }}"
         @foreach($options() as $key => $value) {{$key}}="{{$value}}" @endforeach
     />
     <div class="tf-radio-label-spacing">
-        <span class="tf-radio-label">
+        <label for="{{ $id }}" class="tf-radio-label">
             {{ $label }}
-        </span>
+        </label>
     </div>
 </div>

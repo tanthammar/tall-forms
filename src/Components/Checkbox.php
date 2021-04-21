@@ -24,6 +24,7 @@ class Checkbox extends Component
         $default = [
             $this->field->wire => $this->field->key,
             'name' => $this->field->key,
+            'id' => \Str::slug($this->field->key),
             'class' => $this->class()
         ];
         return array_merge($default, $custom);

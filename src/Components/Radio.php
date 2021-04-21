@@ -13,6 +13,7 @@ class Radio extends Component
     public string $label;
     public $value;
     public $align_label_top = true;
+    public string $id;
 
     /**
      * Radio constructor.
@@ -25,6 +26,7 @@ class Radio extends Component
         $this->field = $field;
         $this->value = $value;
         $this->label = $label;
+        $this->id = \Str::slug($field->key.$value);
     }
 
     public function options(): array
