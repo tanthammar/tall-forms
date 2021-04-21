@@ -9,18 +9,31 @@ use Tanthammar\TallForms\Checkboxes as Field;
 
 class Checkboxes extends Component
 {
-    public function __construct(
-        public Field $field,
-        public null|int|string $value = null,
-        public ?string $label = null,
-    ) {}
+    public Field $field;
+    public string $label;
+    public $value;
+    public string $id;
+
+    /**
+     * Checkboxes constructor.
+     * @param Field $field
+     * @param string $tempKey
+     * @param int|string $value
+     * @param string $label
+     */
+    public function __construct(Field $field, $value, string $label)
+    {
+        $this->field = $field;
+        $this->value = $value;
+        $this->label = $label;
+        $this->id = \Str::slug($field->key.$value);
+    }
 
     public function options(): array
     {
         $custom = $this->field->getAttr('input');
         $default = [
-//            $this->field->wire => $this->field->key,
-            'x-model' => 'checkboxes',
+            $this->field->wire => $this->field->key,
             'class' => $this->class()
         ];
         return array_merge($default, $custom);

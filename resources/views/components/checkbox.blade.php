@@ -5,8 +5,8 @@
     @foreach($options() as $key => $value) {{$key}}="{{$value}}" @endforeach
     />
     <div class="tf-checkbox-label-spacing">
-        <span class="tf-checkbox-label">
+        <label for="{{ \Str::slug($field->key) }}" class="tf-checkbox-label">
             {{ $label ?? ''}}
-        </span>
+        </label>
     </div>
 </div>

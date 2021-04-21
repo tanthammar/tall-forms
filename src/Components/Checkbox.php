@@ -24,6 +24,7 @@ class Checkbox extends Component
 //            $this->field->wire => $this->field->key,
             'x-model' => 'checkbox',
             'name' => $this->field->key,
+            'id' => \Str::slug($this->field->key),
             'class' => $this->class()
         ];
         return array_merge($default, $custom);
