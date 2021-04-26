@@ -18,7 +18,7 @@ trait SubmitsForm
         $field_names = [];
         foreach ($fields as $field) {
             if (filled($field) && !$field->is_relation && !$field->is_custom && !$field->ignored) {
-                $field_names[] = str_replace(['form_data.', '*.'], '', $field->key);
+                $field_names[] = \Str::of($field->key)->remove('*.')->replaceFirst('form_data.', '')->__toString();
             }
         }
         $model_fields_data = $this->arrayDotOnly($validated_data, $field_names);
