@@ -49,7 +49,6 @@ Want to give tribute to those who made TALL-stack come true. (Alphabetically ord
 
 
 # 🙋 Help wanted
-- If you like this package, please help me with the documentation and tests. Send me a PM.
 - **Pull Requests** I appreciate any input that improves the functionality and usability of this package. **Please contribute!**
 
 # 💬 Let's connect
