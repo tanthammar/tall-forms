@@ -42,7 +42,7 @@ trait Helpers
      */
     protected function parseFunctionNameFrom(string $field, $hook = 'updated'): string
     {
-        return $hook . \Str::of($field)->replace('.', '_')->studly()->replaceFirst('FormData', '');
+        return $hook . Str::of($field)->replace('.', '_')->studly()->replaceFirst('FormData', '');
     }
 
     public function tallFillField($array)
@@ -144,7 +144,7 @@ trait Helpers
     {
         foreach ($fields as $field) {
             if (filled($field) && !$field->ignored) {
-                $fieldKey = str_replace('form_data.', '', $field->key);
+                $fieldKey = Str::replaceFirst('form_data.', '', $field->key);
                 if (false === Str::contains($fieldKey, ['*']) && is_null(data_get($this->form_data, $fieldKey, null))) {
                     $array = in_array($field->type, ['checkboxes', 'file', 'multiselect', 'input-array']);
                     data_set($this->form_data, $fieldKey, $field->default ?? ($array ? [] : null));
