@@ -1,7 +1,6 @@
 ![Laravel Livewire Forms](https://i.imgur.com/YB0gEJ8.gif)
 
 # TALL-stack form generator
-This is not an admin panel generator, it is a package that auto-generates Laravel Livewire forms without you having to create any blade views.
 
 [Laravel Livewire](https://laravel-livewire.com), Tailwind forms with auto-generated views.
 
@@ -14,6 +13,7 @@ This is not an admin panel generator, it is a package that auto-generates Larave
 - [Contributions](https://github.com/tanthammar/tall-forms/pulls)
 
 # Features
+* This is not an admin panel generator, it is a package that auto-generates Laravel Livewire forms without you having to create any blade views.
 * Laravel Nova like syntax to auto generate TALL-stack forms
 * Auto generate forms, with fields for **ALL** Eloquent Models, in a project - using a single artisan command.
 * Auto-generated views
