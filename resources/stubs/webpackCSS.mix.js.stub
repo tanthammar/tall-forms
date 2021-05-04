@@ -6,6 +6,7 @@ mix.js('resources/js/app.js', 'public/js')
         require('postcss-import'),
         cssNesting(),
         require('tailwindcss'),
+        // require('autoprefixer'), automatic w Laravel Mix 6
     ]);
 
 if (mix.inProduction()) {

@@ -6,14 +6,13 @@ module.exports = {
             './app/**/*.php',
             //if Jetstream
             './vendor/laravel/jetstream/**/*.blade.php',
-            //if Jetstream or Breeze
+            //if Jetstream and Breeze
+            './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
             './storage/framework/views/*.php',
-            //endif Jetstream or Breeze
-            // Tall-forms start
+            // Tall-forms
             './config/tall-forms.php',
             './vendor/tanthammar/tall-forms/**/*.php',
             './vendor/tanthammar/tall-forms-sponsors/**/*.php',
-            // Tall-forms end
             // File formats applicable to most projects
             './resources/**/*.html',
             './resources/**/*.js',

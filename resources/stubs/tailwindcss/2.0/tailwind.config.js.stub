@@ -5,6 +5,7 @@ module.exports = {
         // the preset merges, fonts, variants, plugins, colors and purge content
         require('./vendor/tanthammar/tall-forms/resources/stubs/tailwindcss/2.0/tall-forms-preset.js'),
     ],
+    darkMode: false, // or 'media' or 'class'
     theme: {
         extend: {}
     },
