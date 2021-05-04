@@ -69,21 +69,25 @@ class InstallTallForms extends Command
 
     public function wrapper()
     {
-        $this->info('Installing wrapper view');
 
         if (!is_dir($directory = resource_path('views/layouts'))) File::makeDirectory($directory, 0755, true);
 
+        $applayout = File::get(__DIR__ . '/../../resources/stubs/app.blade.php.stub');
         $wrapper = File::get(__DIR__ . '/../../resources/stubs/wrapper.blade.php.stub');
 
-        if ($this->jetstream || $this->breeze) {
-            $this->fixAppLayout();
-            $wrapper = File::get(__DIR__ . '/../../resources/stubs/wrapperJetstream.blade.php.stub');
-        } else {
-            $this->info('Installing basic app.blade.php layout because you are not using Jetstream or Breeze');
-            $applayout = File::get(__DIR__ . '/../../resources/stubs/app.blade.php.stub');
-            File::put(resource_path('views/layouts/tall-form-wrapper-layout.blade.php'), $applayout);
+        if ($this->jetstream) {
+            $applayout = File::get(__DIR__ . '/../../resources/stubs/jetstream-app.blade.php.stub');
+            $wrapper = File::get(__DIR__ . '/../../resources/stubs/wrapperJetBreeze.blade.php.stub');
+        }
+        if ($this->breeze) {
+            $applayout = File::get(__DIR__ . '/../../resources/stubs/breeze-app.blade.php.stub');
+            $wrapper = File::get(__DIR__ . '/../../resources/stubs/wrapperJetBreeze.blade.php.stub');
         }
 
+        $this->info('Installing basic app.blade.php layout');
+        File::put(resource_path('views/layouts/app.blade.php'), $applayout);
+
+        $this->info('Installing wrapper view');
         File::put(resource_path('views/layouts/tall-form-wrapper-layout.blade.php'), $wrapper);
 
         $this->info('Publishing the config file');
@@ -95,17 +99,6 @@ class InstallTallForms extends Command
         $config = File::get(config_path('tall-forms.php'));
         $config = str_replace('tall-forms::wrapper-layout', 'layouts.tall-form-wrapper-layout', $config);
         File::put(config_path('tall-forms.php'), $config);
-    }
-
-    public function fixAppLayout()
-    {
-        $this->info('Checking app.blade.php ...');
-        $app_blade = File::get(resource_path('views/layouts/app.blade.php'));
-        $app_blade = str_replace('@livewireStyles', '@livewireStyles' . PHP_EOL. '@stack("styles")', $app_blade);
-        $app_blade = str_replace('@livewireScripts', '@livewireScripts' . PHP_EOL. '@stack("scripts")', $app_blade);
-        $app_blade = str_replace('{{ $header }}', '{{ $header ?? null }}', $app_blade);
-        $app_blade = str_replace('{{ $slot }}', '{{ $slot ?? null }}', $app_blade);
-        File::put(resource_path('views/layouts/app.blade.php'), $app_blade);
     }
 
     public function icons()
