@@ -39,6 +39,7 @@ class InstallTallForms extends Command
 
     public function runInstallation()
     {
+        $this->livewire();
         $this->tailwind();
         $this->theme();
         // $this->icons(); //not needed to publish the icons
@@ -48,9 +49,6 @@ class InstallTallForms extends Command
 //        $this->info('Compiling css');
 //        $this->info(exec('npm run dev'));
 
-        if (!$this->jetstream || !$this->breeze) {
-            $this->info("TODO: ------> You manually have to add. @stack('styles') and @stack('scripts') to your app.blade.php layout");
-        }
         $this->info("Installation complete. DON'T FORGET:  ------> npm install && npm run dev");
         $this->info('Please support this package if you find in useful :-)');
     }
@@ -72,14 +70,20 @@ class InstallTallForms extends Command
     public function wrapper()
     {
         $this->info('Installing wrapper view');
+
+        if (!is_dir($directory = resource_path('views/layouts'))) File::makeDirectory($directory, 0755, true);
+
         $wrapper = File::get(__DIR__ . '/../../resources/stubs/wrapper.blade.php.stub');
 
         if ($this->jetstream || $this->breeze) {
             $this->fixAppLayout();
             $wrapper = File::get(__DIR__ . '/../../resources/stubs/wrapperJetstream.blade.php.stub');
+        } else {
+            $this->info('Installing basic app.blade.php layout because you are not using Jetstream or Breeze');
+            $applayout = File::get(__DIR__ . '/../../resources/stubs/app.blade.php.stub');
+            File::put(resource_path('views/layouts/tall-form-wrapper-layout.blade.php'), $applayout);
         }
 
-        if (!is_dir($directory = resource_path('views/layouts'))) File::makeDirectory($directory, 0755, true);
         File::put(resource_path('views/layouts/tall-form-wrapper-layout.blade.php'), $wrapper);
 
         $this->info('Publishing the config file');
@@ -205,6 +209,23 @@ class InstallTallForms extends Command
             }
         } catch (\Throwable $e) {
             $this->breeze = false;
+        }
+    }
+
+    private function livewire()
+    {
+        try {
+            $v = \Composer\InstalledVersions::getVersion('livewire/livewire');
+            $livewire = $v == 'dev-master' || $v >= "2";
+            if(filled($v) && !$livewire) {
+                //LW installed, but old v
+                $this->info('Upgrading Livewire');
+                exec('composer require livewire/livewire');
+            }
+        } catch (\Throwable $e) {
+            //plain Lv8 and Breeze, no LW installed
+            $this->info('Installing Livewire');
+            exec('composer require livewire/livewire');
         }
     }
 }
