@@ -12,7 +12,6 @@ class InstallTallForms extends Command
     protected $description = 'Install tall-forms presets';
 
     protected bool $lv8 = false;
-    protected bool $tw2 = false;
     protected bool $jetstream = false;
     protected bool $breeze = false;
 
@@ -128,25 +127,6 @@ class InstallTallForms extends Command
 
     public function tailwind()
     {
-        if ($this->breeze || $this->jetstream) {
-            $this->tailwindTwo();
-            return;
-        }
-
-        $tw2 = $this->confirm('Are you on y=Tailwind 2.x or n=Tailwind 1.x');
-
-        if ($tw2) {
-            $this->tailwindTwo();
-        } else {
-            $this->info('ABORTING: This installer only supports Tailwind >= v2');
-            exit;
-        }
-
-    }
-
-    public function tailwindTwo()
-    {
-        $this->tw2 = true;
         $this->info('Installing Laravel Mix v6.x');
         $this->info('Installing Tailwind CSS v2.x');
         $this->info('Installing postcss-import');
