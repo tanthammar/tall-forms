@@ -167,6 +167,7 @@ class InstallTallForms extends Command
 
         $this->info(exec('npm install -D laravel-mix alpinejs tailwindcss@latest postcss-import postcss-nesting autoprefixer@latest @tailwindcss/forms @tailwindcss/typography @tailwindcss/aspect-ratio --save-dev'));
         $config = File::get(__DIR__ . '/../../resources/stubs/tailwindcss/2.0/tailwind.config.js.stub');
+        $this->info('Enabling Tailwind JIT mode, you can disable it in tailwind config');
         File::put(base_path('tailwind.config.js'), $config);
     }
 
