@@ -4,7 +4,7 @@ namespace Tanthammar\TallForms;
 
 use Tanthammar\TallForms\Traits\HasOptions;
 
-class Select extends BaseField
+class Choice extends BaseField
 {
     use HasOptions;
 
@@ -13,7 +13,7 @@ class Select extends BaseField
 
     protected function overrides(): self
     {
-        $this->type = 'select';
+        $this->type = 'choice';
         $this->allowed_in_repeater = true;
         $this->align_label_top = false;
 
@@ -23,20 +23,6 @@ class Select extends BaseField
     public function placeholder(string $placeholder): self
     {
         $this->placeholder = $placeholder;
-
-        return $this;
-    }
-
-    /*
-     * Renders a different view in the blade component class
-     * @deprecated use MultiSelect instead
-     */
-    public function multiple(): self
-    {
-        $this->multiple = true;
-        $this->type = 'multiselect';
-        $this->align_label_top = true;
-        $this->allowed_in_repeater = false;
 
         return $this;
     }

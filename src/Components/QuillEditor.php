@@ -1,6 +1,6 @@
 <?php
 
-namespace Tanthammar\TallForms;
+namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
 use Illuminate\View\Component;
