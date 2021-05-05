@@ -32,9 +32,9 @@ class QuillEditor extends BaseField
      * @param mixed
      * @return null
     */
-    public function quillAdvanced($prop): self
+    public function quillAdvanced(): self
     {
-        $this->quillAdvanced = $prop;
+        $this->quillAdvanced = true;
 
         return $this;
     }
@@ -47,9 +47,9 @@ class QuillEditor extends BaseField
      * @param mixed
      * @return null
     */
-    public function allowMedia($prop) : self
+    public function allowMedia() : self
     {
-        $this->allowMedia = $prop;
+        $this->allowMedia = true;
 
         return $this;
     }
