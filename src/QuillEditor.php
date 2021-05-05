@@ -17,7 +17,7 @@ class QuillEditor extends BaseField
      * @param mixed
      * @return null
     */
-    public function theme($prop): self
+    public function theme($prop = 'snow'): self
     {
         $this->theme = $prop;
 

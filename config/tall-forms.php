@@ -29,7 +29,7 @@ return [
     'multiselect-help' => 'global.multiselect_help', //'Press CTRL(Windows) or CMD(Mac), to select/deselect multiple options.'
 
     //Choice placeholders and help
-    'choice-placeholder' => 'global.choice_placeholder', //'Please choice one or multiple options ...'
+    'choice-placeholder' => 'global.choice_placeholder', //'Please select one or multiple options ...'
 
     //A Laravel blade component to wrap your form with, if $wrapWithView = true, see documentation
     'wrap-view-path' => 'tall-forms::wrapper-layout',
