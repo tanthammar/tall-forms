@@ -4,7 +4,7 @@
     :attr="$field->getAttr('root')">
     @if($field->view)
         {{-- custom view --}}
-        @include($field->view)
+        @include($field->view, $field->data ?? [])
     @elseif($field->livewireComponent)
         {{-- custom Livewire component --}}
         @livewire($field->livewireComponent, $field->livewireParams)

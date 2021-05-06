@@ -21,8 +21,8 @@ class ImageCropper extends BaseField
         $this->type = 'image-cropper';
         $this->is_custom = true;
         $this->align_label_top = true;
-        $this->allowed_in_repeater = false;
-        $this->allowed_in_keyval = false;
+        $this->allowed_in_repeater = true;
+        $this->allowed_in_keyval = true;
         return $this;
     }
 

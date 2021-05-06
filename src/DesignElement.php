@@ -43,6 +43,9 @@ class DesignElement
     public bool $show_label = false;
     public bool $inArray = false;
 
+    public int $colspan = 12;
+    public string $wire = '';
+
 
     public function __construct($label, $key)
     {
@@ -60,6 +63,17 @@ class DesignElement
     public function getAttr($type): array
     {
         return [];
+    }
+
+    /**
+     * Default 12 of 12 columns
+     * @param int $cols
+     * @return $this
+     */
+    public function colspan(int $cols): self
+    {
+        $this->colspan = $cols;
+        return $this;
     }
 
 }

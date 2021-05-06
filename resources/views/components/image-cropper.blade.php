@@ -49,7 +49,7 @@
         <div x-show="!showCroppie && hasImage" class="relative {{ $field->thumbnail }}">
             <div class="tf-cropper-btns-root">
                 <div class="tf-cropper-btns-wrapper">
-                    <button type="button" class="tf-cropper-swap" x-on:click.prevent="swap()"><x-tall-svg :path="config('tall-forms.trash-icon')" class="h-6 w-6" /></button>
+                    <button type="button" class="tf-cropper-swap" x-on:click.prevent="remove()"><x-tall-svg :path="config('tall-forms.trash-icon')" class="h-6 w-6" /></button>
                     <button type="button" class="tf-cropper-edit" x-on:click.prevent="edit()"><x-tall-svg :path="config('tall-forms.edit-icon')" class="h-6 w-6" /></button>
                 </div>
             </div>
@@ -106,6 +106,13 @@
                     this.hasImage = false;
                     this.$refs.result.src = "";
                 },
+                remove() {
+                    this.$refs.input.value = null;
+                    this.showCroppie = false;
+                    this.hasImage = false;
+                    this.$refs.result.src = "";
+                    this.$wire.set('{{ $field->key }}', '');
+                },
                 edit() {
                     this.$refs.input.value = null;
                     this.showCroppie = true;
@@ -121,7 +128,7 @@
                         this.$refs.result.src = croppedImage;
                         this.showCroppie = false;
                         this.hasImage = true;
-                        @this.set('{{ $field->key }}', croppedImage);
+                        this.$wire.set('{{ $field->key }}', croppedImage);
                     });
                 },
                 bindCroppie(src) { //avoid problems with croppie container not being visible when binding
