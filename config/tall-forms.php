@@ -28,6 +28,8 @@ return [
     'multiselect-placeholder' => 'global.multiselect_placeholder', //'Please select one or multiple options ...'
     'multiselect-help' => 'global.multiselect_help', //'Press CTRL(Windows) or CMD(Mac), to select/deselect multiple options.'
 
+    //Choice placeholders and help
+    'choice-placeholder' => 'global.choice_placeholder', //'Please select one or multiple options ...'
 
     //A Laravel blade component to wrap your form with, if $wrapWithView = true, see documentation
     'wrap-view-path' => 'tall-forms::wrapper-layout',
@@ -74,9 +76,6 @@ return [
         'wire' => 'wire:model.lazy',
     ],
 
-
-
-
     //form buttons translations applied as trans(...) or @lang(...)
     'saved' => 'global.saved',
     'save' => 'global.save',
@@ -89,14 +88,13 @@ return [
     'message-updated-success' => 'messages.updated_success',
     'are-u-sure' => 'global.areYouSure',
 
-
     //You can swap the icons blade view path. The path is relative to resources/views/components
     //(publish the icons: php artisan vendor:publish --tag=tall-form-icons)
     'arrow-up-icon' => 'icons.cheveron-outline-up', //Repeater, Panel
-    'arrow-down-icon' => 'icons.cheveron-outline-down',//Repeater, Panel
-    'trash-icon' => 'icons.close-outline',//Multiple fields
+    'arrow-down-icon' => 'icons.cheveron-outline-down', //Repeater, Panel
+    'trash-icon' => 'icons.close-outline', //Multiple fields
     'edit-icon' => 'icons.edit-crop', //ImageCropper
-    'plus-icon' => 'icons.add-outline',//Repeater
+    'plus-icon' => 'icons.add-outline', //Repeater
     'file-icon' => 'icons.', //FileUpload field, all icons with "file-" prefix.
     'file-upload' => 'icons.upload', //FileUpload
     'exclamation' => 'icons.exclamation', //Tab, validation errors notification
@@ -116,7 +114,6 @@ return [
         '11' => 'sm:col-span-11',
         '12' => 'sm:col-span-12',
     ],
-
 
     // list with blade ui kit components that this package replaces
     // the prefix is 'tall',
@@ -139,5 +136,7 @@ return [
         'search' => Components\Search::class,
         'trix' => Components\Trix::class,
         'svg' => Components\Svg::class,
+        'quill-editor' => Components\QuillEditor::class,
+        'choice' => Components\Choice::class,
     ]
 ];
