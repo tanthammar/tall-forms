@@ -8,6 +8,7 @@ class QuillEditor extends BaseField
     public $theme = 'snow';
     public $allowMedia = false;
     public $quillAdvanced = false;
+    public $allowFullScreen = false;
 
     /* theme
      * set quill theme, default = 'snow'
@@ -50,6 +51,21 @@ class QuillEditor extends BaseField
     public function allowMedia() : self
     {
         $this->allowMedia = true;
+
+        return $this;
+    }
+
+    /* allowFullScreen
+     * allow media in quill editor. default = false
+     * @author Arif Pavel
+     * @since 03 May 21
+     * @version v8.0.0
+     * @param mixed
+     * @return null
+    */
+    public function allowFullScreen() : self
+    {
+        $this->allowFullScreen = true;
 
         return $this;
     }

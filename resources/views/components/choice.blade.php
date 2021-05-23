@@ -1,5 +1,13 @@
 <div 
-	x-data= "{ choice: @entangle($field->key).defer }"
+	x-data= "{ 
+		choice: @entangle($field->key).defer,
+		notFocused() { return document.activeElement !== this.$refs.{{ $field->name }} },
+		setValue(choices) {
+			if(this.choice == null){
+				choices.setChoiceByValue('');
+			}
+		}
+	}"
 	x-init="() => {
 	var choices = new Choices($refs.{{ $field->name }}, {
 		itemSelectText: '',
@@ -14,6 +22,8 @@
 	);
 	let selected = parseInt(@this.get{!! md5($field->key) !!}).toString();
 	choices.setChoiceByValue(selected);
+
+	$watch('choice', () => notFocused() && setValue(choices));
 	}"
     wire:ignore
 	>
