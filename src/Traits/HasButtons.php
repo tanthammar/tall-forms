@@ -37,7 +37,7 @@ trait HasButtons
 
     public function onDeleteModel()
     {
-        $className = $this->model->getClassName();
+        $className = is_object($this->model) ? get_class($this->model) : "item";
         $this->model->delete();
         session()->flash('success', "The {$className} was deleted");
         return redirect(urldecode($this->previous));
