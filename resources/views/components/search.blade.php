@@ -7,7 +7,7 @@
             x-on:keydown.escape="optionsVisible = false"
             x-on:input="optionsVisible = true"
             x-on:click.stop="optionsVisible = true"
-            x-on:click.stop.away="optionsVisible = false"
+            x-on:click.stop.outside="optionsVisible = false"
             {{ $attributes->merge(['class' => $errors->has($field->key) ? $error() : $class() ]) }}
         />
         <div x-on:click.stop.prevent="searchInput = ''; optionsVisible = false;" class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer">
@@ -27,7 +27,7 @@
         <ul
             x-on:keydown.escape="optionsVisible = false"
             x-on:keydown.arrow-up.prevent="select > 0 ? select -= 1 : select = 0"
-            x-on:keydown.arrow-down.prevent="select < {{ optional($options)->length }} ? select += 1 : select = {{ optional($options)->length }}"
+            x-on:keydown.arrow-down.prevent="select < {{ optional($options)->length ?? 0 }} ? select += 1 : select = {{ optional($options)->length ?? 0 }}"
             tabindex="-1"
             role="listbox"
             class="tf-search-ul" x-max="1">
