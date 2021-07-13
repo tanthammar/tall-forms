@@ -1,8 +1,8 @@
-<div class="w-full my-1">
+<div class="w-full my-1" x-data="{ isUploading: false }">
     @if(blank($fieldValue) || $errors->has($field->multiple ? $field->name.'.*' : $field->name))
         {{--only show the file input if the field is empty or there are validation errors, to force the user to upload new files or delete existing. --}}
-        <div x-data="{ isUploading: false }"
-             x-on:livewire-upload-start="isUploading = true; $wire.clearFileUploadError('{{ $field->multiple ? $field->name.'.*': $field->name }}');"
+        <div wire:key="file-upload-blank{{md5($field->key)}}"
+             x-on:livewire-upload-start="isUploading = true && $wire.clearFileUploadError('{{ $field->multiple ? $field->name.'.*': $field->name }}')"
              x-on:livewire-upload-finish="isUploading = false"
              x-on:livewire-upload-error="isUploading = false"
              class="{{ $showFileUploadError || $errors->has($field->multiple ? $field->name.'.*': $field->name) ? $inputWrapperError() : $inputWrapper() }}">
@@ -27,7 +27,7 @@
         </div>
     @endif
     @if(filled($fieldValue))
-        <ul class="tf-file-upload-ul">
+        <ul class="tf-file-upload-ul" wire:key="file-upload-filled{{md5($field->key)}}">
             @if($field->multiple)
                 @foreach($fieldValue as $file)
                     @if(filled($file)) @include('tall-forms::includes.file-loop') @endif
@@ -48,3 +48,4 @@
     {{--show components general validation error --}}
     @if($showFileUploadError && $showFileUploadErrorFor == $field->name)<p class="tf-error">{{ $uploadFileError }}</p>@endif
 </div>
+
