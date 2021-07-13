@@ -1,15 +1,15 @@
 <div class="w-full"
      x-data="{
         trix: @entangle($field->key).defer,
-        notFocused: () => document.activeElement !== $refs.trixInput,
+        get notFocused() { return document.activeElement !== this.$refs.trixInput },
         setValue() {
             {{-- replace content --}}
-            $refs.trixInput.editor.loadHTML(trix)
+            this.$refs.trixInput.editor.loadHTML(trix)
             {{-- move cursor to the end--}}
-            $refs.trixInput.editor.setSelectedRange($refs.trixInput.editor.getDocument().toString().length - 1)
+            this.$refs.trixInput.editor.setSelectedRange(this.$refs.trixInput.editor.getDocument().toString().length - 1)
         },
     }"
-    x-init="$watch('trix', () => notFocused() && setValue())"
+    x-init="$watch('trix', () => notFocused && setValue())"
     x-on:trix-change.debounce.300ms="trix = $refs.trixInput.value"
 >
     <input value="{{ old($field->key) ?? $value }}" id="trix{{ md5($field->key) }}" name="trix{{ md5($field->key) }}" type="hidden" />
