@@ -11,6 +11,7 @@ trait HasAttributes
     public array $attributes = [];
 
     public string $wire; // default = wire:model.lazy, in config/tall-forms, set in BaseField __construct()
+    public null|string $deferEntangle = null;
 
     public function getAttr($type)
     {
@@ -26,7 +27,7 @@ trait HasAttributes
     protected function mergeClasses(string $key, array $custom)
     {
         $merged = array_merge_recursive($this->attributes[$key], $custom);
-        if(Arr::has($merged, 'class')) {
+        if (Arr::has($merged, 'class')) {
             $merged['class'] = implode(" ", $merged['class']);
         }
         $this->attributes[$key] = $merged;
@@ -82,6 +83,7 @@ trait HasAttributes
 
     public function wire(string $wire_model_declaration): self
     {
+        if (str_contains($wire_model_declaration, 'defer')) $this->deferEntangle = '.defer';
         $this->wire = $wire_model_declaration;
         return $this;
     }
