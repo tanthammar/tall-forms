@@ -17,7 +17,6 @@ class Checkboxes extends Component
     /**
      * Checkboxes constructor.
      * @param Field $field
-     * @param string $tempKey
      * @param int|string $value
      * @param string $label
      */
@@ -41,7 +40,7 @@ class Checkboxes extends Component
 
     public function class(): string
     {
-        return "form-checkbox tf-checkbox";
+        return "form-checkbox tf-checkbox ";
     }
 
     public function render(): View
