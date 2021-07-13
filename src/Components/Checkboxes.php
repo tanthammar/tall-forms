@@ -33,7 +33,7 @@ class Checkboxes extends Component
     {
         $custom = $this->field->getAttr('input');
         $default = [
-            $this->field->wire => $this->field->key,
+            'x-model' => 'checkboxes', //@entangles field->key
             'class' => $this->class()
         ];
         return array_merge($default, $custom);
