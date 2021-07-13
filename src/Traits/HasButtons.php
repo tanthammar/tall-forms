@@ -6,6 +6,10 @@ namespace Tanthammar\TallForms\Traits;
 
 trait HasButtons
 {
+    public $showSave = true;
+    public $showDelete = true;
+    public $showReset = true;
+    public $showGoBack = true;
     public string $saveStayBtnTxt;
     public string $saveBackBtnTxt;
 
