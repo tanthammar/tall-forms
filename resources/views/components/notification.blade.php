@@ -17,8 +17,10 @@
          x-transition:enter="transform ease-out duration-300 transition"
          x-transition:enter-start="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
          x-transition:enter-end="translate-y-0 opacity-100 sm:translate-x-0"
-         x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100"
-         x-transition:leave-end="opacity-0" x-bind:class="bg"
+         x-transition:leave="transition ease-in duration-100"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         x-bind:class="bg"
          class="w-full max-w-sm rounded-lg shadow-lg pointer-events-auto">
         <div class="overflow-hidden rounded-lg shadow-xs">
             <div class="p-4">
