@@ -1,7 +1,7 @@
 <div class="w-full"
      x-data="{
         trix: @entangle($field->key).defer,
-        notFocused: () => document.activeElement !== $refs.trixInput.editor,
+        notFocused: () => document.activeElement !== $refs.trixInput,
         setValue() {
             {{-- replace content --}}
             $refs.trixInput.editor.loadHTML(trix)
