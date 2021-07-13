@@ -10,7 +10,6 @@ namespace Tanthammar\TallForms;
 class InputArray extends BaseField
 {
     public string $input_type = 'text';
-    public string $defer = ".defer";
     public string $placeholder = "";
     public int $maxItems = 0;
     public int $minItems = 0;
@@ -20,6 +19,7 @@ class InputArray extends BaseField
         $this->type = 'input-array';
         $this->align_label_top = true;
         $this->allowed_in_repeater = false;
+        $this->deferEntangle = '.defer';
         return $this;
     }
 
@@ -60,7 +60,7 @@ class InputArray extends BaseField
      */
     public function noDefer(): self
     {
-        $this->defer = "";
+        $this->deferEntangle = null;
         return $this;
     }
 
