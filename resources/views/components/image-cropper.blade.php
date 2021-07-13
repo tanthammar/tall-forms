@@ -1,6 +1,12 @@
 <div wire:ignore class="tf-cropper-root">
     {{-- init Alpine --}}
-    <div x-data="imageData{{ md5($field->name) }}()" x-init="initCroppie()" x-cloak>
+    <div x-data="imageCropper({
+        imageUrl: '{{ $imageUrl }}',
+        width: {{ $field->width }},
+        height: {{ $field->height }},
+        shape: '{{ $field->shape }}',
+        fieldKey: '{{ $field->key }}'
+    })" x-cloak>
 
         {{-- drop zone --}}
         <div x-show="!showCroppie && !hasImage">
@@ -25,7 +31,7 @@
                 <p class="tf-cropper-file-info">
                     {{ $field->fileInfo }}
                 </p>
-                <button type="button" x-on:click="javascript:void(0)" class="tf-cropper-upload">
+                <button type="button" x-on:click.prevent class="tf-cropper-upload">
                     {{ $field->uploadButton }}
                 </button>
             </div>
@@ -59,84 +65,85 @@
     </div>
 </div>
 @if($field->includeScript)
-@tfonce('styles:imagecropper')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css"
-      integrity="sha512-zxBiDORGDEAYDdKLuYU9X/JaJo/DPzE42UubfBw9yg8Qvb2YRRIQ8v4KsGHOx2H1/+sdSXyXxLXv5r7tHc9ygg=="
-      crossorigin="anonymous" media="print" onload="this.media='all'"/>
-@endtfonce
-@tfonce('scripts:imagecropper')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"
-        integrity="sha512-Gs+PsXsGkmr+15rqObPJbenQ2wB3qYvTHuJO6YJzPe/dTLvhy0fmae2BcnaozxDo5iaF8emzmCZWbQ1XXiX2Ig=="
-        crossorigin="anonymous" defer></script>
-@endtfonce
+    @tfonce('styles:imagecropper')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css"
+          integrity="sha512-zxBiDORGDEAYDdKLuYU9X/JaJo/DPzE42UubfBw9yg8Qvb2YRRIQ8v4KsGHOx2H1/+sdSXyXxLXv5r7tHc9ygg=="
+          crossorigin="anonymous" media="print" onload="this.media='all'"/>
+    @endtfonce
+    @tfonce('scripts:imagecropper')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"
+            integrity="sha512-Gs+PsXsGkmr+15rqObPJbenQ2wB3qYvTHuJO6YJzPe/dTLvhy0fmae2BcnaozxDo5iaF8emzmCZWbQ1XXiX2Ig=="
+            crossorigin="anonymous" defer></script>
+    @endtfonce
 @endif
-@push('scripts')
-    <script>
-        function imageData{{ md5($field->name) }}() {
-            return {
-                showCroppie: false,
-                hasImage: @json(filled($imageUrl)),
-                originalSrc: "{{ $imageUrl }}",
-                croppie: {},
-                updatePreview() {
-                    var reader,
-                        files = this.$refs.input.files;
-
-                    reader = new FileReader();
-
-                    reader.onload = (e) => {
-                        this.showCroppie = true;
-                        this.originalSrc = e.target.result;
-                        this.bindCroppie(e.target.result);
-                    };
-
-                    reader.readAsDataURL(files[0]);
-                },
-                initCroppie() {
-                    this.croppie = new Croppie(this.$refs.croppie, {
-                        viewport: {width: {{ $field->width }}, height: {{ $field->height }}, type: "{{ $field->shape }}"}, //circle or square
-                        boundary: {width: {{ $field->width }}, height: {{ $field->height }}}, //default boundary container
-                        showZoomer: true,
-                        enableResize: false
-                    });
-                },
-                swap() {
-                    this.$refs.input.value = null;
-                    this.showCroppie = false;
-                    this.hasImage = false;
-                    this.$refs.result.src = "";
-                },
-                remove() {
-                    this.$refs.input.value = null;
-                    this.showCroppie = false;
-                    this.hasImage = false;
-                    this.$refs.result.src = "";
-                    this.$wire.set('{{ $field->key }}', '');
-                },
-                edit() {
-                    this.$refs.input.value = null;
-                    this.showCroppie = true;
-                    this.hasImage = false;
-                    this.$refs.result.src = "";
-                    this.bindCroppie(this.originalSrc);
-                },
-                saveCroppie() {
-                    this.croppie.result({
-                        type: "base64",
-                        size: "original"
-                    }).then((croppedImage) => {
-                        this.$refs.result.src = croppedImage;
-                        this.showCroppie = false;
-                        this.hasImage = true;
-                        this.$wire.set('{{ $field->key }}', croppedImage);
-                    });
-                },
-                bindCroppie(src) { //avoid problems with croppie container not being visible when binding
-                    setTimeout(() => {
-                        this.croppie.bind({url: src});
-                    }, 200);
+@tfonce('scripts:imagecropperComponent')
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('imageCropper', (config) => ({
+            showCroppie: false,
+            hasImage: config.imageUrl.length > 0,
+            originalSrc: config.imageUrl,
+            width: config.width,
+            height: config.height,
+            shape: config.shape,
+            fieldKey: config.fieldKey,
+            croppie: {},
+            init() { this.$nextTick(() => this.initCroppie())},
+            updatePreview() {
+                let reader, files = this.$refs.input.files
+                reader = new FileReader()
+                reader.onload = (e) => {
+                    this.showCroppie = true
+                    this.originalSrc = e.target.result
+                    this.bindCroppie(e.target.result)
                 }
-            };
-        }
-    </script>
-@endpush
+                reader.readAsDataURL(files[0])
+            },
+            initCroppie() {
+                this.croppie = new Croppie(this.$refs.croppie, {
+                    viewport: {width: this.width, height: this.height, type: this.shape}, //circle or square
+                    boundary: {width: this.width, height: this.height}, //default boundary container
+                    showZoomer: true,
+                    enableResize: false
+                })
+            },
+            swap() {
+                this.$refs.input.value = null
+                this.showCroppie = false
+                this.hasImage = false
+                this.$refs.result.src = ""
+            },
+            remove() {
+                this.$refs.input.value = null
+                this.showCroppie = false
+                this.hasImage = false
+                this.$refs.result.src = ""
+                this.$wire.set(this.fieldKey, '')
+            },
+            edit() {
+                this.$refs.input.value = null
+                this.showCroppie = true
+                this.hasImage = false
+                this.$refs.result.src = ""
+                this.bindCroppie(this.originalSrc)
+            },
+            saveCroppie() {
+                this.croppie.result({
+                    type: "base64",
+                    size: "original"
+                }).then((croppedImage) => {
+                    this.$refs.result.src = croppedImage
+                    this.showCroppie = false
+                    this.hasImage = true
+                    this.$wire.set(this.fieldKey, croppedImage)
+                })
+            },
+            bindCroppie(src) { //avoid problems with croppie container not being visible when binding
+                setTimeout(() => {
+                    this.croppie.bind({url: src})
+                }, 200)
+            }
+        }))
+    })
+</script>
+@endtfonce
