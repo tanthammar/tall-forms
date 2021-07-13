@@ -1,4 +1,4 @@
-<div x-data="{ checkboxes: @entangle($field->key) }" {{ $attributes->merge(['class' => "flex {$field->class}"]) }}>
+<div {{ $attributes->merge(['class' => "flex {$field->class}"]) }}>
     <input
         type="checkbox"
         value="{{ $value }}"

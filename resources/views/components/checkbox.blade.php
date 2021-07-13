@@ -1,4 +1,4 @@
-<div x-data="{ checkbox: @entangle($field->key) }" {{ $attributes->merge(['class' => "flex {$field->class}"]) }}>
+<div x-data="{ checkbox: @entangle($field->key){{$field->deferEntangle}} }" {{ $attributes->merge(['class' => "flex {$field->class}"]) }}>
 <input
     type="checkbox"
     value="{{ old($field->key) }}"
