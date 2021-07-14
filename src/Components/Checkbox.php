@@ -5,36 +5,32 @@ namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
 use Illuminate\View\Component;
-use Tanthammar\TallForms\Checkbox as Field;
 
 class Checkbox extends Component
 {
 
     public function __construct(
-        public Field $field,
-        public string $label = "")
-    {
-        $this->label = $field->placeholder ?? $field->label;
-    }
+        public string $wireModel,
+        public string $wrapperClass = "",
+        public null|string $deferEntangle = null,
+        public string $label = "",
+        public array $attr = [],
+    ){}
 
     public function options(): array
     {
-        $custom = $this->field->getAttr('input');
         $default = [
-//            $this->field->wire => $this->field->key,
-            'x-model' => 'checkbox',
-            'name' => $this->field->key,
-            'id' => \Str::slug($this->field->key),
-            'class' => $this->class()
+            'x-model' => 'checkbox', // $this->field->wire => $this->field->key,
+            'name' => \Str::slug($this->wireModel),
+            'id' => \Str::slug($this->wireModel)
         ];
-        return array_merge($default, $custom);
+        return array_merge($default, $this->attr);
     }
 
     public function class(): string
     {
         return "form-checkbox tf-checkbox";
     }
-
 
     public function render(): View
     {
