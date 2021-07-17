@@ -10,21 +10,34 @@ trait HasAttributes
 {
     public array $attributes = [];
 
-    public string $wire; // default = wire:model.lazy, in config/tall-forms, set in BaseField __construct()
-    public null|string $deferEntangle = null;
+    public null|string $wire = null; // default = wire:model.lazy, in config/tall-forms, set in BaseField __construct()
+    public null|string|bool $defer = null;
+    public null|string|bool $lazy = null;
 
-    public function getAttr($type)
+    public function getAttr($type): mixed
     {
         return data_get($this->attributes, $type, []);
     }
 
-    public function setAttr()
+    public function setAttr(): void
     {
         $this->attributes = config('tall-forms.field-attributes');
         data_set($this->attributes, 'input', []);
     }
 
-    protected function mergeClasses(string $key, array $custom)
+    public function setBinding(string $text): void
+    {
+        //used in BaseField __construct(), wire(), bind(), see below
+        if (str_contains($text, 'defer')) $this->defer = true;
+        if (str_contains($text, 'lazy')) $this->lazy = true;
+        if (str_contains($text, 'debounce')) {
+            $this->lazy = false;
+            $this->defer = false;
+        };
+        $this->wire = $text;
+    }
+
+    protected function mergeClasses(string $key, array $custom): void
     {
         $merged = array_merge_recursive($this->attributes[$key], $custom);
         if (Arr::has($merged, 'class')) {
@@ -81,10 +94,29 @@ trait HasAttributes
         return $this;
     }
 
-    public function wire(string $wire_model_declaration): self
+    /**
+     * @deprecated v8, use bind() without "wire.model." instead
+     * <br>this value will be used for either wire.model or x-model depending on the field
+     */
+    public function wire(string $on): self
     {
-        if (str_contains($wire_model_declaration, 'defer')) $this->deferEntangle = '.defer';
-        $this->wire = $wire_model_declaration;
+        $this->setBinding(str_replace("wire.model", null, $on)); //legacy v7
         return $this;
     }
+
+    /**
+     * Used for both wire.model and x-model depending on the field.
+     * <br>Observe: wire.model doesn't have a throttle attribute, x-model does.
+     * <br>Example:
+     * <br>'defer'
+     * <br>'lazy'
+     * <br>'debounce.750ms'
+     * <br>'throttle.500ms' -> alpine fields only
+     */
+    public function bind(string $on): self
+    {
+        $this->setBinding($on);
+        return $this;
+    }
+
 }

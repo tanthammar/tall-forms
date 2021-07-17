@@ -70,8 +70,8 @@ return [
         'after-text' => [
             'class' => 'tf-fields-after-text'
         ],
-        //default field wire:model attribute
-        'wire' => 'wire:model.lazy',
+        //default field wire:model or x-model attribute
+        'bind' => 'lazy',
     ],
 
 
