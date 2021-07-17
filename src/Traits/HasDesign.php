@@ -6,17 +6,15 @@ namespace Tanthammar\TallForms\Traits;
 
 trait HasDesign
 {
-    public $fieldW;
-    public $inline;
-    public $colspan = 12;
-    public $class;
-    public $inArray = false;
+    public null|string $fieldW = null;
+    public null|bool $inline = null;
+    public null|int $colspan = 12;
+    public null|string $class = null;
+    public bool $inArray = false;
 
     /**
      * Default w-full sm:w-2/3
      * <br>Applying a class replaces default
-     * @param $class
-     * @return $this
      */
     public function fieldWidth(string $class): self
     {
@@ -38,8 +36,6 @@ trait HasDesign
 
     /**
      * Default 12 of 12 columns
-     * @param int $cols
-     * @return $this
      */
     public function colspan(int $cols): self
     {
@@ -49,13 +45,10 @@ trait HasDesign
 
     /**
      * Applied to the field wrapper
-     * @param string $classes
-     * @param bool $merge
-     * @return $this
      */
-    public function class(string $classes, $merge = true): self
+    public function class(string $classes, bool $merge = true): self
     {
-        $this->class = $merge ? "{$this->class} {$classes}" : $classes;
+        $this->class = $merge ? "$this->class $classes" : $classes;
         return $this;
     }
 }

@@ -20,7 +20,7 @@ trait HasOptions
      * @param bool $flip_key_value
      * @return $this
      */
-    public function options($options, $flip_key_value = true): self
+    public function options(mixed $options, bool $flip_key_value = true): self
     {
         if (is_callable($options)) $options = $options();
 

@@ -6,10 +6,10 @@ namespace Tanthammar\TallForms\Traits;
 
 trait HasViews
 {
-    public $beforeView;
-    public $afterView;
-    public $afterLabelView;
-    public $view;
+    public null|string $beforeView = null;
+    public null|string $afterView = null;
+    public null|string $afterLabelView = null;
+    public null|string $view = null;
 
     public function beforeView(string $blade_view_to_include): self
     {
