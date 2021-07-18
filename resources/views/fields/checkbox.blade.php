@@ -1,7 +1,9 @@
 <x-tall-checkbox
-    :wireModel="$field->key"
-    :wrapperClass="$field->class ?? ''"
-    :deferEntangle="$field->deferEntangle"
+    :id="$field->getHtmlId($_instance->id)"
     :label="$field->placeholder ?? $field->label ?? ''"
-    :attr="$field->getAttr('input')"
+    value="{{ old($field->key) }}"
+    x-data="{ {{ $field->alpineKey ?? 'checkbox' }}: $wire.entangle('{{ $field->key }}'){{ $field->deferString }} }"
+    :attr="array_merge([
+        $field->xmodel => $field->alpineKey ?? 'checkbox'
+    ], $field->getAttr('input'))"
 />

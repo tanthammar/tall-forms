@@ -1,12 +1,13 @@
-<div x-data="{ {{ $options()['x-model'] }}: @entangle($wireModel){{$deferEntangle}} }" class="flex {{ $wrapperClass }}">
+<div {{ $attributes->only('x-data') }} class="flex {{ $wrapperClass }}">
 <input
     type="checkbox"
-    value="{{ old($wireModel) }}"
-    @foreach($options() as $key => $value) {{$key}}="{{$value}}" @endforeach
-    {{ $attributes->merge([ 'class' => $class() ]) }}
+    id="{{ $id }}"
+    name="{{ $id }}"
+    @foreach($attr as $key => $value) {{$key}}="{{$value}}" @endforeach
+    {{ $attributes->except('x-data')->merge(['class' => $class ]) }}
     />
     <div class="tf-checkbox-label-spacing">
-        <label for="{{ \Str::slug($wireModel) }}" class="tf-checkbox-label">
+        <label for="{{ $id }}" class="{{ $labelClass }}">
             {{ $label }}
         </label>
     </div>

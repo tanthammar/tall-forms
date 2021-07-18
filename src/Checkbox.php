@@ -12,6 +12,7 @@ class Checkbox extends BaseField
     protected function overrides(): self
     {
         $this->type = 'checkbox';
+        $this->deferEntangle(true);
         return $this;
     }
 
