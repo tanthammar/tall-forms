@@ -11,8 +11,10 @@ trait HasAttributes
     public array $attributes = [];
 
     public null|string $wire = null; // default = wire:model.lazy, in config/tall-forms, set in BaseField __construct()
-    public null|string|bool $defer = null;
-    public null|string|bool $lazy = null;
+    public null|string $alpineKey = null;
+    public null|string $xmodel= 'x-model';
+    public null|string|bool $deferEntangle = null;
+    public null|string $deferString = null;
 
     public function getAttr($type): mixed
     {
@@ -23,18 +25,6 @@ trait HasAttributes
     {
         $this->attributes = config('tall-forms.field-attributes');
         data_set($this->attributes, 'input', []);
-    }
-
-    public function setBinding(string $text): void
-    {
-        //used in BaseField __construct(), wire(), bind(), see below
-        if (str_contains($text, 'defer')) $this->defer = true;
-        if (str_contains($text, 'lazy')) $this->lazy = true;
-        if (str_contains($text, 'debounce')) {
-            $this->lazy = false;
-            $this->defer = false;
-        };
-        $this->wire = $text;
     }
 
     protected function mergeClasses(string $key, array $custom): void
@@ -94,28 +84,25 @@ trait HasAttributes
         return $this;
     }
 
-    /**
-     * @deprecated v8, use bind() without "wire.model." instead
-     * <br>this value will be used for either wire.model or x-model depending on the field
-     */
-    public function wire(string $on): self
+    public function wire(string $on = 'wire:model'): self
     {
-        $this->setBinding(str_replace("wire.model", null, $on)); //legacy v7
+        $this->wire = str_contains($on, 'wire:model') ? $on : "wire:model.$on";
+        if (str_contains($on, 'defer')) $this->deferEntangle();
         return $this;
     }
 
-    /**
-     * Used for both wire.model and x-model depending on the field.
-     * <br>Observe: wire.model doesn't have a throttle attribute, x-model does.
-     * <br>Example:
-     * <br>'defer'
-     * <br>'lazy'
-     * <br>'debounce.750ms'
-     * <br>'throttle.500ms' -> alpine fields only
-     */
-    public function bind(string $on): self
+    public function xmodel(string $on = 'x-model', bool $defer = true, ?string $key = null): self
     {
-        $this->setBinding($on);
+        $this->xmodel = str_contains($on, 'x-model') ? $on : "x-model.$on";;
+        $this->deferEntangle($defer);
+        if($key) $this->alpineKey = $key;
+        return $this;
+    }
+
+    public function deferEntangle(bool $state = true): self
+    {
+        $this->deferEntangle = $state;
+        if($state) $this->deferString = '.defer';
         return $this;
     }
 

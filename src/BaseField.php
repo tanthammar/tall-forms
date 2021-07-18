@@ -8,32 +8,24 @@ use Tanthammar\TallForms\Traits\HasAttributes;
 use Tanthammar\TallForms\Traits\HasDesign;
 use Tanthammar\TallForms\Traits\HasLabels;
 use Tanthammar\TallForms\Traits\HasSharedProperties;
+use Tanthammar\TallForms\Traits\HasSlots;
 use Tanthammar\TallForms\Traits\HasViews;
 
 abstract class BaseField
 {
-    use HasLabels, HasAttributes, HasSharedProperties, HasDesign, HasViews;
+    use HasLabels, HasAttributes, HasSharedProperties, HasDesign, HasViews, HasSlots;
 
-    public $label;
-    public $name;
-    public $key;
-    public $type = 'input';
-    public $rules = 'nullable';
+    public string $name = "";
+    public string $key = "";
+    public string $type = 'input';
+    public mixed $rules = 'nullable';
 
-    public $default;
-    public $help;
+    public mixed $default = null;
 
-    public $before;
-    public $after;
-    public $above;
-    public $below;
+    public bool $realtimeValidationOn = true;
 
-    public $errorMsg;
-
-    public $realtimeValidationOn = true;
-
-    public $allowed_in_repeater = true;
-    public $allowed_in_keyval = true;
+    public bool $allowed_in_repeater = true;
+    public bool $allowed_in_keyval = true;
 
     //Tabs, Groups, Panels and similar design elements that has a field array but should be ignored in form_data and validation
     public bool $ignored = false;
@@ -48,6 +40,11 @@ abstract class BaseField
         $this->overrides();
     }
 
+    public function getHtmlId($wireComponentID): string
+    {
+        return 'id'.md5($wireComponentID.$this->name);
+    }
+
     //problem with collect()->firstWhere()
     /*public function __get($property)
     {
@@ -60,7 +57,7 @@ abstract class BaseField
     }
 
 
-    public static function make(string $label, string $key = null)
+    public static function make(string $label, string $key = null): static
     {
         return new static($label, $key);
     }
@@ -70,34 +67,15 @@ abstract class BaseField
      * @param array|string $rules
      * @return $this
      */
-    public function rules($rules): self
+    public function rules(mixed $rules): self
     {
         $this->rules = $rules;
         return $this;
     }
 
-    public function default($default): self
+    public function default(mixed $default): self
     {
         $this->default = $default;
-        return $this;
-    }
-
-
-    public function help(string $help): self
-    {
-        $this->help = $help;
-        return $this;
-    }
-
-
-    /**
-     * Add a custom error message displayed on field validation error
-     * @param $string
-     * @return $this
-     */
-    public function errorMsg(string $string): self
-    {
-        $this->errorMsg = $string;
         return $this;
     }
 
@@ -111,35 +89,11 @@ abstract class BaseField
         return $array;
     }
 
-    public function before(string $text): self
-    {
-        $this->before = $text;
-        return $this;
-    }
-
-    public function after(string $text): self
-    {
-        $this->after = $text;
-        return $this;
-    }
-
-    public function above(string $text): self
-    {
-        $this->above = $text;
-        return $this;
-    }
-
-    public function below(string $text): self
-    {
-        $this->below = $text;
-        return $this;
-    }
-
     /**
-     * Consider using ->wire('wire:model.defer') instead
+     * Consider ->wire('defer') instead
      * @return $this
      */
-    public function realtimeValidationOff()
+    public function realtimeValidationOff(): self
     {
         $this->realtimeValidationOn = false;
         return $this;
