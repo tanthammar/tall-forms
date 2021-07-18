@@ -1,4 +1,4 @@
-<div x-data="{ checkboxes: @entangle($field->key){{$field->deferEntangle}} }">
+<div x-data="{ checkboxes: @entangle($field->key){{$field->deferString}} }">
     <fieldset>
 @foreach($field->options as $value => $label)
         <x-tall-checkboxes

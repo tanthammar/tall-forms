@@ -1,4 +1,4 @@
-<div x-data="{ radio: @entangle($field->key){{$field->deferEntangle}} }">
+<div x-data="{ radio: @entangle($field->key){{$field->deferString}} }">
     <fieldset>
 @foreach($field->options as $value => $label)
     <x-tall-radio
