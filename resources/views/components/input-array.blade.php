@@ -1,7 +1,7 @@
-<div x-data="itemsArray({
+<div x-data="inputArray({
     wireId: '{{ $_instance->id }}',
     fieldKey: '{{ $field->key }}',
-    defer: '{{$field->deferEntangle}}',
+    defer: {{json_encode($field->deferEntangle)}},
     maxItems: {{ $field->maxItems }},
     minItems: {{ $field->minItems }},
     inputs: $refs.inputs
@@ -32,39 +32,3 @@
         <x-tall-svg :path="config('tall-forms.plus-icon')" class="tf-repeater-add-button-size" />
     </button>
 </div>
-@tfonce('scripts:itemsArrayCmp')
-<script>
-document.addEventListener('alpine:init', () => {
-    Alpine.data('itemsArray', (config) => ({
-        maxItems: config.maxItems,
-        minItems: config.minItems,
-        itemsArray: config.defer === '.defer' ? window.Livewire.find(config.wireId).entangle(config.fieldKey).defer : window.Livewire.find(config.wireId).entangle(config.fieldKey),
-        inputs: config.inputs,
-        addItem() {
-            this.itemsArray = Array.from(this.itemsArray.filter(item => item.length > 0))
-            if (this.maxItems == 0 || (this.maxItems > 0 && this.itemsArray.length < this.maxItems)) {
-                this.itemsArray.push('')
-            } else {
-                this.shakeIt()
-            }
-            this.focusLastInput()
-        },
-        deleteItem(index) {
-            if (this.minItems == 0 || (this.minItems > 0 && this.itemsArray.length > this.minItems)) {
-                this.itemsArray.splice(index, 1)
-            } else {
-                this.shakeIt()
-            }
-            this.focusLastInput()
-        },
-        focusLastInput() { this.$nextTick(() => this.inputs.lastElementChild?.firstElementChild?.focus()) },
-        shakeIt() {
-            this.inputs.classList.add('shake')
-            setTimeout(() => {
-                this.inputs.classList.remove('shake')
-            }, 2000)
-        }
-    }))
-})
-</script>
-@endtfonce
