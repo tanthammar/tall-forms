@@ -1,12 +1,11 @@
-<div {{ $attributes->only('x-data') }} class="flex {{ $wrapperClass }}">
+<div {{ $attributes->only('x-data') }} class="{{ $wrapperClass }}">
 <input
     type="checkbox"
     id="{{ $id }}"
     name="{{ $id }}"
-    @foreach($attr as $key => $value) {{$key}}="{{$value}}" @endforeach
-    {{ $attributes->except('x-data')->merge(['class' => $class ]) }}
+    {{ $attributes->except('x-data')->merge($attr)->merge(['class' => $class ]) }}
     />
-    <div class="tf-checkbox-label-spacing">
+    <div class="{{ $labelWrapperClass }}">
         <label for="{{ $id }}" class="{{ $labelClass }}">
             {{ $label }}
         </label>

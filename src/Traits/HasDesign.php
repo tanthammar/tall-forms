@@ -10,6 +10,7 @@ trait HasDesign
     public null|bool $inline = null;
     public null|int $colspan = 12;
     public null|string $class = null;
+    public null|string $wrapperClass = null;
     public bool $inArray = false;
 
     /**

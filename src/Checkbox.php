@@ -8,10 +8,13 @@ class Checkbox extends BaseField
 {
 
     public $placeholder;
+    public string $checkboxLabelClass = "tf-checkbox-label";
 
     protected function overrides(): self
     {
         $this->type = 'checkbox';
+        $this->wrapperClass = "flex";
+        $this->class = "form-checkbox tf-checkbox";
         $this->deferEntangle(true);
         return $this;
     }
@@ -25,6 +28,12 @@ class Checkbox extends BaseField
     public function inputAttr(array $attributes): self
     {
         $this->attributes['input'] = $attributes;
+        return $this;
+    }
+
+    public function checkboxLabelClass(string $class): self
+    {
+        $this->checkboxLabelClass = $class;
         return $this;
     }
 
