@@ -42,7 +42,7 @@ abstract class BaseField
 
     public function getHtmlId($wireComponentID): string
     {
-        return 'id'.md5($wireComponentID.$this->name);
+        return 'id'.md5($wireComponentID.$this->key);
     }
 
     //problem with collect()->firstWhere()

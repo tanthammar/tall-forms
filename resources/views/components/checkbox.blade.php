@@ -2,7 +2,7 @@
 <input
     type="checkbox"
     id="{{ $id }}"
-    name="{{ $id }}"
+    name="{{ $name }}"
     {{ $attributes->except('x-data')->merge($attr)->merge(['class' => $class ]) }}
     />
     <div class="{{ $labelWrapperClass }}">

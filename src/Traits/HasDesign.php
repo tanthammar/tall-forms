@@ -45,11 +45,21 @@ trait HasDesign
     }
 
     /**
-     * Applied to the field wrapper
+     * Sometimes applied to the field wrapper
+     * Merge or replace the fields default classes
      */
     public function class(string $classes, bool $merge = true): self
     {
         $this->class = $merge ? "$this->class $classes" : $classes;
+        return $this;
+    }
+
+    /**
+     * Not applied to all fields
+     */
+    public function wrapperClass(string $class): self
+    {
+        $this->wrapperClass = $class;
         return $this;
     }
 }
