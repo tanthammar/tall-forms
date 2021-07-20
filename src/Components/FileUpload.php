@@ -5,29 +5,27 @@ namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
 use Illuminate\View\Component;
-use Tanthammar\TallForms\FileUpload as Field;
 use Tanthammar\TallForms\Traits\Helpers;
 
 class FileUpload extends Component
 {
     use Helpers;
 
-    public Field $field;
-    public string $uploadFileError;
-    public bool $showFileUploadError;
-    public ?string $showFileUploadErrorFor;
-    public $fieldValue;
-
-    public function __construct(Field $field,
-                                bool $showFileUploadError,
-                                ?string $showFileUploadErrorFor,
-                                $fieldValue = null)
+    public function __construct(
+        public object $field,
+        public mixed $fieldValue = null,
+        public ?bool $showFileUploadError = false,
+        public ?string $showFileUploadErrorFor = null,
+        public ?string $uploadFileError = null)
     {
-        $this->field = $field;
-        $this->uploadFileError = data_get($field, 'errorMsg') ?? (string) trans(config('tall-forms.upload-file-error'));
-        $this->showFileUploadError = $showFileUploadError;
-        $this->showFileUploadErrorFor = $showFileUploadErrorFor;
-        $this->fieldValue = $fieldValue;
+        $this->field->key = data_get($field, 'key') ?: data_get($field, 'name');
+        $this->field->tall_svg_upload = config('tall-forms.file-upload');
+        $this->field->tall_svg_file = config('tall-forms.file-icon');
+        $this->field->tall_svg_trash = config('tall-forms.trash-icon');
+        $this->field->confirm_delete = data_get($field, 'confirm_delete', true);
+        $this->field->confirm_msg = (string)trans(data_get($field, 'confirm_msg') ?: config('tall-forms.are-u-sure'));
+        $this->uploadFileError = $this->uploadFileError ?: data_get($field, 'errorMsg') ?? (string)trans(config('tall-forms.upload-file-error'));
+        $this->showFileUploadErrorFor = $this->showFileUploadErrorFor ?: $this->field->key;
     }
 
     public function class(): string
@@ -38,7 +36,7 @@ class FileUpload extends Component
     public function inputWrapper(): string
     {
         $class = "tf-file-upload-input-wrapper ";
-        $class .= $this->field->class;
+        $class .= data_get($this->field, 'class');
         return Helpers::unique_words($class);
     }
 
@@ -51,6 +49,7 @@ class FileUpload extends Component
     {
         return view('tall-forms::components.file-upload');
     }
+
     public function fileIcon($mime_type)
     {
         $icons = [
