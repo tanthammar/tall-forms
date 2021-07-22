@@ -17,7 +17,7 @@ trait Helpers
         $fieldName = Str::replaceFirst('form_data.', '', $fieldKey);
         $fieldsCollection = collect($this->getFieldsFlat());
         $field = $fieldsCollection->firstWhere('key', $fieldKey) ?? $fieldsCollection->firstWhere('name', $fieldName);
-        if (empty($field)) {
+        if (blank($field)) {
             $field = $fieldsCollection->filter(function ($item) use ($fieldName) {
                 $exploded = explode('.', $fieldName);
                 return (
@@ -122,7 +122,7 @@ trait Helpers
             if (filled($field)) {
                 $fieldKey = $field->ignored
                     ? ""
-                    : (empty($prefix) ? $field->key : $prefix . '.' . $field->name);
+                    : (blank($prefix) ? $field->key : $prefix . '.' . $field->name);
                 $field->key = $fieldKey;
                 $fieldKey = ($field->type === 'array') ? "$fieldKey.*" : $fieldKey;
                 if (isset($field->fields) && filled($field->fields)) {
@@ -153,8 +153,8 @@ trait Helpers
         }
     }
 
-    public static function toObjectRejectNull(array $defaults, array $custom): object
+    public static function mergeFilledToObject(array $defaults, array $custom): object
     {
-        return (object)array_merge($defaults, array_filter($custom, fn ($var) => ($var !== NULL && $var !== "")));
+        return (object)array_merge($defaults, array_filter($custom, fn ($var) => filled($var)));
     }
 }

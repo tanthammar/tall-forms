@@ -17,7 +17,7 @@ class FileUpload extends Component
         public ?string $showFileUploadErrorFor = null,
         public ?string $uploadFileError = null)
     {
-        $this->field = Helpers::toObjectRejectNull($this->defaults(), $field);
+        $this->field = Helpers::mergeFilledToObject($this->defaults(), $field);
         $this->field->key = data_get($field, 'key', $this->field->name);
         $this->uploadFileError = data_get($field, 'errorMsg', $this->field->uploadFileError);
         $this->showFileUploadErrorFor = $this->showFileUploadErrorFor ?: $this->field->key;
@@ -32,7 +32,7 @@ class FileUpload extends Component
             'name' => '',
             'class' => '',
             'confirm_delete' => true,
-            'confirm_msg' => __('tf::form.are-u-sure'),
+            'confirm_msg' => __('tf::form.alerts.are-u-sure'),
             'accept' => 'image/*',
             'uploadFileError' => __('tf::form.file-upload.upload-file-error'),
             'fieldValue' => null,

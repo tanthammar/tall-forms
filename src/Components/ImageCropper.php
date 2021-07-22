@@ -14,7 +14,7 @@ class ImageCropper extends Component
         public object|array $field,
         public ?string $imageUrl = '',
     ){
-        $this->field = Helpers::toObjectRejectNull($this->defaults(), $field);
+        $this->field = Helpers::mergeFilledToObject($this->defaults(), $field);
         $this->field->key = data_get($field, 'key', $this->field->name);
     }
 
