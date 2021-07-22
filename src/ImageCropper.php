@@ -7,13 +7,13 @@ namespace Tanthammar\TallForms;
 class ImageCropper extends BaseField
 {
     public $includeScript = false;
-    public $width = 420;
-    public $height = 340;
+    public $width;
+    public $height;
     public $thumbnail;
-    public $shape = 'square'; //or circle
-    public $dropZoneHelp = 'Drag an image here or click in this area';
-    public $fileInfo = 'PNG, JPG, GIF, TIFF, max 1.5MB';
-    public $uploadButton = 'Select a file';
+    public $shape; //square or circle
+    public $dropZoneHelp;
+    public $fileInfo;
+    public $uploadButton;
 
 
     protected function overrides(): self

@@ -1,7 +1,8 @@
+<div class="{{ $field->wrapperClass }}">
 <div wire:ignore class="tf-cropper-root">
     {{-- init Alpine --}}
     <div x-data="imageCropper({
-        imageUrl: '{{ $imageUrl }}',
+        imageUrl: '{{ $field->imageUrl }}',
         width: {{ $field->width }},
         height: {{ $field->height }},
         shape: '{{ $field->shape }}',
@@ -44,8 +45,8 @@
                 <div>
                     <div class="m-auto" x-ref="croppie"></div>
                     <div class="flex justify-center items-center gap-2">
-                        <button type="button" class="tf-cropper-delete" x-on:click.prevent="swap()">@lang(config('tall-forms.delete'))</button>
-                        <button type="button" class="tf-cropper-save" x-on:click.prevent="saveCroppie()">@lang(config('tall-forms.save'))</button>
+                        <button type="button" class="tf-cropper-delete" x-on:click.prevent="swap()">@lang('tf::form.delete')</button>
+                        <button type="button" class="tf-cropper-save" x-on:click.prevent="saveCroppie()">@lang('tf::form.save')</button>
                     </div>
                 </div>
             </div>
@@ -59,10 +60,11 @@
                     <button type="button" class="tf-cropper-edit" x-on:click.prevent="edit()"><x-tall-svg :path="config('tall-forms.edit-icon')" class="h-6 w-6" /></button>
                 </div>
             </div>
-            <div><img src="{{ $imageUrl }}" alt x-ref="result" class="display-block"></div>
+            <div><img src="{{ $field->imageUrl }}" alt x-ref="result" class="display-block"></div>
         </div>
 
     </div>
+</div>
 </div>
 @if($field->includeScript)
     @tfonce('styles:imagecropper')

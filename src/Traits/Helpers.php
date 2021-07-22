@@ -152,4 +152,9 @@ trait Helpers
             }
         }
     }
+
+    public static function toObjectRejectNull(array $defaults, array $custom): object
+    {
+        return (object)array_merge($defaults, array_filter($custom, fn ($var) => ($var !== NULL && $var !== "")));
+    }
 }
