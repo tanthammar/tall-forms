@@ -25,7 +25,7 @@ trait Notify
     {
         $this->notify(
             array_get($this->alert, 'type', 'saved'),
-            array_get($this->alert, 'message', trans(config('tall-forms.message-updated-success')))
+            array_get($this->alert, 'message', trans('tf::form.alerts.updated-success'))
         );
     }
 
@@ -42,7 +42,7 @@ trait Notify
         switch ($type) {
             case 'saved':
                 $bg = 'tf-bg-success';
-                $message = trans(config('tall-forms.message-updated-success'));
+                $message = trans('tf::form.alerts.updated-success');
                 $this->emitSelf('notify-saved');
                 break;
 

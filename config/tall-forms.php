@@ -3,27 +3,12 @@ use Tanthammar\TallForms\Components;
 
 return [
     //note that the word dummymodel is auto replaced with the lower case value of --model option in the make command
-    'form-title' => "trans('global.create').' '.trans('crud.dummymodel.title_singular')",
-
-    //Javascript alerts, used in various fields
-    'size-limit-alert' => 'messages.size_limit_alert', //'The file is too large.'
-    'one-at-the-time-alert' => 'messages.one_at_the_time_alert', //'Please upload only one file at the time.'
-    'max-attachments-alert' => 'messages.max_attachments_alert', //'Max allowed attachments:'
-    'mime-alert' => 'messages.mime_alert', //'Invalid file type, please pick another file.'
-
-    //Spatie tags, search input error translation, applied as trans(...) or @lang(...)
-    'spatie-tags-search-error' => 'fields.tag_search_error',
+    'form-title' => "trans('tf::form.create').' '.trans('crud.dummymodel.title_singular')",
 
     //Use the field label instead of key, as validation attribute.
     //Recommended, else you have to define language settings for every field. Example: 'form_data.name' => 'Name'
     //Can be overridden per field
     'field-labels-as-validation-attributes' => true,
-
-    //Select placeholders and help, applied as trans(...) or @lang(...)
-    'select-placeholder' => 'global.select_placeholder', //'Please select an option...'
-    'search-placeholder' => 'global.search_placeholder', //'Search ...' //used for both Search and SearchList fields
-    'multiselect-placeholder' => 'global.multiselect_placeholder', //'Please select one or multiple options ...'
-    'multiselect-help' => 'global.multiselect_help', //'Press CTRL(Windows) or CMD(Mac), to select/deselect multiple options.'
 
 
     //A Laravel blade component to wrap your form with, if $wrapWithView = true, see documentation

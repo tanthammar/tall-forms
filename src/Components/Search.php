@@ -21,7 +21,7 @@ class Search extends Component
         $this->field = $field;
         $this->options = $options;
         $this->listWidth = $field->listWidth ?? 'tf-search-dropdown-width';
-        $this->field->placeholder = $this->field->placeholder ?? trans(config('tall-forms.search-placeholder'));
+        $this->field->placeholder = $this->field->placeholder ?? __('tf::form.search.placeholder'));
     }
 
     public function class(): string
