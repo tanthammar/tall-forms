@@ -5,9 +5,6 @@ return [
     //note that the word dummymodel is auto replaced with the lower case value of --model option in the make command
     'form-title' => "trans('global.create').' '.trans('crud.dummymodel.title_singular')",
 
-    //File upload default validation message translation, applied as trans(...) or @lang(...)
-    'upload-file-error' => 'messages.file_upload_error', //Example: 'One or many of the uploaded files did not match the allowed filetype or size limit. Please see the fields help text, review your files and try again.'
-
     //Javascript alerts, used in various fields
     'size-limit-alert' => 'messages.size_limit_alert', //'The file is too large.'
     'one-at-the-time-alert' => 'messages.one_at_the_time_alert', //'Please upload only one file at the time.'
@@ -73,22 +70,6 @@ return [
         //default field wire:model attribute
         'wire' => 'wire:model.lazy',
     ],
-
-
-
-
-    //form buttons translations applied as trans(...) or @lang(...)
-    'saved' => 'global.saved',
-    'save' => 'global.save',
-    'swap' => 'global.swap',
-    'delete' => 'global.delete',
-    'edit' => 'global.edit',
-    'reset' => 'global.reset',
-    'save-and-stay' => 'global.save',
-    'save-go-back' => 'global.save_go_back',
-    'message-updated-success' => 'messages.updated_success',
-    'are-u-sure' => 'global.areYouSure',
-
 
     //You can swap the icons blade view path. The path is relative to resources/views/components
     //(publish the icons: php artisan vendor:publish --tag=tall-form-icons)
