@@ -1,4 +1,4 @@
-@if(empty($headView) && !$wrapWithView && ($formTitle || $formSubtitle))
+@if(blank($headView) && !$wrapWithView && ($formTitle || $formSubtitle))
     <div class="tf-form-head">
         <h1 class="tf-form-title">
             {{ $formTitle }}

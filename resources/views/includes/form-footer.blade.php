@@ -1,4 +1,4 @@
-@if(empty($footerView) && ($formFooterTitle || $formFooterSubtitle))
+@if(blank($footerView) && ($formFooterTitle || $formFooterSubtitle))
     <div class="tf-form-footer">
         <h3 class="tf-form-footer-title">
             {{ $formFooterTitle }}

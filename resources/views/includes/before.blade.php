@@ -1,4 +1,4 @@
-@if(empty($field->beforeView) && filled($field->before))
+@if(blank($field->beforeView) && filled($field->before))
     <x-tall-attr :attr="$field->getAttr('before')">
         <x-tall-attr tag="p" :attr="$field->getAttr('before-text')">
             {{ $field->before }}

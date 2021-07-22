@@ -26,15 +26,15 @@ class Select extends Component
     public function help()
     {
         return $this->field->multiple
-            ? trans(config('tall-forms.multiselect-help'))
+            ? __('tf::form.multiselect.help')
             : null;
     }
 
     public function placeholder()
     {
         return $this->field->multiple
-            ? trans(config('tall-forms.multiselect-placeholder'))
-            : trans(config('tall-forms.select-placeholder'));
+            ? __('tf::form.multiselect.placeholder')
+            : __('tf::form.select.placeholder');
     }
 
     public function options(): array
