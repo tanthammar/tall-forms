@@ -32,3 +32,4 @@
         <x-tall-svg :path="config('tall-forms.plus-icon')" class="tf-repeater-add-button-size" />
     </button>
 </div>
+{{-- input-array.js --}}
