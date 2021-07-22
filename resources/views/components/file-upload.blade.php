@@ -1,5 +1,5 @@
 <div class="w-full my-1" x-data="{ isUploading: false }">
-    @if(blank($fieldValue) || $errors->has($field->multiple ? $field->name.'.*' : $field->name))
+    @if(blank($field->fieldValue) || $errors->has($field->multiple ? $field->name.'.*' : $field->name))
         {{--only show the file input if the field is empty or there are validation errors, to force the user to upload new files or delete existing. --}}
         <div wire:key="file-upload-blank{{md5($field->key)}}"
              x-on:livewire-upload-start="isUploading = true && $wire.clearFileUploadError('{{ $field->multiple ? $field->name.'.*': $field->name }}')"
@@ -26,14 +26,14 @@
                 class="{{ $class() }}"/>
         </div>
     @endif
-    @if(filled($fieldValue))
+    @if(filled($field->fieldValue))
         <ul class="tf-file-upload-ul" wire:key="file-upload-filled{{md5($field->key)}}">
             @if($field->multiple)
-                @foreach($fieldValue as $file)
+                @foreach($field->fieldValue as $file)
                     @if(filled($file)) @include('tall-forms::includes.file-loop') @endif
                 @endforeach
             @else
-                @php $file = $fieldValue; @endphp
+                @php $file = $field->fieldValue; @endphp
                 @if(filled($file)) @include('tall-forms::includes.file-loop') @endif
             @endif
         </ul>

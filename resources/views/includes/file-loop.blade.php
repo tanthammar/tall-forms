@@ -15,7 +15,7 @@
     </div>
     <div class="flex-1 px-2">{{ $file->getClientOriginalName() }}</div>
     <button type="button" class="tf-file-upload-delete-btn"
-             @if($field->confirm_delete) onclick="confirm('{{ trans($field->confirm_msg) }}') || event.stopImmediatePropagation();" @endif
+             @if($field->confirm_delete) onclick="confirm('{{ $field->confirm_msg }}') || event.stopImmediatePropagation();" @endif
             wire:click.prevent="deleteSingleTempFile('{{ $field->name }}', '{{ isset($loop) ? $loop->index : null }}')">
         <span class="px-2" wire:loading wire:target="deleteSingleTempFile"><x-tall-spinner /></span>
         <x-tall-svg :path="$field->tall_svg_trash" class="tf-file-upload-btn-size" />

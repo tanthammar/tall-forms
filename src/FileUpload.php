@@ -11,7 +11,7 @@ class FileUpload extends BaseField
     public ?string $livewireComponent = null;
     public string $accept = "";
     public bool $confirm_delete = true;
-    public ?string $confirm_msg = null; //defaults to config in blade class
+    public ?string $confirm_msg = null; //defaults in blade class
 
     public $maxBytes = null;
     public $sizeLimitAlert;

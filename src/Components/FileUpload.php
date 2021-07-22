@@ -12,20 +12,34 @@ class FileUpload extends Component
     use Helpers;
 
     public function __construct(
-        public object $field,
-        public mixed $fieldValue = null,
+        public array|object $field,
         public ?bool $showFileUploadError = false,
         public ?string $showFileUploadErrorFor = null,
         public ?string $uploadFileError = null)
     {
-        $this->field->key = data_get($field, 'key') ?: data_get($field, 'name');
-        $this->field->tall_svg_upload = config('tall-forms.file-upload');
-        $this->field->tall_svg_file = config('tall-forms.file-icon');
-        $this->field->tall_svg_trash = config('tall-forms.trash-icon');
-        $this->field->confirm_delete = data_get($field, 'confirm_delete', true);
-        $this->field->confirm_msg = (string)trans(data_get($field, 'confirm_msg') ?: config('tall-forms.are-u-sure'));
-        $this->uploadFileError = $this->uploadFileError ?: data_get($field, 'errorMsg') ?? (string)trans(config('tall-forms.upload-file-error'));
+        $this->field = Helpers::toObjectRejectNull($this->defaults(), $field);
+        $this->field->key = data_get($field, 'key', $this->field->name);
+        $this->uploadFileError = data_get($field, 'errorMsg', $this->field->uploadFileError);
         $this->showFileUploadErrorFor = $this->showFileUploadErrorFor ?: $this->field->key;
+        ray($this->field);
+    }
+
+    public function defaults(): array
+    {
+        return [
+            'multiple' => false,
+            'key' => '',
+            'name' => '',
+            'class' => '',
+            'confirm_delete' => true,
+            'confirm_msg' => __('tf::form.are-u-sure'),
+            'accept' => 'image/*',
+            'uploadFileError' => __('tf::form.file-upload.upload-file-error'),
+            'fieldValue' => null,
+            'tall_svg_upload' => config('tall-forms.file-upload'),
+            'tall_svg_file' => config('tall-forms.file-icon'),
+            'tall_svg_trash' => config('tall-forms.trash-icon'),
+        ];
     }
 
     public function class(): string
