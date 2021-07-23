@@ -24,8 +24,8 @@ class LabelFieldWrapper extends Component
         $is_inline = $field->inline ?? $componentInline;
         $field->inline = $field->inline === false ? false : $is_inline;
         $this->inlineLabelAlignment = $inlineLabelAlignment;
-        $this->labelW = $field->labelW ?? $labelW;
-        $this->fieldW = $field->fieldW ?? $fieldW;
+        $this->labelW = $field->labelW ?: $labelW;
+        $this->fieldW = $field->fieldW ?: $fieldW;
     }
 
     public function class(): string
@@ -48,7 +48,7 @@ class LabelFieldWrapper extends Component
     public function labelWidth(): string
     {
         return $this->field->inline
-            ? $this->labelW . ' ' . ($field->inlineLabelAlignment ?? $this->inlineLabelAlignment)
+            ? $this->labelW . ' ' . ($this->field->inlineLabelAlignment ?: $this->inlineLabelAlignment)
             : 'tf-stacked-label-alignment';
     }
 
