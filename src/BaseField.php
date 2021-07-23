@@ -36,6 +36,8 @@ abstract class BaseField
         $this->name = $key ?? Str::snake(Str::lower($label));
         $this->key = 'form_data.' . $this->name;
         $this->wire = config('tall-forms.field-attributes.wire');
+        $this->xmodel = config('tall-forms.field-attributes.x-model');
+        $this->deferEntangle = config('tall-forms.field-attributes.defer-entangle');
         $this->setAttr();
         $this->overrides();
     }

@@ -11,8 +11,8 @@ trait HasAttributes
     public array $attributes = [];
 
     public null|string $wire = null; // default = wire:model.lazy, in config/tall-forms, set in BaseField __construct()
-    public null|string $alpineKey = null;
-    public null|string $xmodel= 'x-model';
+    public null|string $xmodel = null; // default = x-model.lazy, in config/tall-forms, set in BaseField __construct()
+    public null|string $alpineKey = null; //used for x-data
     public null|string|bool $deferEntangle = null;
     public null|string $deferString = null;
 
