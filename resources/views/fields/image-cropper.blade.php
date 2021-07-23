@@ -1,9 +1,9 @@
 <x-tall-image-cropper :field="[
+    'key' => $field->key,
+    'name' => $field->getHtmlId($_instance->id), //id falls back to name
     'width' => $field->width,
     'height' => $field->height,
     'shape' => $field->shape,
-    'key' => $field->key,
-    'name' => $field->name,
     'dropZoneHelp' => $field->dropZoneHelp,
     'fileInfo' => $field->fileInfo,
     'wrapperClass' => $field->wrapperClass,
