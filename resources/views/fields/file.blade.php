@@ -1,5 +1,6 @@
 <x-tall-file-upload :field="[
         'multiple' => $field->multiple,
+        'id' => $field->getHtmlId($_instance->id),
         'key' => $field->key,
         'name' => $field->name,
         'class' => $field->class,

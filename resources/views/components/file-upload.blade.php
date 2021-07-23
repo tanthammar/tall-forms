@@ -18,6 +18,7 @@
             {{--intentionally removed input id if multiple forms, with the same field name --}}
             <input
                 wire:model="{{ $field->name }}"
+                id="{{ $field->id }}"
                 name="{{ $field->name }}"
                 type="file"
                 @if($showFileUploadError && $showFileUploadErrorFor == $field->name) :value="null" @endif
