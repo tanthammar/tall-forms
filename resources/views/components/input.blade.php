@@ -1,4 +1,4 @@
-<div class="{{$field->class}}">
+<div {{ $attributes->only('x-data') }} class="{{$field->wrapperClass}}">
     @if($field->prefix || $field->hasIcon)
         <span class="{{ $icon_span }} {{ $left_border }}">
             @if($field->icon)
@@ -18,12 +18,11 @@
     <div class="relative w-full">
         <input
             value="{{ old($field->key) }}"
-            @if($required) required @endif
-            @foreach($options() as $key => $value) {{$key}}="{{$value}}" @endforeach
-            {{ $attributes->merge(['class' => $errors->has($field->key) ? $error() : $class() ]) }}
+            @if($field->required) required @endif
+            {{ $attributes->except('x-data')->merge($attr)->merge(['class' => $errors->has($field->key) ? $error() : $class ]) }}
         />
         @error($field->key)
-            <x-tall-error-icon :right="in_array($field->input_type, ['date', 'datetime-local', 'time']) ? 'right-6' : 'right-0'"/>
+            <x-tall-error-icon :right="in_array($field->type, ['date', 'datetime-local', 'time']) ? 'right-6' : 'right-0'"/>
         @enderror
     </div>
     @if($field->suffix || $field->sfxHasIcon)

@@ -14,11 +14,10 @@ class Input extends BaseField
     public $autocomplete;
     public $placeholder;
     public $prefix;
-    public $step = 1;
-    public $min = 0;
-    public $max = 100;
+    public $step;
+    public $min;
+    public $max;
     public $required = false;
-    public $class = 'tf-input-wrapper';
 
     public $suffix;
     public $sfxIcon;
