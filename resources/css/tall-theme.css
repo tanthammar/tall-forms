@@ -2,7 +2,7 @@
     /* icons */
     .svg-icon {
         @apply inline-flex align-middle overflow-visible;
-        fill: currentColor;
+        /* fill: currentColor; */
         font-size: inherit;
         margin-top: -0.1rem;
     }

@@ -21,6 +21,7 @@ class Input extends BaseField
 
     public $suffix;
     public $sfxIcon;
+    public $sfxIconClass;
     public $sfxTallIcon;
     public $sfxHtmlIcon;
     public bool $sfxHasIcon = false;
@@ -117,9 +118,10 @@ class Input extends BaseField
      * @param string $blade_ui_icon_path
      * @return $this
      */
-    public function suffixIcon(string $blade_ui_icon_path): self
+    public function suffixIcon(string $blade_ui_icon_path, ?string $class = null): self
     {
         $this->sfxIcon = $blade_ui_icon_path;
+        $this->sfxIconClass = $class;
         $this->sfxHasIcon = true;
         return $this;
     }

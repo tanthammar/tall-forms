@@ -9,7 +9,7 @@
             </div>
         @else
             <div class="tf-file-upload-icon-wrapper">
-                <x-tall-svg :path="$field->tall_svg_file.$fileIcon($file->getMimeType())" class="h-4 w-4" />
+                <x-tall-svg :path="$field->tall_svg_file.$fileIcon($file->getMimeType())" class="h-4 w-4 fill-current" />
             </div>
         @endif
     </div>
@@ -18,7 +18,7 @@
              @if($field->confirm_delete) onclick="confirm('{{ $field->confirm_msg }}') || event.stopImmediatePropagation();" @endif
             wire:click.prevent="deleteSingleTempFile('{{ $field->name }}', '{{ isset($loop) ? $loop->index : null }}')">
         <span class="px-2" wire:loading wire:target="deleteSingleTempFile"><x-tall-spinner /></span>
-        <x-tall-svg :path="$field->tall_svg_trash" class="tf-file-upload-btn-size" />
+        <x-tall-svg :path="$field->tall_svg_trash" class="tf-file-upload-btn-size fill-current" />
     </button>
 </li>
 @endif

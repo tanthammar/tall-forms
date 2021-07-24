@@ -2,10 +2,10 @@
     @if($field->prefix || $field->hasIcon)
         <span class="{{ $icon_span }} {{ $left_border }}">
             @if($field->icon)
-                <span class="mx-1">@svg($field->icon, 'h-6 w-6')</span>
+                <span class="mx-1">@svg($field->icon, "h-6 w-6 $field->iconClass")</span>
             @endif
             @if($field->tallIcon)
-                <span class="mx-1"><x-tall-svg :path="$field->tallIcon" class="h-6 w-6" /></span>
+                <span class="mx-1"><x-tall-svg :path="$field->tallIcon" class="h-6 w-6 fill-current" /></span>
             @endif
             @if($field->htmlIcon)
                 <span class="mx-1">{!! $field->htmlIcon !!}</span>
@@ -28,10 +28,10 @@
     @if($field->suffix || $field->sfxHasIcon)
         <span class="{{ $icon_span }} {{ $right_border }}">
             @if($field->sfxIcon)
-                <span class="mx-1">@svg($field->sfxIcon, 'h-6 w-6')</span>
+                <span class="mx-1">@svg($field->sfxIcon, "h-6 w-6 $field->sfxIconClass")</span>
             @endif
             @if($field->sfxTallIcon)
-                <span class="mx-1"><x-tall-svg :path="$field->sfxTallIcon" class="h-6 w-6" /></span>
+                <span class="mx-1"><x-tall-svg :path="$field->sfxTallIcon" class="h-6 w-6 fill-current" /></span>
             @endif
             @if($field->sfxHtmlIcon)
                 <span class="mx-1">{!! $field->sfxHtmlIcon !!}</span>

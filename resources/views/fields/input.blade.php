@@ -5,12 +5,14 @@
         'wrapperClass' => $field->wrapperClass,
         'class' => $field->class,
         'prefix' => $field->prefix,
-        'icon' => $field->icon,
+        'icon' => $field->icon, //Blade icon name
+        'iconClass' => $field->iconClass, //Blade icon class
         'tallIcon' => $field->tallIcon,
         'htmlIcon' => $field->htmlIcon,
         'type' => $field->input_type,
         'suffix' => $field->suffix,
         'sfxIcon' => $field->sfxIcon, //Blade icon name
+        'sfxIconClass' => $field->sfxIcon, //Blade icon class
         'sfxTallIcon' => $field->sfxTallIcon, //Tall-forms icon name
         'sfxHtmlIcon' => $field->sfxHtmlIcon, //Html example: <i>...</i>
         'autocomplete' => $field->autocomplete,
@@ -19,8 +21,7 @@
         'min' => $field->min,
         'max' => $field->max,
     ]"
-    x-data="{ {{ $alpineKey }}: $wire.entangle('{{ $field->key }}'){{ $field->deferString }} }"
     :attr="array_merge([
-        $field->xmodel => $alpineKey
+        $field->wire => $field->key
     ], $field->getAttr('input'))
 "/>

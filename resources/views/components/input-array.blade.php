@@ -17,7 +17,7 @@
                         @foreach($options() as $key => $value) {{$key}}="{{$value}}" @endforeach
                     />
                     <button type="button" class="tf-repeater-delete-btn" x-on:click.prevent.prevent="deleteItem(index)" tabindex="-1">
-                        <x-tall-svg :path="config('tall-forms.trash-icon')" class="tf-repeater-btn-size" />
+                        <x-tall-svg :path="config('tall-forms.trash-icon')" class="tf-repeater-btn-size fill-current" />
                     </button>
                 </div>
             </template>
@@ -29,7 +29,7 @@
         @enderror
     </div>
     <button type="button" class="tf-repeater-add-button" x-on:click.prevent="addItem()" style="width:fit-content">
-        <x-tall-svg :path="config('tall-forms.plus-icon')" class="tf-repeater-add-button-size" />
+        <x-tall-svg :path="config('tall-forms.plus-icon')" class="tf-repeater-add-button-size fill-current" />
     </button>
 </div>
 {{-- input-array.js --}}

@@ -41,6 +41,7 @@ class Input extends Component
             'prefix' => null,
             'hasIcon' => false,
             'icon' => '',
+            'iconClass' => null,
             'tallIcon' => '',
             'htmlIcon' => '',
             'type' => 'text', //any HTML5 input type
