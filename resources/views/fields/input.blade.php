@@ -12,7 +12,7 @@
         'type' => $field->input_type,
         'suffix' => $field->suffix,
         'sfxIcon' => $field->sfxIcon, //Blade icon name
-        'sfxIconClass' => $field->sfxIcon, //Blade icon class
+        'sfxIconClass' => $field->sfxIconClass, //Blade icon class
         'sfxTallIcon' => $field->sfxTallIcon, //Tall-forms icon name
         'sfxHtmlIcon' => $field->sfxHtmlIcon, //Html example: <i>...</i>
         'autocomplete' => $field->autocomplete,

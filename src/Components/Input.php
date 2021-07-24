@@ -48,6 +48,7 @@ class Input extends Component
             'suffix' => null,
             'sfxHasIcon' => false,
             'sfxIcon' => '', //Blade icon name
+            'sfxIconClass' => '',
             'sfxTallIcon' => '', //Tall-forms icon name
             'sfxHtmlIcon' => '', //Html example: <i>...</i>
             'required' => true,
