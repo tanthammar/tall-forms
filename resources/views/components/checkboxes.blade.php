@@ -1,7 +1,7 @@
 <div {{ $attributes->only('x-data') }} class="w-full">
-    <fieldset wire:ignore class="{{ $wrapperClass }}">
+    <fieldset wire:ignore class="{{ $wrapperClass }}" id="{{ $id }}" name="{{ $name }}">
         @foreach($options as $value => $label)
-            @php $id = md5($id.$value.$label.$loop->index); @endphp
+            @php $id = 'id'.md5($id.$value.$label.$loop->index); @endphp
             <x-tall-checkbox
                 :id="$id"
                 :name="$name"
