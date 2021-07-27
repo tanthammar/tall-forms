@@ -1,9 +1,7 @@
 export default (config) => ({
     maxItems: config.maxItems,
     minItems: config.minItems,
-    itemsArray: config.defer
-        ? window.Livewire.find(config.wireId).entangle(config.fieldKey).defer
-        : window.Livewire.find(config.wireId).entangle(config.fieldKey),
+    itemsArray: config.itemsArray,
     inputs: config.inputs,
     addItem() {
         this.itemsArray = Array.from(this.itemsArray.filter(item => item.length > 0))
