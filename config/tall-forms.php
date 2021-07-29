@@ -108,5 +108,6 @@ return [
         'search' => Components\Search::class,
         'trix' => Components\Trix::class,
         'svg' => Components\Svg::class,
+        'markdown' => Components\Markdown::class,
     ]
 ];
