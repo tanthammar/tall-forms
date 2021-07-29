@@ -11,7 +11,7 @@
         easyMde = new EasyMDE({
             element: $refs.input{{ $jsonOptions() }}
          })
-         easyMde.codemirror.on('{{ $field->syncOn }}', function(){
+         easyMde.codemirror.on('change', function(){
             value = easyMde.value()
         })
         $watch('value', () => !focused && setValue())

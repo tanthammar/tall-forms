@@ -6,7 +6,6 @@
         'placeholder' => $field->placeholder,
         'wrapperClass' => $field->wrapperClass,
         'includeScript' => $field->includeScript,
-        'syncOn' => $field->syncOn,
         'wrapperClass' => $field->wrapperClass,
     ]"
     :options="$field->options"

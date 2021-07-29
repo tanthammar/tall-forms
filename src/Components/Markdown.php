@@ -28,7 +28,6 @@ class Markdown extends Component
             'key' => null, //old(), @entangle, @error, falls back to name
             'name' => 'markdown', //required
             'includeScript' => true, //include external cdn
-            'syncOn' => 'change', //or 'blur'. When to update Alpine/Livewire. other events: https://codemirror.net/doc/manual.html#events
             'deferEntangle' => true,
             'placeholder' => '',
             'wrapperClass' => 'w-full',

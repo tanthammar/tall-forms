@@ -7,7 +7,6 @@ namespace Tanthammar\TallForms;
 class Markdown extends BaseField
 {
     public array $options = [];
-    public string $syncOn = 'change';
     public null|string $placeholder = null;
     public bool $includeScript = false;
 
@@ -25,27 +24,6 @@ class Markdown extends BaseField
     public function options(array $config): self
     {
         $this->options = $config;
-        return $this;
-    }
-
-    /**
-     * [any CodeMirror event](https://codemirror.net/doc/manual.html#events)
-     */
-    public function syncOn(string $event = 'blur'): self
-    {
-        $this->syncOn = $event;
-        return $this;
-    }
-
-    public function syncOnChange(): self
-    {
-        $this->syncOn = 'change';
-        return $this;
-    }
-
-    public function syncOnBlur(): self
-    {
-        $this->syncOn = 'blur';
         return $this;
     }
 
