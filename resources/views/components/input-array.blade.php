@@ -5,7 +5,7 @@
         inputs: $refs.inputs
     })" class="{{ $field->wrapperClass }}">
     <div @error($field->key.'.*') class="{{ $field->errorClass }}" @enderror>
-        <fieldset x-ref="inputs" wire:ignore id="{{ $field->id }}">
+        <fieldset x-ref="inputs" wire:ignore id="{{ $field->id }}" name="{{ $field->name }}">
             <template x-for="(item, index) in itemsArray" :key="index">
                 <div class="flex md:space-x-2 space-x-1">
                     <input

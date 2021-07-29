@@ -1,7 +1,7 @@
 @php $alpineKey = $field->alpineKey ?? 'checkboxes'; @endphp
 <x-tall-checkboxes
     :id="$field->getHtmlId($_instance->id)"
-    :name="$alpineKey"
+    :name="$field->name"
     :options="$field->options"
     :wrapper-class="$field->wrapperClass"
     :label-class="$field->checkboxLabelClass"

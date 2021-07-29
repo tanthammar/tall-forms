@@ -157,4 +157,9 @@ trait Helpers
     {
         return (object)array_merge($defaults, array_filter($custom, fn ($var) => filled($var)));
     }
+
+    public static function mergeFilledToArray(array $defaults, array $custom): array
+    {
+        return array_merge($defaults, array_filter($custom, fn ($var) => filled($var)));
+    }
 }

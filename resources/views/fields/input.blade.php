@@ -1,6 +1,7 @@
 @php $alpineKey = $field->alpineKey ?? 'input'; @endphp
 <x-tall-input :field="[
-        'name' => $field->getHtmlId($_instance->id), //id falls back to name
+        'id' => $field->getHtmlId($_instance->id),
+        'name' => $field->name,
         'key' => $field->key, //@error & Livewire prop
         'wrapperClass' => $field->wrapperClass,
         'class' => $field->class,

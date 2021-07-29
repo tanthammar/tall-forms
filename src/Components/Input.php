@@ -23,7 +23,8 @@ class Input extends Component
     {
         $this->field = Helpers::mergeFilledToObject($this->defaults(), $field);
         $this->attr = array_merge($this->options(), $attr);
-        $this->field->key = data_get($field, 'key', $this->field->name);
+        $this->field->name = $this->field->name ?: $this->field->id;
+        $this->field->key = $this->field->key ?: $this->field->id;
         $this->field->class = $this->class();
         $this->field->hasIcon = !empty($this->field->icon || $this->field->tallIcon || $this->field->htmlIcon);
         $this->field->sfxHasIcon = !empty($this->field->sfxIcon || $this->field->sfxTallIcon || $this->field->sfxHtmlIcon);
@@ -32,7 +33,7 @@ class Input extends Component
     public function defaults(): array
     {
         return [
-            'id' => null,
+            'id' => 'input',
             'name' => null,
             'key' => null, //@error & Livewire prop
             'wrapperClass' => 'tf-input-wrapper',

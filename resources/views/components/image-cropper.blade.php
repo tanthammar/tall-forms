@@ -13,7 +13,7 @@
         <div x-show="!showCroppie && !hasImage">
 
             {{-- input --}}
-            <input type="file" name="{{ $field->id }}"
+            <input type="file" name="{{ $field->name }}"
                    id="{{ $field->id }}"
                    class="absolute inset-0 z-50 m-0 p-0 w-full h-full outline-none opacity-0 cursor-pointer"
                    x-ref="input"

@@ -1,6 +1,7 @@
 <x-tall-input-array
     :field="[
         'id' => $field->getHtmlId($_instance->id),
+        'name' => $field->name,
         'key' => $field->key,
         'deferEntangle' => $field->deferEntangle,
         'type' => $field->input_type,

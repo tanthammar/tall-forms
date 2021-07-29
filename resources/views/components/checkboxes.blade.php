@@ -4,7 +4,7 @@
             @php $id = 'id'.md5($id.$value.$label.$loop->index); @endphp
             <x-tall-checkbox
                 :id="$id"
-                :name="$name"
+                :name="Str::slug(Str::lower($label))"
                 :label="$label"
                 :label-class="$labelClass"
                 :class="$class"

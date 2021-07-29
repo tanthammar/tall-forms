@@ -14,6 +14,8 @@ class InputArray extends Component
         public array $attr = [])
     {
         $this->field = Helpers::mergeFilledToObject($this->defaults(), $field);
+        $this->field->key = $this->field->key ?: $this->field->id;
+        $this->field->name = $this->field->name ?: $this->field->id;
         $this->attr = array_merge($this->options(), $attr);
         $this->field->itemsArray = $this->field->deferEntangle ? "\$wire.entangle('".$this->field->key."').defer" : "\$wire.entangle('".$this->field->key."')";
     }
@@ -21,9 +23,9 @@ class InputArray extends Component
     public function defaults(): array
     {
         return [
-            'id' => null, //unique, fieldset id + label for =
-            'key' => null,
-            'name' => null, //Livewire property and @error($field->key.'.*')
+            'id' => 'inputArray', //unique, fieldset id + label for =,
+            'key' => null, //Livewire prop, @error($field->key.'.*'), falls back to 'id'
+            'name' => null, //fieldset name, falls back to 'id'
             'deferEntangle' => true,
             'type' => 'text',
             'wrapperClass' => null,

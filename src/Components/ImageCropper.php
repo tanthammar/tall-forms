@@ -15,17 +15,17 @@ class ImageCropper extends Component
         public ?string $imageUrl = '',
     ){
         $this->field = Helpers::mergeFilledToObject($this->defaults(), $field);
-        $this->field->key = data_get($field, 'key', $this->field->name);
-        $this->field->id = data_get($field, 'id', $this->field->name);
+        $this->field->key = $this->field->key ?: $this->field->id;
+        $this->field->name = $this->field->name ?: $this->field->id;
     }
 
 
     public function defaults(): array
     {
         return [
-            'id' => null,
+            'id' => 'imageCropper',
             'key' => null,
-            'name' => 'imageCropper',
+            'name' => null,
             'width' => 150,
             'height' => 150,
             'shape' => 'square',
