@@ -15,7 +15,7 @@ class Checkbox extends BaseField
         $this->type = 'checkbox';
         $this->wrapperClass = "flex";
         $this->class = "form-checkbox tf-checkbox";
-        $this->deferEntangle(true);
+        $this->deferEntangle();
         return $this;
     }
 

@@ -19,7 +19,7 @@ class InputArray extends BaseField
         $this->type = 'input-array';
         $this->align_label_top = true;
         $this->allowed_in_repeater = false;
-        $this->deferEntangle = true;
+        $this->deferEntangle();
         return $this;
     }
 
@@ -57,13 +57,13 @@ class InputArray extends BaseField
     /**
      * Entangle the field on every keystroke
      * @deprecated deprecated since version 8.0
-     * <br> replaced with defer(bool true/false) in BaseField
+     * <br> replaced with deferEntangle(bool true/false) in BaseField
      *
      * @return $this
      */
     public function noDefer(): self
     {
-        $this->deferEntangle = false;
+        $this->deferEntangle(false);
         return $this;
     }
 
