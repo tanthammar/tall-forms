@@ -1,4 +1,4 @@
-<div {{ $attributes->only('class')->merge(['class' => $class()]) }}>
+<div class="$class()">
     <div class="tf-range-wrapper">
         <div class="tf-range-value">{{ data_get($this, $field->key) ?? $min }}</div>
         <div class="tf-range-labels">{{$min}}</div>
@@ -7,7 +7,7 @@
         name="{{ $field->key }}"
         type="range"
         min="{{ $min }}" max="{{ $max }}" step="{{ $step }}"
-        {{ $attributes->except(['value', 'name', 'type', 'class', 'min', 'max', 'step'])->merge($attr) }}
+        {{ $attributes->except(['value', 'name', 'type', 'min', 'class', 'max', 'step'])->merge($attr) }}
         />
         <div class="tf-range-labels">{{ $max }}</div>
     </div>
