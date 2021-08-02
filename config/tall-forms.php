@@ -16,7 +16,7 @@ return [
 
     // Component attributes, perfect spot to add default Alpine $refs keys
     'component-attributes' => [
-        // You can add anything to these attributes. Applied as @foreach($attr as key => value)
+        // You can add anything to these attributes. Applied as $attributes->merge($attr)
         'form' => [
             'class' => 'tf-form',
         ],
@@ -27,7 +27,7 @@ return [
 
     // Field attributes, perfect spot to add default Alpine $refs keys
     'field-attributes' => [
-        // You can add anything to these attributes. Applied as @foreach($attr as key => value)
+        // You can add anything to these attributes. Applied as $attributes->merge($attr)
         'root' => [
             'class' => 'tf-fields-root' //default = w-full, do not add py-, my- or col-span-x here, see FieldRoot component.
         ],

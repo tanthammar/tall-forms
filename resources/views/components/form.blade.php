@@ -1,6 +1,5 @@
 <form
-@foreach($attr as $key => $value) {{$key}}="{{$value}}" @endforeach
 @if($onKeyDownEnter) wire:submit.prevent="{{ $onKeyDownEnter }}" @endif
-{{ $attributes->merge(['class' => $class() ]) }}>
+{{ $attributes->except('wire:submit.prevent')->merge($attr)->merge(['class' => $class() ]) }}>
 {{ $slot }}
 </form>

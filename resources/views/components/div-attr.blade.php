@@ -12,6 +12,6 @@ if(isset($colspan) && filled($colspan)) {
     data_set($attr, 'class', $class);
 }
 @endphp
-<{{$tag}} @foreach($attr as $key => $value) {{$key}}="{{$value}}" @endforeach {{ $attributes }}>
+<{{$tag}} {{ $attributes->merge($attr) }}>
     {{ $slot }}
 </{{$tag}}>
