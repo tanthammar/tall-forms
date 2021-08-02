@@ -12,6 +12,7 @@ class MultiSelect extends Select
         $this->type = 'multiselect';
         $this->align_label_top = true;
         $this->allowed_in_repeater = false;
+        $this->help = __('tf::form.multiselect.help');
         return $this;
     }
 
