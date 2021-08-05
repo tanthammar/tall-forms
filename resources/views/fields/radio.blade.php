@@ -1,11 +1,14 @@
-<div x-data="{ radio: @entangle($field->key){{$field->deferString}} }">
-    <fieldset>
-@foreach($field->options as $value => $label)
-    <x-tall-radio
-        :field="$field"
-        :value="$value"
-        :label="$label"
-        wire:key="{{ md5($field->key.$value.$label.$loop->index) }}" />
-@endforeach
-    </fieldset>
-</div>
+@php $alpineKey = $field->alpineKey ?? 'radio'; @endphp
+<x-tall-radio :field="[
+        'id' => $field->getHtmlId($_instance->id),
+        'name' => $field->name,
+        'key' => $field->key,
+        'class' => $field->class, //div wrapping input & label
+        'wrapperClass' => $field->wrapperClass, //outmost div
+    ]"
+    :options="$field->options"
+    x-data="{ {{ $alpineKey }}: $wire.entangle('{{ $field->key }}'){{ $field->deferString }} }"
+    :attr="array_merge([
+        $field->xmodel => $alpineKey
+    ], $field->getAttr('input'))"
+/>

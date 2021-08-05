@@ -5,45 +5,34 @@ namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
 use Illuminate\View\Component;
-use Tanthammar\TallForms\Radio as Field;
+use Tanthammar\TallForms\Traits\Helpers;
 
 class Radio extends Component
 {
-    public Field $field;
-    public string $label;
-    public $value;
-    public $align_label_top = true;
-    public string $id;
-
-    /**
-     * Radio constructor.
-     * @param Field $field
-     * @param int|string $value
-     * @param string $label
-     */
-    public function __construct(Field $field, $value, string $label)
+    public function __construct(
+        public array|object $field,
+        public array $options = [],
+        public array $attr = [],
+    )
     {
-        $this->field = $field;
-        $this->value = $value;
-        $this->label = $label;
-        $this->id = \Str::slug($field->key.$value);
+        $this->field = Helpers::mergeFilledToObject($this->defaults(), $field);
+        $this->field->key = $this->field->key ?: $this->field->id;
+        $this->field->name = $this->field->name ?: $this->field->id;
     }
 
-    public function options(): array
+    public function defaults()
     {
-        $custom = $this->field->getAttr('input');
-        $default = [
-            'x-model' => 'radio', //@entangles field->key
-            'class' => $this->class()
+        return [
+            'id' => 'radio', //unique, concats id.value.loop-index on each radio input,
+            'key' => null, //Livewire prop, input radio name, falls back to id
+            'name' => null, //input name, falls back to 'id'
+            'radioClass' => "form-radio tf-radio",
+            'radioLabelClass' => "tf-radio-label",
+            'spacing' => "tf-radio-label-spacing",
+            'class' => 'flex', //div wrapping input & label
+            'wrapperClass' => false, //outmost div, string
         ];
-        return array_merge($default, $custom);
     }
-
-    public function class(): string
-    {
-        return "form-radio tf-radio ";
-    }
-
 
     public function render(): View
     {

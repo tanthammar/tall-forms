@@ -53,10 +53,10 @@ return [
             'class' => 'tf-fields-after-text'
         ],
 
-        'wire' => 'wire:model.lazy', //default field wire:model attribute
+        'wire' => 'wire:model.lazy', //default field wire:model attribute, override with ->wire()
 
-        'x-model' => 'x-model.lazy', //default field x-model attribute
-        'defer-entangle' => true, //override on individual fields with ->deferEntangle(bool $state)
+        'x-model' => 'x-model.lazy', //default field x-model attribute, override with ->xmodel()
+        'defer-entangle' => true, //override with ->deferEntangle(bool $state)
     ],
 
     //You can swap the icons blade view path. The path is relative to resources/views/components
