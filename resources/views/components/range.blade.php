@@ -1,14 +1,13 @@
-<div class="$class()">
-    <div class="tf-range-wrapper">
-        <div class="tf-range-value">{{ data_get($this, $field->key) ?? $min }}</div>
-        <div class="tf-range-labels">{{$min}}</div>
-        <input {{ $field->wire }}="{{ $field->key }}"
-        value="{{ old($field->key) }}"
-        name="{{ $field->key }}"
-        type="range"
-        min="{{ $min }}" max="{{ $max }}" step="{{ $step }}"
-        {{ $attributes->except(['value', 'name', 'type', 'min', 'class', 'max', 'step'])->merge($attr) }}
+<div x-data="{ range: $wire.entangle('{{ $field->key }}'){{ $field->deferString }} }" class="{{ $field->wrapperClass }}">
+    <div class="tf-range-wrapper" x-cloak>
+        <div class="tf-range-value" x-text="range"></div>
+        <div class="tf-range-labels">{{$field->min}}</div>
+        <input
+            id="{{ $field->id }}" name="{{ $field->name }}" type="range"
+            min="{{ $field->min }}" max="{{ $field->max }}" step="{{ $field->step }}"
+            x-model="range"
+            {{ $attributes->except(['x-data', 'x-model', 'id', 'name', 'type', 'min', 'max', 'step'])->merge($attr)->merge([ 'class' => $field->class ]) }}
         />
-        <div class="tf-range-labels">{{ $max }}</div>
+        <div class="tf-range-labels">{{ $field->max }}</div>
     </div>
 </div>

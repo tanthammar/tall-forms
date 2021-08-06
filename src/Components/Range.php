@@ -5,41 +5,27 @@ namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
 use Illuminate\View\Component;
-use Tanthammar\TallForms\Traits\Helpers;
-use Tanthammar\TallForms\Range as Field;
+use Tanthammar\TallForms\Traits\BaseBladeField;
 
 class Range extends Component
 {
-    use Helpers;
-
-    public Field $field;
-    public int $colspan;
-    public array $attr;
-    public float $step;
-    public float $min;
-    public float $max;
-
-    public function __construct(Field $field, array $attr = [])
+    public function __construct(
+        public array|object $field = [],
+        public array $attr = [])
     {
-        $this->field = $field;
-        $this->colspan = $field->colspan;
-        $this->attr = $attr ?? $field->getAttr('input');
-        $this->step = $field->step;
-        $this->min = $field->min;
-        $this->max = $field->max;
-        $this->inputAttr();
+        $this->field = BaseBladeField::setDefaults($this->defaults(), $field);
     }
 
-    public function class(): string
+    protected function defaults(): array
     {
-        return config('tall-forms.col-span-classes')[$this->colspan];
-    }
-
-    public function inputAttr(): void
-    {
-        $width = 'flex-1 w-full';
-        $custom = ' '.data_get($this->attr, 'class');
-        data_set($this->attr, 'class', Helpers::unique_words($width.$custom));
+        return [
+            'id' => 'range',
+            'step' => 1,
+            'min' => 1,
+            'max' => 100,
+            'class' => 'flex-1 w-full',
+            'wrapperClass' => 'w-full'
+        ];
     }
 
     public function render(): View
