@@ -1,4 +1,4 @@
-<div {{ $attributes->only('x-data') }} class="w-full">
+<div x-data="{ checkboxes: $wire.entangle('{{ $field->key }}'){{ $field->deferString }} }" class="w-full">
     <fieldset wire:ignore class="{{ $wrapperClass }}" id="{{ $id }}" name="{{ $name }}">
         @foreach($options as $value => $label)
             @php $id = 'id'.md5($id.$value.$label.$loop->index); @endphp
@@ -12,7 +12,8 @@
                     'wire:key' => $id,
                     'value' => $value,
                 ], $attr)"
-                {{ $attributes->except('x-data') }}
+                x-model="checkboxes"
+                {{ $attributes->except(['x-data', 'x-model']) }}
             />
         @endforeach
     </fieldset>

@@ -1,4 +1,4 @@
-<div {{ $attributes->only('x-data') }} @if($field->wrapperClass) class="{{ $field->wrapperClass }}" @endif>
+<div x-data="{ radio: $wire.entangle('{{ $field->key }}'){{ $field->deferString }} }" @if($field->wrapperClass) class="{{ $field->wrapperClass }}" @endif>
     <fieldset id="{{ $field->id }}">
         @foreach($options as $value => $label)
             <div class="{{ $field->class }}">
@@ -10,7 +10,8 @@
                     value="{{ $value }}"
                     wire:key="{{ $id }}"
                     class="{{ $field->radioClass }}"
-                    {{ $attributes->except(['x-data', 'class', 'value', 'name', 'id', 'type'])->merge($attr) }}
+                    x-model="radio"
+                    {{ $attributes->except(['x-data', 'x-model', 'class', 'value', 'name', 'id', 'type'])->merge($attr) }}
                 />
                 <div class="{{ $field->spacing }}">
                     <label for="{{ $id }}" class="{{ $field->radioLabelClass }}">

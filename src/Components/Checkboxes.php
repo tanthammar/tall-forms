@@ -5,20 +5,27 @@ namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
 use Illuminate\View\Component;
+use Tanthammar\TallForms\Traits\BaseBladeField;
 
 class Checkboxes extends Component
 {
     public function __construct(
-        public string $id,
+        public array|object $field = [],
         public array $options = [],
-        public ?string $name = "",
-        public ?string $wrapperClass = "tf-checkboxes-fieldset",
-        public ?string $labelClass = "tf-checkbox-label",
-        public ?string $labelWrapperClass = "tf-checkbox-label-spacing",
-        public ?string $class = "form-checkbox tf-checkbox",
         public ?array $attr = [],
     ){
-        $this->name = $this->name ?: $this->id;
+        $this->field = BaseBladeField::setDefaults($this->defaults(), $field);
+    }
+
+    protected function defaults(): array
+    {
+        return [
+            'id' => 'checkboxes',
+            'wrapperClass' => "tf-checkboxes-fieldset",
+            'labelWrapperClass' => "tf-checkbox-label-spacing",
+            'labelClass' => "tf-checkbox-label",
+            'class' => "form-checkbox tf-checkbox",
+        ];
     }
 
     public function render(): View

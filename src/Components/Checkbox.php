@@ -5,6 +5,9 @@ namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\Component;
 
+/**
+ * This component is used by Checkboxes
+ */
 class Checkbox extends Component
 {
     public function __construct(
