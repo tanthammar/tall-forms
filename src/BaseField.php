@@ -35,16 +35,8 @@ abstract class BaseField
         $this->label = $label;
         $this->name = $key ?? Str::snake(Str::lower($label));
         $this->key = 'form_data.' . $this->name;
-        $this->wire = config('tall-forms.field-attributes.wire');
-        $this->xmodel = config('tall-forms.field-attributes.x-model');
-        $this->deferEntangle = config('tall-forms.field-attributes.defer-entangle');
         $this->setAttr();
         $this->overrides();
-    }
-
-    public function getHtmlId($wireComponentID): string
-    {
-        return 'id'.md5($wireComponentID.$this->key);
     }
 
     //problem with collect()->firstWhere()
@@ -86,7 +78,7 @@ abstract class BaseField
     {
         $array = array();
         foreach ($this as $key => $value) {
-            $array[$key] = is_array($value) ? (array) $value : $value;
+            $array[$key] = is_array($value) ? (array)$value : $value;
         }
         return $array;
     }
@@ -99,5 +91,25 @@ abstract class BaseField
     {
         $this->realtimeValidationOn = false;
         return $this;
+    }
+
+    protected function makeHtmlId(string $wireInstanceID): string
+    {
+        return 'id' . md5($wireInstanceID . $this->key);
+    }
+
+    public function mergeBladeDefaults(string $wireInstanceID, array $custom = []): array
+    {
+        //This array merges as $custom in BaseBladeField->setDefaults(...)
+        return array_merge([
+            'id' => $this->makeHtmlId($wireInstanceID),
+            'name' => $this->name,
+            'key' => $this->key,
+            'defer' => $this->deferEntangle,
+            'wire' => $this->wire,
+            'xmodel' => $this->xmodel,
+            'class' => $this->class,
+            'wrapperClass' => $this->wrapperClass,
+        ], $custom);
     }
 }

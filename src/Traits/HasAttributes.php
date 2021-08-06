@@ -10,11 +10,9 @@ trait HasAttributes
 {
     public array $attributes = [];
 
-    public null|string $wire = null; // default = wire:model.lazy, in config/tall-forms, set in BaseField __construct()
-    public null|string $xmodel = null; // default = x-model.lazy, in config/tall-forms, set in BaseField __construct()
-    public null|string $alpineKey = null; //used for x-data
-    public null|string|bool $deferEntangle = null;
-    public null|string $deferString = null;
+    public null|string $wire = null; // config('tall-forms.field-attributes.wire'), applied in BaseBladeField::setDefaults()
+    public null|string $xmodel = null; // config('tall-forms.field-attributes.x-model'), applied in BaseBladeField::setDefaults()
+    public null|bool $deferEntangle = null; // config('tall-forms.field-attributes.defer-entangle'), applied in BaseBladeField::setDefaults()
 
     public function getAttr($type): mixed
     {
@@ -84,25 +82,29 @@ trait HasAttributes
         return $this;
     }
 
+    /**
+     * Example ->wire('debounce.500ms')
+     */
     public function wire(string $on = 'wire:model'): self
     {
-        $this->wire = str_contains($on, 'wire:model') ? $on : "wire:model.$on";
-        if (str_contains($on, 'defer')) $this->deferEntangle();
+        //handled in BaseBladeField->setDefaults()
+        $this->wire = $on;
         return $this;
     }
 
-    public function xmodel(string $on = 'x-model', bool $defer = true, ?string $key = null): self
+    /**
+     * Example ->xmodel('debounce.500ms')
+     */
+    public function xmodel(string $on = 'x-model'): self
     {
-        $this->xmodel = str_contains($on, 'x-model') ? $on : "x-model.$on";;
-        $this->deferEntangle($defer);
-        if($key) $this->alpineKey = $key;
+        //handled in BaseBladeField->setDefaults()
+        $this->xmodel = $on;
         return $this;
     }
 
     public function deferEntangle(bool $state = true): self
     {
         $this->deferEntangle = $state;
-        if($state) $this->deferString = '.defer';
         return $this;
     }
 

@@ -22,7 +22,6 @@ class FileUpload extends Component
         $this->field->key = $this->field->key ?: $this->field->name;
         $this->uploadFileError = data_get($field, 'errorMsg', $this->field->uploadFileError);
         $this->showFileUploadErrorFor = $this->showFileUploadErrorFor ?: $this->field->key;
-        ray($this->field);
     }
 
     public function defaults(): array
