@@ -42,8 +42,9 @@ class Select extends Component
 
     public function class(): string
     {
-        $class = $this->field->multiple ? "form-input my-1 w-full shadow px-0 divide-y " : "form-select my-1 w-full shadow ";
+        $class = $this->field->multiple ? "form-input my-1 w-full shadow px-0 divide-y " : "form-select my-1 w-full shadow";
         if(filled($this->field->class)) {
+            $class .= " ";
             $class .= $this->field->class;
             return Helpers::unique_words($class);
         } else {
