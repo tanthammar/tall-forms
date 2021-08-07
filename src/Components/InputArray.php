@@ -5,6 +5,7 @@ namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
 use Illuminate\View\Component;
+use Tanthammar\TallForms\Traits\BaseBladeField;
 use Tanthammar\TallForms\Traits\Helpers;
 
 class InputArray extends Component
@@ -13,20 +14,16 @@ class InputArray extends Component
         public array|object $field,
         public array $attr = [])
     {
-        $this->field = Helpers::mergeFilledToObject($this->defaults(), $field);
-        $this->field->key = $this->field->key ?: $this->field->id;
-        $this->field->name = $this->field->name ?: $this->field->id;
+        $this->field = BaseBladeField::setDefaults($this->defaults(), $field);
         $this->attr = array_merge($this->options(), $attr);
-        $this->field->itemsArray = $this->field->deferEntangle ? "\$wire.entangle('".$this->field->key."').defer" : "\$wire.entangle('".$this->field->key."')";
+        $this->field->itemsArray = $this->field->defer ? "\$wire.entangle('".$this->field->key."').defer" : "\$wire.entangle('".$this->field->key."')";
     }
 
     public function defaults(): array
     {
         return [
             'id' => 'inputArray', //unique, fieldset id + label for =,
-            'key' => null, //Livewire prop, @error($field->key.'.*'), falls back to 'id'
-            'name' => null, //fieldset name, falls back to 'id'
-            'deferEntangle' => true,
+            'defer' => true,
             'type' => 'text',
             'wrapperClass' => null,
             'class' => null,

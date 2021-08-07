@@ -5,6 +5,7 @@ namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
 use Illuminate\View\Component;
+use Tanthammar\TallForms\Traits\BaseBladeField;
 use Tanthammar\TallForms\Traits\Helpers;
 
 class FileUpload extends Component
@@ -17,20 +18,17 @@ class FileUpload extends Component
         public ?string $showFileUploadErrorFor = null,
         public ?string $uploadFileError = null)
     {
-        $this->field = Helpers::mergeFilledToObject($this->defaults(), $field);
-        $this->field->id = $this->field->id ?: $this->field->name;
-        $this->field->key = $this->field->key ?: $this->field->name;
+        $this->field = BaseBladeField::setDefaults($this->defaults(), $field);
         $this->uploadFileError = data_get($field, 'errorMsg', $this->field->uploadFileError);
         $this->showFileUploadErrorFor = $this->showFileUploadErrorFor ?: $this->field->key;
+        $this->field->inputWrapperClass = $this->inputWrapper();
     }
 
     public function defaults(): array
     {
         return [
+            'id' => 'fileUpload',
             'multiple' => false,
-            'id' => null,
-            'name' => 'fileUpload',
-            'key' => null,
             'class' => '',
             'confirm_delete' => true,
             'confirm_msg' => __('tf::form.alerts.are-u-sure'),
@@ -40,6 +38,8 @@ class FileUpload extends Component
             'tall_svg_upload' => config('tall-forms.file-upload'),
             'tall_svg_file' => config('tall-forms.file-icon'),
             'tall_svg_trash' => config('tall-forms.trash-icon'),
+            'inputWrapperClass' => 'tf-file-upload-input-wrapper',
+            'inputWrapperErrorClass' => 'tf-field-error',
         ];
     }
 
@@ -50,14 +50,18 @@ class FileUpload extends Component
 
     public function inputWrapper(): string
     {
-        $class = "tf-file-upload-input-wrapper ";
-        $class .= data_get($this->field, 'class');
-        return Helpers::unique_words($class);
+        if (filled($this->field->class)) {
+            $class = $this->field->inputWrapperClass;
+            $class .= " ";
+            $class .= $this->field->class;
+            return Helpers::unique_words($class);
+        }
+        return $this->field->inputWrapperClass;
     }
 
     public function inputWrapperError(): string
     {
-        return $this->inputWrapper() . " tf-field-error";
+        return "$this->field->inputWrapperClass $this->field->inputWrapperErrorClass";
     }
 
     public function render(): View

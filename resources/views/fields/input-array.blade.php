@@ -1,15 +1,9 @@
 <x-tall-input-array
-    :field="[
-        'id' => $field->getHtmlId($_instance->id),
-        'name' => $field->name,
-        'key' => $field->key,
-        'deferEntangle' => $field->deferEntangle,
+    :field="$field->mergeBladeDefaults($_instance->id, [
         'type' => $field->input_type,
-        'wrapperClass' => $field->wrapperClass,
-        'class' => $field->class,
         'placeholder' => $field->placeholder,
         'errorMsg' => $field->errorMsg,
         'maxItems' => $field->maxItems, //0 = unlimited
         'minItems' => $field->minItems, //0 = unlimited
-    ]"
+    ])"
     :attr="$field->getAttr('input')"/>

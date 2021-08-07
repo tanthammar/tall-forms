@@ -5,7 +5,7 @@
              x-on:livewire-upload-start="isUploading = true && $wire.clearFileUploadError('{{ $field->multiple ? $field->name.'.*': $field->name }}')"
              x-on:livewire-upload-finish="isUploading = false"
              x-on:livewire-upload-error="isUploading = false"
-             class="{{ $showFileUploadError || $errors->has($field->multiple ? $field->name.'.*': $field->name) ? $inputWrapperError() : $inputWrapper() }}">
+             class="{{ $showFileUploadError || $errors->has($field->multiple ? $field->name.'.*': $field->name) ? $inputWrapperError() : $field->inputWrapperClass }}">
             <div class="tf-file-upload-spinner-wrapper">
                 {{-- <div x-cloak x-show="isUploading">--}}
                 <div wire:loading wire:target="{{ $field->name }}">

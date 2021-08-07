@@ -6,6 +6,7 @@ namespace Tanthammar\TallForms\Components;
 use Illuminate\View\View;
 use Illuminate\View\Component;
 use Tanthammar\TallForms\Input as Field;
+use Tanthammar\TallForms\Traits\BaseBladeField;
 use Tanthammar\TallForms\Traits\Helpers;
 
 class Input extends Component
@@ -21,10 +22,8 @@ class Input extends Component
         public array $attr = [],
     )
     {
-        $this->field = Helpers::mergeFilledToObject($this->defaults(), $field);
+        $this->field = BaseBladeField::setDefaults($this->defaults(), $field);
         $this->attr = array_merge($this->options(), $attr);
-        $this->field->name = $this->field->name ?: $this->field->id;
-        $this->field->key = $this->field->key ?: $this->field->id;
         $this->field->class = $this->class();
         $this->field->hasIcon = !empty($this->field->icon || $this->field->tallIcon || $this->field->htmlIcon);
         $this->field->sfxHasIcon = !empty($this->field->sfxIcon || $this->field->sfxTallIcon || $this->field->sfxHtmlIcon);

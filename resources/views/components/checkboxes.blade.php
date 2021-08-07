@@ -1,13 +1,13 @@
 <div x-data="{ checkboxes: $wire.entangle('{{ $field->key }}'){{ $field->deferString }} }" class="w-full">
-    <fieldset wire:ignore class="{{ $wrapperClass }}" id="{{ $id }}" name="{{ $name }}">
+    <fieldset wire:ignore class="{{ $field->wrapperClass }}" id="{{ $field->id }}" name="{{ $field->name }}">
         @foreach($options as $value => $label)
-            @php $id = 'id'.md5($id.$value.$label.$loop->index); @endphp
+            @php $id = 'id'.md5($field->id.$value.$label.$loop->index); @endphp
             <x-tall-checkbox
                 :id="$id"
                 :name="Str::slug(Str::lower($label))"
                 :label="$label"
-                :label-class="$labelClass"
-                :class="$class"
+                :label-class="$field->labelClass"
+                :class="$field->class"
                 :attr="array_merge([
                     'wire:key' => $id,
                     'value' => $value,

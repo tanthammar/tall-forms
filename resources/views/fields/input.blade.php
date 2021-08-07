@@ -1,10 +1,5 @@
-@php $alpineKey = $field->alpineKey ?? 'input'; @endphp
-<x-tall-input :field="[
-        'id' => $field->getHtmlId($_instance->id),
-        'name' => $field->name,
-        'key' => $field->key, //@error & Livewire prop
-        'wrapperClass' => $field->wrapperClass,
-        'class' => $field->class,
+<x-tall-input
+    :field="$field->mergeBladeDefaults($_instance->id, [
         'prefix' => $field->prefix,
         'icon' => $field->icon, //Blade icon name
         'iconClass' => $field->iconClass, //Blade icon class
@@ -21,7 +16,7 @@
         'step' => $field->step,
         'min' => $field->min,
         'max' => $field->max,
-    ]"
+    ])"
     :attr="array_merge([
         $field->wire => $field->key
     ], $field->getAttr('input'))

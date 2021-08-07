@@ -5,6 +5,7 @@ namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
 use Illuminate\View\Component;
+use Tanthammar\TallForms\Traits\BaseBladeField;
 use Tanthammar\TallForms\Traits\Helpers;
 
 class ImageCropper extends Component
@@ -14,9 +15,7 @@ class ImageCropper extends Component
         public array|object $field,
         public ?string $imageUrl = '',
     ){
-        $this->field = Helpers::mergeFilledToObject($this->defaults(), $field);
-        $this->field->key = $this->field->key ?: $this->field->id;
-        $this->field->name = $this->field->name ?: $this->field->id;
+        $this->field = BaseBladeField::setDefaults($this->defaults(), $field);
     }
 
 
@@ -24,8 +23,6 @@ class ImageCropper extends Component
     {
         return [
             'id' => 'imageCropper',
-            'key' => null,
-            'name' => null,
             'width' => 150,
             'height' => 150,
             'shape' => 'square',
