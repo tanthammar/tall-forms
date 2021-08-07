@@ -5,7 +5,6 @@ namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
 use Illuminate\View\Component;
-use Tanthammar\TallForms\Search as Field;
 use Tanthammar\TallForms\Traits\BaseBladeField;
 use Tanthammar\TallForms\Traits\Helpers;
 
@@ -16,7 +15,8 @@ class Search extends Component
     public function __construct(
         public array|object $field = [],
         public array        $options = [],
-        public array        $attr = [])
+        public array        $attr = []
+    )
     {
         $this->field = BaseBladeField::setDefaults($this->defaults(), $field);
         $this->field->class = $this->class($field);

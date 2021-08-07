@@ -14,7 +14,7 @@
             multiple
             name="{{ $field->name }}"
             id="{{ $field->id }}"
-            {{ $attributes->except(['id', 'name', 'value'])->merge($attr)->merge(['class' => $errors->has($field->key) ? $error() : $class() ]) }}>
+            {{ $attributes->except(['id', 'name', 'value'])->merge($attr)->merge(['class' => $errors->has($field->key) ? $error() : $field->class ]) }}>
         @forelse($options as $value => $label)
             <option class="p-2" wire:key="id{{ md5($field->id.$field->key.$value) }}" value="{{ $value }}">{{ $label }}</option>
         @empty

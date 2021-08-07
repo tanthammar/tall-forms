@@ -2,7 +2,7 @@
     name="{{ $field->name }}"
     id="{{ $field->id }}"
     @if($value) value="{{ $value }}" @endif
-    {{ $attributes->except(['id', 'name'])->merge($attr)->merge(['class' => $errors->has($field->key) ? $error() : $class() ]) }}
+    {{ $attributes->except(['id', 'name', 'value'])->merge($attr)->merge(['class' => $errors->has($field->key) ? $error() : $field->class ]) }}
 >
 @if($field->placeholder) <option value="">{{ $field->placeholder }}</option> @endif
 @forelse($options as $value => $label)
