@@ -93,7 +93,7 @@ abstract class BaseField
         return $this;
     }
 
-    protected function makeHtmlId(string $wireInstanceID): string
+    public function makeHtmlId(string $wireInstanceID): string
     {
         return 'id' . md5($wireInstanceID . $this->key);
     }

@@ -1,6 +1,6 @@
 <x-tall-select
     :field="[
-        'id' => $field->getHtmlId($_instance->id),
+        'id' => $field->makeHtmlId($_instance->id),
         'name' => $field->name,
         'key' => $field->key, //@error & Livewire prop
         'class' => $field->class ?? $field->wrapperClass,
