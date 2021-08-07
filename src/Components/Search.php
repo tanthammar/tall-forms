@@ -6,34 +6,50 @@ namespace Tanthammar\TallForms\Components;
 use Illuminate\View\View;
 use Illuminate\View\Component;
 use Tanthammar\TallForms\Search as Field;
+use Tanthammar\TallForms\Traits\BaseBladeField;
 use Tanthammar\TallForms\Traits\Helpers;
 
 class Search extends Component
 {
     use Helpers;
 
-    public Field $field;
-    public array $options;
-    public string $listWidth;
-
-    public function __construct(Field $field, array $options = [])
+    public function __construct(
+        public array|object $field = [],
+        public array        $options = [],
+        public array        $attr = [])
     {
-        $this->field = $field;
-        $this->options = $options;
-        $this->listWidth = $field->listWidth ?? 'tf-search-dropdown-width';
-        $this->field->placeholder = $this->field->placeholder ?: __('tf::form.search.placeholder');
+        $this->field = BaseBladeField::setDefaults($this->defaults(), $field);
+        $this->field->class = $this->class($field);
     }
 
-    public function class(): string
+    protected function defaults(): array
     {
-        $class = "form-input w-full shadow-inner my-1 ";
-        $class .= $this->field->class;
-        return Helpers::unique_words($class);
+        return [
+            'id' => 'search',
+            'searchKey' => 'searchKey',
+            'debounce' => '500',
+            'listWidth' => 'tf-search-dropdown-width',
+            'placeholder' => __('tf::form.search.placeholder'),
+            'class' => 'form-input w-full shadow-inner my-1',
+            'errorClass' => 'tf-field-error',
+            'wrapperClass' => 'w-full',
+        ];
+    }
+
+    public function class(array $field): string
+    {
+        if (array_key_exists('class', $field)) {
+            $class = $this->field->class;
+            $class .= " ";
+            $class .= $field['class'];
+            return Helpers::unique_words($class);
+        }
+        return $this->field->class;
     }
 
     public function error(): string
     {
-        return $this->class()." tf-field-error";
+        return $this->field->class.' '.$this->field->errorClass;
     }
 
     public function render(): View

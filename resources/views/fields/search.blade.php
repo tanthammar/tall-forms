@@ -1,12 +1,10 @@
-<div x-data="{
-    optionsVisible: false,
-    field: @entangle($field->key),
-    selected: null,
-    searchInput: @entangle($field->searchKey)}
-">
-    <x-tall-search
-        :field="$field"
-        :options="$field->options"
-    />
-</div>
+<x-tall-search
+    :field="$field->mergeBladeDefaults($_instance->id, [
+            'searchKey' => $field->searchKey,
+            'debounce' => $field->debounce,
+            'listWidth' => $field->listWidth,
+            'placeholder' => $field->placeholder,
+        ])"
+    :options="$field->options"
+/>
 

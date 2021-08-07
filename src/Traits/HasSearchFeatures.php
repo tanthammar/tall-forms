@@ -11,7 +11,7 @@ trait HasSearchFeatures
 {
     public $placeholder;
     public $searchKey = 'searchInput';
-    public $displayValue = 'displayValue';
+    //public $displayValue = 'displayValue'; obsolete prop
     public $debounce = 500;
     public string $listWidth;
 
