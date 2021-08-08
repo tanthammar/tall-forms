@@ -1,11 +1,11 @@
-<div class="w-full my-1" x-data="{ isUploading: false }">
+<div class="{{ $field->wrapperClass }}" x-data="{ isUploading: false }">
     @if(blank($field->fieldValue) || $errors->has($field->multiple ? $field->name.'.*' : $field->name))
         {{--only show the file input if the field is empty or there are validation errors, to force the user to upload new files or delete existing. --}}
         <div wire:key="file-upload-blank{{md5($field->name)}}"
              x-on:livewire-upload-start="isUploading = true && $wire.clearFileUploadError('{{ $field->multiple ? $field->name.'.*': $field->name }}')"
              x-on:livewire-upload-finish="isUploading = false"
              x-on:livewire-upload-error="isUploading = false"
-             class="{{ $showFileUploadError || $errors->has($field->multiple ? $field->name.'.*': $field->name) ? $inputWrapperError() : $field->inputWrapperClass }}">
+             class="{{ $showFileUploadError || $errors->has($field->multiple ? $field->name.'.*': $field->name) ? $field->errorClass : $field->class }}">
             <div class="tf-file-upload-spinner-wrapper">
                 {{-- <div x-cloak x-show="isUploading">--}}
                 <div wire:loading wire:target="{{ $field->name }}">
@@ -24,7 +24,7 @@
                 @if($showFileUploadError && $showFileUploadErrorFor == $field->name) :value="null" @endif
                 {{ $field->multiple ? 'multiple' : '' }}
                 accept="{{$field->accept}}"
-                class="{{ $class() }}"/>
+                class="{{ $field->inputClass }}"/>
         </div>
     @endif
     @if(filled($field->fieldValue))

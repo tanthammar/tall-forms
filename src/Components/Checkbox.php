@@ -21,6 +21,7 @@ class Checkbox extends Component
         public ?array $attr = [],
     ){
         $this->name = $this->name ?: $this->id;
+
     }
 
     public function render()

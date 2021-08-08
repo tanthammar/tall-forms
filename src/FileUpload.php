@@ -57,5 +57,6 @@ class FileUpload extends BaseField
         if ($message) $this->confirm_msg = $message;
         return $this;
     }
+
 }
 

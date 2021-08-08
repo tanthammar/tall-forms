@@ -3,7 +3,7 @@
     type="checkbox"
     id="{{ $id }}"
     name="{{ $name }}"
-    {{ $attributes->except('x-data')->merge($attr)->merge(['class' => $class ]) }}
+    {{ $attributes->except([...array_keys($attr), 'id', 'name', 'x-data'])->merge($attr)->merge(['class' => $class ]) }}
     />
     <div class="{{ $labelWrapperClass }}">
         <label for="{{ $id }}" class="{{ $labelClass }}">

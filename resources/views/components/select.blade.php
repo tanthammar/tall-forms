@@ -1,9 +1,4 @@
-<select
-    name="{{ $field->name }}"
-    id="{{ $field->id }}"
-    @if($value) value="{{ $value }}" @endif
-    {{ $attributes->except(['id', 'name', 'value'])->merge($attr)->merge(['class' => $errors->has($field->key) ? $error() : $field->class ]) }}
->
+<select {{ $attributes->except(array_keys($attr))->merge($attr)->merge(['class' => $errors->has($field->key) ? $field->errorClass : $field->class ]) }}>
 @if($field->placeholder) <option value="">{{ $field->placeholder }}</option> @endif
 @forelse($options as $value => $label)
 <option wire:key="id{{ md5($field->id.$field->key.$value) }}" value="{{ $value }}">{{ $label }}</option>

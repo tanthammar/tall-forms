@@ -104,9 +104,9 @@ return [
         'radio' => Components\Radio::class,
         'file-upload' => Components\FileUpload::class,
         'select' => Components\Select::class,
+        'multiselect' => Components\MultiSelect::class,
         'search' => Components\Search::class,
         'trix' => Components\Trix::class,
         'svg' => Components\Svg::class,
-        'markdown' => Components\Markdown::class,
     ]
 ];

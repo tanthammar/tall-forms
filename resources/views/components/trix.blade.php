@@ -1,6 +1,6 @@
 <div class="w-full"
      x-data="{
-        trix: @entangle($field->key).defer,
+        trix: @entangle($field->key){{ $field->deferString }},
         get notFocused() { return document.activeElement !== this.$refs.trixInput },
         setValue() {
             {{-- replace content --}}
@@ -12,9 +12,9 @@
     x-init="$watch('trix', () => notFocused && setValue())"
     x-on:trix-change.debounce.300ms="trix = $refs.trixInput.value"
 >
-    <input value="{{ old($field->key) ?? $value }}" id="trix{{ md5($field->key) }}" name="trix{{ md5($field->key) }}" type="hidden" />
+    <input value="{{ old($field->name) ?? $field->value }}" id="{{ $field->id }}" name="{{ $field->name }}" type="hidden" />
     <div wire:ignore x-on:trix-file-accept="() => event.preventDefault()" class="no-upload">
-        <trix-editor x-ref="trixInput" input="trix{{ md5($field->key) }}" {{ $attributes->merge(['class' => $errors->has($field->key) ? $error() : $class() ]) }}></trix-editor>
+        <trix-editor x-ref="trixInput" input="{{ $field->id }}" {{ $attributes->merge(['class' => $errors->has($field->key) ? $field->errorClass : $field->class ]) }}></trix-editor>
     </div>
 </div>
 @if($field->includeScript)

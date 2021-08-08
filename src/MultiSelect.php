@@ -13,6 +13,7 @@ class MultiSelect extends Select
         $this->align_label_top = true;
         $this->allowed_in_repeater = false;
         $this->help = __('tf::form.multiselect.help');
+        $this->deferEntangle();
         return $this;
     }
 

@@ -4,11 +4,10 @@
 namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
-use Illuminate\View\Component;
 use Tanthammar\TallForms\Traits\BaseBladeField;
 use Tanthammar\TallForms\Traits\Helpers;
 
-class Select extends Component
+class Select extends BaseBladeField
 {
     use Helpers;
 
@@ -19,46 +18,33 @@ class Select extends Component
         public array             $attr = []
     )
     {
-        $this->field = BaseBladeField::setDefaults($this->defaults(), $field);
-        $this->field->placeholder = $this->field->placeholder ?: (
-            $this->field->multiple
-                ? __('tf::form.multiselect.placeholder')
-                : __('tf::form.select.placeholder')
-        );
-        $this->field->class = $this->class();
+        parent::__construct($field);
+        $this->attr = array_merge($this->inputAttributes(), $attr);
     }
 
     public function defaults(): array
     {
         return [
             'id' => 'select',
-            'placeholder' => null, //see construct
+            'placeholder' => __('tf::form.select.placeholder'),
             'defer' => false, //doesn't use entangle
             'multiple' => false,
-            'class' => '', //see class() + error()
-            'errorClass' => 'tf-field-error'
+            'class' => 'form-select my-1 w-full shadow',
         ];
     }
 
-    public function class(): string
+    public function inputAttributes(): array
     {
-        $class = $this->field->multiple ? "form-input my-1 w-full shadow px-0 divide-y " : "form-select my-1 w-full shadow";
-        if (filled($this->field->class)) {
-            $class .= " ";
-            $class .= $this->field->class;
-            return Helpers::unique_words($class);
-        } else {
-            return $class;
-        }
+        return [
+            'id' => $this->field->id,
+            'name' => $this->field->name,
+            'value' => old($this->field->name)
+        ];
     }
 
-    public function error(): string
-    {
-        return $this->field->class . ' ' . $this->field->errorClass;
-    }
 
     public function render(): View
     {
-        return ($this->field->multiple) ? view('tall-forms::components.multiselect') : view('tall-forms::components.select');
+        return view('tall-forms::components.select');
     }
 }

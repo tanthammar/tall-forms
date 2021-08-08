@@ -4,33 +4,37 @@
 namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
-use Illuminate\View\Component;
-use Tanthammar\TallForms\Trix as Field;
+use Tanthammar\TallForms\Traits\BaseBladeField;
 use Tanthammar\TallForms\Traits\Helpers;
 
-class Trix extends Component
+class Trix extends BaseBladeField
 {
     use Helpers;
 
-    public Field $field;
-    public ?string $value;
 
-    public function __construct(Field $field, ?string $value = null)
+    public function __construct(
+        public array|object $field = [],
+        public array $attr = [])
     {
-        $this->field = $field;
-        $this->value = $value;
+        parent::__construct($field);
     }
 
-    public function class(): string
-    {
-        $class = "form-textarea w-full shadow-inner ";
-        $class .= $this->field->class;
-        return Helpers::unique_words($class);
-    }
 
-    public function error(): string
+    public function defaults(): array
     {
-        return $this->class() . " tf-field-error";
+        return [
+            'id' => 'trix',
+            'class' => 'form-textarea w-full shadow-inner',
+            'value' => '',
+            'defer' => true, //defer entangle
+            'includeScript' => true,
+            //sponsor field defaults;
+            'allowAttachments' => false,
+            'attachmentKey' => '',
+            'allowedMimeTypes' => [],
+            'maxAttachments' => 1,
+            'maxKB' => 1024,
+        ];
     }
 
     public function render(): View

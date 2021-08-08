@@ -10,6 +10,9 @@ trait HasDesign
     public null|bool $inline = null;
     public null|int $colspan = 12;
     public null|string $class = null;
+    public bool|string $appendClass = false;
+    public null|string $errorClass = null;
+    public bool|string $appendErrorClass = false;
     public null|string $wrapperClass = null;
     public bool $inArray = false;
 
@@ -45,12 +48,28 @@ trait HasDesign
     }
 
     /**
-     * Sometimes applied to the field wrapper
-     * Merge or replace the fields default classes
+     * Append or replace the fields default classes
      */
-    public function class(string $classes, bool $merge = true): self
+    public function class(string $classes, bool $append = true): self
     {
-        $this->class = $merge ? "$this->class $classes" : $classes;
+        if ($append) {
+            $this->appendClass = $classes;
+        } else {
+            $this->class = $classes;
+        }
+        return $this;
+    }
+
+    /**
+     * Append or replace the fields default error classes
+     */
+    public function errorClass(string $classes, bool $append = true): self
+    {
+        if ($append) {
+            $this->appendErrorClass = $classes;
+        } else {
+            $this->class = $classes;
+        }
         return $this;
     }
 

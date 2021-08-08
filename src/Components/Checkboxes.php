@@ -4,20 +4,19 @@
 namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
-use Illuminate\View\Component;
 use Tanthammar\TallForms\Traits\BaseBladeField;
 
-class Checkboxes extends Component
+class Checkboxes extends BaseBladeField
 {
     public function __construct(
         public array|object $field = [],
         public array $options = [],
         public ?array $attr = [],
     ){
-        $this->field = BaseBladeField::setDefaults($this->defaults(), $field);
+        parent::__construct($field);
     }
 
-    protected function defaults(): array
+    public function defaults(): array
     {
         return [
             'id' => 'checkboxes',

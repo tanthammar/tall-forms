@@ -1,4 +1,4 @@
-<div x-data="{ radio: $wire.entangle('{{ $field->key }}'){{ $field->deferString }} }" @if($field->wrapperClass) class="{{ $field->wrapperClass }}" @endif>
+<div x-data="{ radio: $wire.entangle('{{ $field->key }}'){{ $field->deferString }} }" class="{{ $field->wrapperClass }}">
     <fieldset id="{{ $field->id }}">
         @foreach($options as $value => $label)
             <div class="{{ $field->class }}">

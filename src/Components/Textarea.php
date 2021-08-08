@@ -4,45 +4,40 @@
 namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
-use Illuminate\View\Component;
-use Tanthammar\TallForms\Textarea as Field;
-use Tanthammar\TallForms\Traits\Helpers;
+use Tanthammar\TallForms\Traits\BaseBladeField;
 
-class Textarea extends Component
+class Textarea extends BaseBladeField
 {
-    use Helpers;
-
-    public Field $field;
-    public bool $required;
-
-    public function __construct(Field $field)
+    public function __construct(
+        public array|object $field = [],
+        public array        $attr = []
+    )
     {
-        $this->field = $field;
-        $this->required = $field->required;
+        parent::__construct($field);
+        $this->attr = array_merge($this->inputAttributes(), $attr);
     }
 
-    public function options(): array
+    public function defaults(): array
     {
-        $custom = $this->field->getAttr('input');
-        $default = [
-            $this->field->wire => $this->field->key,
-            'name' => $this->field->key,
-            'placeholder' => $this->field->placeholder,
-            'rows' => $this->field->textarea_rows,
+        return [
+            'id' => 'textarea',
+            'required' => false,
+            'defer' => false, //doesn't use entangle
+            'class' => 'form-textarea block w-full rounded shadow-inner my-1',
+            'placeholder' => '',
+            'rows' => 5,
         ];
-        return array_merge($default, $custom);
     }
 
-    public function class(): string
+    public function inputAttributes(): array
     {
-        $class = "form-textarea block w-full rounded shadow-inner my-1 ";
-        $class .= $this->field->class;
-        return Helpers::unique_words($class);
-    }
-
-    public function error(): string
-    {
-        return $this->class()." tf-field-error";
+        return [
+            'id' => $this->field->id,
+            'name' => $this->field->name,
+            'placeholder' => $this->field->placeholder,
+            'rows' => $this->field->rows,
+            'value' => old($this->field->name)
+        ];
     }
 
     public function render(): View

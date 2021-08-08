@@ -4,11 +4,10 @@
 namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
-use Illuminate\View\Component;
 use Tanthammar\TallForms\Traits\BaseBladeField;
 use Tanthammar\TallForms\Traits\Helpers;
 
-class Search extends Component
+class Search extends BaseBladeField
 {
     use Helpers;
 
@@ -18,11 +17,11 @@ class Search extends Component
         public array        $attr = []
     )
     {
-        $this->field = BaseBladeField::setDefaults($this->defaults(), $field);
-        $this->field->class = $this->class($field);
+        parent::__construct($field);
+        $this->attr = array_merge($this->inputAttributes(), $attr);
     }
 
-    protected function defaults(): array
+    public function defaults(): array
     {
         return [
             'id' => 'search',
@@ -31,26 +30,21 @@ class Search extends Component
             'listWidth' => 'tf-search-dropdown-width',
             'placeholder' => __('tf::form.search.placeholder'),
             'class' => 'form-input w-full shadow-inner my-1',
-            'errorClass' => 'tf-field-error',
             'wrapperClass' => 'w-full',
         ];
     }
 
-    public function class(array $field): string
+    public function inputAttributes(): array
     {
-        if (array_key_exists('class', $field)) {
-            $class = $this->field->class;
-            $class .= " ";
-            $class .= $field['class'];
-            return Helpers::unique_words($class);
-        }
-        return $this->field->class;
+        return [
+            'id' => $this->field->id,
+            'name' => $this->field->name,
+            'value' => old($this->field->name),
+            'type' => 'text',
+            'placeholder' => $this->field->placeholder,
+        ];
     }
 
-    public function error(): string
-    {
-        return $this->field->class.' '.$this->field->errorClass;
-    }
 
     public function render(): View
     {

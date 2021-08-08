@@ -4,19 +4,19 @@
 namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
-use Illuminate\View\Component;
 use Tanthammar\TallForms\Traits\BaseBladeField;
 
-class Range extends Component
+class Range extends BaseBladeField
 {
     public function __construct(
         public array|object $field = [],
         public array $attr = [])
     {
-        $this->field = BaseBladeField::setDefaults($this->defaults(), $field);
+        parent::__construct($field);
+        $this->attr = array_merge($this->inputAttributes(), $attr);
     }
 
-    protected function defaults(): array
+    public function defaults(): array
     {
         return [
             'id' => 'range',
@@ -31,5 +31,18 @@ class Range extends Component
     public function render(): View
     {
         return view('tall-forms::components.range');
+    }
+
+    public function inputAttributes(): array
+    {
+        return [
+            'type' => 'range',
+            'id' => $this->field->id,
+            'name' => $this->field->name,
+            'value' => old($this->field->name),
+            'min' => $this->field->min,
+            'max' => $this->field->max,
+            'step' => $this->field->step,
+        ];
     }
 }

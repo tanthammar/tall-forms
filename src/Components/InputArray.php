@@ -4,17 +4,15 @@
 namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
-use Illuminate\View\Component;
 use Tanthammar\TallForms\Traits\BaseBladeField;
-use Tanthammar\TallForms\Traits\Helpers;
 
-class InputArray extends Component
+class InputArray extends BaseBladeField
 {
     public function __construct(
         public array|object $field,
         public array $attr = [])
     {
-        $this->field = BaseBladeField::setDefaults($this->defaults(), $field);
+        parent::__construct($field);
         $this->attr = array_merge($this->options(), $attr);
         $this->field->itemsArray = $this->field->defer ? "\$wire.entangle('".$this->field->key."').defer" : "\$wire.entangle('".$this->field->key."')";
     }
@@ -26,7 +24,7 @@ class InputArray extends Component
             'defer' => true,
             'type' => 'text',
             'wrapperClass' => null,
-            'class' => null,
+            'class' => "form-input my-1 w-full", //applied to each input
             'errorClass' => 'border rounded border-red-500 p-2 md:p-4 mb-2', //applied to the outer div surrounding the inputs
             'placeholder' => null,
             'errorMsg' => null,
@@ -40,13 +38,8 @@ class InputArray extends Component
         return [
             'type' => $this->field->type,
             'placeholder' => $this->field->placeholder,
-            'class' => $this->class()
+            'class' => $this->field->class,
         ];
-    }
-
-    public function class(): string
-    {
-        return $this->field->class ?: "form-input my-1 w-full"; //example class from a default input field
     }
 
 

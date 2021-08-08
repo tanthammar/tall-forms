@@ -1,6 +1,6 @@
 <div {{ $attributes->only('x-data') }} class="{{$field->wrapperClass}}">
     @if($field->prefix || $field->hasIcon)
-        <span class="{{ $icon_span }} {{ $left_border }}">
+        <span class="{{ $field->icon_span }} {{ $field->left_border }}">
             @if($field->icon)
                 <span class="mx-1">@svg($field->icon, "h-6 w-6 $field->iconClass")</span>
             @endif
@@ -17,16 +17,15 @@
     @endif
     <div class="relative w-full">
         <input
-            value="{{ old($field->key) }}"
             @if($field->required) required @endif
-            {{ $attributes->except('x-data')->merge($attr)->merge(['class' => $errors->has($field->key) ? $error() : $class ]) }}
+            {{ $attributes->except([...array_keys($attr), 'x-data'])->merge($attr)->merge(['class' => $errors->has($field->key) ? $field->errorClass : $field->class ]) }}
         />
         @error($field->key)
             <x-tall-error-icon :right="in_array($field->type, ['date', 'datetime-local', 'time']) ? 'right-6' : 'right-0'"/>
         @enderror
     </div>
     @if($field->suffix || $field->sfxHasIcon)
-        <span class="{{ $icon_span }} {{ $right_border }}">
+        <span class="{{ $field->icon_span }} {{ $field->right_border }}">
             @if($field->sfxIcon)
                 <span class="mx-1">@svg($field->sfxIcon, "h-6 w-6 $field->sfxIconClass")</span>
             @endif

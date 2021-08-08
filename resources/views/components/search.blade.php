@@ -8,15 +8,11 @@
         <div class="relative">
             <input
                 x-model.debounce.{{ $field->debounce }}ms="searchInput"
-                type="text"
-                placeholder="{{ $field->placeholder }}"
                 x-on:keydown.escape="optionsVisible = false"
                 x-on:input="optionsVisible = true"
                 x-on:click.stop="optionsVisible = true"
                 x-on:click.stop.outside="optionsVisible = false"
-                id="{{ $field->id }}"
-                name="{{ $field->name }}"
-                {{ $attributes->only('class')->merge(['class' => $errors->has($field->key) ? $error() : $field->class ]) }}
+                {{ $attributes->except(array_keys($attr))->merge($attr)->merge(['class' => $errors->has($field->key) ? $field->errorClass : $field->class ]) }}
             />
             <div x-on:click.stop.prevent="searchInput = ''; optionsVisible = false;" class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer">
                 <!-- Heroicon name: x -->

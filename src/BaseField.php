@@ -109,6 +109,9 @@ abstract class BaseField
             'wire' => $this->wire,
             'xmodel' => $this->xmodel,
             'class' => $this->class,
+            'appendClass' => $this->appendClass,
+            'errorClass' => $this->errorClass,
+            'appendErrorClass' => $this->appendErrorClass,
             'wrapperClass' => $this->wrapperClass,
         ], $custom);
     }

@@ -4,29 +4,23 @@
 namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
-use Illuminate\View\Component;
-use Tanthammar\TallForms\Input as Field;
 use Tanthammar\TallForms\Traits\BaseBladeField;
 use Tanthammar\TallForms\Traits\Helpers;
 
-class Input extends Component
+class Input extends BaseBladeField
 {
     use Helpers;
-
-    public string $icon_span = 'flex items-center justify-center px-2 border border-gray-300 bg-gray-100 text-gray-600 sm:text-sm leading-normal';
-    public string $left_border = 'rounded-l border-r-0';
-    public string $right_border = 'rounded-r border-l-0';
 
     public function __construct(
         public array|object $field = [],
         public array $attr = [],
     )
     {
-        $this->field = BaseBladeField::setDefaults($this->defaults(), $field);
-        $this->attr = array_merge($this->options(), $attr);
-        $this->field->class = $this->class();
+        parent::__construct($field);
+        $this->attr = array_merge($this->inputAttributes(), $attr);
         $this->field->hasIcon = !empty($this->field->icon || $this->field->tallIcon || $this->field->htmlIcon);
         $this->field->sfxHasIcon = !empty($this->field->sfxIcon || $this->field->sfxTallIcon || $this->field->sfxHtmlIcon);
+        $this->field->class = $this->customClass();
     }
 
     public function defaults(): array
@@ -36,15 +30,18 @@ class Input extends Component
             'name' => null,
             'key' => null, //@error & Livewire prop
             'wrapperClass' => 'tf-input-wrapper',
-            'class' => null,
-            'errorClass' => "tf-field-error",
+            'type' => 'text', //any HTML5 input type
+            'class' => "form-input block w-full shadow-inner",
+            'autoStyling' => true,
             'prefix' => null,
             'hasIcon' => false,
             'icon' => '',
             'iconClass' => null,
+            'icon_span' => 'flex items-center justify-center px-2 border border-gray-300 bg-gray-100 text-gray-600 sm:text-sm leading-normal',
+            'left_border' => 'rounded-l border-r-0',
+            'right_border' => 'rounded-r border-l-0',
             'tallIcon' => '',
             'htmlIcon' => '',
-            'type' => 'text', //any HTML5 input type
             'suffix' => null,
             'sfxHasIcon' => false,
             'sfxIcon' => '', //Blade icon name
@@ -60,7 +57,7 @@ class Input extends Component
         ];
     }
 
-    public function options(): array
+    public function inputAttributes(): array
     {
         $default = [
             'id' => $this->field->id ?: $this->field->name,
@@ -68,6 +65,7 @@ class Input extends Component
             'type' => $this->field->type,
             'autocomplete' => $this->field->autocomplete,
             'placeholder' => $this->field->placeholder,
+            'value' => old($this->field->name),
         ];
         if (in_array($this->field->type, ['number', 'range', 'date', 'datetime-local', 'month', 'time', 'week'])) {
             $limits = [
@@ -81,31 +79,32 @@ class Input extends Component
         return $default;
     }
 
-    public function class(): string
+    public function customClass(): string
     {
-        $class = $this->field->class ?: "form-input block w-full shadow-inner";
-        $class .= $this->field->type == 'color' ? " h-11 p-1 " : null;
-//        $class .= ($this->field->prefix || $this->field->hasIcon) ? " rounded-none rounded-r" : " rounded";
-        $leftRounded = ($this->field->prefix || $this->field->hasIcon);
-        $rightRounded = ($this->field->suffix || $this->field->sfxHasIcon);
+        //override parent class()
+        if($this->field->autoStyling) {
+            $class = $this->field->class; //already set in parent class() in construct.
+            $class .= $this->field->type == 'color' ? " h-11 p-1 " : null;
 
-        if($leftRounded || $rightRounded){
-            $class .= " rounded-none";
-            if($leftRounded && !$rightRounded){
-                $class .= " rounded-r";
-            } else if(!$leftRounded && $rightRounded){
-                $class .= " rounded-l";
+            $leftRounded = ($this->field->prefix || $this->field->hasIcon);
+            $rightRounded = ($this->field->suffix || $this->field->sfxHasIcon);
+
+            if($leftRounded || $rightRounded){
+                $class .= " rounded-none";
+                if($leftRounded && !$rightRounded){
+                    $class .= " rounded-r";
+                } else if(!$leftRounded && $rightRounded){
+                    $class .= " rounded-l";
+                }
+            } else {
+                $class .= " rounded";
             }
-        } else {
-            $class .= " rounded";
+            return $class;
         }
-        return $class;
+
+        return $this->field->class;
     }
 
-    public function error(): string
-    {
-        return $this->field->class.' '.$this->field->errorClass;
-    }
 
     public function render(): View
     {
