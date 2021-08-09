@@ -5,12 +5,10 @@ namespace App\Namespace;
 use ModelsPathDummyModel;
 use Livewire\Component;
 use Tanthammar\TallForms\Input;
-use Tanthammar\TallForms\TallForm;
+use Tanthammar\TallForms\TallFormComponent;
 
-class DummyComponent extends Component
+class DummyComponent extends TallFormComponent
 {
-    use TallForm;
-
     public function mount(?DummyModel $dummymodel)
     {
         //Gate::authorize()
