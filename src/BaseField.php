@@ -35,6 +35,9 @@ abstract class BaseField
         $this->label = $label;
         $this->name = $key ?? Str::snake(Str::lower($label));
         $this->key = 'form_data.' . $this->name;
+        $this->deferEntangle(config('tall-forms.field-attributes.defer-entangle', true));
+        $this->wire(config('tall-forms.field-attributes.wire', 'wire:model.lazy'));
+        //$this->xmodel(config('tall-forms.field-attributes.x-model', 'x-model')); //future use maybe
         $this->setAttr();
         $this->overrides();
     }
@@ -107,7 +110,7 @@ abstract class BaseField
             'key' => $this->key,
             'defer' => $this->deferEntangle,
             'wire' => $this->wire,
-            'xmodel' => $this->xmodel,
+            //'xmodel' => $this->xmodel,
             'class' => $this->class,
             'appendClass' => $this->appendClass,
             'errorClass' => $this->errorClass,

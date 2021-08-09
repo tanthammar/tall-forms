@@ -4,7 +4,7 @@
         <div class="tf-range-labels">{{ $field->min }}</div>
         <input
             x-model="range"
-            {{ $attributes->except([...array_keys($attr), 'x-data', 'x-model'])->merge($attr)->merge([ 'class' => $field->class ]) }}
+            {{ $attributes->except([...array_keys($attr), 'x-data'])->whereDoesntStartWith('x-model')->merge($attr)->merge([ 'class' => $field->class ]) }}
         />
         <div class="tf-range-labels">{{ $field->max }}</div>
     </div>

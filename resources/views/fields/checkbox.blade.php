@@ -1,4 +1,3 @@
-@php $alpineKey = $field->alpineKey ?? 'checkbox'; @endphp
 <x-tall-checkbox
     :id="$field->makeHtmlId($_instance->id)"
     :name="$field->name"
@@ -8,6 +7,6 @@
     :class="$field->class"
     x-data="{ {{ $alpineKey }}: $wire.entangle('{{ $field->key }}'){{ $field->deferString }} }"
     :attr="array_merge([
-        $field->xmodel => $alpineKey
+        $field->wire => $field->key
     ], $field->getAttr('input'))"
 />

@@ -13,7 +13,7 @@
                     'value' => $value,
                 ], $attr)"
                 x-model="checkboxes"
-                {{ $attributes->except(['x-data', 'x-model']) }}
+                {{ $attributes->except(['x-data'])->whereDoesntStartWith('x-model') }}
             />
         @endforeach
     </fieldset>

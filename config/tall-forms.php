@@ -54,7 +54,7 @@ return [
         ],
 
         'wire' => 'wire:model.lazy', //default field wire:model attribute, override with ->wire()
-        'x-model' => 'x-model.lazy', //x-model.lazy, x-model.debounce etc, default field x-model attribute, override with ->xmodel()
+        //not used yet: 'x-model' => 'x-model', //x-model.lazy, x-model.debounce etc, default field x-model attribute, override with ->xmodel()
         'defer-entangle' => true, //override with ->deferEntangle(bool $state) or in blade :field="['defer' => ...]"
     ],
 

@@ -10,8 +10,8 @@ trait HasButtons
     public $showDelete = true;
     public $showReset = true;
     public $showGoBack = true;
-    public string $saveStayBtnTxt;
-    public string $saveBackBtnTxt;
+    public null|string $saveStayBtnTxt = null;
+    public null|string $saveBackBtnTxt = null;
 
     public function saveAndStay()
     {

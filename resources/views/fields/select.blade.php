@@ -4,7 +4,6 @@
         'placeholder' => $field->placeholder,
         'multiple' => false,
     ])"
-    :value="data_get($this, $field->key)"
     :options="$field->options"
     :attr="array_merge([
         $field->wire => $field->key
