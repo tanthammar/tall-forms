@@ -13,7 +13,6 @@ class Select extends BaseBladeField
 
     public function __construct(
         public array|object      $field = [],
-        public null|string|array $value = [],
         public array             $options = [],
         public array             $attr = []
     )
