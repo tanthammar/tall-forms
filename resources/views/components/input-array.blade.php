@@ -1,7 +1,7 @@
 <div x-data="inputArray({
         maxItems: {{ $field->maxItems }},
         minItems: {{ $field->minItems }},
-        itemsArray: {{ $field->itemsArray }},
+        itemsArray: $wire.entangle('{{ $field->key }}'){{ $field->deferString }},
         inputs: $refs.inputs
     })" class="{{ $field->wrapperClass }}">
     <div @error($field->key.'.*') class="{{ $field->errorClass }}" @enderror>

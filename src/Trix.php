@@ -8,7 +8,7 @@ class Trix extends BaseField
 {
     public bool $includeScript = false;
     public bool $allowAttachments = false;
-    public string $attachmentKey;
+    public null|string $attachmentKey = null;
     public array $allowedMimeTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/tiff', 'image/tif', 'image/gif'];
     public int $maxAttachments = 1;
     public int $maxKB = 1024;
@@ -17,6 +17,7 @@ class Trix extends BaseField
     {
         $this->type = 'trix';
         $this->align_label_top = true;
+        $this->deferEntangle();
         return $this;
     }
 

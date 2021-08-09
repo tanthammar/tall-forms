@@ -99,7 +99,7 @@ trait HasAttributes
      */
     /*
     If it's going to be used, uncomment:
-    - config 'xmodel'
+    - add this to config: 'x-model' => 'x-model', //x-model.lazy, x-model.debounce etc., default field x-model attribute, override with ->xmodel()
     - BaseField construct
     - BaseField ->mergeBladeDefaults()
     - BaseBladeField $baseField

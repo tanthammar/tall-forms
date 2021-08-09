@@ -14,7 +14,6 @@ class InputArray extends BaseBladeField
     {
         parent::__construct($field);
         $this->attr = array_merge($this->options(), $attr);
-        $this->field->itemsArray = $this->field->defer ? "\$wire.entangle('".$this->field->key."').defer" : "\$wire.entangle('".$this->field->key."')";
     }
 
     public function defaults(): array

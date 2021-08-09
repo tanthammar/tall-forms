@@ -13,7 +13,6 @@ class Range extends BaseField
     protected function overrides(): self
     {
         $this->type = 'range';
-        $this->deferEntangle();
         return $this;
     }
 

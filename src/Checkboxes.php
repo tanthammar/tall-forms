@@ -17,7 +17,6 @@ class Checkboxes extends BaseField
         $this->type = 'checkboxes';
         $this->wrapperClass = "tf-checkboxes-fieldset";
         $this->class = "form-checkbox tf-checkbox";
-        $this->deferEntangle();
         $this->align_label_top = true;
         $this->allowed_in_repeater = false;
         return $this;

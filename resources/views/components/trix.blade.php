@@ -1,6 +1,6 @@
 <div class="w-full"
      x-data="{
-        trix: @entangle($field->key){{ $field->deferString }},
+        trix: $wire.entangle('{{ $field->key }}'){{ $field->deferString }},
         get notFocused() { return document.activeElement !== this.$refs.trixInput },
         setValue() {
             {{-- replace content --}}
