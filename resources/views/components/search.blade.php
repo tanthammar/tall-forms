@@ -31,11 +31,11 @@
             <ul
                 x-on:keydown.escape="optionsVisible = false"
                 x-on:keydown.arrow-up.prevent="select > 0 ? select -= 1 : select = 0"
-                x-on:keydown.arrow-down.prevent="select < {{ optional($options)->length ?? 0 }} ? select += 1 : select = {{ optional($options)->length ?? 0 }}"
+                x-on:keydown.arrow-down.prevent="select < {{ $field->options->length ?? 0 }} ? select += 1 : select = {{ $field->options->length ?? 0 }}"
                 tabindex="-1"
                 role="listbox"
                 class="tf-search-ul" x-max="1">
-                @forelse($options as $value => $key)
+                @forelse($field->options as $value => $key)
                 <li
                     role="option"
                     wire:key="id{{ md5($field->id.$key) }}"

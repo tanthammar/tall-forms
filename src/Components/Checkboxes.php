@@ -10,20 +10,20 @@ class Checkboxes extends BaseBladeField
 {
     public function __construct(
         public array|object $field = [],
-        public array $options = [],
-        public ?array $attr = [],
-    ){
-        parent::__construct($field);
+        public array        $attr = [],
+    )
+    {
+        parent::__construct((array)$field, $attr);
     }
 
     public function defaults(): array
     {
         return [
             'id' => 'checkboxes',
+            'class' => "form-checkbox tf-checkbox",
             'wrapperClass' => "tf-checkboxes-fieldset",
             'labelWrapperClass' => "tf-checkbox-label-spacing",
-            'labelClass' => "tf-checkbox-label",
-            'class' => "form-checkbox tf-checkbox",
+            'checkboxLabelClass' => "tf-checkbox-label",
         ];
     }
 

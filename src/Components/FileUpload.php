@@ -13,11 +13,12 @@ class FileUpload extends BaseBladeField
 
     public function __construct(
         public array|object $field,
-        public ?bool $showFileUploadError = false,
-        public ?string $showFileUploadErrorFor = null,
-        public ?string $uploadFileError = null)
+        public mixed        $fieldValue = null,
+        public ?bool        $showFileUploadError = false,
+        public ?string      $showFileUploadErrorFor = null,
+        public ?string      $uploadFileError = null)
     {
-        parent::__construct($field);
+        parent::__construct((array)$field);
         $this->uploadFileError = data_get($field, 'errorMsg', $this->field->uploadFileError);
         $this->showFileUploadErrorFor = $this->showFileUploadErrorFor ?: $this->field->key;
     }
@@ -34,7 +35,6 @@ class FileUpload extends BaseBladeField
             'confirm_msg' => __('tf::form.alerts.are-u-sure'),
             'accept' => 'image/*',
             'uploadFileError' => __('tf::form.file-upload.upload-file-error'),
-            'fieldValue' => null,
             'tall_svg_upload' => config('tall-forms.file-upload'),
             'tall_svg_file' => config('tall-forms.file-icon'),
             'tall_svg_trash' => config('tall-forms.trash-icon'),

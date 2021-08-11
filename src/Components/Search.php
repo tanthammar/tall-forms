@@ -13,11 +13,10 @@ class Search extends BaseBladeField
 
     public function __construct(
         public array|object $field = [],
-        public array        $options = [],
         public array        $attr = []
     )
     {
-        parent::__construct($field);
+        parent::__construct((array)$field, $attr);
         $this->attr = array_merge($this->inputAttributes(), $attr);
     }
 

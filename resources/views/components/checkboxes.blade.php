@@ -1,20 +1,25 @@
 <div x-data="{ checkboxes: $wire.entangle('{{ $field->key }}'){{ $field->deferString }} }" class="w-full">
     <fieldset wire:ignore class="{{ $field->wrapperClass }}" id="{{ $field->id }}" name="{{ $field->name }}">
-        @foreach($options as $value => $label)
-            @php $id = 'id'.md5($field->id.$value.$label.$loop->index); @endphp
-            <x-tall-checkbox
-                :id="$id"
-                :name="Str::slug(Str::lower($label))"
-                :label="$label"
-                :label-class="$field->labelClass"
-                :class="$field->class"
-                :attr="array_merge([
-                    'wire:key' => $id,
-                    'value' => $value,
-                ], $attr)"
-                x-model="checkboxes"
-                {{ $attributes->except(['x-data'])->whereDoesntStartWith('x-model') }}
-            />
+        @foreach($field->options as $value => $label)
+            @php
+                $id = 'id'.md5($field->id.$value.$label.$loop->index);
+            @endphp
+            <div class="flex">
+                <input
+                    type="checkbox"
+                    x-model="checkboxes"
+                    id="{{ $id }}"
+                    wire:key="{{ $id }}"
+                    value="{{ $value }}"
+                    name="{{ $field->key }}"
+                    class="{{ $field->class }}"
+                />
+                <div class="{{ $field->labelWrapperClass }}">
+                    <label for="{{ $id }}" class="{{ $field->labelWrapperClass }}">
+                        {{ $label }}
+                    </label>
+                </div>
+            </div>
         @endforeach
     </fieldset>
 </div>

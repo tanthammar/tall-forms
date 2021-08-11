@@ -10,10 +10,10 @@ class InputArray extends BaseBladeField
 {
     public function __construct(
         public array|object $field,
-        public array $attr = [])
+        public array        $attr = [])
     {
-        parent::__construct($field);
-        $this->attr = array_merge($this->options(), $attr);
+        parent::__construct((array)$field, $attr);
+        $this->attr = array_merge($this->inputAttributes(), $attr);
     }
 
     public function defaults(): array
@@ -25,6 +25,7 @@ class InputArray extends BaseBladeField
             'wrapperClass' => null,
             'class' => "form-input my-1 w-full", //applied to each input
             'errorClass' => 'border rounded border-red-500 p-2 md:p-4 mb-2', //applied to the outer div surrounding the inputs
+            'appendErrorClass' => '', //override baseField
             'placeholder' => null,
             'errorMsg' => null,
             'maxItems' => 0, //0 = unlimited
@@ -32,10 +33,10 @@ class InputArray extends BaseBladeField
         ];
     }
 
-    public function options(): array
+    public function inputAttributes(): array
     {
         return [
-            'type' => $this->field->type,
+            'type' => $this->field->input_type,
             'placeholder' => $this->field->placeholder,
             'class' => $this->field->class,
         ];

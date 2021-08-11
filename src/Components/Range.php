@@ -10,9 +10,9 @@ class Range extends BaseBladeField
 {
     public function __construct(
         public array|object $field = [],
-        public array $attr = [])
+        public array        $attr = [])
     {
-        parent::__construct($field);
+        parent::__construct((array)$field, $attr);
         $this->attr = array_merge($this->inputAttributes(), $attr);
     }
 
@@ -28,10 +28,6 @@ class Range extends BaseBladeField
         ];
     }
 
-    public function render(): View
-    {
-        return view('tall-forms::components.range');
-    }
 
     public function inputAttributes(): array
     {
@@ -44,5 +40,10 @@ class Range extends BaseBladeField
             'max' => $this->field->max,
             'step' => $this->field->step,
         ];
+    }
+
+    public function render(): View
+    {
+        return view('tall-forms::components.range');
     }
 }

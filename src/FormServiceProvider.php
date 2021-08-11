@@ -2,6 +2,7 @@
 
 namespace Tanthammar\TallForms;
 
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\View\Component as IlluminateComponent;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -19,6 +20,8 @@ class FormServiceProvider extends ServiceProvider
                 InstallTallForms::class,
             ]);
         }
+
+        $this->bootAliases();
 
         $this->publishes([__DIR__ . '/../config/tall-forms.php' => config_path('tall-forms.php')], 'tall-form-config');
         $this->publishes([__DIR__ . '/../resources/views' => resource_path('views/vendor/tall-forms')], 'tall-form-views');
@@ -52,6 +55,14 @@ class FormServiceProvider extends ServiceProvider
         Blade::component('tall-forms::components.error-icon', 'tall-error-icon');
         Blade::component('tall-forms::components.notification', 'tall-notification');
         Blade::component('tall-forms::components.div-attr', 'tall-attr');
+    }
+
+    protected function bootAliases()
+    {
+        $loader = AliasLoader::getInstance();
+        foreach (config('tall-forms.aliases', []) as $alias => $component) {
+            $loader->alias($alias, $component);
+        }
     }
 
     private function prefixComponents(): void

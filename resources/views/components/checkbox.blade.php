@@ -1,12 +1,10 @@
-<div {{ $attributes->only('x-data') }} class="{{ $wrapperClass }}">
+<div {{ $attributes->only('x-data') }} class="{{ $field->wrapperClass }}">
 <input
     type="checkbox"
-    id="{{ $id }}"
-    name="{{ $name }}"
-    {{ $attributes->except([...array_keys($attr), 'id', 'name', 'x-data'])->merge($attr)->merge(['class' => $class ]) }}
+    {{ $attributes->except([...array_keys($attr), 'x-data'])->merge($attr)->merge(['class' => $field->class ]) }}
     />
-    <div class="{{ $labelWrapperClass }}">
-        <label for="{{ $id }}" class="{{ $labelClass }}">
+    <div class="{{ $field->labelWrapperClass }}">
+        <label for="{{ $field->id }}" class="{{ $field->checkboxLabelClass }}">
             {{ $label }}
         </label>
     </div>

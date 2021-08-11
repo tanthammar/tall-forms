@@ -13,10 +13,10 @@ class Input extends BaseBladeField
 
     public function __construct(
         public array|object $field = [],
-        public array $attr = [],
+        public array        $attr = [],
     )
     {
-        parent::__construct($field);
+        parent::__construct((array)$field, $attr);
         $this->attr = array_merge($this->inputAttributes(), $attr);
         $this->field->hasIcon = !empty($this->field->icon || $this->field->tallIcon || $this->field->htmlIcon);
         $this->field->sfxHasIcon = !empty($this->field->sfxIcon || $this->field->sfxTallIcon || $this->field->sfxHtmlIcon);
@@ -60,7 +60,8 @@ class Input extends BaseBladeField
     public function inputAttributes(): array
     {
         $default = [
-            'id' => $this->field->id ?: $this->field->name,
+            $this->field->wire => $this->field->key,
+            'id' => $this->field->id,
             'name' => $this->field->name,
             'type' => $this->field->type,
             'autocomplete' => $this->field->autocomplete,
@@ -82,18 +83,18 @@ class Input extends BaseBladeField
     public function customClass(): string
     {
         //override parent class()
-        if($this->field->autoStyling) {
+        if ($this->field->autoStyling) {
             $class = $this->field->class; //already set in parent class() in construct.
             $class .= $this->field->type == 'color' ? " h-11 p-1 " : null;
 
             $leftRounded = ($this->field->prefix || $this->field->hasIcon);
             $rightRounded = ($this->field->suffix || $this->field->sfxHasIcon);
 
-            if($leftRounded || $rightRounded){
+            if ($leftRounded || $rightRounded) {
                 $class .= " rounded-none";
-                if($leftRounded && !$rightRounded){
+                if ($leftRounded && !$rightRounded) {
                     $class .= " rounded-r";
-                } else if(!$leftRounded && $rightRounded){
+                } else if (!$leftRounded && $rightRounded) {
                     $class .= " rounded-l";
                 }
             } else {

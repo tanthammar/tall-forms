@@ -13,7 +13,7 @@ class Textarea extends BaseBladeField
         public array        $attr = []
     )
     {
-        parent::__construct($field);
+        parent::__construct((array)$field, $attr);
         $this->attr = array_merge($this->inputAttributes(), $attr);
     }
 
@@ -32,10 +32,11 @@ class Textarea extends BaseBladeField
     public function inputAttributes(): array
     {
         return [
+            $this->field->wire => $this->field->key,
             'id' => $this->field->id,
             'name' => $this->field->name,
             'placeholder' => $this->field->placeholder,
-            'rows' => $this->field->rows,
+            'rows' => $this->field->textarea_rows,
             'value' => old($this->field->name)
         ];
     }

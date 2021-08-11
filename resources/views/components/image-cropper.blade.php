@@ -2,7 +2,7 @@
 <div wire:ignore class="tf-cropper-root">
     {{-- init Alpine --}}
     <div x-data="imageCropper({
-        imageUrl: '{{ $field->imageUrl }}',
+        imageUrl: '{{ $imageUrl }}',
         width: {{ $field->width }},
         height: {{ $field->height }},
         shape: '{{ $field->shape }}',
@@ -61,7 +61,7 @@
                     <button type="button" class="tf-cropper-edit" x-on:click.prevent="edit()"><x-tall-svg :path="config('tall-forms.edit-icon')" class="h-6 w-6 fill-current" /></button>
                 </div>
             </div>
-            <div><img src="{{ $field->imageUrl }}" alt x-ref="result" class="display-block"></div>
+            <div><img src="{{ $imageUrl }}" alt x-ref="result" class="display-block"></div>
         </div>
 
     </div>

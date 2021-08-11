@@ -14,9 +14,10 @@ class Trix extends BaseBladeField
 
     public function __construct(
         public array|object $field = [],
-        public array $attr = [])
+        public ?string      $value = null,
+        public array        $attr = [])
     {
-        parent::__construct($field);
+        parent::__construct((array)$field, $attr);
     }
 
 
@@ -25,7 +26,6 @@ class Trix extends BaseBladeField
         return [
             'id' => 'trix',
             'class' => 'form-textarea w-full shadow-inner',
-            'value' => '',
             'defer' => true, //defer entangle
             'includeScript' => true,
             //sponsor field defaults;
@@ -39,7 +39,7 @@ class Trix extends BaseBladeField
 
     public function render(): View
     {
-        if($this->field->allowAttachments) return view('tall-forms-sponsors::components.trix-with-attachments');
+        if ($this->field->allowAttachments) return view('tall-forms-sponsors::components.trix-with-attachments');
         return view('tall-forms::components.trix');
     }
 }

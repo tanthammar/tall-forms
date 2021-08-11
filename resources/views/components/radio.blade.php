@@ -1,6 +1,6 @@
 <div x-data="{ radio: $wire.entangle('{{ $field->key }}'){{ $field->deferString }} }" class="{{ $field->wrapperClass }}">
     <fieldset id="{{ $field->id }}">
-        @foreach($options as $value => $label)
+        @foreach($field->options as $value => $label)
             <div class="{{ $field->class }}">
                 @php $id = "id" . md5($field->id.$value.$loop->index); @endphp
                 <input

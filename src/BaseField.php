@@ -15,6 +15,7 @@ abstract class BaseField
 {
     use HasLabels, HasAttributes, HasSharedProperties, HasDesign, HasViews, HasSlots;
 
+    public string $id = "";
     public string $name = "";
     public string $key = "";
     public string $type = 'input';
@@ -60,6 +61,22 @@ abstract class BaseField
     }
 
     /**
+     * Make a headless field to use in custom forms.
+     * <br>ONLY TO BE USED IN BLADE VIEWS
+     * <br>Strips of 'form_data' in $field->key.
+     * <br>Pass the Livewire instance id to get a unique input id.
+     * <br>$wireId = $_instance->id in blade
+     */
+    public static function blade(string $label, string $key = null, string $wireId = '', string $name = '', string $id = ''): static
+    {
+        $field = new static($label, $key);
+        $field->id = filled($id) ? $id : 'id' . md5($wireId . $field->key);
+        $field->key = Str::replaceFirst('form_data.', '', $field->key);
+        $field->name = filled($name) ? $name : $field->name;
+        return $field;
+    }
+
+    /**
      * Standard Laravel validation syntax, default = 'nullable'
      * @param array|string $rules
      * @return $this
@@ -96,11 +113,21 @@ abstract class BaseField
         return $this;
     }
 
+    //Todo remove
     public function makeHtmlId(string $wireInstanceID): string
     {
         return 'id' . md5($wireInstanceID . $this->key);
     }
 
+    public function setHtmlId(string $wireInstanceID): self
+    {
+        //applied in field-loop.php or Field::blade
+        //$_instance->id
+        $this->id = 'id' . md5($wireInstanceID . $this->key);
+        return $this;
+    }
+
+    //Todo remove
     public function mergeBladeDefaults(string $wireInstanceID, array $custom = []): array
     {
         //This array merges as $custom in BaseBladeField->setDefaults(...)
@@ -108,7 +135,7 @@ abstract class BaseField
             'id' => $this->makeHtmlId($wireInstanceID),
             'name' => $this->name,
             'key' => $this->key,
-            'defer' => $this->deferEntangle,
+            'defer' => $this->defer,
             'wire' => $this->wire,
             //'xmodel' => $this->xmodel,
             'class' => $this->class,

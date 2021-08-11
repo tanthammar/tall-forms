@@ -13,11 +13,10 @@ class Select extends BaseBladeField
 
     public function __construct(
         public array|object      $field = [],
-        public array             $options = [],
         public array             $attr = []
     )
     {
-        parent::__construct($field);
+        parent::__construct((array)$field, $attr);
         $this->attr = array_merge($this->inputAttributes(), $attr);
     }
 
@@ -35,6 +34,7 @@ class Select extends BaseBladeField
     public function inputAttributes(): array
     {
         return [
+            $this->field->wire => $this->field->key,
             'id' => $this->field->id,
             'name' => $this->field->name,
             'value' => old($this->field->name)

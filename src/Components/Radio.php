@@ -10,11 +10,11 @@ class Radio extends BaseBladeField
 {
     public function __construct(
         public array|object $field = [],
-        public array $options = [],
-        public array $attr = [],
+        public array        $options = [],
+        public array        $attr = [],
     )
     {
-        parent::__construct($field);
+        parent::__construct((array)$field, $attr);
     }
 
     public function defaults(): array

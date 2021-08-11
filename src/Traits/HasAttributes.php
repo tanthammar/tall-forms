@@ -10,9 +10,9 @@ trait HasAttributes
 {
     public array $attributes = [];
 
-    public null|string $wire = null; // config('tall-forms.field-attributes.wire'), applied in BaseBladeField::setDefaults()
-//    public null|string $xmodel = null; // config('tall-forms.field-attributes.x-model'), applied in BaseBladeField::setDefaults()
-    public null|bool $deferEntangle = null; // config('tall-forms.field-attributes.defer-entangle'), applied in BaseBladeField::setDefaults()
+    public null|string $wire = null; //BaseField construct
+//    public null|string $xmodel = null; //BaseField construct
+    public null|bool $defer = null; //BaseField construct
     public null|string $deferString = null;
 
     public function getAttr($type): mixed
@@ -88,8 +88,7 @@ trait HasAttributes
      */
     public function wire(string $on = 'wire:model'): self
     {
-        //handled in BaseBladeField->setDefaults()
-        $this->wire = str_contains($on, 'wire:model') ? $on : "wire.$on";
+        $this->wire = str_contains($on, 'wire:model') ? $on : "wire:model.$on";
         if (str_contains($on, 'defer')) $this->deferEntangle();
         return $this;
     }
@@ -102,14 +101,11 @@ trait HasAttributes
     - add this to config: 'x-model' => 'x-model', //x-model.lazy, x-model.debounce etc., default field x-model attribute, override with ->xmodel()
     - BaseField construct
     - BaseField ->mergeBladeDefaults()
-    - BaseBladeField $baseField
-    - BaseBladeField buildField()
-    - BaseBladeField xmodel()
     - HasAttributes $xmodel
     - HasAttributes xmodel() (this method)
+
     public function xmodel(string $on = 'x-model'): self
     {
-        //handled in BaseBladeField->setDefaults()
         $this->xmodel = str_contains($on, 'x-model') ? $on : "x-model.$on";
         if (str_contains($on, 'defer')) { //x-model.defer does not exist
             $this->deferEntangle();
@@ -120,7 +116,7 @@ trait HasAttributes
 
     public function deferEntangle(bool $state = true): self
     {
-        $this->deferEntangle = $state;
+        $this->defer = $state;
         if ($state) $this->deferString = '.defer';
         return $this;
     }

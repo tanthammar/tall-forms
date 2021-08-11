@@ -53,8 +53,8 @@ return [
             'class' => 'tf-fields-after-text'
         ],
 
-        'wire' => 'wire:model.lazy', //default field wire:model attribute, override with ->wire()
-        'defer-entangle' => false, //override with ->deferEntangle(bool $state) or in blade :field="['defer' => ...]"
+        'wire' => 'wire:model.lazy', //default field wire:model attribute, override with ->wire(...)
+        'defer-entangle' => true, //override with ->deferEntangle(bool $state)
     ],
 
     //You can swap the icons blade view path. The path is relative to resources/views/components
@@ -82,6 +82,25 @@ return [
         '10' => 'sm:col-span-10',
         '11' => 'sm:col-span-11',
         '12' => 'sm:col-span-12',
+    ],
+
+    //Register Aliases for easy access in blade files.
+    //Extend or replace the fields.
+    'aliases' => [
+        'Input' => Tanthammar\TallForms\Input::class,
+        'InputArray' => Tanthammar\TallForms\InputArray::class,
+        'ImageCropper' => Tanthammar\TallForms\ImageCropper::class,
+        'Range' => Tanthammar\TallForms\Range::class,
+        'Textarea' => Tanthammar\TallForms\Textarea::class,
+        'Checkbox' => Tanthammar\TallForms\Checkbox::class,
+        'Checkboxes' => Tanthammar\TallForms\Checkboxes::class,
+        'Radio' => Tanthammar\TallForms\Radio::class,
+        'FileUpload' => Tanthammar\TallForms\FileUpload::class,
+        'Select' => Tanthammar\TallForms\Select::class,
+        'Search' => Tanthammar\TallForms\Search::class,
+        'multiselect' => Tanthammar\TallForms\MultiSelect::class,
+        'MultiSelect' => Tanthammar\TallForms\Search::class,
+        'Trix' => Tanthammar\TallForms\Trix::class,
     ],
 
 

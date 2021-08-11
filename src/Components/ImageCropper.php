@@ -11,9 +11,10 @@ class ImageCropper extends BaseBladeField
 
     public function __construct(
         public array|object $field,
-        public ?string $imageUrl = '',
-    ){
-        parent::__construct($field);
+        public ?string      $imageUrl = '',
+    )
+    {
+        parent::__construct((array)$field);
     }
 
 
@@ -30,7 +31,6 @@ class ImageCropper extends BaseBladeField
             'uploadButton' => __('tf::form.cropper.select-file'),
             'thumbnail' => 'tf-cropper-thumb', //= h-full w-full
             'includeScript' => true,
-            'imageUrl' => '',
         ];
     }
 

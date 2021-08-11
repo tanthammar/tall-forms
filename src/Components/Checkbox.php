@@ -3,28 +3,46 @@
 
 namespace Tanthammar\TallForms\Components;
 
-use Illuminate\View\Component;
+use Illuminate\View\View;
+use Tanthammar\TallForms\Traits\BaseBladeField;
 
-/**
- * This component is used by Checkboxes
- */
-class Checkbox extends Component
+class Checkbox extends BaseBladeField
 {
-    public function __construct(
-        public string $id,
-        public ?string $name = null,
-        public ?string $label = "",
-        public ?string $wrapperClass = "flex",
-        public ?string $labelClass = "tf-checkbox-label",
-        public ?string $labelWrapperClass = "tf-checkbox-label-spacing",
-        public ?string $class = "form-checkbox tf-checkbox",
-        public ?array $attr = [],
-    ){
-        $this->name = $this->name ?: $this->id;
+    public string $label;
 
+    public function __construct(
+        public array|object $field = [],
+        public array       $attr = [],
+    )
+    {
+        parent::__construct((array)$field, $attr);
+        $this->attr = array_merge($this->inputAttributes(), $attr);
+        $this->label = $this->field->placeholder ?? $this->field->label ?? '';
     }
 
-    public function render()
+    public function defaults(): array
+    {
+        return [
+            'id' => 'checkbox',
+            'class' => 'form-checkbox tf-checkbox',
+            'wrapperClass' => 'flex',
+            'checkboxLabelClass' => 'tf-checkbox-label',
+            'labelWrapperClass' => 'tf-checkbox-label-spacing',
+        ];
+    }
+
+    public function inputAttributes(): array
+    {
+        return [
+            $this->field->wire => $this->field->key,
+            'name' => $this->field->name,
+            'id' => $this->field->id,
+            'value' => old($this->field->name),
+            'wire:key' => $this->field->id,
+        ];
+    }
+
+    public function render(): View
     {
         return view('tall-forms::components.checkbox');
     }

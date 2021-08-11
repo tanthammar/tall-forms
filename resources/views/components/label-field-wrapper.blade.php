@@ -2,7 +2,7 @@
     {{-- label column --}}
     @if($field->show_label)
         <div class="{{ $labelWidth() }} {{ $field->labelWrapperClass }}">
-            <label for="{{ $field->makeHtmlId($_instance->id) }}" class="{{ $field->labelClass }}">
+            <label for="{{ $field->id }}" class="{{ $field->labelClass }}">
                 {{$field->label}} <span class="tf-label-suffix">{{ $field->labelSuffix }}</span>
             </label>
             @if(!$field->afterLabelView && $field->afterLabel)

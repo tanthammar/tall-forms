@@ -10,9 +10,9 @@ trait HasDesign
     public null|bool $inline = null;
     public null|int $colspan = 12;
     public null|string $class = null;
-    public bool|string $appendClass = false;
+    public null|string $appendClass = null;
     public null|string $errorClass = null;
-    public bool|string $appendErrorClass = false;
+    public null|string $appendErrorClass = null;
     public null|string $wrapperClass = null;
     public bool $inArray = false;
 
