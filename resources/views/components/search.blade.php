@@ -1,9 +1,10 @@
 <div x-data="{
     optionsVisible: false,
-    field: @entangle($field->key),
+    field: $wire.entangle('{{$field->key}}'),
     selected: null,
-    searchInput: @entangle($field->searchKey)}
-" class="{{ $field->wrapperClass }}">
+    searchInput: $wire.entangle('{{$field->searchKey}}')
+    }"
+    class="{{ $field->wrapperClass }}">
     <div class="relative">
         <div class="relative">
             <input
