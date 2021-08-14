@@ -25,7 +25,7 @@ class Radio extends BaseBladeField
             'radioLabelClass' => "tf-radio-label",
             'spacing' => "tf-radio-label-spacing",
             'class' => 'flex', //input & label wrapper
-            'wrapperClass' => '', //outmost div
+            'wrapperClass' => 'tf-radio-fieldset', //fieldset
         ];
     }
 
