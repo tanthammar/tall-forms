@@ -63,7 +63,7 @@ class Input extends BaseBladeField
             $this->field->wire => $this->field->key,
             'id' => $this->field->id,
             'name' => $this->field->name,
-            'type' => $this->field->type,
+            'type' => $this->field->input_type ?? 'text',
             'autocomplete' => $this->field->autocomplete,
             'placeholder' => $this->field->placeholder,
             'value' => old($this->field->name),
@@ -102,7 +102,6 @@ class Input extends BaseBladeField
             }
             return $class;
         }
-
         return $this->field->class;
     }
 
