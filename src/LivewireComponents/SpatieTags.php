@@ -2,6 +2,7 @@
 
 namespace Tanthammar\TallForms\LivewireComponents;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -17,7 +18,7 @@ class SpatieTags extends Component
     public $errorClass;
     public $helpClass;
     public $color;
-    public $rules = ['search' => 'string|between:3,50']; //overriden in addFromSearch(), prevents Livewire from squeaking
+    protected $rules = ['search' => 'string|between:3,50']; //overriden in addFromSearch(), prevents Livewire from squeaking
     /**
      * @param array $field
      * @param null|string $tags
@@ -36,6 +37,15 @@ class SpatieTags extends Component
         $this->errorClass = 'tf-error';
         $this->helpClass = 'tf-help';
         $this->color = 'tf-tags-color';
+    }
+
+    //prevent tampering
+    /**
+     * @throws AuthorizationException
+     */
+    public function updatingField()
+    {
+        throw new AuthorizationException(__('tf::form.alerts.tampering'));
     }
 
     public function getExisting()

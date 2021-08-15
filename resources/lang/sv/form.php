@@ -45,6 +45,13 @@ return [
         'mime' => 'Felaktig filtyp, vänligen välj en annan fil.',
         'updated-success' => 'Formuläret har sparats',
         'are-u-sure' => 'Är du säker?',
+        'tampering' => 'Hallå där! Så får du inte göra :)', //if someone tampers with read-only values in Livewire devtools or console
+    ],
+
+    'spatie-tags' => [
+        'error-msg' => 'Måste vara mellan 3 till 60 tecken och bara bestå av bokstäver och siffror',
+        'placeholder' => 'Skriv för att lägga till/söka ...',
+        'help' => 'Tryck mellanslag för att skapa en ny, eller välj en existerande genom att klicka på den.',
     ],
 
     'date-picker' => [

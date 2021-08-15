@@ -101,6 +101,7 @@ return [
         'multiselect' => Tanthammar\TallForms\MultiSelect::class,
         'MultiSelect' => Tanthammar\TallForms\Search::class,
         'Trix' => Tanthammar\TallForms\Trix::class,
+        'SpatieTags' => Tanthammar\TallForms\SpatieTags::class,
     ],
 
 

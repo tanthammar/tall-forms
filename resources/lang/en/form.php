@@ -46,13 +46,18 @@ return [
         'mime' => 'Invalid file type, please pick another file.',
         'updated-success' => 'The form was saved successfully',
         'are-u-sure' => 'Are you sure?',
+        'tampering' => 'Gotcha! Unauthorized value tampering', //if someone tampers with read-only values in Livewire devtools or console
     ],
 
     'spatie-tags' => [
-        'search-error' => 'The tag must be between 3 to 60 chars long and only consist of alpha-numeric characters.'
+        'error-msg' => 'The tag must be between 3 to 60 chars long and only consist of alpha-numeric characters.',
+        'placeholder' => 'Type to add/search ...',
+        'help' => 'Press SPACE to create a new tag, or SELECT an existing tag by CLICKING on it.',
     ],
 
     'date-picker' => [
         'placeholder' => 'Select date...'
-    ]
+    ],
+
+
 ];
