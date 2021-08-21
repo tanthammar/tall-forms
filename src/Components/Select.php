@@ -28,6 +28,7 @@ class Select extends BaseBladeField
             'defer' => false, //doesn't use entangle
             'multiple' => false,
             'class' => 'form-select my-1 w-full shadow',
+            'wrapperClass' => null,
         ];
     }
 

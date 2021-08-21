@@ -15,6 +15,7 @@ class MultiSelect extends Select
             'defer' => true,
             'multiple' => true,
             'class' => 'form-input my-1 w-full shadow px-0 divide-y',
+            'wrapperClass' => null,
         ];
     }
 

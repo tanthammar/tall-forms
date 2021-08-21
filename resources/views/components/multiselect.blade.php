@@ -1,7 +1,7 @@
 <div x-data="{
     open: false,
     field: $wire.entangle('{{ $field->key }}'){{ $field->deferString }} }
-">
+" @if($field->wrapperClass)class="{{ $field->wrapperClass }}"@endif>
     <div x-cloak
          x-show="!field.length"
          type="text"

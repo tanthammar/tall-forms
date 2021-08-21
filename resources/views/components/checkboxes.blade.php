@@ -15,7 +15,7 @@
                     class="{{ $field->class }}"
                 />
                 <div class="{{ $field->labelWrapperClass }}">
-                    <label for="{{ $id }}" class="{{ $field->labelWrapperClass }}">
+                    <label for="{{ $id }}" class="{{ $field->checkboxLabelClass }}">
                         {{ $label }}
                     </label>
                 </div>
