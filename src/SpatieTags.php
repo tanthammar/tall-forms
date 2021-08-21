@@ -20,7 +20,7 @@ class SpatieTags extends BaseField
         $this->allowed_in_keyval = false;
         $this->placeholder = __('tf::form.spatie-tags.placeholder');
         $this->help = __('tf::form.spatie-tags.help'); //default = "Add tag ..."
-        $this->rules = 'string|between:3,50';
+        $this->tagsRules = 'string|between:3,50';
         return $this;
     }
 

@@ -134,10 +134,9 @@ class SpatieTags extends Component
     public function addFromSearch()
     {
         $this->validateOnly(
-            'search',
-            ['search' => data_get($this->field, 'tagsRules', 'string|between:3,50')],
-            null,
-            ['search' => 'tag'],
+            field: 'search',
+            rules: ['search' => data_get($this->field, 'tagsRules', 'string|between:3,50')],
+            attributes: ['search' => 'tag'],
         );
         $this->addTag($this->search);
         //$this->search = ""; not needed called in syncTags() later
