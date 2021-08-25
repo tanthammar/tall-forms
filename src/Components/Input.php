@@ -105,6 +105,13 @@ class Input extends BaseBladeField
         return $this->field->class;
     }
 
+    //override parent->error() for prefix/suffix border
+    protected function error(): string
+    {
+        return $this->field->appendErrorClass
+            ? Helpers::unique_words($this->customClass() . " " . $this->field->appendErrorClass)
+            : $this->field->errorClass;
+    }
 
     public function render(): View
     {
