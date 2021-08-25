@@ -13,11 +13,13 @@
         autocomplete="{{ $field->autocomplete }}" class="nosy" />
     @else
         {{-- before --}}
-        @include('tall-forms::includes.before')
+        @if(filled($field->beforeView) || filled($field->before))
+            @include('tall-forms::includes.before')
+        @endif
         {{-- label and field --}}
         <x-tall-label-field-wrapper
             :field="$field"
-            :componentInline="$inline"
+            :inline="$inline"
             :inlineLabelAlignment="$inlineLabelAlignment"
             :label-w="$labelW"
             :field-w="$fieldW">
@@ -30,6 +32,8 @@
             @endif
         </x-tall-label-field-wrapper>
         {{-- after --}}
-        @include('tall-forms::includes.after')
+        @if(filled($field->afterView) || filled($field->after))
+            @include('tall-forms::includes.after')
+        @endif
     @endif
 </x-tall-field-root>
