@@ -17,6 +17,7 @@ class Trix extends BaseField
     {
         $this->type = 'trix';
         $this->align_label_top = true;
+        $this->includeScript = config('tall-forms.include-external-scripts');
         $this->deferEntangle();
         return $this;
     }
@@ -26,9 +27,9 @@ class Trix extends BaseField
      * Else, you must import them yourself
      * Only pushed once
      */
-    public function includeExternalScripts(): self
+    public function includeExternalScripts(bool $state = true): self
     {
-        $this->includeScript = true;
+        $this->includeScript = $state;
         return $this;
     }
 

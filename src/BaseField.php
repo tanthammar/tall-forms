@@ -35,7 +35,7 @@ abstract class BaseField
     {
         $this->label = $label;
         $this->name = $key ?? Str::snake(Str::lower($label));
-        $this->key = 'form_data.' . $this->name;
+        $this->key = 'form_data.' . ($key ?? $this->name);
         $this->deferEntangle(config('tall-forms.field-attributes.defer-entangle', true));
         $this->wire(config('tall-forms.field-attributes.wire', 'wire:model.lazy'));
         //$this->xmodel(config('tall-forms.field-attributes.x-model', 'x-model')); //future use maybe
@@ -69,6 +69,7 @@ abstract class BaseField
      */
     public static function blade(string $label, string $key = null, string $wireId = '', string $name = '', string $id = ''): static
     {
+        if($key == null) $key = $label; //if key is empty, assume that label is the key, don't snake and lowercase it.
         $field = new static($label, $key);
         $field->id = filled($id) ? $id : 'id' . md5($wireId . $field->key);
         $field->key = Str::replaceFirst('form_data.', '', $field->key);
