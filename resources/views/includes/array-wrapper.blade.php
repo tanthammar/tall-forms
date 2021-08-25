@@ -1,5 +1,5 @@
 <div class="tf-repeater-root">
-    @if(filled($field->form_data = data_get($form_data, $field->name)))
+    @if(filled($field->form_data = data_get($this, $field->key)))
         <div class="{{ $field->array_wrapper_class ?? 'tf-repeater-wrapper' }}">
             @foreach($field->form_data as $key => $value)
                 <div class="tf-repeater-wrapper-outer" wire:key="{{ md5($field->key.$loop->index) }}">
