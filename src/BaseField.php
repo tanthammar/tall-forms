@@ -31,6 +31,8 @@ abstract class BaseField
     //Tabs, Groups, Panels and similar design elements that has a field array but should be ignored in form_data and validation
     public bool $ignored = false;
 
+    public bool $dynamicComponent = true;
+
     public function __construct($label, $key)
     {
         $this->label = $label;
@@ -69,7 +71,6 @@ abstract class BaseField
      */
     public static function blade(string $label, string $key = null, string $wireId = '', string $name = '', string $id = ''): static
     {
-        if($key == null) $key = $label; //if key is empty, assume that label is the key, don't snake and lowercase it.
         $field = new static($label, $key);
         $field->id = filled($id) ? $id : 'id' . md5($wireId . $field->key);
         $field->key = Str::replaceFirst('form_data.', '', $field->key);
