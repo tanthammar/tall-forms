@@ -1,1 +1,0 @@
-<div>{{-- sponsor field --}}</div>
