@@ -13,7 +13,7 @@ trait HasAttributes
     public null|string $wire = null; //BaseField construct
 //    public null|string $xmodel = null; //BaseField construct
     public null|bool $defer = null; //BaseField construct
-    public null|string $deferString = null;
+    public null|string $deferString = null; //BaseField construct
 
     public function getAttr($type): mixed
     {
@@ -117,7 +117,7 @@ trait HasAttributes
     public function deferEntangle(bool $state = true): self
     {
         $this->defer = $state;
-        if ($state) $this->deferString = '.defer';
+        $this->deferString = $state ? '.defer' : null;
         return $this;
     }
 
