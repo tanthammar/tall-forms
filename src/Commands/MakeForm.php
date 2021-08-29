@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 class MakeForm extends Command
 {
     protected $signature = 'make:tall-form {name} {--model=Model} {--path=Http/Livewire/Forms} {--modelspath=Models} {--action=create} {--overwrite=false} {--skipexisting=false} {--fields=""}';
-    protected $description = 'Make a new Laravel Livewire form component.';
+    protected $description = 'Make a TAll-form component for a model';
 
     public static function strReplaceModelsPath(string $modelspath = "App\\Models\\"): string
     {
