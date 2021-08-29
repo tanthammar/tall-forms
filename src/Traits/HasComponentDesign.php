@@ -22,7 +22,7 @@ trait HasComponentDesign
     public $wrapViewPath;
     public $layout;
 
-    public $onKeyDownEnter;
+    public $onKeyDownEnter = 'saveAndStay';
 
     public $labelW;
     public $fieldW;
