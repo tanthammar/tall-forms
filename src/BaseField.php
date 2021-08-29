@@ -138,6 +138,7 @@ abstract class BaseField
             'name' => $this->name,
             'key' => $this->key,
             'defer' => $this->defer,
+            'deferString' => $this->deferString,
             'wire' => $this->wire,
             //'xmodel' => $this->xmodel,
             'class' => $this->class,

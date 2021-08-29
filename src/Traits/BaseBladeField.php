@@ -7,7 +7,16 @@ use Illuminate\View\Component;
 abstract class BaseBladeField extends Component
 {
     protected array $baseField = [
+        'id' => '',
+        'name' => '',
+        'key' => '',
         'class' => '',
+        'wire' => 'wire:model',
+        //Leave deferString as null, if config defer = false,
+        //BaseField construct will set deferString to null, and it will become undefined when merged in this __construct
+        //if defer = true, deferString will be filled...
+        'defer' => false,
+        'deferString' => null,
         'appendClass' => null,
         'errorClass' => '',
         'appendErrorClass' => 'tf-field-error',
