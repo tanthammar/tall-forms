@@ -32,6 +32,7 @@ return [
     'multiselect' => [
         'placeholder' => 'Välj ett eller flera alternativ ...',
         'help' => 'CTRL(Windows) eller CMD(Mac), för att markera/avmarkera',
+        'error-msg' => 'Ogiltigt värde',
     ],
 
     'search' => [

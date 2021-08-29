@@ -33,6 +33,7 @@ return [
     'multiselect' => [
         'placeholder' => 'Please select one or multiple options ...',
         'help' => 'Press CTRL(Windows) or CMD(Mac), to select/deselect multiple options.',
+        'error-msg' => 'The selection is invalid',
     ],
 
     'search' => [
