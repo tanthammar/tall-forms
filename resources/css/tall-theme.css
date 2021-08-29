@@ -154,7 +154,7 @@
 
     /* form */
     .tf-form {
-        @apply w-full;
+        @apply w-full isolate;
     }
 
     .tf-form-head {
