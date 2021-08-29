@@ -46,10 +46,12 @@ trait Notify
                 $this->emitSelf('notify-saved');
                 break;
 
+            case 'positive':
             case 'success':
                 $bg = 'tf-bg-success';
                 break;
 
+            case 'negative':
             case 'danger':
                 $bg = 'tf-bg-danger';
                 break;
