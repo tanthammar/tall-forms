@@ -11,14 +11,17 @@
                 <x-tall-button size="sm" wire:click.prevent="saveAndGoBack" color="secondary">{{ $saveBackBtnTxt ?? trans('tf::form.save-go-back') }}</x-tall-button>
             @endif
             @if($showSave)
-                    <span x-data="{ open: false }"
-                          x-init="$wire.on('notify-saved', () => { if (open === false) setTimeout(() => { open = false }, 2500); open = true;})"
-                          x-show="open" x-transition.out.duration.1000ms style="display: none;"
-                          class="text-gray-500">{{ trans('tf::form.saved') }}</span>
-                <x-tall-button size="sm" type="submit" wire:click.prevent="saveAndStay" wire:loading.attr="disabled" color="primary">
-                        <span class="mr-2" wire:loading wire:target="saveAndStay">
-                            <x-tall-spinner/></span>
-                    {{ $saveStayBtnTxt ?? trans('tf::form.save-and-stay') }}
+                    <x-tall-button
+                        x-data="{ open: false }"
+                        x-on:click="$dispatch('show-errors')"
+                        x-on:notify-saved.window="if (open === false) setTimeout(() => { open = false }, 2500); open = true;"
+                        @if($errors->any()) disabled @endif
+                        size="sm" type="submit" color="primary">
+                        <span class="mr-2" wire:loading wire:target="{{ $onKeyDownEnter }}">
+                            <x-tall-svg path="icons.circle-spinner" class="w-4 h-4 animate-spin -mt-1 fill-current" />
+                        </span>
+                        <span x-show="!open" x-transition.out.duration.150ms x-transition.in.duration.150ms>{{ $saveStayBtnTxt ?? trans('tf::form.save-and-stay') }}</span>
+                        <span x-show="open" x-transition.out.duration.1000ms style="display: none;" class="text-gray-500">{{ trans('tf::form.saved') }}</span>
                 </x-tall-button>
             @endif
         </div>
