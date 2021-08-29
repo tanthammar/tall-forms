@@ -3,7 +3,6 @@
 namespace App\Namespace;
 
 use ModelsPathDummyModel;
-use Livewire\Component;
 use Tanthammar\TallForms\Input;
 use Tanthammar\TallForms\TallFormComponent;
 
@@ -27,7 +26,7 @@ class DummyComponent extends TallFormComponent
         $this->model->update($validated_data);
     }
 
-    public function fields()
+    public function fields(): array
     {
         return [
             Input::make('Name')->rules('required'),
