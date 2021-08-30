@@ -36,13 +36,24 @@ trait Helpers
 
     /**
      * Executes before field validation, creds to "@roni", livewire discord channel member.
+     * It is possible now to change the "Repeater" and "Array" fields to before validation, because the index is filtered out
      * @param string $field
      * @param string $hook
      * @return string
      */
     protected function parseFunctionNameFrom(string $field, $hook = 'updated'): string
     {
-        return $hook . Str::of($field)->replace('.', '_')->studly()->replaceFirst('FormData', '');
+        //return $hook . Str::of($field)->replace('.', '_')->studly()->replaceFirst('FormData', '');
+        return $hook . Str::of(preg_replace('/(\d+)\./', '', $field))->replace('.', '_')->replaceFirst('formData', '')->studly();
+    }
+    /**
+     * Returns the index of the field, if available
+     * @params string $field
+     * @return string|null
+     */
+    protected function getKeyIndexFrom(string $field)
+    {
+        return Str::match('/(\d+)/', $field);
     }
 
     public function tallFillField($array)
