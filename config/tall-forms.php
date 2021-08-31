@@ -12,6 +12,8 @@ return [
 
     'include-external-scripts' => true, //Use cdn links for fields based on third party scripts, or bundle them with your app.js?
 
+    'notify-validation-errors' => true, //Alert validation errors, on submit (stacked notifications).
+
 
     //A Laravel blade component to wrap your form with, if $wrapWithView = true, see documentation
     'wrap-view-path' => 'tall-forms::wrapper-layout',

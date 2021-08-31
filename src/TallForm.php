@@ -22,6 +22,7 @@ trait TallForm
     public $custom_data = [];
 
     public $labelsAsAttributes;
+    public bool $notifyErrors = true;
 
     public function __construct($id = null)
     {
@@ -29,6 +30,7 @@ trait TallForm
         $this->labelW = 'tf-label-width';
         $this->fieldW = 'tf-field-width';
         $this->labelsAsAttributes = config('tall-forms.field-labels-as-validation-attributes');
+        $this->notifyErrors = config('tall-forms.notify-validation-errors');
         parent::__construct($id);
     }
 

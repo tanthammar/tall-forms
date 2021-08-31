@@ -13,7 +13,7 @@
             @if($showSave)
                     <x-tall-button
                         x-data="{ open: false }"
-                        x-on:click="$dispatch('show-errors')"
+                        @if($notifyErrors) x-on:click="$dispatch('replace-errors', {{ json_encode($errors->all()) }})" @endif
                         x-on:notify-saved.window="if (open === false) setTimeout(() => { open = false }, 2500); open = true;"
                         @if($errors->any()) disabled @endif
                         size="sm" type="submit" color="primary">
