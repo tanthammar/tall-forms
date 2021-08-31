@@ -1,6 +1,6 @@
 @props([
     'show' => session()->has('notify') ? 'true' : 'false',
-    'message' => data_get(session('notify'), 'message', '') ?? '',
+    'message' => data_get(session('notify'), 'message', ''),
     'bg' => data_get(session('notify'), 'bg', 'tf-bg-success'),
     'icon' => data_get(session('notify'), 'icon', 'check'),
     'iconcolor' => data_get(session('notify'), 'iconcolor', 'text-white'),
@@ -11,7 +11,7 @@
         message: '{{ $message }}',
         bg: '{{ $bg }}',
         icon: '{{ $icon }}',
-        iconcolor: '{{ $iconcolor }}'
+        iconcolor: '{{ $iconcolor }}',
         showErrors: false,
         errors: [],
         newMessage(obj) {
@@ -65,27 +65,27 @@
             <div class="p-4">
                 <div class="flex items-start">
                     <div class="flex-shrink-0">
-                        <svg x-show="icon == 'info'" :class="iconColor" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg x-show="icon == 'info'" :class="iconcolor" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <svg x-show="icon == 'check'" :class="iconColor" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg x-show="icon == 'check'" :class="iconcolor" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <svg x-show="icon == 'exclamation'" :class="iconColor" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg x-show="icon == 'exclamation'" :class="iconcolor" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <svg x-show="icon == 'warning'" :class="iconColor" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg x-show="icon == 'warning'" :class="iconcolor" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                         </svg>
-                        <svg x-show="icon == 'happy'" :class="iconColor" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg x-show="icon == 'happy'" :class="iconcolor" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <svg x-show="icon == 'sad'" :class="iconColor" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg x-show="icon == 'sad'" :class="iconcolor" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
                     <div class="ml-3 w-0 flex-1 pt-0.5">
-                        <p x-text="message" class="text-sm font-medium leading-5 text-white"></p>
+                        <p x-text="message" :class="iconcolor" class="text-sm font-medium leading-5"></p>
                     </div>
                     <div class="flex flex-shrink-0 ml-4">
                         <button type="button" x-on:click.prevent.stop="showMessage = false"

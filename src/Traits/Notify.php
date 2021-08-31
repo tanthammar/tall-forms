@@ -24,15 +24,17 @@ trait Notify
     public function updatedAlert()
     {
         $this->notify(
-            array_get($this->alert, 'type', 'saved'),
-            array_get($this->alert, 'message', trans('tf::form.alerts.updated-success'))
+            type: data_get($this->alert, 'type', 'saved'),
+            message: data_get($this->alert, 'message', trans('tf::form.alerts.updated-success')),
+            bg: data_get($this->alert, 'bg'),
+            icon: data_get($this->alert, 'icon'),
+            iconcolor: data_get($this->alert, 'iconcolor')
         );
     }
 
     public function withSession()
 	{
 		$this->_withSession = true;
-
 		return $this;
 	}
 
@@ -46,70 +48,36 @@ trait Notify
      */
     public function notify(
         null|string $type = "saved",
-        string $message = "",
-        string $bg = 'tf-notify-bg-default',
-        string $icon="info",
-        string $iconcolor="text-white" )
+        string      $message = "",
+        string      $bg = 'tf-notify-bg-default',
+        string      $icon = "info",
+        string      $iconcolor = "text-white")
     {
-        switch ($type) {
-            case 'saved':
-                $bg = 'tf-bg-success';
-                $message = trans('tf::form.alerts.updated-success');
-                $icon = 'check';
-                $this->emitSelf('notify-saved');
-                break;
 
-            case 'positive':
-            case 'green':
-            case 'success':
-            case 'check':
-                $bg = 'tf-bg-success';
-                $icon = 'check';
-                break;
+        [$bg, $icon, $iconcolor] = match ($type) {
+            'saved', 'positive', 'green', 'success', 'check' => ['tf-bg-success', 'check', $iconcolor],
+            'warning', 'orange', 'exclamation'               => ['tf-bg-warning', 'exclamation', $iconcolor],
+            'negative', 'red', 'danger'                      => ['tf-bg-danger', 'warning', $iconcolor],
+            'info', 'blue'                                   => ['tf-bg-info', 'info', $iconcolor],
+            'happy'                                          => ['bg-white', 'happy', 'text-green-600'],
+            'sad'                                            => ['bg-white', 'sad', 'text-red-600'],
+            default                                          => [$bg, $icon, $iconcolor],
+        };
 
-            case 'negative':
-            case 'red':
-            case 'danger':
-                $bg = 'tf-bg-danger';
-                $icon = 'warning';
-                break;
-
-            case 'info':
-            case 'blue':
-                $bg = 'tf-bg-info';
-                $icon = 'info';
-                break;
-
-            case 'warning':
-            case 'orange':
-            case 'exclamation':
-                $bg = 'tf-bg-warning';
-                $icon = 'exclamation';
-                break;
-
-            case 'happy':
-                $bg = 'bg-white';
-                $icon = 'happy';
-                $iconcolor = 'text-green-400';
-                break;
-
-            case 'sad':
-                $bg = 'bg-white';
-                $icon = 'sad';
-                $iconcolor = 'text-red-400';
-                break;
+        if($type == 'saved') {
+            $message = $message ?: trans('tf::form.alerts.updated-success');
+            $this->emitSelf('notify-saved');//x-on:notify-saved.window, flash trans('tf::form.saved') on the form submit button, buttons.root.blade.php
         }
 
         $payload = [
-			'bg'      => $bg,
-			'message' => $message,
-            'icon' => $icon,
+			'bg'        => $bg,
+			'message'   => $message,
+            'icon'      => $icon,
             'iconcolor' => $iconcolor,
 		];
 
 		if ($this->_withSession) {
 			session()->flash('notify', $payload);
-
 			return;
 		}
 

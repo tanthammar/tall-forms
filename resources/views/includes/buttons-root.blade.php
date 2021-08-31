@@ -13,9 +13,9 @@
             @if($showSave)
                     <x-tall-button
                         x-data="{ open: false }"
-                        @if($notifyErrors) x-on:click="$dispatch('replace-errors', {{ json_encode($errors->all()) }})" @endif
                         x-on:notify-saved.window="if (open === false) setTimeout(() => { open = false }, 2500); open = true;"
-                        @if($errors->any()) disabled @endif
+                        @if($errors->any() && $notifyErrors) x-on:click.prevent.stop="$dispatch('replace-errors', {{ json_encode($errors->all()) }})" @endif
+                        @if($errors->any() && !$notifyErrors) disabled @endif
                         size="sm" type="submit" color="primary">
                         <span class="mr-2" wire:loading wire:target="{{ $onKeyDownEnter }}">
                             <x-tall-svg path="icons.circle-spinner" class="w-4 h-4 animate-spin -mt-1 fill-current" />
