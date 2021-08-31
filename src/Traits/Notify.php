@@ -8,18 +8,18 @@ trait Notify
     You can use this trait in both php or in frontend js
     It either sets a LiveWire property that calls the notify method or
     you can call the notify method directly.
-    example use in js to update the property
-    @this.set('alert', {
+    example use in Alpine js to update the property
+    $wire.set('alert', {
         type: 'danger',
         message: Locale == 'sv' //if locale is shared to window
         ? "Bilden du valt överskrider max tillåten dokument storlek. Se 'Max file size' ovanför bilden."
         : "The image you uploaded exceeds max allowed file size, stated above the picture"
     });
     exeample use in js to call the notify function
-    @this.call('notify', 'danger', 'Oh No!');
+    $wire.call('notify', 'danger', 'Oh No!');
     */
     public array $alert = [];
-    private bool $_withSession = false;
+    private bool $withSession = false;
 
     public function updatedAlert()
     {
@@ -34,12 +34,12 @@ trait Notify
 
     public function withSession()
 	{
-		$this->_withSession = true;
+		$this->withSession = true;
 		return $this;
 	}
 
     /**
-     * Available icons: 'info', 'check, 'exclamation', 'warning', 'happy', 'sad'
+     * Types: 'info', 'success, 'warning', 'danger', 'happy', 'sad'
      * @param string|null $type
      * @param string $message
      * @param string $bg
@@ -55,13 +55,13 @@ trait Notify
     {
 
         [$bg, $icon, $iconcolor] = match ($type) {
-            'saved', 'positive', 'green', 'success', 'check' => ['tf-bg-success', 'check', $iconcolor],
-            'warning', 'orange', 'exclamation'               => ['tf-bg-warning', 'exclamation', $iconcolor],
-            'negative', 'red', 'danger'                      => ['tf-bg-danger', 'warning', $iconcolor],
-            'info', 'blue'                                   => ['tf-bg-info', 'info', $iconcolor],
-            'happy'                                          => ['bg-white', 'happy', 'text-green-600'],
-            'sad'                                            => ['bg-white', 'sad', 'text-red-600'],
-            default                                          => [$bg, $icon, $iconcolor],
+            'success', 'green', 'saved', 'check' => ['tf-bg-success', 'check', $iconcolor],
+            'warning', 'orange',                 => ['tf-bg-warning', 'exclamation', $iconcolor],
+            'happy', 'positive'                  => ['bg-white', 'happy', 'text-green-600'],
+            'sad', 'negative'                    => ['bg-white', 'sad', 'text-red-600'],
+            'danger', 'red'                      => ['tf-bg-danger', 'warning', $iconcolor],
+            'info', 'blue'                       => ['tf-bg-info', 'info', $iconcolor],
+            default                              => [$bg, $icon, $iconcolor],
         };
 
         if($type == 'saved') {
@@ -76,7 +76,7 @@ trait Notify
             'iconcolor' => $iconcolor,
 		];
 
-		if ($this->_withSession) {
+		if ($this->withSession) {
 			session()->flash('notify', $payload);
 			return;
 		}
