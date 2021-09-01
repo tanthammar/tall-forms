@@ -30,6 +30,7 @@
         <x-tall-svg :path="config('tall-forms.plus-icon')" class="tf-repeater-add-button-size fill-current" />
     </button>
 </div>
+@tfonce('scripts:inputarray')
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('inputArray', (config) => ({
@@ -66,3 +67,4 @@
         }))
     })
 </script>
+@endtfonce

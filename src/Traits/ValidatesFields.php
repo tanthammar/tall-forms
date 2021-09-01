@@ -49,7 +49,7 @@ trait ValidatesFields
     protected function validationAttributes(): array
     {
         $attributes = [];
-        if ($this->labelsAsAttributes) {
+        if ($this->form->labelsAsAttributes) {
             foreach ($this->getFieldsFlat() as $field) {
                 if ($field != null && !$field->ignored && $field->labelAsAttribute) {
                     if (in_array($field->type, ['array', 'keyval'])) {

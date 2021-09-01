@@ -30,6 +30,7 @@ class Search extends BaseBladeField
             'placeholder' => __('tf::form.search.placeholder'),
             'class' => 'form-input w-full shadow-inner my-1',
             'wrapperClass' => 'w-full',
+            'options' => [],
         ];
     }
 

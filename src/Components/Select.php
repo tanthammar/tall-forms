@@ -29,6 +29,7 @@ class Select extends BaseBladeField
             'multiple' => false,
             'class' => 'form-select my-1 w-full shadow',
             'wrapperClass' => null,
+            'options' => [],
         ];
     }
 

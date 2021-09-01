@@ -11,15 +11,11 @@ class FieldRoot extends Component
 {
     use Helpers;
 
-    public bool $inArray;
-    public int $colspan;
-    public array $attr;
-
-    public function __construct(bool $inArray, int $colspan = 12, array $attr = [])
+    public function __construct(
+        public bool $inArray, // if this field is inside a Keyval or Repeater
+        public int $colspan = 12,
+        public array $attr = [])
     {
-        $this->inArray = $inArray; // if this field is inside a Keyval or Repeater
-        $this->colspan = $colspan;
-        $this->attr = $attr;
         $this->class();
     }
 

@@ -10,7 +10,6 @@ class Radio extends BaseBladeField
 {
     public function __construct(
         public array|object $field = [],
-        public array        $options = [],
         public array        $attr = [],
     )
     {
@@ -26,6 +25,7 @@ class Radio extends BaseBladeField
             'spacing' => "tf-radio-label-spacing",
             'class' => 'flex', //input & label wrapper
             'wrapperClass' => 'tf-radio-fieldset', //fieldset
+            'options' => [],
         ];
     }
 

@@ -38,6 +38,11 @@ trait Notify
 		return $this;
 	}
 
+    public function getWithSession(): bool
+    {
+        return $this->withSession;
+	}
+
     /**
      * Types: 'info', 'success, 'warning', 'danger', 'happy', 'sad'
      * @param string|null $type
@@ -76,7 +81,7 @@ trait Notify
             'iconcolor' => $iconcolor,
 		];
 
-		if ($this->withSession) {
+		if ($this->getWithSession()) {
 			session()->flash('notify', $payload);
 			return;
 		}

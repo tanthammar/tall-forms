@@ -3,20 +3,10 @@ use Tanthammar\TallForms\Components;
 
 return [
     //note that the word dummymodel is auto replaced with the lower case value of --model option in the make command
-    'form-title' => "trans('tf::form.create').' '.trans('models.dummymodel.title_singular')",
+    'form-title' => "trans('tf::form.create').' '.trans('models.dummymodel.singular')",
 
-    //Use the field label instead of key, as validation attribute.
-    //Recommended, else you have to define language settings for every field. Example: 'form_data.name' => 'Name'
-    //Can be overridden per field
-    'field-labels-as-validation-attributes' => true,
-
-    'include-external-scripts' => true, //Use cdn links for fields based on third party scripts, or bundle them with your app.js?
-
-    'notify-validation-errors' => true, //Alert validation errors, on submit (stacked notifications).
-
-
-    //A Laravel blade component to wrap your form with, if $wrapWithView = true, see documentation
-    'wrap-view-path' => 'tall-forms::wrapper-layout',
+    //Use cdn links for fields based on third party scripts, or bundle them with your app.js?
+    'include-external-scripts' => true,
 
     // Component attributes, perfect spot to add default Alpine $refs keys
     'component-attributes' => [
@@ -88,23 +78,25 @@ return [
         '12' => 'sm:col-span-12',
     ],
 
+    'default-form-factory' => \Tanthammar\TallForms\TallFormFactory::new(),
+
     //Register Aliases for easy access in blade files.
     //Extend or replace the fields.
     'aliases' => [
-        'Checkbox' => Tanthammar\TallForms\Checkbox::class,
-        'Checkboxes' => Tanthammar\TallForms\Checkboxes::class,
-        'FileUpload' => Tanthammar\TallForms\FileUpload::class,
-        'ImageCropper' => Tanthammar\TallForms\ImageCropper::class,
-        'Input' => Tanthammar\TallForms\Input::class,
-        'InputArray' => Tanthammar\TallForms\InputArray::class,
-        'MultiSelect' => Tanthammar\TallForms\MultiSelect::class,
-        'Radio' => Tanthammar\TallForms\Radio::class,
-        'Range' => Tanthammar\TallForms\Range::class,
-        'Search' => Tanthammar\TallForms\Search::class,
-        'Select' => Tanthammar\TallForms\Select::class,
-        'SpatieTags' => Tanthammar\TallForms\SpatieTags::class,
-        'Textarea' => Tanthammar\TallForms\Textarea::class,
-        'Trix' => Tanthammar\TallForms\Trix::class,
+        'Checkbox' => \Tanthammar\TallForms\Checkbox::class,
+        'Checkboxes' => \Tanthammar\TallForms\Checkboxes::class,
+        'FileUpload' => \Tanthammar\TallForms\FileUpload::class,
+        'ImageCropper' => \Tanthammar\TallForms\ImageCropper::class,
+        'Input' => \Tanthammar\TallForms\Input::class,
+        'InputArray' => \Tanthammar\TallForms\InputArray::class,
+        'MultiSelect' => \Tanthammar\TallForms\MultiSelect::class,
+        'Radio' => \Tanthammar\TallForms\Radio::class,
+        'Range' => \Tanthammar\TallForms\Range::class,
+        'Search' => \Tanthammar\TallForms\Search::class,
+        'Select' => \Tanthammar\TallForms\Select::class,
+        'SpatieTags' => \Tanthammar\TallForms\SpatieTags::class,
+        'Textarea' => \Tanthammar\TallForms\Textarea::class,
+        'Trix' => \Tanthammar\TallForms\Trix::class,
     ],
 
 

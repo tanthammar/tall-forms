@@ -24,6 +24,7 @@ class Checkboxes extends BaseBladeField
             'wrapperClass' => "tf-checkboxes-fieldset",
             'checkboxLabelClass' => "tf-checkbox-label",
             'labelWrapperClass' => "tf-checkbox-label-spacing",
+            'options' => [],
         ];
     }
 

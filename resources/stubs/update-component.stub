@@ -11,13 +11,16 @@ class DummyComponent extends TallFormComponent
     public function mount(DummyModel $dummymodel)
     {
         //Gate::authorize()
-        $this->fill([
-            'formTitle' => FormTitle,
-            'wrapWithView' => true, //see https://github.com/tanthammar/tall-forms/wiki/Wrapper-Layout
-            'showGoBack' => false,
-        ]);
-
         $this->mount_form($dummymodel); // $dummymodel from hereon, called $this->model
+    }
+
+    public function formAttr(): array
+    {
+        return [
+           'formTitle' => FormTitle,
+           'wrapWithView' => true, //see https://github.com/tanthammar/tall-forms/wiki/Wrapper-Layout
+           'showGoBack' => false,
+       ];
     }
 
     // Optional method, this already exists in the TallForm trait
