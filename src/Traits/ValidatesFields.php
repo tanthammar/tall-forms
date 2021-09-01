@@ -71,7 +71,8 @@ trait ValidatesFields
     public function updated($field, $value): void
     {
         $function = $this->parseFunctionNameFrom($field);
-        if (method_exists($this, $function)) $this->$function($value);
+        $fieldIndexKey = $this->getKeyIndexFrom($field)
+        if (method_exists($this, $function)) $this->$function($value, $fieldIndexKey);
 
         if (filled($fieldCollection = $this->collectField($field)) && $fieldCollection->get('realtimeValidationOn')) {
             $fieldRule = $fieldCollection->get('rules') ?? 'nullable';
