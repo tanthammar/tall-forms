@@ -466,10 +466,12 @@
         @apply fixed inset-0 h-screen w-screen p-2 sm:p-10 md:p-20 bg-gray-800 bg-opacity-75 z-50;
     }
     .tf-cropper-modal {
-        @apply bg-white rounded w-full h-full flex justify-center items-center;
+        @apply bg-white rounded w-full h-full flex justify-center items-center isolate;
+        z-index: 5;
     }
     .tf-cropper-btns-root {
-        @apply z-10 absolute inset-0;
+        @apply absolute inset-0 isolate;
+        z-index: 5; /* compatible with CKEditor overlay */
     }
     .tf-cropper-btns-wrapper {
         @apply flex gap-2 h-full w-full items-center justify-center;
