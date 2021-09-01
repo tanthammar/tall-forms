@@ -70,8 +70,8 @@ trait ValidatesFields
 
     public function updated($field, $value): void
     {
-        $function = $this->parseFunctionNameFrom($field);
-        $fieldIndexKey = $this->getKeyIndexFrom($field)
+        $function = $this->parseFunctionNameFrom($field); //studly field->key minus form_data
+        $fieldIndexKey = $this->getKeyIndexFrom($field); //first found index integer
         if (method_exists($this, $function)) $this->$function($value, $fieldIndexKey);
 
         if (filled($fieldCollection = $this->collectField($field)) && $fieldCollection->get('realtimeValidationOn')) {
