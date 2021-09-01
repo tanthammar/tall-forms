@@ -1,20 +1,20 @@
 <div x-data="inputArray({
         maxItems: {{ $field->maxItems }},
         minItems: {{ $field->minItems }},
-        itemsArray: $wire.entangle('{{ $field->key }}'){{ $field->deferString }},
+        items: $wire.entangle('{{ $field->key }}'){{ $field->deferString }},
         inputs: $refs.inputs
     })" class="{{ $field->wrapperClass }}">
     <div @error($field->key.'.*') class="{{ $field->errorClass }}" @enderror>
-        <fieldset x-ref="inputs" wire:ignore id="{{ $field->id }}" name="{{ $field->name }}">
-            <template x-for="(item, index) in itemsArray" :key="index">
+        <fieldset x-ref="inputs" id="{{ $field->id }}" name="{{ $field->name }}">
+            <template x-for="(item, itemsIndex) in items" :key="itemsIndex">
                 <div class="flex md:space-x-2 space-x-1">
                     <input
-                        x-model="itemsArray[index]"
+                        x-model="items[itemsIndex]"
                         x-on:keydown.enter.prevent="addItem()"
-                        x-on:keydown.backspace="if(itemsArray[index].length == 0) deleteItem(index)"
+                        x-on:keydown.backspace="if(items[itemsIndex].length == 0) deleteItem(itemsIndex)"
                         {{ $attributes->except([...array_keys($attr), 'x-model'])->whereDoesntStartWith('x-model')->merge($attr) }}
                     />
-                    <button type="button" class="tf-repeater-delete-btn" x-on:click.prevent.prevent="deleteItem(index)" tabindex="-1">
+                    <button type="button" class="tf-repeater-delete-btn" x-on:click.prevent.prevent="deleteItem(itemsIndex)" tabindex="-1">
                         <x-tall-svg :path="config('tall-forms.trash-icon')" class="tf-repeater-btn-size fill-current" />
                     </button>
                 </div>
@@ -36,20 +36,20 @@
         Alpine.data('inputArray', (config) => ({
             maxItems: config.maxItems,
             minItems: config.minItems,
-            itemsArray: config.itemsArray,
+            items: config.items,
             inputs: config.inputs,
             addItem() {
-                this.itemsArray = Array.from(this.itemsArray.filter(item => item.length > 0))
-                if (this.maxItems === 0 || (this.maxItems > 0 && this.itemsArray.length < this.maxItems)) {
-                    this.itemsArray.push('')
+                this.items = Array.from(this.items.filter(item => item.length > 0))
+                if (this.maxItems === 0 || (this.maxItems > 0 && this.items.length < this.maxItems)) {
+                    this.items.push('')
                 } else {
                     this.shakeIt()
                 }
                 this.focusLastInput()
             },
-            deleteItem(index) {
-                if (this.minItems === 0 || (this.minItems > 0 && this.itemsArray.length > this.minItems)) {
-                    this.itemsArray.splice(index, 1)
+            deleteItem(itemsIndex) {
+                if (this.minItems === 0 || (this.minItems > 0 && this.items.length > this.minItems)) {
+                    this.items.splice(itemsIndex, 1)
                 } else {
                     this.shakeIt()
                 }
