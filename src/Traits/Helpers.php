@@ -35,14 +35,23 @@ trait Helpers
     }
 
     /**
-     * Executes before field validation, creds to "@roni", livewire discord channel member.
-     * @param string $field
-     * @param string $hook
-     * @return string
+     * Executes before field validation, creds to "@roni" and "@ra-V-en".
      */
-    protected function parseFunctionNameFrom(string $field, $hook = 'updated'): string
+    protected function parseFunctionNameFrom(string $field, string $hook = 'updated'): string
     {
-        return $hook . Str::of($field)->replace('.', '_')->studly()->replaceFirst('FormData', '');
+        //return $hook . Str::of($field)->replace('.', '_')->studly()->replaceFirst('FormData', '');
+        return $hook . Str::of(preg_replace('/(\d+)\./', '', $field))
+                ->replace('.', '_')
+                ->replaceFirst('formData', '')
+                ->studly();
+    }
+
+    /**
+     * Returns the index of the field, if available
+     */
+    protected function getKeyIndexFrom(string $field): ?string
+    {
+        return Str::match('/(\d+)/', $field);
     }
 
     public function tallFillField($array)
