@@ -49,6 +49,7 @@ class TallFormModel extends Model
         'showGoBack' => 'boolean',
         'saveStayBtnTxt' => 'string',
         'saveBackBtnTxt' => 'string',
+        'modalMaxWidth' => 'string',
     ];
 
     public static function defaults(): array
@@ -63,7 +64,7 @@ class TallFormModel extends Model
             'notifyErrors' => true, //Alert validation errors, on submit (stacked notifications).
             'wrapViewPath' => 'tall-forms::wrapper-layout', //A Laravel blade component to wrap your form with, if $wrapWithView = true, see documentation
             'inlineLabelAlignment' => 'tf-inline-label-alignment',
-            'formTitle' => config('tall-forms.form-title'), //config('tall-forms.form-title') in artisan make:tall-form cmd
+            'formTitle' => '',
             'layout' => 'layouts.app', //Livewire default = 'layouts.app'
             'headView' => '',
             'afterFormView' => '',
@@ -81,6 +82,7 @@ class TallFormModel extends Model
             'showGoBack' => true,
             'saveStayBtnTxt' => trans('tf::form.save-and-stay'), //trans('tf::form.save-and-stay')
             'saveBackBtnTxt' => trans('tf::form.save-go-back'),//trans('tf::form.save-go-back')
+            'modalMaxWidth' => 'lg', //options: sm, md, lg, xl, 2xl
         ];
     }
 }

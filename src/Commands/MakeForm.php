@@ -5,6 +5,7 @@ namespace Tanthammar\TallForms\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use function PHPUnit\Framework\matches;
 
 class MakeForm extends Command
 {
@@ -24,8 +25,11 @@ class MakeForm extends Command
 
     public function handle()
     {
-        $stub = $this->option('action') == 'create' ? File::get(__DIR__ . '/../../resources/stubs/create-component.stub') : File::get(__DIR__ . '/../../resources/stubs/update-component.stub');
-        $stub = str_replace('FormTitle', config('tall-forms.form-title'), $stub);
+        $stub = match ($this->option('action')) {
+            'create' => File::get(__DIR__ . '/../../resources/stubs/create-component.stub'),
+            'update' => File::get(__DIR__ . '/../../resources/stubs/update-component.stub'),
+            'modal' => File::get(__DIR__ . '/../../resources/stubs/modal-component.stub')
+        };
         $stub = str_replace('DummyComponent', $this->argument('name'), $stub);
         $stub = str_replace('DummyModel', $this->option('model'), $stub);
         $stub = str_replace('dummymodel', Str::lower($this->option('model')), $stub);
