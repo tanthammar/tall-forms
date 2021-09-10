@@ -78,4 +78,12 @@ trait TallForm
         return [];
     }
 
+    public function transTitle(?string $model = null): string
+    {
+        $key = $model ?: class_basename($this->model);
+        return $this->model->exists
+            ? __('tf::form.edit'). ' ' . __("tf::models.$key.singular")
+            : __('tf::form.new'). ' ' . __("tf::models.$key.singular");
+    }
+
 }
