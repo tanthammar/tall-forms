@@ -8,6 +8,7 @@ use Tanthammar\TallForms\TallFormComponent;
 
 class DummyComponent extends TallFormComponent
 {
+
     public function mount(?DummyModel $dummymodel)
     {
         //Gate::authorize()
@@ -17,21 +18,17 @@ class DummyComponent extends TallFormComponent
     public function formAttr(): array
     {
         return [
-           'formTitle' => FormTitle,
-           'wrapWithView' => true, //see https://github.com/tanthammar/tall-forms/wiki/Wrapper-Layout
-           'showGoBack' => false,
+           'formTitle' => $this->transTitle(model: 'DummyModel'),
+           'wrapWithView' => false,
        ];
     }
 
-
-    // Mandatory method
+    // OPTIONAL methods, they already exist in the SubmitsForm trait
     public function onCreateModel($validated_data)
     {
-        // Set the $model property in order to conditionally display fields when the model instance exists, on saveAndStayResponse()
         $this->model = DummyModel::create($validated_data);
     }
 
-    // OPTIONAL method used for the "Save and stay" button, this method already exists in the TallForm trait
     public function onUpdateModel($validated_data)
     {
         $this->model->update($validated_data);

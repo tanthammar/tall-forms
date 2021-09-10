@@ -17,13 +17,12 @@ class DummyComponent extends TallFormComponent
     public function formAttr(): array
     {
         return [
-           'formTitle' => FormTitle,
-           'wrapWithView' => true, //see https://github.com/tanthammar/tall-forms/wiki/Wrapper-Layout
-           'showGoBack' => false,
+           'formTitle' => $this->transTitle(model: 'DummyModel'),
+           'wrapWithView' => false,
        ];
     }
 
-    // Optional method, this already exists in the TallForm trait
+    // OPTIONAL method, it already exists in the SubmitsForm trait
     public function onUpdateModel($validated_data)
     {
         $this->model->update($validated_data);
