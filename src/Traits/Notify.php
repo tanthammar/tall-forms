@@ -24,7 +24,7 @@ trait Notify
     public function updatedAlert()
     {
         $this->notify(
-            type: data_get($this->alert, 'type', 'saved'),
+            preset: data_get($this->alert, 'type', 'saved'),
             message: data_get($this->alert, 'message', trans('tf::form.alerts.updated-success')),
             bg: data_get($this->alert, 'bg'),
             icon: data_get($this->alert, 'icon'),
@@ -44,22 +44,22 @@ trait Notify
 	}
 
     /**
-     * Types: 'info', 'success, 'warning', 'danger', 'happy', 'sad'
-     * @param string|null $type
+     * Presets: 'info', 'success, 'warning', 'danger', 'happy', 'sad'
+     * @param string|null $preset
      * @param string $message
      * @param string $bg
      * @param string $icon
      * @param string $iconcolor
      */
     public function notify(
-        null|string $type = "saved",
+        null|string $preset = "saved",
         string      $message = "",
         string      $bg = 'tf-notify-bg-default',
         string      $icon = "info",
         string      $iconcolor = "text-white")
     {
 
-        [$bg, $icon, $iconcolor] = match ($type) {
+        [$bg, $icon, $iconcolor] = match ($preset) {
             'success', 'green', 'saved', 'check' => ['tf-bg-success', 'check', $iconcolor],
             'warning', 'orange',                 => ['tf-bg-warning', 'exclamation', $iconcolor],
             'happy', 'positive'                  => ['bg-white', 'happy', 'text-green-600'],
@@ -69,7 +69,7 @@ trait Notify
             default                              => [$bg, $icon, $iconcolor],
         };
 
-        if($type == 'saved') {
+        if($preset == 'saved') {
             $message = $message ?: trans('tf::form.alerts.updated-success');
             $this->emitSelf('notify-saved');//x-on:notify-saved.window, flash trans('tf::form.saved') on the form submit button, buttons.root.blade.php
         }
