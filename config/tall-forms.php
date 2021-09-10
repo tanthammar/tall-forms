@@ -2,9 +2,6 @@
 use Tanthammar\TallForms\Components;
 
 return [
-    //note that the word dummymodel is auto replaced with the lower case value of --model option in the make command
-    'form-title' => "trans('tf::form.create').' '.trans('models.dummymodel.singular')",
-
     //Use cdn links for fields based on third party scripts, or bundle them with your app.js?
     'include-external-scripts' => true,
 
