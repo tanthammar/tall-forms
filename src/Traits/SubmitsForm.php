@@ -59,6 +59,6 @@ trait SubmitsForm
 
     public function onCreateModel($validated_data)
     {
-        //
+        $this->model = $this->model::create($validated_data);
     }
 }
