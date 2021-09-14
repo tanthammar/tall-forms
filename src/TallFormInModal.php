@@ -6,8 +6,8 @@ abstract class TallFormInModal extends \Livewire\Component
 {
     use TallForm;
 
-    public string $closeBtnColor = 'danger';
-    public string $submitBtnColor = 'success';
+    public string $closeBtnColor = 'white';
+    public string $submitBtnColor = 'primary';
 
     public bool $modalOpen = false;
 
@@ -45,8 +45,8 @@ abstract class TallFormInModal extends \Livewire\Component
             'inline' => false,
             'wrapWithView' => true,
             'wrapViewPath' => 'tall-forms::form-in-modal',
-            'submitBtn' => trans('tf::form.save'),
-            'cancelBtn' => trans('tf::form.cancel'),
+            'submitBtnTxt' => trans('tf::form.save'),
+            'cancelBtnTxt' => trans('tf::form.cancel'),
             'onKeyDownEnter' => 'modalSubmit',
             'modalMaxWidth' => 'lg', //options: sm, md, lg, xl, 2xl
         ];

@@ -120,7 +120,7 @@
         @apply text-gray-100 tf-bg-secondary hover:bg-blue-800 hover:text-white focus:border-blue-800 focus:shadow;
     }
     .tf-btn-white {
-        @apply border-gray-300 bg-white text-gray-700 hover:text-gray-500 focus:border-blue-300 focus:shadow;
+        @apply border-gray-400 bg-white text-gray-700 hover:text-gray-500 focus:border-blue-300 focus:shadow;
     }
     .tf-btn-indigo {
         @apply text-indigo-100 bg-indigo-500 hover:bg-indigo-600 focus:border-indigo-700 focus:shadow;

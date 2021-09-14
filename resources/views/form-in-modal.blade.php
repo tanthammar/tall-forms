@@ -35,13 +35,13 @@
             size="sm" color="{{ $closeBtnColor }}"
             wire:click.prevent.stop="closeModal"
             wire:loading.attr="disabled"
-            :text="$this->form->cancelBtn" />
+            :text="$this->form->cancelBtnTxt" />
 
         <x-tall-button
             size="sm" class="ml-2" type="submit" color="{{ $submitBtnColor }}"
             wire:click="{{ $this->form->onKeyDownEnter }}"
             wire:loading.attr="disabled"
-            :text="$this->form->submitBtn" />
+            :text="$this->form->submitBtnTxt" />
     </x-slot>
 
 </x-tall-forms::form-modal>
