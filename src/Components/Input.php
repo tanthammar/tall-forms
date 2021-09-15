@@ -54,6 +54,7 @@ class Input extends BaseBladeField
             'step' => 1,
             'min' => 0,
             'max' => null,
+            'disabled' => false,
         ];
     }
 

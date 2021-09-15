@@ -4,11 +4,12 @@
 namespace Tanthammar\TallForms;
 
 
+use Tanthammar\TallForms\Traits\CanBeDisabled;
 use Tanthammar\TallForms\Traits\HasIcons;
 
 class Input extends BaseField
 {
-    use HasIcons;
+    use HasIcons, CanBeDisabled;
 
     public $input_type = 'text';
     public $autocomplete;

@@ -18,7 +18,8 @@
     <div class="relative w-full">
         <input
             @if($field->required) required @endif
-            {{ $attributes->except([...array_keys($attr), 'x-data'])->merge($attr)->merge(['class' => $errors->has($field->key) ? $field->errorClass : $field->class ]) }}
+            @if($field->disabled) disabled @endif
+            {{ $attributes->except([...array_keys($attr), 'x-data', 'required', 'disabled'])->merge($attr)->merge(['class' => $errors->has($field->key) ? $field->errorClass : $field->class ]) }}
         />
         @error($field->key)
             <x-tall-error-icon :right="in_array($field->type, ['date', 'datetime-local', 'time']) ? 'right-6' : 'right-0'"/>
