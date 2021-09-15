@@ -26,6 +26,7 @@ class Textarea extends BaseBladeField
             'class' => 'form-textarea block w-full rounded shadow-inner my-1',
             'placeholder' => '',
             'rows' => 5,
+            'disabled' => false,
         ];
     }
 

@@ -4,8 +4,12 @@
 namespace Tanthammar\TallForms;
 
 
+use Tanthammar\TallForms\Traits\CanBeDisabled;
+
 class Textarea extends BaseField
 {
+    use CanBeDisabled;
+
     public $textarea_rows = 5;
     public $placeholder;
     public $required = false;
