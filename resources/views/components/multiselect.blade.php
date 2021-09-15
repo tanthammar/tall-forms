@@ -19,7 +19,8 @@
             x-model="field"
             x-on:click.outside.stop="open = false"
             multiple
-            {{ $attributes->except(array_keys($attr))->whereDoesntStartWith('x-model')->merge($attr)->merge(['class' => $error ? $field->errorClass : $field->class ]) }}>
+            @if($field->disabled) disabled @endif
+            {{ $attributes->except([...array_keys($attr), 'disabled', 'multiple'])->whereDoesntStartWith('x-model')->merge($attr)->merge(['class' => $error ? $field->errorClass : $field->class ]) }}>
         @forelse($field->options as $value => $label)
             <option class="p-2" wire:key="id{{ md5($field->id.$field->key.$value) }}" value="{{ $value }}">{{ $label }}</option>
         @empty

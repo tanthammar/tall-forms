@@ -17,6 +17,7 @@ class MultiSelect extends Select
             'class' => 'form-input my-1 w-full shadow px-0 divide-y',
             'wrapperClass' => null,
             'options' => [],
+            'disabled' => false,
         ];
     }
 

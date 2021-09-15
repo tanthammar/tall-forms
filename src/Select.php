@@ -3,11 +3,12 @@
 
 namespace Tanthammar\TallForms;
 
+use Tanthammar\TallForms\Traits\CanBeDisabled;
 use Tanthammar\TallForms\Traits\HasOptions;
 
 class Select extends BaseField
 {
-    use HasOptions;
+    use HasOptions, CanBeDisabled;
 
     public $placeholder;
     public $multiple = false;
