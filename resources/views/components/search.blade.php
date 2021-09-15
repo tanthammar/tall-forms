@@ -14,7 +14,8 @@
                 x-on:click.stop="optionsVisible = true"
                 x-on:click.stop.outside="optionsVisible = false"
                 autocomplete="off"
-                {{ $attributes->except(array_keys($attr))->merge($attr)->merge(['class' => $errors->has($field->key) ? $field->errorClass : $field->class ]) }}
+                @if($field->disabled) disabled @endif
+                {{ $attributes->except([...array_keys($attr), 'disabled', 'autocomplete'])->whereDoesntStartWith('x-model')->merge($attr)->merge(['class' => $errors->has($field->key) ? $field->errorClass : $field->class ]) }}
             />
             <div x-on:click.prevent="searchInput = ''; optionsVisible = false;" class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer">
                 <!-- clear search field icon x -->
