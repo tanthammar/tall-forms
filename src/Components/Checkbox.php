@@ -28,6 +28,7 @@ class Checkbox extends BaseBladeField
             'wrapperClass' => 'flex',
             'checkboxLabelClass' => 'tf-checkbox-label',
             'labelWrapperClass' => 'tf-checkbox-label-spacing',
+            'disabled' => false,
         ];
     }
 

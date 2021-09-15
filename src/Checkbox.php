@@ -4,8 +4,11 @@
 namespace Tanthammar\TallForms;
 
 
+use Tanthammar\TallForms\Traits\CanBeDisabled;
+
 class Checkbox extends BaseField
 {
+    use CanBeDisabled;
 
     public $placeholder;
     public string $checkboxLabelClass = "tf-checkbox-label";

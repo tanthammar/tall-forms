@@ -527,6 +527,10 @@
         @apply list-decimal list-outside ml-4;
     }
 
+    .trix-disabled {
+        @apply border border-gray-300 my-1 p-3 prose rounded shadow-inner;
+    }
+
     /* Tnx Filament */
     trix-editor:empty:not(:focus)::before {
         @apply text-gray-400 opacity-100;
@@ -607,6 +611,11 @@
     }
     .tf-subtitle {
         @apply text-sm text-gray-800;
+    }
+
+    /* CKEditor */
+    .ckeditor-disabled {
+        @apply border border-gray-300 my-1 p-3 prose rounded shadow-inner;
     }
 
     /* Modals */
