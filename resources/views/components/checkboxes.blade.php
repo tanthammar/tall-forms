@@ -13,6 +13,7 @@
                     value="{{ $value }}"
                     name="{{ $field->key }}"
                     class="{{ $field->class }}"
+                    @if($field->disabled) disabled @endif
                 />
                 <div class="{{ $field->labelWrapperClass }}">
                     <label for="{{ $id }}" class="{{ $field->checkboxLabelClass }}">

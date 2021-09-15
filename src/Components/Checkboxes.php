@@ -25,6 +25,7 @@ class Checkboxes extends BaseBladeField
             'checkboxLabelClass' => "tf-checkbox-label",
             'labelWrapperClass' => "tf-checkbox-label-spacing",
             'options' => [],
+            'disabled' => false,
         ];
     }
 

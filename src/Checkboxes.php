@@ -4,11 +4,12 @@
 namespace Tanthammar\TallForms;
 
 
+use Tanthammar\TallForms\Traits\CanBeDisabled;
 use Tanthammar\TallForms\Traits\HasOptions;
 
 class Checkboxes extends BaseField
 {
-    use HasOptions;
+    use HasOptions, CanBeDisabled;
 
     public string $checkboxLabelClass = "tf-checkbox-label";
 
