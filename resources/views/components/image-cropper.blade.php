@@ -13,9 +13,11 @@
         <div x-show="!showCroppie && !hasImage">
 
             {{-- input --}}
-            <input type="file" name="{{ $field->name }}"
+            <input type="file"
+                   name="{{ $field->name }}"
                    id="{{ $field->id }}"
                    class="absolute inset-0 z-5 m-0 p-0 w-full h-full outline-none opacity-0 cursor-pointer"
+                   @if($field->disabled) disabled @endif
                    x-ref="input"
                    x-on:change="updatePreview()"
                    x-on:dragover="$el.classList.add('active')"

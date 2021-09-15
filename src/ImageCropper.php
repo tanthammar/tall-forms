@@ -4,8 +4,12 @@
 namespace Tanthammar\TallForms;
 
 
+use Tanthammar\TallForms\Traits\CanBeDisabled;
+
 class ImageCropper extends BaseField
 {
+    use CanBeDisabled;
+
     public bool $includeScript = false;
     public $width;
     public $height;

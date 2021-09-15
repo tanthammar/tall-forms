@@ -31,6 +31,7 @@ class ImageCropper extends BaseBladeField
             'uploadButton' => __('tf::form.cropper.select-file'),
             'thumbnail' => 'tf-cropper-thumb', //= h-full w-full
             'includeScript' => true,
+            'disabled' => false,
         ];
     }
 
