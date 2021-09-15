@@ -5,6 +5,7 @@ namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
 use Tanthammar\TallForms\Traits\BaseBladeField;
+use Tanthammar\TallForms\Traits\CanBeDisabled;
 use Tanthammar\TallForms\Traits\Helpers;
 
 class Trix extends BaseBladeField
@@ -34,6 +35,7 @@ class Trix extends BaseBladeField
             'allowedMimeTypes' => [],
             'maxAttachments' => 1,
             'maxKB' => 1024,
+            'disabled' => false,
         ];
     }
 

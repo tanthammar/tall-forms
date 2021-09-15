@@ -12,10 +12,14 @@
     x-init="$watch('trix', () => notFocused && setValue())"
     x-on:trix-change.debounce.300ms="trix = $refs.trixInput.value"
 >
+    @unless ($field->disabled)
     <input value="{{ old($field->name) ?? $value }}" id="{{ $field->id }}" name="{{ $field->name }}" type="hidden" />
     <div wire:ignore x-on:trix-file-accept="() => event.preventDefault()" class="no-upload">
         <trix-editor x-ref="trixInput" input="{{ $field->id }}" {{ $attributes->merge(['class' => $errors->has($field->key) ? $field->errorClass : $field->class ]) }}></trix-editor>
     </div>
+    @else
+        <div class="trix-disabled">{!! $value !!}</div>
+    @endunless
 </div>
 @if($field->includeScript)
     @tfonce('styles:trix')

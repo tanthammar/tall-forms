@@ -4,8 +4,12 @@
 namespace Tanthammar\TallForms;
 
 
+use Tanthammar\TallForms\Traits\CanBeDisabled;
+
 class Trix extends BaseField
 {
+    use CanBeDisabled;
+
     public bool $includeScript = false;
     public bool $allowAttachments = false;
     public null|string $attachmentKey = null;
