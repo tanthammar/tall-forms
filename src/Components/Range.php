@@ -24,7 +24,8 @@ class Range extends BaseBladeField
             'min' => 1,
             'max' => 100,
             'class' => 'flex-1 w-full',
-            'wrapperClass' => 'w-full'
+            'wrapperClass' => 'w-full',
+            'disabled' => false,
         ];
     }
 

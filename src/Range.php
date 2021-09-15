@@ -4,8 +4,12 @@
 namespace Tanthammar\TallForms;
 
 
+use Tanthammar\TallForms\Traits\CanBeDisabled;
+
 class Range extends BaseField
 {
+    use CanBeDisabled;
+
     public $step = 1;
     public $min = 1;
     public $max = 100;
