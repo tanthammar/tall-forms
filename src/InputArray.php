@@ -3,12 +3,16 @@
 
 namespace Tanthammar\TallForms;
 
+use Tanthammar\TallForms\Traits\CanBeDisabled;
+
 /**
  * The Model attribute must be $cast to array
  * @package Tanthammar\TallForms
  */
 class InputArray extends BaseField
 {
+    use CanBeDisabled;
+
     public string $input_type = 'text';
     public string $placeholder = "";
     public int $maxItems = 0;

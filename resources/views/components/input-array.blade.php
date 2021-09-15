@@ -9,10 +9,11 @@
             <template x-for="(item, itemsIndex) in items" :key="itemsIndex">
                 <div class="flex md:space-x-2 space-x-1">
                     <input
+                        @if($field->disabled) disabled @endif
                         x-model="items[itemsIndex]"
                         x-on:keydown.enter.prevent="addItem()"
                         x-on:keydown.backspace="if(items[itemsIndex].length == 0) deleteItem(itemsIndex)"
-                        {{ $attributes->except([...array_keys($attr), 'x-model'])->whereDoesntStartWith('x-model')->merge($attr) }}
+                        {{ $attributes->except([...array_keys($attr), 'x-model', 'disabled'])->whereDoesntStartWith('x-model')->merge($attr) }}
                     />
                     <button type="button" class="tf-repeater-delete-btn" x-on:click.prevent.prevent="deleteItem(itemsIndex)" tabindex="-1">
                         <x-tall-svg :path="config('tall-forms.trash-icon')" class="tf-repeater-btn-size fill-current" />

@@ -30,6 +30,7 @@ class InputArray extends BaseBladeField
             'errorMsg' => null,
             'maxItems' => 0, //0 = unlimited
             'minItems' => 0, //0 = unlimited
+            'disabled' => false,
         ];
     }
 
