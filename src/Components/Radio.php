@@ -26,6 +26,7 @@ class Radio extends BaseBladeField
             'class' => 'flex', //input & label wrapper
             'wrapperClass' => 'tf-radio-fieldset', //fieldset
             'options' => [],
+            'disabled' => false,
         ];
     }
 

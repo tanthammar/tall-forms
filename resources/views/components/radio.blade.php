@@ -11,7 +11,8 @@
                     wire:key="{{ $id }}"
                     class="{{ $field->radioClass }}"
                     x-model="radio"
-                    {{ $attributes->except(['x-data', 'class', 'value', 'name', 'id', 'type'])->whereDoesntStartWith('x-model')->merge($attr) }}
+                    @if($field->disabled) disabled @endif
+                    {{ $attributes->except(['x-data', 'class', 'value', 'name', 'id', 'type', 'disabled'])->whereDoesntStartWith('x-model')->merge($attr) }}
                 />
                 <div class="{{ $field->spacing }}">
                     <label for="{{ $id }}" class="{{ $field->radioLabelClass }}">
