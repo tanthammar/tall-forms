@@ -4,8 +4,11 @@
 namespace Tanthammar\TallForms;
 
 
+use Tanthammar\TallForms\Traits\CanBeDisabled;
+
 class FileUpload extends BaseField
 {
+    use CanBeDisabled;
 
     public bool $multiple = false;
     public ?string $livewireComponent = null;

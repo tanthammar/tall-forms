@@ -38,6 +38,7 @@ class FileUpload extends BaseBladeField
             'tall_svg_upload' => config('tall-forms.file-upload'),
             'tall_svg_file' => config('tall-forms.file-icon'),
             'tall_svg_trash' => config('tall-forms.trash-icon'),
+            'disabled' => false,
         ];
     }
 

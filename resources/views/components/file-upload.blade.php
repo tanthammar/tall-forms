@@ -21,6 +21,7 @@
                 id="{{ $field->id }}"
                 name="{{ $field->name }}"
                 type="file"
+                @if($field->disabled) disabled @endif
                 @if($showFileUploadError && $showFileUploadErrorFor == $field->name) :value="null" @endif
                 {{ $field->multiple ? 'multiple' : '' }}
                 accept="{{$field->accept}}"
