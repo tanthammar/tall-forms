@@ -33,7 +33,7 @@ trait ValidatesFields
                     if ($field->type === 'file') {
                         $ruleName = $field->multiple ? "$field->name.*" : $field->name;
                     }
-                    elseif (in_array($field->type, ['multiselect', 'input-array'])) {
+                    elseif (in_array($field->type, ['multiselect', 'input-array', 'tags'])) {
                         $ruleName = "$prefix.$field->name.*";
                     } else {
                         $ruleName = "$prefix.$field->name";
@@ -43,7 +43,8 @@ trait ValidatesFields
                 }
             }
         }
-        return $rules;
+        //component rules() || $rules takes precedence
+        return array_merge($rules, $this->getRules());
     }
 
     protected function validationAttributes(): array
@@ -70,14 +71,18 @@ trait ValidatesFields
 
     public function updated($field, $value): void
     {
+        ray($field, $value);
         $function = $this->parseFunctionNameFrom($field); //studly field->key minus form_data
         $fieldIndexKey = $this->getKeyIndexFrom($field); //first found index integer
-        if (method_exists($this, $function)) $this->$function($value, $fieldIndexKey);
+        if (method_exists($this, $function)) {
+            $this->$function($value, $fieldIndexKey);
+            exit;
+        }
 
-        if (filled($fieldCollection = $this->collectField($field)) && $fieldCollection->get('realtimeValidationOn')) {
+        if (filled($fieldCollection = $this->collectField($field)) && $fieldCollection->get('0')) {
             $fieldRule = $fieldCollection->get('rules') ?? 'nullable';
             $fieldType = $fieldCollection->get('type');
-            if (in_array($fieldType, ['multiselect', 'input-array'])) $field = $field . '.*';
+            if (in_array($fieldType, ['multiselect', 'input-array', 'tags'])) $field = $field . '.*';
             if ($fieldType == 'file') {
                 // livewire native file upload
                 $this->customValidateFilesIn($field, $fieldRule);
