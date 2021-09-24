@@ -42,8 +42,8 @@ trait Helpers
         //return $hook . Str::of($field)->replace('.', '_')->studly()->replaceFirst('FormData', '');
         return $hook . Str::of(preg_replace('/(\d+)\./', '', $field))
                 ->replace('.', '_')
-                ->replaceFirst('formData', '')
-                ->studly();
+                ->studly()
+                ->replaceFirst('FormData', '');
     }
 
     /**
@@ -155,7 +155,7 @@ trait Helpers
             if (filled($field) && !$field->ignored) {
                 $fieldKey = Str::replaceFirst('form_data.', '', $field->key);
                 if (false === Str::contains($fieldKey, ['*']) && is_null(data_get($this->form_data, $fieldKey, null))) {
-                    $array = in_array($field->type, ['checkboxes', 'file', 'multiselect', 'input-array']);
+                    $array = in_array($field->type, ['checkboxes', 'file', 'multiselect', 'input-array', 'tags']);
                     data_set($this->form_data, $fieldKey, $field->default ?? ($array ? [] : null));
                 }
             }
