@@ -14,10 +14,21 @@ class MultiSelect extends Select
             'placeholder' => __('tf::form.multiselect.placeholder'),
             'defer' => true,
             'multiple' => true,
-            'class' => 'form-input my-1 w-full shadow px-0 divide-y',
+            'class' => 'form-multiselect',
             'wrapperClass' => null,
             'options' => [],
             'disabled' => false,
+        ];
+    }
+
+    //override Select because multiselect is entangled
+    public function inputAttributes(): array
+    {
+        return [
+            //$this->field->wire => $this->field->key, //entangled
+            'id' => $this->field->id,
+            'name' => $this->field->name,
+            'value' => old($this->field->name)
         ];
     }
 
