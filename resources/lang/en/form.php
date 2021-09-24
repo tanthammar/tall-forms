@@ -33,7 +33,6 @@ return [
     'multiselect' => [
         'placeholder' => 'Please select one or multiple options ...',
         'help' => 'Press CTRL(Windows) or CMD(Mac), to select/deselect multiple options.',
-        'error-msg' => 'The selection is invalid',
     ],
 
     'search' => [
@@ -54,6 +53,10 @@ return [
         'error-msg' => 'The tag must be between 3 to 60 chars long and only consist of alpha-numeric characters.',
         'placeholder' => 'Type to add/search ...',
         'help' => 'Press SPACE to create a new tag, or SELECT an existing tag by CLICKING on it.',
+    ],
+
+    'tags' => [
+        'placeholder' => 'Press ENTER, COMMA or SPACE, to add a tag',
     ],
 
     'date-picker' => [

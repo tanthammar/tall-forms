@@ -32,7 +32,6 @@ return [
     'multiselect' => [
         'placeholder' => 'Välj ett eller flera alternativ ...',
         'help' => 'CTRL(Windows) eller CMD(Mac), för att markera/avmarkera',
-        'error-msg' => 'Ogiltigt värde',
     ],
 
     'search' => [
@@ -53,6 +52,10 @@ return [
         'error-msg' => 'Måste vara mellan 3 till 60 tecken och bara bestå av bokstäver och siffror',
         'placeholder' => 'Skriv för att lägga till/söka ...',
         'help' => 'Tryck mellanslag för att skapa en ny, eller välj en existerande genom att klicka på den.',
+    ],
+
+    'tags' => [
+        'placeholder' => 'Separera ord med enter, retur, mellanslag eller kommatecken ...',
     ],
 
     'date-picker' => [
