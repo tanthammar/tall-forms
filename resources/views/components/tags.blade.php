@@ -43,7 +43,7 @@
             x-show="tags.length"
             class="bg-white space-x-1 rtl:space-x-reverse relative w-full px-2 py-1"
         >
-            <div class="-ml-1">
+            <div class="-ml-1 space-x-2 space-y-1">
                 <template class="inline" x-for="tag in tags" x-bind:key="tag">
                     <button
                         @unless ($field->disabled)
@@ -51,14 +51,14 @@
                         @endunless
                         type="button"
                         @class([
-                            'inline-flex items-center justify-center h-6 px-2 my-1 text-sm font-semibold tracking-tight text-primary-700 rounded-full bg-primary-500/10 space-x-1',
+                            'tf-tags-color inline-flex leading-4 items-center text-sm rounded py-1 px-2 space-x-1',
                             'cursor-default' => $field->disabled,
                         ])
                     >
                         <span x-text="tag"></span>
 
                         @unless ($field->disabled)
-                             X
+                             <span class="tf-tags-x-color">x</span>
                         @endunless
                     </button>
                 </template>
