@@ -339,7 +339,7 @@
         @apply tf-bg-primary text-white;
     }
     .tf-tags-x-color {
-        @apply text-gray-200;
+        @apply text-gray-400;
     }
 
     /* Search */
