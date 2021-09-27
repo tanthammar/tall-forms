@@ -55,7 +55,8 @@ return [
     ],
 
     'tags' => [
-        'placeholder' => 'Separera ord med enter, retur, mellanslag eller kommatecken ...',
+        'placeholder' => 'Skriv här …',
+        'help' => 'Tryck på retur, enter, mellanslag eller kommatecken för att lägga till ord.',
     ],
 
     'date-picker' => [

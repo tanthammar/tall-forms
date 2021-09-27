@@ -56,7 +56,8 @@ return [
     ],
 
     'tags' => [
-        'placeholder' => 'Press ENTER, COMMA or SPACE, to add a tag',
+        'placeholder' => 'Type here …',
+        'help' => 'Press ENTER, COMMA or SPACE, to add a tag',
     ],
 
     'date-picker' => [
