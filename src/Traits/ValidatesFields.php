@@ -25,6 +25,7 @@ trait ValidatesFields
                         $ruleName = $field->type === 'array'
                             ? "$prefix.$field->name.*"
                             : ($field->ignored ? $prefix : "$prefix.$field->name");
+                        //recursive
                         $rules = array_merge($rules, $this->get_rules($field->fields, $ruleName));
                     }
                     $rules["$prefix.$field->name"] = $field->rules ?? 'nullable';
@@ -33,7 +34,7 @@ trait ValidatesFields
                     if ($field->type === 'file') {
                         $ruleName = $field->multiple ? "$field->name.*" : $field->name;
                     }
-                    elseif (in_array($field->type, ['multiselect', 'input-array', 'tags'])) {
+                    elseif (in_array($field->type, ['input-array', 'tags'])) {
                         $ruleName = "$prefix.$field->name.*";
                     } else {
                         $ruleName = "$prefix.$field->name";
@@ -43,7 +44,7 @@ trait ValidatesFields
                 }
             }
         }
-        //component rules() || $rules takes precedence
+        //Merge with Livewire default $rules || rules() takes precedence
         return array_merge($rules, $this->getRules());
     }
 
@@ -71,18 +72,24 @@ trait ValidatesFields
 
     public function updated($field, $value): void
     {
-        ray($field, $value);
+        //updatedFoo
         $function = $this->parseFunctionNameFrom($field); //studly field->key minus form_data
         $fieldIndexKey = $this->getKeyIndexFrom($field); //first found index integer
+        if (method_exists($this, $function)) $this->$function($value, $fieldIndexKey);
+
+        //updatedFooValidate
+        $function = $function . 'Validate';
         if (method_exists($this, $function)) {
             $this->$function($value, $fieldIndexKey);
-            exit;
+            return;
         }
 
-        if (filled($fieldCollection = $this->collectField($field)) && $fieldCollection->get('0')) {
+        //realtime validation
+        $fieldCollection = $this->collectField($field);
+        if (filled($fieldCollection)) {
             $fieldRule = $fieldCollection->get('rules') ?? 'nullable';
             $fieldType = $fieldCollection->get('type');
-            if (in_array($fieldType, ['multiselect', 'input-array', 'tags'])) $field = $field . '.*';
+            if (in_array($fieldType, ['input-array', 'tags'])) $field = $field . '.*';
             if ($fieldType == 'file') {
                 // livewire native file upload
                 $this->customValidateFilesIn($field, $fieldRule);

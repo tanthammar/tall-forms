@@ -23,6 +23,7 @@ class Repeater extends BaseField
         $this->allowed_in_keyval = false;
         $this->inline = false;
         $this->wire = '';
+        $this->defaultErrorPosition = false;
         return $this;
     }
 

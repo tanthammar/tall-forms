@@ -12,6 +12,7 @@ trait HasSlots
     public null|string $below = null;
     public null|string $help = null;
     public null|string $errorMsg = null;
+    public bool $defaultErrorPosition = true;
 
     public function before(string $text): self
     {

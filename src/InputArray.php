@@ -23,6 +23,7 @@ class InputArray extends BaseField
         $this->type = 'input-array';
         $this->align_label_top = true;
         $this->allowed_in_repeater = false;
+        $this->defaultErrorPosition = false;
         $this->deferEntangle();
         return $this;
     }

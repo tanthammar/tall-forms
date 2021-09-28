@@ -16,6 +16,7 @@ class KeyVal extends BaseField
         $this->allowed_in_keyval = true;
         $this->inline = false;
         $this->wire = '';
+        $this->defaultErrorPosition = false;
         return $this;
     }
 }

@@ -11,8 +11,13 @@
             </p>
         @endif
     @endif
-    @if(!in_array($field->type, ['file', 'spatie-tags']))
+    @if(!in_array($field->type, ['file', 'spatie-tags']) && $field->defaultErrorPosition)
         @error($field->key)
+        <p class="tf-error">
+            {{ $field->errorMsg ?? \Tanthammar\TallForms\ErrorMessage::parse($message) }}
+        </p>
+        @enderror
+        @error($field->key.'.*')
         <p class="tf-error">
             {{ $field->errorMsg ?? \Tanthammar\TallForms\ErrorMessage::parse($message) }}
         </p>

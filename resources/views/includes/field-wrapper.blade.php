@@ -9,6 +9,6 @@
     @include('tall-forms::fields.' . $field->type)
 @endif
 {{-- after field --}}
-@if($field->below || $field->help || $errors->has($field->key))
+@if($field->below || $field->help || $errors->has($field->key) || $errors->has($field->key.'.*'))
     @include('tall-forms::includes.below')
 @endif
