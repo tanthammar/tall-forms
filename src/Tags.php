@@ -14,6 +14,8 @@ class Tags extends BaseField
     {
         $this->type = 'tags';
         $this->align_label_top = true;
+        $this->help = trans('tf::form.tags.help');
+        $this->placeholder = trans('tf::form.tags.placeholder');
         return $this;
     }
 

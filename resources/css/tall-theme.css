@@ -273,7 +273,7 @@
 
     /* Input */
     .tf-input-wrapper {
-        @apply my-1 flex rounded w-full relative;
+        @apply my-1 flex w-full;
     }
 
     /* Range */
@@ -340,6 +340,9 @@
     }
     .tf-tags-x-color {
         @apply text-gray-400;
+    }
+    .tf-tags-wrapper {
+        @apply w-full my-1;
     }
 
     /* Search */

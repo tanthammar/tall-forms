@@ -23,6 +23,7 @@ class Tags extends BaseBladeField
             'id' => 'tags',
             'required' => false,
             'defer' => true,
+            'wrapperClass' => 'tf-tags-wrapper',
             'class' => 'form-textarea block w-full rounded shadow-inner my-1',
             'placeholder' => '',
             'disabled' => false,
