@@ -58,6 +58,7 @@ return [
     'tags' => [
         'placeholder' => 'Type here …',
         'help' => 'Press ENTER, COMMA or SPACE, to add a tag',
+        'error-msg' => 'The tag must be between 3 to 25 chars long and only consist of alpha-numeric characters.',
     ],
 
     'date-picker' => [

@@ -26,7 +26,7 @@
             />
         @endunless
 
-        <div class="bg-white relative w-full pb-2 space-x-2 space-y-2">
+        <div x-show="tags.length" class="bg-white relative w-full pb-2 space-x-2 space-y-2">
             <template x-for="tag in tags" x-bind:key="tag">
                 <button
                     type="button"

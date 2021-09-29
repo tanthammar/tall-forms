@@ -57,6 +57,7 @@ return [
     'tags' => [
         'placeholder' => 'Skriv här …',
         'help' => 'Tryck på retur, enter, mellanslag eller kommatecken för att lägga till ord.',
+        'error-msg' => 'Orden måste vara mellan 3-25 tecken och endast bestå av bokstäver/siffror',
     ],
 
     'date-picker' => [
