@@ -32,6 +32,11 @@ trait TallForm
             : TallFormModel::factory()->make();
     }
 
+    public function getFieldsProperty(): array
+    {
+        return method_exists($this,'fields') ? $this->fields() : [];
+    }
+
     public function mount_form($model)
     {
         $this->model = $model;

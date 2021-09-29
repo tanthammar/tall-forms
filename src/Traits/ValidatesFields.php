@@ -15,7 +15,7 @@ trait ValidatesFields
      */
     protected function get_rules($fields = null, string $prefix = 'form_data'): array
     {
-        $fields = is_null($fields) || !is_array($fields) ? $this->fields() : $fields;
+        $fields = is_null($fields) || !is_array($fields) ? $this->fields : $fields;
         $rules = [];
 
         foreach ($fields as $field) {

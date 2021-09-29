@@ -94,7 +94,7 @@ trait Helpers
     protected function firstLevelFieldNames(): array
     {
         $fieldNames = [];
-        foreach ($this->fields() as $field) {
+        foreach ($this->fields as $field) {
             if (filled($field) && !$field->ignored) $fieldNames[] = $field->name;
             if (filled($field) && $field->ignored && isset($field->fields) && filled($field->fields)){
                 foreach ($field->fields as $nested_field) {
@@ -124,7 +124,7 @@ trait Helpers
      */
     protected function getFields($fields = null, $prefix = '', bool $flatten = true): array
     {
-        $fields = is_null($fields) || !is_array($fields) ? $this->fields() : $fields;
+        $fields = is_null($fields) || !is_array($fields) ? $this->fields : $fields;
         $results = [];
 
         foreach ($fields as &$field) {

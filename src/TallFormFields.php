@@ -20,7 +20,7 @@ class TallFormFields extends \Livewire\Component
     public function render()
     {
         return view('tall-forms::fields-only', [
-            'fields' => $this->fields(),
+            'fields' => $this->fields,
         ]);
     }
 
