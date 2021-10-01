@@ -7,6 +7,7 @@
                         @foreach($field->fields as $nested_field)
                             @php
                                 $nested_field->key = "{$field->key}.{$key}.{$nested_field->name}";
+                                $nested_field->setHtmlId($_instance->id);
                                 if (!$field->labelEachRow) $nested_field->show_label = $key === 0;
                                 $nested_field->inline = $nested_field->inline ?? $field->childInline;
                                 $nested_field->colspan = $field->childCols ?? $nested_field->colspan;
