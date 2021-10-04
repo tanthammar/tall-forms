@@ -61,6 +61,12 @@ return [
         'error-msg' => 'The tag must be between 3 to 25 chars long and only consist of alpha-numeric characters.',
     ],
 
+    'tags-search' => [
+        'placeholder' => 'Type to add/search ...',
+        'help' => 'Press ENTER, COMMA or SPACE, to add a new tag, or select an existing tag by clicking on it.',
+        'error-msg' => 'The tag must be between 3 to 25 chars long and only consist of alpha-numeric characters.',
+    ],
+
     'date-picker' => [
         'placeholder' => 'Select date...'
     ],

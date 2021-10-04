@@ -51,13 +51,19 @@ return [
     'spatie-tags' => [
         'error-msg' => 'Måste vara mellan 3 till 60 tecken och bara bestå av bokstäver och siffror',
         'placeholder' => 'Skriv för att lägga till/söka ...',
-        'help' => 'Tryck mellanslag för att skapa en ny, eller välj en existerande genom att klicka på den.',
+        'help' => 'Tryck mellanslag för att skapa ett nytt ord, eller välj ett existerande genom att klicka på det.',
     ],
 
     'tags' => [
         'placeholder' => 'Skriv här …',
-        'help' => 'Tryck på retur, enter, mellanslag eller kommatecken för att lägga till ord.',
+        'help' => 'Tryck på retur, enter, mellanslag eller kommatecken för att lägga till ett nytt ord.',
         'error-msg' => 'Orden måste vara mellan 3-25 tecken och endast bestå av bokstäver/siffror',
+    ],
+
+    'tags-search' => [
+        'placeholder' => 'Skriv för att lägga till/söka ...',
+        'help' => 'Tryck på retur, enter, mellanslag eller kommatecken för att lägga till ett nytt ord, eller välj ett existerande genom att klicka på det.',
+        'error-msg' =>  'Orden måste vara mellan 3-25 tecken och endast bestå av bokstäver/siffror',
     ],
 
     'date-picker' => [
