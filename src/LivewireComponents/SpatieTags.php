@@ -8,6 +8,9 @@ use Illuminate\Support\Str;
 use Livewire\Component;
 use Spatie\Tags\Tag;
 
+/**
+ * @deprecated use TagsSearch or Tags instead
+ */
 class SpatieTags extends Component
 {
     public $model;
@@ -79,6 +82,7 @@ class SpatieTags extends Component
     public function syncTags()
     {
         $cleaned = collect(\Arr::sort($this->tags))->unique()->toArray();
+        //add 'tallFillField' listener to your component. The method exists in TallForms/Traits/Helpers.
         filled($this->model) && $this->model->exists
             ? $this->syncModelWithLocale($cleaned)
             : $this->emitUp('tallFillField', [
