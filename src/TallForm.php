@@ -5,13 +5,13 @@ namespace Tanthammar\TallForms;
 use Tanthammar\TallForms\Traits\HandlesArrays;
 use Tanthammar\TallForms\Traits\HasButtons;
 use Tanthammar\TallForms\Traits\SubmitsForm;
-use Tanthammar\TallForms\Traits\Helpers;
+use Tanthammar\TallForms\Traits\MiscMethods;
 use Tanthammar\TallForms\Traits\Notify;
 use Tanthammar\TallForms\Traits\ValidatesFields;
 
 trait TallForm
 {
-    use Notify, Helpers, HandlesArrays, ValidatesFields, SubmitsForm, HasButtons;
+    use Notify, MiscMethods, HandlesArrays, ValidatesFields, SubmitsForm, HasButtons;
 
     public $model;
     public $form_data;
@@ -21,15 +21,18 @@ trait TallForm
     public function __construct($id = null)
     {
         $this->previous = urlencode(\URL::previous());  //used for saveAndGoBack
-        $this->listeners = array_merge($this->listeners, ['tallFillField']);
+        //SpatieTags is deprecated, if you use it, you have to add this listener manually.
+        //$this->listeners = array_merge($this->listeners, ['tallFillField']);
         parent::__construct($id);
     }
 
-    public function getFormProperty(): TallFormModel
+    public function getFormProperty(): object
     {
+        $defaults = config('tall-forms.form');
+
         return method_exists($this,'formAttr')
-            ? TallFormModel::factory()->make($this->formAttr())
-            : TallFormModel::factory()->make();
+            ? (object) array_merge($defaults, $this->formAttr())
+            : (object) $defaults;
     }
 
     public function getFieldsProperty(): array
@@ -37,7 +40,7 @@ trait TallForm
         return method_exists($this,'fields') ? $this->fields() : [];
     }
 
-    public function mount_form($model)
+    protected function mount_form($model)
     {
         $this->model = $model;
         $this->beforeFormProperties();
@@ -46,19 +49,19 @@ trait TallForm
     }
 
 
-    public function beforeFormProperties()
+    protected function beforeFormProperties()
     {
         return;
     }
 
 
-    public function setFormProperties()
+    protected function setFormProperties()
     {
         $this->form_data = $this->model->only($this->firstLevelFieldNames());
         $this->setFieldValues($this->getFieldsFlat());
     }
 
-    public function afterFormProperties()
+    protected function afterFormProperties()
     {
         return;
     }
@@ -69,7 +72,7 @@ trait TallForm
         return $this->formView();
     }
 
-    public function formView()
+    protected function formView()
     {
         $view = view('tall-forms::layout-picker', [
             'fields' => $this->getFieldsNested(),
@@ -78,12 +81,12 @@ trait TallForm
         return $view;
     }
 
-    public function fields()
+    protected function fields()
     {
         return [];
     }
 
-    public function transTitle(?string $model = null): string
+    protected function transTitle(?string $model = null): string
     {
         $key = $model ?: class_basename($this->model);
         return $this->model->exists

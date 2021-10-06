@@ -4,7 +4,7 @@ namespace Tanthammar\TallForms;
 
 abstract class TallFormWithoutButtons extends TallFormComponent
 {
-    public function getFormProperty(): TallFormModel
+    public function getFormProperty(): object
     {
         $defaults = [
             'showSave' => false,
@@ -14,8 +14,10 @@ abstract class TallFormWithoutButtons extends TallFormComponent
             'wrapWithView' => false,
         ];
 
+        $defaults = array_merge(config('tall-forms.form'), $defaults);
+
         return method_exists($this,'formAttr')
-            ? TallFormModel::factory()->make(array_merge($defaults, $this->formAttr()))
-            : TallFormModel::factory()->make($defaults);
+            ? (object) array_merge($defaults, $this->formAttr())
+            : (object) $defaults;
     }
 }

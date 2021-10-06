@@ -5,7 +5,7 @@ namespace Tanthammar\TallForms\Traits;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
-trait Helpers
+trait MiscMethods
 {
     protected function getFieldValueByKey(string $fieldKey, string $fieldValue)
     {
@@ -57,6 +57,7 @@ trait Helpers
     /**
      * Fill fields from javascript: $wire.call('tallFillField', ['field' => ..., 'value' => ...])<br>
      * Fill fields from Livewire: $this->>emit(...), $this->>emitUp(...), $this->>emitTo(...), $this->>emitSelf(...)
+     * The value will be validated in either updatedFoo() or on submit.
      */
     public function tallFillField(array $array)
     {

@@ -6,15 +6,19 @@ namespace Tanthammar\TallForms;
 use Illuminate\Auth\Access\AuthorizationException;
 use Tanthammar\TallForms\Traits\HandlesArrays;
 
+//TODO skall denna vara abstract?
+//TODO gå igenom alla andra som extendas
 class TallFormFields extends \Livewire\Component
 {
     use HandlesArrays; //to handle FileUpload
 
-    public function getFormProperty(): TallFormModel
+    public function getFormProperty(): object
     {
+        $defaults = config('tall-forms.form');
+
         return method_exists($this,'formAttr')
-            ? TallFormModel::factory()->make($this->formAttr())
-            : TallFormModel::factory()->make();
+            ? (object) array_merge($defaults, $this->formAttr())
+            : (object) $defaults;
     }
 
     public function render()
@@ -24,7 +28,9 @@ class TallFormFields extends \Livewire\Component
         ]);
     }
 
-    public function fields(): array
+    //TODO sök efter alla public function fields() ändra till protected
+    //TODO gör om till abstract function?
+    protected function fields(): array
     {
         return [];
     }

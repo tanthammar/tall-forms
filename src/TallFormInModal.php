@@ -2,7 +2,9 @@
 
 namespace Tanthammar\TallForms;
 
-abstract class TallFormInModal extends \Livewire\Component
+use Livewire\Component;
+
+abstract class TallFormInModal extends Component
 {
     use TallForm;
 
@@ -25,6 +27,7 @@ abstract class TallFormInModal extends \Livewire\Component
         $this->modalOpen = true;
     }
 
+    //TODO tänk igenom alla classer vad skall vara protected functions
     public function closeModal(): void
     {   //modal cancel button
         $this->modalOpen = false;
@@ -39,7 +42,7 @@ abstract class TallFormInModal extends \Livewire\Component
     }
 
 
-    public function getFormProperty(): TallFormModel
+    public function getFormProperty(): object
     {
         $defaults = [
             'inline' => false,
@@ -51,9 +54,11 @@ abstract class TallFormInModal extends \Livewire\Component
             'modalMaxWidth' => 'lg', //options: sm, md, lg, xl, 2xl
         ];
 
-        return method_exists($this, 'formAttr')
-            ? TallFormModel::factory()->make(array_merge($defaults, $this->formAttr()))
-            : TallFormModel::factory()->make($defaults);
+        $defaults = array_merge(config('tall-forms.form'), $defaults);
+
+        return method_exists($this,'formAttr')
+            ? (object) array_merge($defaults, $this->formAttr())
+            : (object) $defaults;
     }
 
 }

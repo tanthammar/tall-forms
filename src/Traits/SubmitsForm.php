@@ -36,28 +36,18 @@ trait SubmitsForm
         }
     }
 
-    public function relations(array $relationship_data)
-    {
-        //
-    }
-
-    public function custom_fields(array $custom_data)
-    {
-        //
-    }
-
-    public function success($model_fields_data)
+    protected function success($model_fields_data)
     {
         // you have to add the methods to your component
         filled($this->model) && $this->model->exists ? $this->onUpdateModel($model_fields_data) : $this->onCreateModel($model_fields_data);
     }
 
-    public function onUpdateModel($validated_data)
+    protected function onUpdateModel($validated_data)
     {
         $this->model->update($validated_data);
     }
 
-    public function onCreateModel($validated_data)
+    protected function onCreateModel($validated_data)
     {
         $this->model = $this->model::create($validated_data);
     }

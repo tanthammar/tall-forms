@@ -25,6 +25,7 @@ trait HasButtons
         $this->setFormProperties();
     }
 
+    //This is called from frontend, delete button
     public function delete()
     {
         if (optional($this->model)->exists) {
@@ -33,7 +34,12 @@ trait HasButtons
         return null;
     }
 
-    public function onDeleteModel()
+    protected function onDeleteModel()
+    {
+        $this->defaultDelete();
+    }
+
+    protected function defaultDelete()
     {
         $className = is_object($this->model) ? get_class($this->model) : "item";
         $this->model->delete();
@@ -41,13 +47,13 @@ trait HasButtons
         return redirect(urldecode($this->previous));
     }
 
-    public function saveAndStayResponse()
+    protected function saveAndStayResponse()
     {
-        //return redirect()->route('users.create');
+        //example: return redirect()->route('users.create');
         $this->notify();
     }
 
-    public function saveAndGoBackResponse()
+    protected function saveAndGoBackResponse()
     {
         //return back(); //does not work with livewire
         return redirect(urldecode($this->previous));
