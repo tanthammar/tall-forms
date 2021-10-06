@@ -115,11 +115,11 @@ abstract class BaseField
         return $this;
     }
 
-    //Todo remove
-    public function makeHtmlId(string $wireInstanceID): string
+    //TODO remove if we drop xmodel()
+/*    public function makeHtmlId(string $wireInstanceID): string
     {
         return 'id' . md5($wireInstanceID . $this->key);
-    }
+    }*/
 
     public function setHtmlId(string $wireInstanceID): self
     {
@@ -129,8 +129,8 @@ abstract class BaseField
         return $this;
     }
 
-    //Todo remove
-    public function mergeBladeDefaults(string $wireInstanceID, array $custom = []): array
+    //Todo remove if we drop xmodel()
+/*    public function mergeBladeDefaults(string $wireInstanceID, array $custom = []): array
     {
         //This array merges as $custom in BaseBladeField->setDefaults(...)
         return array_merge([
@@ -147,5 +147,5 @@ abstract class BaseField
             'appendErrorClass' => $this->appendErrorClass,
             'wrapperClass' => $this->wrapperClass,
         ], $custom);
-    }
+    }*/
 }
