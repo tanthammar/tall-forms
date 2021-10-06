@@ -8,7 +8,7 @@
                 <x-tall-button size="sm" type="reset" wire:click.prevent="resetFormData" color="warning" :text="trans('tf::form.reset')" />
             @endif
             @if($this->form->showGoBack)
-                <x-tall-button size="sm" wire:click.prevent="saveAndGoBack" color="secondary" :text="$this->form->saveBackBtnTxt" />
+                <x-tall-button size="sm" wire:click.prevent="saveAndGoBack" color="secondary" :text="trans($this->form->saveBackBtnTxt)" />
             @endif
             @if($this->form->showSave)
                 <x-tall-button
@@ -19,7 +19,7 @@
                     <span class="mr-2" wire:loading wire:target="{{ $this->form->onKeyDownEnter }}">
                         <x-tall-svg path="icons.circle-spinner" class="w-4 h-4 animate-spin -mt-1 fill-current"></x-tall-svg>
                     </span>
-                    <span x-show="!open" x-transition:enter.scale.10.delay.500ms>{{ $this->form->saveStayBtnTxt }}</span>
+                    <span x-show="!open" x-transition:enter.scale.10.delay.500ms>@lang($this->form->saveStayBtnTxt)</span>
                     <span x-cloak x-show="open" x-transition:enter.scale.10.delay.500ms>{{ trans('tf::form.saved') }}</span>
                 </x-tall-button>
             @endif
