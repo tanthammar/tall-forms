@@ -2,6 +2,8 @@
 
 namespace Tanthammar\TallForms;
 
+use Lean\LivewireAccess\BlockFrontendAccess;
+use Lean\LivewireAccess\WithImplicitAccess;
 use Tanthammar\TallForms\Traits\HandlesArrays;
 use Tanthammar\TallForms\Traits\HasButtons;
 use Tanthammar\TallForms\Traits\SubmitsForm;
@@ -11,12 +13,11 @@ use Tanthammar\TallForms\Traits\ValidatesFields;
 
 trait TallForm
 {
-    use Notify, MiscMethods, HandlesArrays, ValidatesFields, SubmitsForm, HasButtons;
+    use Notify, MiscMethods, HandlesArrays, ValidatesFields, SubmitsForm, HasButtons, WithImplicitAccess;
 
     public $model;
     public $form_data;
     public $previous;
-    public $custom_data = [];
 
     public function __construct($id = null)
     {
@@ -26,6 +27,7 @@ trait TallForm
         parent::__construct($id);
     }
 
+    #[BlockFrontendAccess]
     public function getFormProperty(): object
     {
         $defaults = config('tall-forms.form');
@@ -35,6 +37,7 @@ trait TallForm
             : (object) $defaults;
     }
 
+    #[BlockFrontendAccess]
     public function getComputedFieldsProperty(): array
     {
         return method_exists($this,'fields') ? $this->fields() : [];
@@ -67,6 +70,7 @@ trait TallForm
     }
 
 
+    #[BlockFrontendAccess]
     public function render()
     {
         return $this->formView();
