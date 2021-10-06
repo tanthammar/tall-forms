@@ -54,24 +54,23 @@ trait Helpers
         return Str::match('/(\d+)/', $field);
     }
 
-    public function tallFillField($array)
+    /**
+     * Fill fields from javascript: $wire.call('tallFillField', ['field' => ..., 'value' => ...])<br>
+     * Fill fields from Livewire: $this->>emit(...), $this->>emitUp(...), $this->>emitTo(...), $this->>emitSelf(...)
+     */
+    public function tallFillField(array $array)
     {
         data_set($this->form_data, $array['field'], $array['value']);
     }
 
     // All other methods regarding tags are in Tanthammar\TallForms\SpatieTags
     // It's intended to be called in the onCreateModel() method, to sync tags after the model is created
-    public function syncTags($field, $tagType = null)
+    protected function syncTags($field, $tagType = null)
     {
         $tags = data_get($this->form_data, $field);
         if (filled($tags = explode(',', $tags)) && optional($this->model)->exists) {
             filled($tagType) ? $this->model->syncTagsWithType($tags, $tagType) : $this->model->syncTags($tags);
         }
-    }
-
-    public static function unique_words(string $scentence): string
-    {
-        return implode(' ', array_unique(explode(' ', $scentence)));
     }
 
     /**
@@ -81,7 +80,7 @@ trait Helpers
      * @param mixed $keys
      * @return array
      */
-    public function arrayDotOnly(array $array, $keys): array
+    protected function arrayDotOnly(array $array, $keys): array
     {
         $newArray = [];
         foreach ((array)$keys as $key) {
@@ -160,15 +159,5 @@ trait Helpers
                 }
             }
         }
-    }
-
-    public static function mergeFilledToObject(array $defaults, array $custom): object
-    {
-        return (object)array_merge($defaults, array_filter($custom, fn ($var) => filled($var)));
-    }
-
-    public static function mergeFilledToArray(array $defaults, array $custom): array
-    {
-        return array_merge($defaults, array_filter($custom, fn ($var) => filled($var)));
     }
 }
