@@ -2,13 +2,10 @@
 
 namespace Tanthammar\TallForms;
 
-
-use Illuminate\Auth\Access\AuthorizationException;
+use Livewire\Component;
 use Tanthammar\TallForms\Traits\HandlesArrays;
 
-//TODO skall denna vara abstract?
-//TODO gå igenom alla andra som extendas
-class TallFormFields extends \Livewire\Component
+abstract class TallFormFields extends Component
 {
     use HandlesArrays; //to handle FileUpload
 
@@ -24,14 +21,9 @@ class TallFormFields extends \Livewire\Component
     public function render()
     {
         return view('tall-forms::fields-only', [
-            'fields' => $this->fields,
+            'fields' => $this->fields(),
         ]);
     }
 
-    //TODO sök efter alla public function fields() ändra till protected
-    //TODO gör om till abstract function?
-    protected function fields(): array
-    {
-        return [];
-    }
+    abstract protected function fields(): array;
 }

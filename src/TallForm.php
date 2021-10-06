@@ -81,10 +81,7 @@ trait TallForm
         return $view;
     }
 
-    protected function fields()
-    {
-        return [];
-    }
+    abstract protected function fields(): array;
 
     protected function transTitle(?string $model = null): string
     {

@@ -97,7 +97,8 @@ trait HasAttributes
      * Example ->xmodel('debounce.500ms')
      */
     /*
-    If it's going to be used, uncomment:
+    //TODO do we need xmodel() ?
+    - If it's going to be used, uncomment:
     - add this to config: 'x-model' => 'x-model', //x-model.lazy, x-model.debounce etc., default field x-model attribute, override with ->xmodel()
     - BaseField construct
     - BaseField ->mergeBladeDefaults()

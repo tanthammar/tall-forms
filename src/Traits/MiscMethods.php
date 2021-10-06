@@ -124,7 +124,7 @@ trait MiscMethods
      */
     protected function getFields($fields = null, $prefix = '', bool $flatten = true): array
     {
-        $fields = is_null($fields) || !is_array($fields) ? $this->fields : $fields;
+        $fields = is_null($fields) || !is_array($fields) ? $this->fields : $fields; //$this->>fields is a computed property
         $results = [];
 
         foreach ($fields as &$field) {
