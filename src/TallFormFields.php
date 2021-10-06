@@ -18,10 +18,15 @@ abstract class TallFormFields extends Component
             : (object) $defaults;
     }
 
+    public function getComputedFieldsProperty(): array
+    {
+        return method_exists($this,'fields') ? $this->fields() : [];
+    }
+
     public function render()
     {
         return view('tall-forms::fields-only', [
-            'fields' => $this->fields(),
+            'fields' => $this->computedFields,
         ]);
     }
 

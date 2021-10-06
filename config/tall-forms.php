@@ -26,7 +26,8 @@ return [
         'wrapViewPath' => 'tall-forms::wrapper-layout', //A Laravel blade component to wrap your form with, if $wrapWithView = true, see documentation
         'inlineLabelAlignment' => 'tf-inline-label-alignment',
         'formTitle' => '',
-        'layout' => 'layouts.app', //Livewire default = 'layouts.app'
+        'layout' => 'layouts.app', //Livewire default = 'layouts.app', see https://laravel-livewire.com/docs/2.x/rendering-components#custom-layout
+        'slot' => null, // see https://laravel-livewire.com/docs/2.x/rendering-components#custom-layout
         'headView' => '',
         'afterFormView' => '',
         'beforeFormView' => '',

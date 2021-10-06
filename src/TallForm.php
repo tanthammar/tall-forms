@@ -35,7 +35,7 @@ trait TallForm
             : (object) $defaults;
     }
 
-    public function getFieldsProperty(): array
+    public function getComputedFieldsProperty(): array
     {
         return method_exists($this,'fields') ? $this->fields() : [];
     }
@@ -77,7 +77,8 @@ trait TallForm
         $view = view('tall-forms::layout-picker', [
             'fields' => $this->getFieldsNested(),
         ]);
-        if ($this->form->layout) $view->layout($this->form->layout);
+        if (filled($this->form->layout)) $view->layout($this->form->layout);
+        if (filled($this->form->slot)) $view->slot($this->form->slot);
         return $view;
     }
 
