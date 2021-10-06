@@ -15,26 +15,32 @@ class DummyComponent extends TallFormComponent
         $this->mount_form($dummymodel); // $dummymodel from hereon, called $this->model
     }
 
-    public function formAttr(): array
+    protected function formAttr(): array
     {
         return [
            'formTitle' => $this->transTitle(model: 'DummyModel'),
            'wrapWithView' => false,
+           'showDelete' => false,
        ];
     }
 
-    // OPTIONAL methods, they already exist in the SubmitsForm trait
-    public function onCreateModel($validated_data)
+    // OPTIONAL methods, they already exist
+    protected function onCreateModel($validated_data)
     {
         $this->model = DummyModel::create($validated_data);
     }
 
-    public function onUpdateModel($validated_data)
+    protected function onUpdateModel($validated_data)
     {
         $this->model->update($validated_data);
     }
 
-    public function fields(): array
+    protected function onDeleteModel()
+    {
+        $this->defaultDelete();
+    }
+
+    protected function fields(): array
     {
         return [
             Input::make('Name')->rules('required'),

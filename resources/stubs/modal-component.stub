@@ -26,7 +26,7 @@ class DummyComponent extends TallFormInModal
         $this->mount_form(new DummyModel); // $dummymodel from hereon, called $this->model
     }
 
-    public function formAttr(): array
+    protected function formAttr(): array
     {
         return [
            'formTitle' => $this->transTitle(model: 'DummyModel'),
@@ -36,17 +36,17 @@ class DummyComponent extends TallFormInModal
     }
 
     // OPTIONAL methods, they already exist in the SubmitsForm trait
-    public function onCreateModel($validated_data)
+    protected function onCreateModel($validated_data)
     {
         $this->model = DummyModel::create($validated_data);
     }
 
-    public function onUpdateModel($validated_data)
+    protected function onUpdateModel($validated_data)
     {
         $this->model->update($validated_data);
     }
 
-    public function fields(): array
+    protected function fields(): array
     {
         return [
             Input::make('Name')->rules('required'),
