@@ -5,14 +5,9 @@ namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
 use Tanthammar\TallForms\Traits\BaseBladeField;
-use Tanthammar\TallForms\Traits\CanBeDisabled;
-use Tanthammar\TallForms\Traits\Helpers;
 
 class Trix extends BaseBladeField
 {
-    use Helpers;
-
-
     public function __construct(
         public array|object $field = [],
         public ?string      $value = null,

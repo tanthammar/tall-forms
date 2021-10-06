@@ -5,12 +5,10 @@ namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
 use Illuminate\View\Component;
-use Tanthammar\TallForms\Traits\Helpers;
+use Tanthammar\TallForms\Helpers;
 
 class FieldRoot extends Component
 {
-    use Helpers;
-
     public function __construct(
         public bool $inArray, // if this field is inside a Keyval or Repeater
         public int $colspan = 12,

@@ -3,6 +3,7 @@
 namespace Tanthammar\TallForms\Traits;
 
 use Illuminate\View\Component;
+use Tanthammar\TallForms\Helpers;
 
 abstract class BaseBladeField extends Component
 {

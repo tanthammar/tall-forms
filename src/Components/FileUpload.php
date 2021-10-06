@@ -5,12 +5,9 @@ namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
 use Tanthammar\TallForms\Traits\BaseBladeField;
-use Tanthammar\TallForms\Traits\Helpers;
 
 class FileUpload extends BaseBladeField
 {
-    use Helpers;
-
     public function __construct(
         public array|object $field,
         public mixed        $fieldValue = null,
