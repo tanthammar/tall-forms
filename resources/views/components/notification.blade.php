@@ -7,8 +7,7 @@
         'iconcolor' => data_get(session('notify'), 'iconcolor', 'text-white'),
         ] : [],
 ])
-
-<div x-data="{
+<div wire:ignore x-data="{
         showMessages: {{ $show }},
         messages: {{ json_encode($messages) }},
         showErrors: false,
