@@ -16,19 +16,20 @@ trait TallForm
     use Notify, MiscMethods, HandlesArrays, ValidatesFields, SubmitsForm, HasButtons, WithImplicitAccess;
 
     public $model;
-    public $form_data;
-    public $previous;
+    public array $form_data = [];
+    protected object $form;
+    protected string $previous = '';
 
     public function __construct($id = null)
     {
         $this->previous = urlencode(\URL::previous());  //used for saveAndGoBack
+        $this->form = $this->getForm();
         //SpatieTags is deprecated, if you use it, you have to add this listener manually.
         //$this->listeners = array_merge($this->listeners, ['tallFillField']);
         parent::__construct($id);
     }
 
-    #[BlockFrontendAccess]
-    public function getFormProperty(): object
+    protected function getForm(): object
     {
         $defaults = config('tall-forms.form');
 
@@ -70,7 +71,6 @@ trait TallForm
     }
 
 
-    #[BlockFrontendAccess]
     public function render()
     {
         return $this->formView();

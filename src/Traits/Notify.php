@@ -19,10 +19,11 @@ trait Notify
     $wire.call('notify', 'danger', 'Oh No!');
     */
     public array $alert = [];
-    private bool $withSession = false;
+    protected bool $withSession = false;
 
     public function updatedAlert()
     {
+        //TODO validate alert values
         $this->notify(
             preset: data_get($this->alert, 'type', 'saved'),
             message: data_get($this->alert, 'message', trans('tf::form.alerts.updated-success')),
@@ -32,15 +33,10 @@ trait Notify
         );
     }
 
-    public function withSession()
-	{
+    protected function withSession(): static
+    {
 		$this->withSession = true;
 		return $this;
-	}
-
-    public function getWithSession(): bool
-    {
-        return $this->withSession;
 	}
 
     /**
@@ -81,8 +77,10 @@ trait Notify
             'iconcolor' => $iconcolor,
 		];
 
-		if ($this->getWithSession()) {
+		if ($this->withSession) {
 			session()->flash('notify', $payload);
+            //reset withSession
+            $this->withSession = false;
 			return;
 		}
 

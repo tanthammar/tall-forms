@@ -2,21 +2,24 @@
 
 namespace Tanthammar\TallForms;
 
+use Lean\LivewireAccess\BlockFrontendAccess;
+use Lean\LivewireAccess\WithImplicitAccess;
 use Livewire\Component;
 
 abstract class TallFormInModal extends Component
 {
-    use TallForm;
+    use TallForm, WithImplicitAccess;
 
-    public string $closeBtnColor = 'white';
-    public string $submitBtnColor = 'primary';
-
+    protected object $form;
+    protected string $closeBtnColor = 'white';
+    protected string $submitBtnColor = 'primary';
     public bool $modalOpen = false;
 
     public function __construct($id = null)
     {
-        parent::__construct($id);
         $this->listeners = array_merge($this->listeners, ['loadModal']);
+        $this->form = $this->getForm();
+        parent::__construct($id);
     }
 
     public function loadModal(int|string $modelKey): void
@@ -27,7 +30,6 @@ abstract class TallFormInModal extends Component
         $this->modalOpen = true;
     }
 
-    //TODO tänk igenom alla classer vad skall vara protected functions
     public function closeModal(): void
     {   //modal cancel button
         $this->modalOpen = false;
@@ -41,8 +43,7 @@ abstract class TallFormInModal extends Component
         $this->modalOpen = false;
     }
 
-
-    public function getFormProperty(): object
+    protected function getForm(): object
     {
         $defaults = [
             'inline' => false,

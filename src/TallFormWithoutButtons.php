@@ -4,7 +4,7 @@ namespace Tanthammar\TallForms;
 
 abstract class TallFormWithoutButtons extends TallFormComponent
 {
-    public function getFormProperty(): object
+    protected function getForm(): object
     {
         $defaults = [
             'showSave' => false,

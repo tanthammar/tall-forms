@@ -7,7 +7,7 @@ namespace Tanthammar\TallForms\Traits;
 trait SubmitsForm
 {
 
-    public function submit()
+    protected function submit()
     {
         $validated_data = data_get($this->validate($this->get_rules()), 'form_data', []);
         $fields = $this->getFieldsFlat();
