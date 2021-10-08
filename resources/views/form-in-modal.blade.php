@@ -32,13 +32,13 @@
 
     <x-slot name="footer">
         <x-tall-button
-            size="sm" color="{{ $closeBtnColor }}"
+            size="sm" color="{{ $this->closeBtnColor }}"
             wire:click.prevent.stop="closeModal"
             wire:loading.attr="disabled"
             :text="$this->form->cancelBtnTxt" />
 
         <x-tall-button
-            size="sm" class="ml-2" type="submit" color="{{ $submitBtnColor }}"
+            size="sm" class="ml-2" type="submit" color="{{ $this->submitBtnColor }}"
             wire:click="{{ $this->form->onKeyDownEnter }}"
             wire:loading.attr="disabled"
             :text="$this->form->submitBtnTxt" />
