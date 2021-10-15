@@ -10,16 +10,14 @@ abstract class TallFormInModal extends Component
 {
     use TallForm, WithImplicitAccess;
 
-    protected object $form;
     protected string $closeBtnColor = 'white';
     protected string $submitBtnColor = 'primary';
     public bool $modalOpen = false;
 
-    public function __construct($id = null)
+    //override Livewire instead of __construct
+    protected function getListeners(): array
     {
-        $this->listeners = array_merge($this->listeners, ['loadModal']);
-        $this->form = $this->getForm();
-        parent::__construct($id);
+        return array_merge($this->listeners, ['loadModal']);
     }
 
     public function loadModal(int|string $modelKey): void
@@ -43,7 +41,7 @@ abstract class TallFormInModal extends Component
         $this->modalOpen = false;
     }
 
-    protected function getForm(): object
+    public function getFormProperty(): object
     {
         $defaults = [
             'inline' => false,
