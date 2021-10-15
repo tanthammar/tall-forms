@@ -11,15 +11,7 @@ abstract class TallFormFields extends Component
 {
     use HandlesArrays, WithImplicitAccess; //to handle FileUpload
 
-    protected object $form;
-
-    public function __construct($id = null)
-    {
-        $this->form = $this->getForm();
-        parent::__construct($id);
-    }
-
-    protected function getForm(): object
+    public function getFormProperty(): object
     {
         $defaults = config('tall-forms.form');
 

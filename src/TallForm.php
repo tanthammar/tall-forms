@@ -17,19 +17,17 @@ trait TallForm
 
     public $model;
     public array $form_data = [];
-    protected object $form;
     protected string $previous = '';
 
     public function __construct($id = null)
     {
         $this->previous = urlencode(\URL::previous());  //used for saveAndGoBack
-        $this->form = $this->getForm();
         //SpatieTags is deprecated, if you use it, you have to add this listener manually.
         //$this->listeners = array_merge($this->listeners, ['tallFillField']);
         parent::__construct($id);
     }
 
-    protected function getForm(): object
+    public function getFormProperty(): object
     {
         $defaults = config('tall-forms.form');
 
