@@ -123,6 +123,8 @@ return [
         'SpatieTags' => \Tanthammar\TallForms\SpatieTags::class,
         'Textarea' => \Tanthammar\TallForms\Textarea::class,
         'Trix' => \Tanthammar\TallForms\Trix::class,
+        'Tags' => \Tanthammar\TallForms\Tags::class,
+        'TagsSearch' => \Tanthammar\TallForms\TagsSearch::class,
     ],
 
 
@@ -149,5 +151,6 @@ return [
         'trix' => \Tanthammar\TallForms\Components\Trix::class,
         'svg' => \Tanthammar\TallForms\Components\Svg::class,
         'tags' => \Tanthammar\TallForms\Components\Tags::class,
+        'tags-search' => \Tanthammar\TallForms\Components\TagsSearch::class,
     ],
 ];
