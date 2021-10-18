@@ -2,13 +2,12 @@
 
 namespace Tanthammar\TallForms;
 
-use Lean\LivewireAccess\BlockFrontendAccess;
 use Lean\LivewireAccess\WithImplicitAccess;
 use Livewire\Component;
 
 abstract class TallFormInModal extends Component
 {
-    use TallForm, WithImplicitAccess;
+    use TallForm;
 
     protected string $closeBtnColor = 'white';
     protected string $submitBtnColor = 'primary';

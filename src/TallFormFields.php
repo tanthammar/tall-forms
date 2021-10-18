@@ -2,14 +2,12 @@
 
 namespace Tanthammar\TallForms;
 
-use Lean\LivewireAccess\BlockFrontendAccess;
-use Lean\LivewireAccess\WithImplicitAccess;
 use Livewire\Component;
 use Tanthammar\TallForms\Traits\HandlesArrays;
 
 abstract class TallFormFields extends Component
 {
-    use HandlesArrays, WithImplicitAccess; //to handle FileUpload
+    use HandlesArrays; //to handle FileUpload
 
     public function getFormProperty(): object
     {
@@ -20,7 +18,6 @@ abstract class TallFormFields extends Component
             : (object) $defaults;
     }
 
-    #[BlockFrontendAccess]
     public function getComputedFieldsProperty(): array
     {
         return method_exists($this,'fields') ? $this->fields() : [];

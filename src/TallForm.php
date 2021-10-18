@@ -2,8 +2,6 @@
 
 namespace Tanthammar\TallForms;
 
-use Lean\LivewireAccess\BlockFrontendAccess;
-use Lean\LivewireAccess\WithImplicitAccess;
 use Tanthammar\TallForms\Traits\HandlesArrays;
 use Tanthammar\TallForms\Traits\HasButtons;
 use Tanthammar\TallForms\Traits\SubmitsForm;
@@ -13,7 +11,7 @@ use Tanthammar\TallForms\Traits\ValidatesFields;
 
 trait TallForm
 {
-    use Notify, MiscMethods, HandlesArrays, ValidatesFields, SubmitsForm, HasButtons, WithImplicitAccess;
+    use Notify, MiscMethods, HandlesArrays, ValidatesFields, SubmitsForm, HasButtons;
 
     public $model;
     public array $form_data = [];
@@ -21,9 +19,8 @@ trait TallForm
 
     public function __construct($id = null)
     {
+        //TODO check if there has been a Livewire update that fixes return back().
         $this->previous = urlencode(\URL::previous());  //used for saveAndGoBack
-        //SpatieTags is deprecated, if you use it, you have to add this listener manually.
-        //$this->listeners = array_merge($this->listeners, ['tallFillField']);
         parent::__construct($id);
     }
 
@@ -36,7 +33,6 @@ trait TallForm
             : (object) $defaults;
     }
 
-    #[BlockFrontendAccess]
     public function getComputedFieldsProperty(): array
     {
         return method_exists($this,'fields') ? $this->fields() : [];

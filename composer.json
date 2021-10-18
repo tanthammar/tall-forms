@@ -21,8 +21,7 @@
     "require": {
         "php": "^8.0",
         "livewire/livewire": "^2.6.5|dev-master",
-        "laravel/framework": "^8.24.0",
-        "leanadmin/livewire-access": "^0.1.1"
+        "laravel/framework": "^8.24.0"
     },
     "autoload": {
         "psr-4": {
