@@ -12,6 +12,7 @@ trait HasSlots
     public null|string $below = null;
     public null|string $help = null;
     public null|string $errorMsg = null;
+    public null|string $validationAttr = null;
     public bool $defaultErrorPosition = true;
 
     public function before(string $text): self
@@ -50,6 +51,15 @@ trait HasSlots
     public function errorMsg(string $string): self
     {
         $this->errorMsg = $string;
+        return $this;
+    }
+
+    /**
+     * Set the validation :attribute used in validation error message
+     */
+    public function validationAttr(string $string): self
+    {
+        $this->validationAttr = $string;
         return $this;
     }
 
