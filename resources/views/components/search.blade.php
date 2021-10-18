@@ -1,6 +1,6 @@
 <div x-data="{
     optionsVisible: false,
-    field: $wire.entangle('{{$field->key}}'),
+    field: $wire.entangle('{{$field->key}}'){{ $field->deferString }},
     selected: null,
     searchInput: $wire.entangle('{{$field->searchKey}}')
     }"
