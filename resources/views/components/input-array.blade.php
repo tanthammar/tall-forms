@@ -27,7 +27,7 @@
         </fieldset>
         @error($field->key.'.*')
         <p class="tf-error">
-            {{ $field->errorMsg ?? \Tanthammar\TallForms\ErrorMessage::parse($message) }}
+            {{ $field->errorMsg ?? $message }}
         </p>
         @enderror
     </div>
