@@ -9,7 +9,7 @@ trait SubmitsForm
 
     protected function submit()
     {
-        $validated_data = data_get($this->validate($this->get_rules()), 'form_data', []);
+        $validated_data = data_get($this->validate(), 'form_data', []);
         $fields = $this->getFieldsFlat();
 
         //filter out custom-, and relationship-fields

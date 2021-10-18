@@ -7,13 +7,20 @@ namespace Tanthammar\TallForms\Traits;
 trait ValidatesFields
 {
 
-    /**
-     *
-     * @param array|string|null $fields
-     * @param string $prefix
-     * @return array
-     */
-    protected function get_rules($fields = null, string $prefix = 'form_data'): array
+    //Used by Livewire default getRules():array method where rules() takes precedence before $rules
+    protected function rules(): array
+    {
+        return $this->fieldRules();
+    }
+
+    //Used by Livewire default getValidationAttributes():array method where validationAttributes() takes precedence before $validationAttributes
+    protected function validationAttributes(): array
+    {
+        return $this->fieldValidationAttributes();
+    }
+
+    //OBSERVE, is recursive function
+    protected function fieldRules($fields = null, string $prefix = 'form_data'): array
     {
         $fields = is_null($fields) || !is_array($fields) ? $this->computedFields : $fields;
         $rules = [];
@@ -26,7 +33,7 @@ trait ValidatesFields
                             ? "$prefix.$field->name.*"
                             : ($field->ignored ? $prefix : "$prefix.$field->name");
                         //recursive
-                        $rules = array_merge($rules, $this->get_rules($field->fields, $ruleName));
+                        $rules = array_merge($rules, $this->fieldRules($field->fields, $ruleName));
                     }
                     $rules["$prefix.$field->name"] = $field->rules ?? 'nullable';
 
@@ -34,7 +41,9 @@ trait ValidatesFields
                     if ($field->type === 'file') {
                         $ruleName = $field->multiple ? "$field->name.*" : $field->name;
                     }
-                    elseif (in_array($field->type, ['input-array', 'tags'])) {
+                    //TODO add $rulesAppliedToEach = true to these field types
+                    //These field types applies rules to each item, DON'T add checkboxes or multiselect here. They use Rule::in([...]) validation.
+                    elseif (in_array($field->type, ['input-array', 'tags', 'tags-search'])) {
                         $ruleName = "$prefix.$field->name.*";
                     } else {
                         $ruleName = "$prefix.$field->name";
@@ -44,11 +53,11 @@ trait ValidatesFields
                 }
             }
         }
-        //Merge with Livewire default $rules || rules() takes precedence
-        return array_merge($rules, $this->getRules());
+
+        return $rules;
     }
 
-    protected function validationAttributes(): array
+    protected function fieldValidationAttributes(): array
     {
         $attributes = [];
         if ($this->form->labelsAsAttributes) {
@@ -59,16 +68,19 @@ trait ValidatesFields
                             $key = $field->type === 'array'
                                 ? "$field->key.*.$array_field->name"
                                 : "$field->key.$array_field->name";
-                            $attributes[$key] = $array_field->label;
+                            $attributes[$key] = $array_field->validationAttr ?? $array_field->label;
                         }
+                    } elseif (in_array($field->type, ['input-array', 'tags', 'tags-search'])) {
+                        $attributes[$field->key.'.*'] = $field->validationAttr ?? $field->label;
                     } else {
-                        $attributes[$field->key] = $field->label;
+                        $attributes[$field->key] = $field->validationAttr ?? $field->label;
                     }
                 }
             }
         }
         return $attributes;
     }
+
 
     public function updated($field, $value): void
     {
@@ -89,12 +101,12 @@ trait ValidatesFields
         if (filled($fieldCollection)) {
             $fieldRule = $fieldCollection->get('rules') ?? 'nullable';
             $fieldType = $fieldCollection->get('type');
-            if (in_array($fieldType, ['input-array', 'tags'])) $field = $field . '.*';
+            if (in_array($fieldType, ['input-array', 'tags', 'tags-search'])) $field = $field . '.*';
             if ($fieldType == 'file') {
-                // livewire native file upload
+                // requires trait UploadsFiles
                 $this->customValidateFilesIn($field, $fieldRule);
             } else {
-                $this->validateOnly(field: $field, rules: $this->get_rules());
+                $this->validateOnly(field: $field);
             }
         }
     }
