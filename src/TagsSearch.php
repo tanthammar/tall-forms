@@ -2,8 +2,14 @@
 
 namespace Tanthammar\TallForms;
 
-class TagsSearch extends Tags
+use Tanthammar\TallForms\Traits\CanBeDisabled;
+use Tanthammar\TallForms\Traits\HasOptions;
+use Tanthammar\TallForms\Traits\HasSearchFeatures;
+
+class TagsSearch extends BaseField
 {
+    use HasOptions, HasSearchFeatures, CanBeDisabled;
+
     public bool $allowNew = true;
 
     protected function overrides(): self
@@ -13,7 +19,8 @@ class TagsSearch extends Tags
         $this->help = trans('tf::form.tags-search.help');
         $this->placeholder = trans('tf::form.tags-search.placeholder');
         $this->errorMsg = trans('tf::form.tags-search.error-msg');
-        $this->rules = 'string|alpha_num|between:3,25';
+        $this->rules = 'string|alpha_dash|between:3,25';
+        $this->default = [];
         return $this;
     }
 

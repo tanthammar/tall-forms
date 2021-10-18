@@ -17,7 +17,8 @@ class Tags extends BaseField
         $this->help = trans('tf::form.tags.help');
         $this->placeholder = trans('tf::form.tags.placeholder');
         $this->errorMsg = trans('tf::form.tags.error-msg');
-        $this->rules = 'string|alpha_num|between:3,25';
+        $this->rules = 'string|alpha_dash|between:3,25';
+        $this->default = [];
         return $this;
     }
 
