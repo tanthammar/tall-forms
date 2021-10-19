@@ -3,9 +3,18 @@
 
 namespace Tanthammar\TallForms\Traits;
 
-
 trait ValidatesFields
 {
+    protected int $rulesIteration = 0;
+    protected array $cachedRules = [];
+
+    public function hydrateValidatesFields()
+    {
+        //TODO remove when this is fixed: https://github.com/livewire/livewire/discussions/4045
+        //avoid rules() loop to be executed more than once on each request.
+        //see fieldRules() below
+        $this->rulesIteration = 1;
+    }
 
     //Used by Livewire default getRules():array method where rules() takes precedence before $rules
     protected function rules(): array
@@ -19,8 +28,17 @@ trait ValidatesFields
         return $this->fieldValidationAttributes();
     }
 
-    //OBSERVE, is recursive function
-    protected function fieldRules($fields = null, string $prefix = 'form_data'): array
+    protected function fieldRules(): array
+    {
+        if ($this->rulesIteration < 2) {
+            $this->rulesIteration += 1;
+            $this->cachedRules = $this->recursiveFieldRules();
+        }
+        return $this->cachedRules;
+    }
+
+
+    protected function recursiveFieldRules($fields = null, string $prefix = 'form_data'): array
     {
         $fields = is_null($fields) || !is_array($fields) ? $this->computedFields : $fields;
         $rules = [];
@@ -33,7 +51,7 @@ trait ValidatesFields
                             ? "$prefix.$field->name.*"
                             : ($field->ignored ? $prefix : "$prefix.$field->name");
                         //recursive
-                        $rules = array_merge($rules, $this->fieldRules($field->fields, $ruleName));
+                        $rules = array_merge($rules, $this->recursiveFieldRules($field->fields, $ruleName));
                     }
                     $rules["$prefix.$field->name"] = $field->rules ?? 'nullable';
 
