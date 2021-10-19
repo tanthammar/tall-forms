@@ -1,6 +1,7 @@
 <div x-data="tags({
-        inputTag: '',
+        searchInput: '',
         tags: $wire.entangle('{{ $field->key }}'){{ $field->deferString }},
+        open: false, {{-- not used in this component, only here because this comp shares js with TagsSearch --}}
     })"
     x-on:click.away="clearInput" class="{{$field->wrapperClass}}">
     <div @class([
@@ -21,19 +22,20 @@
                 x-on:keydown.escape="clearInput"
                 x-on:keydown.clear="clearInput"
                 x-on:keydown.delete="clearInput"
-                x-model="inputTag"
+                x-model="searchInput"
                 class="block w-full border-0"
             />
         @endunless
 
         <div x-show="tags.length" class="bg-white relative w-full pb-2 space-x-2 space-y-2">
+            @php $hasErrors = json_encode($errors->has($field->key.'.*')); @endphp
             <template x-for="tag in tags" x-bind:key="tag">
                 <button
                     type="button"
                     @if($field->disabled)
                     x-on:click.prevent.stop
                     @else
-                    x-on:click="deleteTag(tag)"
+                    x-on:click="deleteTag(tag, {{ $hasErrors }})"
                     @endif
                     @class([
                         'tf-tags-color inline-flex leading-4 items-center text-sm rounded py-1 px-2 space-x-1',
@@ -50,30 +52,5 @@
     </div>
 </div>
 @tfonce('scripts:tagscomponent')
-<script>
-    document.addEventListener('alpine:init', () => {
-        Alpine.data('tags', (config) => ({
-            inputTag: config.inputTag,
-            tags: config.tags,
-            addTag() {
-                this.inputTag = this.inputTag.trim()
-                if (this.inputTag === '') {
-                    return
-                }
-                if (this.tags.includes(this.inputTag)) {
-                    this.inputTag = ''
-                    return
-                }
-                this.tags.push(this.inputTag)
-                this.inputTag = ''
-            },
-            deleteTag(tagToDelete) {
-                this.tags.splice(this.tags.indexOf(tagToDelete), 1)
-            },
-            clearInput() {
-                this.inputTag = ''
-            }
-        }))
-    })
-</script>
+@include('tall-forms::includes.tags-js')
 @endtfonce
