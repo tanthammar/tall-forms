@@ -24,7 +24,6 @@ class InputArray extends BaseField
         $this->align_label_top = true;
         $this->allowed_in_repeater = false;
         $this->defaultErrorPosition = false;
-        $this->validationAttr = '';
         $this->deferEntangle();
         return $this;
     }
