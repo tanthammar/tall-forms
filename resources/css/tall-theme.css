@@ -306,13 +306,17 @@
         @apply flex flex-col divide-y mb-2 rounded border;
     }
     .tf-repeater-wrapper-outer {
-        @apply flex flex-col sm:flex-row px-2 items-center py-2;
+        @apply flex flex-col sm:flex-row items-stretch;
     }
     .tf-repeater-wrapper-grid {
-        @apply flex-1 sm:grid sm:grid-cols-12 gap-x-2;
+        @apply flex-1 mx-1 my-2 sm:mx-2 sm:my-0 sm:grid sm:grid-cols-12 gap-x-2;
     }
     .tf-repeater-btns-wrapper {
-        @apply flex flex-row sm:flex-col flex-shrink justify-between my-2 sm:pl-2 sm:my-0 space-x-0 space-y-0 sm:space-y-1 w-full sm:w-auto;
+        @apply flex flex-row sm:flex-col flex-shrink justify-around sm:justify-center
+        my-0 py-2 px-6 sm:px-2
+        space-x-0 space-y-0 sm:space-y-1
+        bg-gray-100 border-t sm:border-t-0 sm:border-l
+        w-full sm:w-auto;
     }
     /* also used in InputArray */
     .tf-repeater-btn-size {
@@ -547,13 +551,13 @@
         @apply text-gray-700 bg-gray-100 hover:bg-gray-200;
     }
     .tf-tab {
-        @apply flex flex-row items-center rounded mr-2 px-4 py-2;
+        @apply flex items-center rounded mr-2 px-4 py-2 space-x-2;
     }
     .tf-tab-icon {
         @apply h-5 w-5;
     }
     .tf-tab-label {
-        @apply ml-2;
+
     }
     .tf-tab-errors-callout {
         @apply rounded-md bg-red-100 p-4 mx-auto text-white mb-2;
