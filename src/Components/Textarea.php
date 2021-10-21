@@ -22,7 +22,6 @@ class Textarea extends BaseBladeField
         return [
             'id' => 'textarea',
             'required' => false,
-            'defer' => false, //doesn't use entangle
             'class' => 'form-textarea block w-full rounded shadow-inner my-1',
             'placeholder' => '',
             'rows' => 5,

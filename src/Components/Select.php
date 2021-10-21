@@ -22,7 +22,6 @@ class Select extends BaseBladeField
         return [
             'id' => 'select',
             'placeholder' => __('tf::form.select.placeholder'),
-            'defer' => false, //doesn't use entangle
             'multiple' => false,
             'class' => 'form-select my-1 w-full shadow',
             'wrapperClass' => null,

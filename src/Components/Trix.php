@@ -22,7 +22,6 @@ class Trix extends BaseBladeField
         return [
             'id' => 'trix',
             'class' => 'form-textarea w-full shadow-inner',
-            'defer' => true, //defer entangle
             'includeScript' => true,
             //sponsor field defaults;
             'allowAttachments' => false,

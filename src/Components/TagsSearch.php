@@ -30,7 +30,6 @@ class TagsSearch extends BaseBladeField
             'options' => [],
             'disabled' => false,
             'required' => false,
-            'defer' => true,
             'allowNew' => true,
         ];
     }

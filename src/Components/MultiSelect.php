@@ -12,7 +12,6 @@ class MultiSelect extends Select
         return [
             'id' => 'multiselect',
             'placeholder' => __('tf::form.multiselect.placeholder'),
-            'defer' => true,
             'multiple' => true,
             'class' => 'form-multiselect',
             'wrapperClass' => null,

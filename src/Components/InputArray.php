@@ -20,7 +20,6 @@ class InputArray extends BaseBladeField
     {
         return [
             'id' => 'inputArray', //unique, fieldset id + label for =,
-            'defer' => true,
             'type' => 'text',
             'wrapperClass' => null,
             'class' => "form-input my-1 w-full", //applied to each input

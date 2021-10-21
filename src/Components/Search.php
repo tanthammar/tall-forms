@@ -28,7 +28,6 @@ class Search extends BaseBladeField
             'class' => 'form-input w-full shadow-inner my-1',
             'wrapperClass' => 'w-full',
             'options' => [],
-            'defer' => true,
             'disabled' => false,
         ];
     }
