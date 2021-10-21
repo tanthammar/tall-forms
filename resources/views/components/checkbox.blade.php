@@ -1,12 +1,12 @@
-<div {{ $attributes->merge(['class' => "flex {$field->class}"]) }}>
+<div {{ $attributes->only('x-data') }} class="{{ $field->wrapperClass }}">
 <input
     type="checkbox"
-    value="{{ old($field->key) }}"
-    @foreach($options() as $key => $value) {{$key}}="{{$value}}" @endforeach
+    @if($field->disabled) disabled @endif
+    {{ $attributes->except([...array_keys($attr), 'x-data', 'disabled', 'type'])->merge($attr)->merge(['class' => $field->class ]) }}
     />
-    <div class="tf-checkbox-label-spacing">
-        <label for="{{ \Str::slug($field->key) }}" class="tf-checkbox-label">
-            {{ $label ?? ''}}
+    <div class="{{ $field->labelWrapperClass }}">
+        <label for="{{ $field->id }}" class="{{ $field->checkboxLabelClass }}">
+            {{ $label }}
         </label>
     </div>
 </div>

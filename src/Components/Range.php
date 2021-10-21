@@ -4,42 +4,43 @@
 namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
-use Illuminate\View\Component;
-use Tanthammar\TallForms\Traits\Helpers;
-use Tanthammar\TallForms\Range as Field;
+use Tanthammar\TallForms\Traits\BaseBladeField;
 
-class Range extends Component
+class Range extends BaseBladeField
 {
-    use Helpers;
-
-    public Field $field;
-    public int $colspan;
-    public array $attr;
-    public float $step;
-    public float $min;
-    public float $max;
-
-    public function __construct(Field $field, array $attr = [])
+    public function __construct(
+        public array|object $field = [],
+        public array        $attr = [])
     {
-        $this->field = $field;
-        $this->colspan = $field->colspan;
-        $this->attr = $attr ?? $field->getAttr('input');
-        $this->step = $field->step;
-        $this->min = $field->min;
-        $this->max = $field->max;
-        $this->inputAttr();
+        parent::__construct((array)$field, $attr);
+        $this->attr = array_merge($this->inputAttributes(), $attr);
     }
 
-    public function class(): string
+    public function defaults(): array
     {
-        return config('tall-forms.col-span-classes')[$this->colspan];
+        return [
+            'id' => 'range',
+            'step' => 1,
+            'min' => 1,
+            'max' => 100,
+            'class' => 'flex-1 w-full',
+            'wrapperClass' => 'w-full',
+            'disabled' => false,
+        ];
     }
 
-    public function inputAttr(): void
+
+    public function inputAttributes(): array
     {
-        $width = 'flex-1 w-full';
-        $custom = ' '.data_get($this->attr, 'class');
-        data_set($this->attr, 'class', Helpers::unique_words($width.$custom));
+        return [
+            'type' => 'range',
+            'id' => $this->field->id,
+            'name' => $this->field->name,
+            'value' => old($this->field->name),
+            'min' => $this->field->min,
+            'max' => $this->field->max,
+            'step' => $this->field->step,
+        ];
     }
 
     public function render(): View

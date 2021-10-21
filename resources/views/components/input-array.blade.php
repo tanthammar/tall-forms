@@ -1,81 +1,77 @@
-<div x-data="{
-        inputArray: @entangle($field->key){{$field->defer}},
-        maxItems: {{ $field->maxItems ?? 0 }},
-        minItems: {{ $field->minItems ?? 0 }},
-        addItem() {
-            this.inputArray = Array.from(this.inputArray.filter(item => item.length > 0))
-            if (this.maxItems == 0 || (this.maxItems > 0 && this.inputArray.length < this.maxItems)) {
-                this.inputArray.push('')
-            } else {
-                this.shakeIt()
-            }
-            this.focusLastInput()
-        },
-        deleteItem(index) {
-            if (this.minItems == 0 || (this.minItems > 0 && this.inputArray.length > this.minItems)) {
-                this.inputArray.splice(index, 1)
-            } else {
-                this.shakeIt()
-            }
-            this.focusLastInput()
-        },
-        focusLastInput() {
-            this.$nextTick(() => {
-                this.$refs.inputs.lastElementChild.firstElementChild.focus()
-            })
-        },
-        shakeIt() {
-            this.$refs.inputs.classList.add('shake')
-            setTimeout(() => {
-                this.$refs.inputs.classList.remove('shake')
-            }, 2000)
-        }
-    }">
-    <div @error($field->key.'.*') class="{{ $error() }}" @enderror>
-        <div x-ref="inputs" wire:ignore>
-            <template x-for="(item, index) in inputArray" :key="index">
+<div x-data="inputArray({
+        maxItems: {{ $field->maxItems }},
+        minItems: {{ $field->minItems }},
+        items: $wire.entangle('{{ $field->key }}'){{ $field->deferString }},
+        fieldName: '{{ $field->name }}',
+        fieldKey: '{{ $field->key }}',
+        inputs: $refs.inputs
+    })" class="{{ $field->wrapperClass }}">
+    <div @error($field->key.'.*') class="{{ $field->errorClass }}" @enderror>
+        <fieldset x-ref="inputs" id="{{ $field->id }}" name="{{ $field->name }}">
+            <template x-for="(item, itemsIndex) in items" x-bind:key="itemsIndex">
                 <div class="flex md:space-x-2 space-x-1">
                     <input
-                        x-model="inputArray[index]"
+                        @if($field->disabled) disabled @endif
+                        x-model="items[itemsIndex]"
+                        x-bind:name="fieldName+itemsIndex"
+                        x-bind:id="fieldKey+itemsIndex"
                         x-on:keydown.enter.prevent="addItem()"
-                        x-on:keydown.backspace="if(inputArray[index].length == 0) deleteItem(index)"
-                        @foreach($options() as $key => $value) {{$key}}="{{$value}}" @endforeach
+                        x-on:keydown.backspace="if(items[itemsIndex].length == 0) deleteItem(itemsIndex)"
+                        {{ $attributes->except([...array_keys($attr), 'x-model', 'disabled'])->whereDoesntStartWith('x-model')->merge($attr) }}
                     />
-                    <button type="button" class="tf-repeater-delete-btn" x-on:click.prevent.prevent="deleteItem(index)" tabindex="-1">
-                        <x-tall-svg :path="config('tall-forms.trash-icon')" class="tf-repeater-btn-size" />
+                    <button type="button" class="tf-repeater-delete-btn" x-on:click.prevent.prevent="deleteItem(itemsIndex)" tabindex="-1">
+                        <x-tall-svg :path="config('tall-forms.trash-icon')" class="tf-repeater-btn-size fill-current" />
                     </button>
                 </div>
             </template>
-        </div>
+        </fieldset>
         @error($field->key.'.*')
         <p class="tf-error">
-            {{ $field->errorMsg ?? \Tanthammar\TallForms\ErrorMessage::parse($message) }}
+            {{ $field->errorMsg ?? $message }}
         </p>
         @enderror
     </div>
     <button type="button" class="tf-repeater-add-button" x-on:click.prevent="addItem()" style="width:fit-content">
-        <x-tall-svg :path="config('tall-forms.plus-icon')" class="tf-repeater-add-button-size" />
+        <x-tall-svg :path="config('tall-forms.plus-icon')" class="tf-repeater-add-button-size fill-current" />
     </button>
 </div>
-@tfonce('styles:shake')
-<style>
-    .shake {
-        animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
-        transform: translate3d(0, 0, 0);
-    }
-    @keyframes shake {
-        10%, 90% {
-            transform: translate3d(-1px, 0, 0);
-        }
-        20%, 80% {
-            transform: translate3d(2px, 0, 0);
-        }
-        30%, 50%, 70% {
-            transform: translate3d(-4px, 0, 0);
-        }
-        40%, 60% {
-            transform: translate3d(4px, 0, 0);
-        }
-    }
-</style>
+@tfonce('scripts:inputarray')
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('inputArray', (config) => ({
+            maxItems: config.maxItems,
+            minItems: config.minItems,
+            items: config.items,
+            fieldName: config.fieldName,
+            fieldKey: config.fieldKey,
+            inputs: config.inputs,
+            addItem() {
+                this.items = Array.from(this.items.filter(item => item.length > 0))
+                if (this.maxItems === 0 || (this.maxItems > 0 && this.items.length < this.maxItems)) {
+                    this.items.push('')
+                } else {
+                    this.shakeIt()
+                }
+                this.focusLastInput()
+            },
+            deleteItem(itemsIndex) {
+                if (this.minItems === 0 || (this.minItems > 0 && this.items.length > this.minItems)) {
+                    this.items.splice(itemsIndex, 1)
+                } else {
+                    this.shakeIt()
+                }
+                this.focusLastInput()
+            },
+            focusLastInput() {
+                this.$nextTick(() => this.inputs.lastElementChild?.firstElementChild?.focus())
+            },
+            shakeIt() {
+                this.inputs.classList.add('shake')
+                setTimeout(() => {
+                    this.inputs.classList.remove('shake')
+                }, 2000)
+            }
+        }))
+    })
+</script>
 @endtfonce

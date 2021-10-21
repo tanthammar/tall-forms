@@ -1,6 +1,5 @@
 <textarea
-    value="{{ old($field->key) }}"
-    @if($required) required @endif
-    @foreach($options() as $key => $value) {{$key}}="{{$value}}" @endforeach
-    {{ $attributes->merge(['class' => $errors->has($field->key) ? $error() : $class() ]) }}>
+    @if($field->required) required @endif
+    @if($field->disabled) disabled @endif
+    {{ $attributes->except([...array_keys($attr), 'required', 'disabled'])->merge($attr)->merge(['class' => $errors->has($field->key) ? $field->errorClass : $field->class ]) }}>
 </textarea>

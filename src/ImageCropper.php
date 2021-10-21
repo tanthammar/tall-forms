@@ -4,16 +4,20 @@
 namespace Tanthammar\TallForms;
 
 
+use Tanthammar\TallForms\Traits\CanBeDisabled;
+
 class ImageCropper extends BaseField
 {
-    public $includeScript = false;
-    public $width = 420;
-    public $height = 340;
+    use CanBeDisabled;
+
+    public bool $includeScript = false;
+    public $width;
+    public $height;
     public $thumbnail;
-    public $shape = 'square'; //or circle
-    public $dropZoneHelp = 'Drag an image here or click in this area';
-    public $fileInfo = 'PNG, JPG, GIF, TIFF, max 1.5MB';
-    public $uploadButton = 'Select a file';
+    public $shape; //square or circle
+    public $dropZoneHelp;
+    public $fileInfo;
+    public $uploadButton;
 
 
     protected function overrides(): self
@@ -23,6 +27,8 @@ class ImageCropper extends BaseField
         $this->align_label_top = true;
         $this->allowed_in_repeater = true;
         $this->allowed_in_keyval = true;
+        $this->dynamicComponent = false;
+        $this->includeScript = config('tall-forms.include-external-scripts');
         return $this;
     }
 
@@ -49,9 +55,9 @@ class ImageCropper extends BaseField
      * Else, you must import them yourself
      * Only pushed once
      */
-    public function includeExternalScripts(): self
+    public function includeExternalScripts(bool $state = true): self
     {
-        $this->includeScript = true;
+        $this->includeScript = $state;
         return $this;
     }
 

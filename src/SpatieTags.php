@@ -18,6 +18,10 @@ class SpatieTags extends BaseField
         $this->align_label_top = true;
         $this->allowed_in_repeater = false;
         $this->allowed_in_keyval = false;
+        $this->placeholder = __('tf::form.spatie-tags.placeholder');
+        $this->help = __('tf::form.spatie-tags.help'); //default = "Add tag ..."
+        $this->tagsRules = 'string|between:3,50';
+        $this->dynamicComponent = false;
         return $this;
     }
 

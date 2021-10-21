@@ -5,7 +5,7 @@ namespace Tanthammar\TallForms\Traits;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
-trait Helpers
+trait MiscMethods
 {
     protected function getFieldValueByKey(string $fieldKey, string $fieldValue)
     {
@@ -17,7 +17,7 @@ trait Helpers
         $fieldName = Str::replaceFirst('form_data.', '', $fieldKey);
         $fieldsCollection = collect($this->getFieldsFlat());
         $field = $fieldsCollection->firstWhere('key', $fieldKey) ?? $fieldsCollection->firstWhere('name', $fieldName);
-        if (empty($field)) {
+        if (blank($field)) {
             $field = $fieldsCollection->filter(function ($item) use ($fieldName) {
                 $exploded = explode('.', $fieldName);
                 return (
@@ -42,8 +42,8 @@ trait Helpers
         //return $hook . Str::of($field)->replace('.', '_')->studly()->replaceFirst('FormData', '');
         return $hook . Str::of(preg_replace('/(\d+)\./', '', $field))
                 ->replace('.', '_')
-                ->replaceFirst('formData', '')
-                ->studly();
+                ->studly()
+                ->replaceFirst('FormData', '');
     }
 
     /**
@@ -54,24 +54,24 @@ trait Helpers
         return Str::match('/(\d+)/', $field);
     }
 
-    public function tallFillField($array)
+    /**
+     * Fill fields from javascript: $wire.call('tallFillField', ['field' => ..., 'value' => ...])<br>
+     * Fill fields from Livewire: $this->>emit(...), $this->>emitUp(...), $this->>emitTo(...), $this->>emitSelf(...)
+     * The value will be validated in either updatedFoo() or on submit.
+     */
+    public function tallFillField(array $array)
     {
         data_set($this->form_data, $array['field'], $array['value']);
     }
 
     // All other methods regarding tags are in Tanthammar\TallForms\SpatieTags
     // It's intended to be called in the onCreateModel() method, to sync tags after the model is created
-    public function syncTags($field, $tagType = null)
+    protected function syncTags($field, $tagType = null)
     {
         $tags = data_get($this->form_data, $field);
         if (filled($tags = explode(',', $tags)) && optional($this->model)->exists) {
             filled($tagType) ? $this->model->syncTagsWithType($tags, $tagType) : $this->model->syncTags($tags);
         }
-    }
-
-    public static function unique_words(string $scentence): string
-    {
-        return implode(' ', array_unique(explode(' ', $scentence)));
     }
 
     /**
@@ -81,7 +81,7 @@ trait Helpers
      * @param mixed $keys
      * @return array
      */
-    public function arrayDotOnly(array $array, $keys): array
+    protected function arrayDotOnly(array $array, $keys): array
     {
         $newArray = [];
         foreach ((array)$keys as $key) {
@@ -94,7 +94,7 @@ trait Helpers
     protected function firstLevelFieldNames(): array
     {
         $fieldNames = [];
-        foreach ($this->fields() as $field) {
+        foreach ($this->computedFields as $field) {
             if (filled($field) && !$field->ignored) $fieldNames[] = $field->name;
             if (filled($field) && $field->ignored && isset($field->fields) && filled($field->fields)){
                 foreach ($field->fields as $nested_field) {
@@ -124,14 +124,14 @@ trait Helpers
      */
     protected function getFields($fields = null, $prefix = '', bool $flatten = true): array
     {
-        $fields = is_null($fields) || !is_array($fields) ? $this->fields() : $fields;
+        $fields = is_null($fields) || !is_array($fields) ? $this->computedFields : $fields;
         $results = [];
 
         foreach ($fields as &$field) {
             if (filled($field)) {
                 $fieldKey = $field->ignored
                     ? ""
-                    : (empty($prefix) ? $field->key : $prefix . '.' . $field->name);
+                    : (blank($prefix) ? $field->key : $prefix . '.' . $field->name);
                 $field->key = $fieldKey;
                 $fieldKey = ($field->type === 'array') ? "$fieldKey.*" : $fieldKey;
                 if (isset($field->fields) && filled($field->fields)) {
@@ -155,7 +155,8 @@ trait Helpers
             if (filled($field) && !$field->ignored) {
                 $fieldKey = Str::replaceFirst('form_data.', '', $field->key);
                 if (false === Str::contains($fieldKey, ['*']) && is_null(data_get($this->form_data, $fieldKey, null))) {
-                    $array = in_array($field->type, ['checkboxes', 'file', 'multiselect', 'input-array']);
+                    //TODO change this to field property
+                    $array = in_array($field->type, ['checkboxes', 'file', 'multiselect', 'input-array', 'tags', 'tags-search']);
                     data_set($this->form_data, $fieldKey, $field->default ?? ($array ? [] : null));
                 }
             }

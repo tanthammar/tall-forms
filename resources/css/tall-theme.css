@@ -2,9 +2,29 @@
     /* icons */
     .svg-icon {
         @apply inline-flex align-middle overflow-visible;
-        fill: currentColor;
+        /* fill: currentColor; */
         font-size: inherit;
         margin-top: -0.1rem;
+    }
+
+    /* shake on error */
+    .shake {
+        animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+        transform: translate3d(0, 0, 0);
+    }
+    @keyframes shake {
+        10%, 90% {
+            transform: translate3d(-1px, 0, 0);
+        }
+        20%, 80% {
+            transform: translate3d(2px, 0, 0);
+        }
+        30%, 50%, 70% {
+            transform: translate3d(-4px, 0, 0);
+        }
+        40%, 60% {
+            transform: translate3d(4px, 0, 0);
+        }
     }
 
     /* Tailwind v1 fall-back */
@@ -21,7 +41,7 @@
         @apply focus:ring-gray-400 focus:border-gray-400 focus:shadow-md border-gray-300 rounded
     }
     .form-multiselect {
-        @apply appearance-none bg-white border-gray-400 rounded border-solid border box-border cursor-default block leading-normal mx-0 mb-0 mt-1 py-0 px-0 normal-case whitespace-nowrap w-full focus:border-gray-400 focus:shadow-md
+        @apply form-select my-1 w-full shadow px-0 divide-y
     }
     .form-checkbox {
         @apply focus:ring-blue-400 text-blue-500 border-gray-300 rounded
@@ -100,7 +120,7 @@
         @apply text-gray-100 tf-bg-secondary hover:bg-blue-800 hover:text-white focus:border-blue-800 focus:shadow;
     }
     .tf-btn-white {
-        @apply border-gray-300 bg-white text-gray-700 hover:text-gray-500 focus:border-blue-300 focus:shadow;
+        @apply border-gray-400 bg-white text-gray-700 hover:text-gray-500 focus:border-blue-300 focus:shadow;
     }
     .tf-btn-indigo {
         @apply text-indigo-100 bg-indigo-500 hover:bg-indigo-600 focus:border-indigo-700 focus:shadow;
@@ -134,7 +154,7 @@
 
     /* form */
     .tf-form {
-        @apply w-full;
+        @apply w-full isolate;
     }
 
     .tf-form-head {
@@ -171,7 +191,7 @@
     }
 
     .tf-field-error {
-        @apply border-red-500 text-red-900 placeholder-red-500 focus:border-red-500;
+        @apply border-red-500 text-red-900 placeholder-red-500 focus:border-red-500 shake;
     }
 
 
@@ -253,7 +273,7 @@
 
     /* Input */
     .tf-input-wrapper {
-        @apply my-1 flex rounded w-full relative;
+        @apply my-1 flex w-full;
     }
 
     /* Range */
@@ -286,17 +306,21 @@
         @apply flex flex-col divide-y mb-2 rounded border;
     }
     .tf-repeater-wrapper-outer {
-        @apply flex flex-col sm:flex-row px-2 sm:space-x-3 items-center py-2;
+        @apply flex flex-col sm:flex-row items-stretch;
     }
     .tf-repeater-wrapper-grid {
-        @apply flex-1 sm:grid sm:grid-cols-12 gap-x-2;
+        @apply flex-1 mx-1 my-2 sm:mx-2 sm:my-0 sm:grid sm:grid-cols-12 gap-x-2;
     }
     .tf-repeater-btns-wrapper {
-        @apply my-4 sm:my-0 flex-shrink space-x-1 items-center justify-end;
+        @apply flex flex-row sm:flex-col flex-shrink justify-around sm:justify-center
+        my-0 py-2 px-6 sm:px-2
+        space-x-0 space-y-0 sm:space-y-1
+        bg-gray-100 border-t sm:border-t-0 sm:border-l
+        w-full sm:w-auto;
     }
     /* also used in InputArray */
     .tf-repeater-btn-size {
-        @apply h-6 w-6 md:h-8 md:w-8;
+        @apply h-6 w-6;
     }
     .tf-repeater-sorter-color {
         @apply text-gray-400;
@@ -319,7 +343,10 @@
         @apply tf-bg-primary text-white;
     }
     .tf-tags-x-color {
-        @apply text-gray-200;
+        @apply text-gray-400;
+    }
+    .tf-tags-wrapper {
+        @apply w-full my-1;
     }
 
     /* Search */
@@ -374,6 +401,9 @@
     .tf-checkbox-label-spacing {
         @apply ml-2 block;
     }
+    .tf-checkboxes-fieldset {
+        @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5;
+    }
 
     /* Radio */
     /* If you want to change the color, see tailwind custom form documentation */
@@ -385,6 +415,9 @@
     }
     .tf-radio-label-spacing {
         @apply ml-2 block;
+    }
+    .tf-radio-fieldset {
+        @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5;
     }
 
     /* File upload */
@@ -440,10 +473,12 @@
         @apply fixed inset-0 h-screen w-screen p-2 sm:p-10 md:p-20 bg-gray-800 bg-opacity-75 z-50;
     }
     .tf-cropper-modal {
-        @apply bg-white rounded w-full h-full flex justify-center items-center;
+        @apply bg-white rounded w-full h-full flex justify-center items-center isolate;
+        z-index: 5;
     }
     .tf-cropper-btns-root {
-        @apply z-10 absolute inset-0;
+        @apply absolute inset-0 isolate;
+        z-index: 5; /* compatible with CKEditor overlay */
     }
     .tf-cropper-btns-wrapper {
         @apply flex gap-2 h-full w-full items-center justify-center;
@@ -499,6 +534,10 @@
         @apply list-decimal list-outside ml-4;
     }
 
+    .trix-disabled {
+        @apply border border-gray-300 my-1 p-3 prose rounded shadow-inner;
+    }
+
     /* Tnx Filament */
     trix-editor:empty:not(:focus)::before {
         @apply text-gray-400 opacity-100;
@@ -512,13 +551,13 @@
         @apply text-gray-700 bg-gray-100 hover:bg-gray-200;
     }
     .tf-tab {
-        @apply flex flex-row items-center rounded mr-2 px-4 py-2;
+        @apply flex items-center rounded mr-2 px-4 py-2 space-x-2;
     }
     .tf-tab-icon {
         @apply h-5 w-5;
     }
     .tf-tab-label {
-        @apply ml-2;
+
     }
     .tf-tab-errors-callout {
         @apply rounded-md bg-red-100 p-4 mx-auto text-white mb-2;
@@ -579,5 +618,30 @@
     }
     .tf-subtitle {
         @apply text-sm text-gray-800;
+    }
+
+    /* CKEditor */
+    .ckeditor-disabled {
+        @apply border border-gray-300 my-1 p-3 prose rounded shadow-inner;
+    }
+
+    /* Modals */
+    .tf-modal {
+        @apply mb-6 bg-white rounded-lg overflow-hidden shadow-xl sm:w-full sm:mx-auto;
+    }
+    .tf-modal-form-head {
+        @apply border border-b pb-3 pt-3 pl-4 pr-4 sm:pl-6 sm:pr-6;
+    }
+    .tf-modal-form-title {
+        @apply font-medium leading-7 text-gray-900 text-lg;
+    }
+    .tf-modal-form-sub-title {
+        @apply leading-5 text-gray-500 text-sm;
+    }
+    .tf-modal-form-content {
+        @apply -mt-2 pl-4 pr-4 sm:pl-6 sm:pr-6 isolate overflow-scroll;
+    }
+    .tf-modal-form-footer {
+        @apply px-6 py-4 bg-gray-100 text-right;
     }
 }

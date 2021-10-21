@@ -1,0 +1,55 @@
+<?php
+
+namespace App\Namespace;
+
+use ModelsPathDummyModel;
+use Tanthammar\TallForms\Input;
+use Tanthammar\TallForms\TallFormInModal;
+
+class DummyComponent extends TallFormInModal
+{
+    /*
+     * button color presets:
+     * white, indigo, blue, green, yellow, red, gray, orange, teal, info, success, danger, warning, primary, secondary
+     public string $closeBtnColor = 'white';
+     public string $submitBtnColor = 'primary';
+
+     * Methods to override
+     public function loadModal(int|string $modelKey): void
+     public function closeModal(): void
+     public function modalSubmit(): void
+     */
+
+    public function mount()
+    {
+        //Gate::authorize()
+        $this->mount_form(new DummyModel); // $dummymodel from hereon, called $this->model
+    }
+
+    protected function formAttr(): array
+    {
+        return [
+           'formTitle' => $this->transTitle(model: 'DummyModel'),
+           'formSubtitle' => 'Form Subtitle slot',
+           'modalMaxWidth' => 'xl', //default = 'lg', options: sm, md, lg, xl, 2xl
+       ];
+    }
+
+    // OPTIONAL methods, they already exist in the SubmitsForm trait
+    protected function onCreateModel($validated_data)
+    {
+        $this->model = DummyModel::create($validated_data);
+    }
+
+    protected function onUpdateModel($validated_data)
+    {
+        $this->model->update($validated_data);
+    }
+
+    protected function fields(): array
+    {
+        return [
+            Input::make('Name')->rules('required'),
+        ];
+    }
+}

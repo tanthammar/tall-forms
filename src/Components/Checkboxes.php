@@ -4,44 +4,29 @@
 namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
-use Illuminate\View\Component;
-use Tanthammar\TallForms\Checkboxes as Field;
+use Tanthammar\TallForms\Traits\BaseBladeField;
 
-class Checkboxes extends Component
+class Checkboxes extends BaseBladeField
 {
-    public Field $field;
-    public string $label;
-    public $value;
-    public string $id;
-
-    /**
-     * Checkboxes constructor.
-     * @param Field $field
-     * @param string $tempKey
-     * @param int|string $value
-     * @param string $label
-     */
-    public function __construct(Field $field, $value, string $label)
+    public function __construct(
+        public array|object $field = [],
+        public array        $attr = [],
+    )
     {
-        $this->field = $field;
-        $this->value = $value;
-        $this->label = $label;
-        $this->id = \Str::slug($field->key.$value);
+        parent::__construct((array)$field, $attr);
     }
 
-    public function options(): array
+    public function defaults(): array
     {
-        $custom = $this->field->getAttr('input');
-        $default = [
-            $this->field->wire => $this->field->key,
-            'class' => $this->class()
+        return [
+            'id' => 'checkboxes',
+            'class' => "form-checkbox tf-checkbox",
+            'wrapperClass' => "tf-checkboxes-fieldset",
+            'checkboxLabelClass' => "tf-checkbox-label",
+            'labelWrapperClass' => "tf-checkbox-label-spacing",
+            'options' => [],
+            'disabled' => false,
         ];
-        return array_merge($default, $custom);
-    }
-
-    public function class(): string
-    {
-        return "form-checkbox tf-checkbox";
     }
 
     public function render(): View

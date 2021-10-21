@@ -18,6 +18,7 @@ class DesignElement
     public bool $ignored = true;
     public bool $is_relation = false;
     public bool $is_custom = false;
+    public bool $dynamicComponent = false;
 
     public string $label;
     public string $name;

@@ -1,40 +1,12 @@
 <?php
-use Tanthammar\TallForms\Components;
 
 return [
-    //note that the word dummymodel is auto replaced with the lower case value of --model option in the make command
-    'form-title' => "trans('global.create').' '.trans('crud.dummymodel.title_singular')",
-
-    //File upload default validation message translation, applied as trans(...) or @lang(...)
-    'upload-file-error' => 'messages.file_upload_error', //Example: 'One or many of the uploaded files did not match the allowed filetype or size limit. Please see the fields help text, review your files and try again.'
-
-    //Javascript alerts, used in various fields
-    'size-limit-alert' => 'messages.size_limit_alert', //'The file is too large.'
-    'one-at-the-time-alert' => 'messages.one_at_the_time_alert', //'Please upload only one file at the time.'
-    'max-attachments-alert' => 'messages.max_attachments_alert', //'Max allowed attachments:'
-    'mime-alert' => 'messages.mime_alert', //'Invalid file type, please pick another file.'
-
-    //Spatie tags, search input error translation, applied as trans(...) or @lang(...)
-    'spatie-tags-search-error' => 'fields.tag_search_error',
-
-    //Use the field label instead of key, as validation attribute.
-    //Recommended, else you have to define language settings for every field. Example: 'form_data.name' => 'Name'
-    //Can be overridden per field
-    'field-labels-as-validation-attributes' => true,
-
-    //Select placeholders and help, applied as trans(...) or @lang(...)
-    'select-placeholder' => 'global.select_placeholder', //'Please select an option...'
-    'search-placeholder' => 'global.search_placeholder', //'Search ...' //used for both Search and SearchList fields
-    'multiselect-placeholder' => 'global.multiselect_placeholder', //'Please select one or multiple options ...'
-    'multiselect-help' => 'global.multiselect_help', //'Press CTRL(Windows) or CMD(Mac), to select/deselect multiple options.'
-
-
-    //A Laravel blade component to wrap your form with, if $wrapWithView = true, see documentation
-    'wrap-view-path' => 'tall-forms::wrapper-layout',
+    //Use cdn links for fields based on third party scripts, or bundle them with your app.js?
+    'include-external-scripts' => true,
 
     // Component attributes, perfect spot to add default Alpine $refs keys
     'component-attributes' => [
-        // You can add anything to these attributes. Applied as @foreach($attr as key => value)
+        // You can add anything to these attributes. Applied as $attributes->merge($attr)
         'form' => [
             'class' => 'tf-form',
         ],
@@ -43,9 +15,41 @@ return [
         ],
     ],
 
+    'form' => [
+        'labelW' => 'tf-label-width',
+        'fieldW' => 'tf-field-width',
+        //Use the field label instead of key, as validation attribute.
+        //Recommended, else you have to define language settings for every field. Example: 'form_data.name' => 'Name'
+        //Can be overridden per field
+        'labelsAsAttributes' => true,
+        'notifyErrors' => true, //Alert validation errors, on submit (stacked notifications).
+        'wrapViewPath' => 'tall-forms::wrapper-layout', //A Laravel blade component to wrap your form with, if $wrapWithView = true, see documentation
+        'inlineLabelAlignment' => 'tf-inline-label-alignment',
+        'formTitle' => '',
+        'layout' => 'layouts.app', //Livewire default = 'layouts.app', see https://laravel-livewire.com/docs/2.x/rendering-components#custom-layout
+        'slot' => null, // see https://laravel-livewire.com/docs/2.x/rendering-components#custom-layout
+        'headView' => '',
+        'afterFormView' => '',
+        'beforeFormView' => '',
+        'formSubtitle' => '',
+        'footerView' => '',
+        'formFooterTitle' => '',
+        'formFooterSubtitle' => '',
+        'inline' => true,
+        'wrapWithView' => true,
+        'onKeyDownEnter' => 'saveAndStay', //form submit action
+        'showSave' => true,
+        'showDelete' => true,
+        'showReset' => true,
+        'showGoBack' => true,
+        'saveStayBtnTxt' => 'tf::form.save-and-stay', //trans('tf::form.save-and-stay')
+        'saveBackBtnTxt' => 'tf::form.save-go-back',//trans('tf::form.save-go-back')
+        'modalMaxWidth' => 'lg', //options: sm, md, lg, xl, 2xl
+    ],
+
     // Field attributes, perfect spot to add default Alpine $refs keys
     'field-attributes' => [
-        // You can add anything to these attributes. Applied as @foreach($attr as key => value)
+        // You can add anything to these attributes. Applied as $attributes->merge($attr)
         'root' => [
             'class' => 'tf-fields-root' //default = w-full, do not add py-, my- or col-span-x here, see FieldRoot component.
         ],
@@ -70,25 +74,10 @@ return [
         'after-text' => [
             'class' => 'tf-fields-after-text'
         ],
-        //default field wire:model attribute
-        'wire' => 'wire:model.lazy',
+
+        'wire' => 'wire:model.lazy', //default field wire:model attribute, override with ->wire(...)
+        'defer-entangle' => true, //override with ->deferEntangle(bool $state)
     ],
-
-
-
-
-    //form buttons translations applied as trans(...) or @lang(...)
-    'saved' => 'global.saved',
-    'save' => 'global.save',
-    'swap' => 'global.swap',
-    'delete' => 'global.delete',
-    'edit' => 'global.edit',
-    'reset' => 'global.reset',
-    'save-and-stay' => 'global.save',
-    'save-go-back' => 'global.save_go_back',
-    'message-updated-success' => 'messages.updated_success',
-    'are-u-sure' => 'global.areYouSure',
-
 
     //You can swap the icons blade view path. The path is relative to resources/views/components
     //(publish the icons: php artisan vendor:publish --tag=tall-form-icons)
@@ -117,27 +106,51 @@ return [
         '12' => 'sm:col-span-12',
     ],
 
+    //Register Aliases for easy access in blade files.
+    //Extend or replace the fields.
+    'aliases' => [
+        'Checkbox' => \Tanthammar\TallForms\Checkbox::class,
+        'Checkboxes' => \Tanthammar\TallForms\Checkboxes::class,
+        'FileUpload' => \Tanthammar\TallForms\FileUpload::class,
+        'ImageCropper' => \Tanthammar\TallForms\ImageCropper::class,
+        'Input' => \Tanthammar\TallForms\Input::class,
+        'InputArray' => \Tanthammar\TallForms\InputArray::class,
+        'MultiSelect' => \Tanthammar\TallForms\MultiSelect::class,
+        'Radio' => \Tanthammar\TallForms\Radio::class,
+        'Range' => \Tanthammar\TallForms\Range::class,
+        'Search' => \Tanthammar\TallForms\Search::class,
+        'Select' => \Tanthammar\TallForms\Select::class,
+        'SpatieTags' => \Tanthammar\TallForms\SpatieTags::class,
+        'Textarea' => \Tanthammar\TallForms\Textarea::class,
+        'Trix' => \Tanthammar\TallForms\Trix::class,
+        'Tags' => \Tanthammar\TallForms\Tags::class,
+        'TagsSearch' => \Tanthammar\TallForms\TagsSearch::class,
+    ],
+
 
     // list with blade ui kit components that this package replaces
     // the prefix is 'tall',
-    // you cannot change the prefix but you can extend these components,
+    // you cannot change the prefix, but you can extend these components,
     // and replace the component classes here.
     'components' => [
-        'form' => Components\Form::class,
-        'label-field-wrapper' => Components\LabelFieldWrapper::class,
-        'field-root' => Components\FieldRoot::class,
-        'input' => Components\Input::class,
-        'input-array' => Components\InputArray::class,
-        'image-cropper' => Components\ImageCropper::class,
-        'range' => Components\Range::class,
-        'textarea' => Components\Textarea::class,
-        'checkbox' => Components\Checkbox::class,
-        'checkboxes' => Components\Checkboxes::class,
-        'radio' => Components\Radio::class,
-        'file-upload' => Components\FileUpload::class,
-        'select' => Components\Select::class,
-        'search' => Components\Search::class,
-        'trix' => Components\Trix::class,
-        'svg' => Components\Svg::class,
-    ]
+        'form' => \Tanthammar\TallForms\Components\Form::class,
+        'label-field-wrapper' => \Tanthammar\TallForms\Components\LabelFieldWrapper::class,
+        'field-root' => \Tanthammar\TallForms\Components\FieldRoot::class,
+        'input' => \Tanthammar\TallForms\Components\Input::class,
+        'input-array' => \Tanthammar\TallForms\Components\InputArray::class,
+        'image-cropper' => \Tanthammar\TallForms\Components\ImageCropper::class,
+        'range' => \Tanthammar\TallForms\Components\Range::class,
+        'textarea' => \Tanthammar\TallForms\Components\Textarea::class,
+        'checkbox' => \Tanthammar\TallForms\Components\Checkbox::class,
+        'checkboxes' => \Tanthammar\TallForms\Components\Checkboxes::class,
+        'radio' => \Tanthammar\TallForms\Components\Radio::class,
+        'file-upload' => \Tanthammar\TallForms\Components\FileUpload::class,
+        'select' => \Tanthammar\TallForms\Components\Select::class,
+        'multiselect' => \Tanthammar\TallForms\Components\MultiSelect::class,
+        'search' => \Tanthammar\TallForms\Components\Search::class,
+        'trix' => \Tanthammar\TallForms\Components\Trix::class,
+        'svg' => \Tanthammar\TallForms\Components\Svg::class,
+        'tags' => \Tanthammar\TallForms\Components\Tags::class,
+        'tags-search' => \Tanthammar\TallForms\Components\TagsSearch::class,
+    ],
 ];

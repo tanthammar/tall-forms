@@ -1,14 +1,25 @@
-<div {{ $attributes->merge(['class' => "flex {$field->class}"]) }}>
-    <input
-        type="radio"
-        value="{{ $value }}"
-        name="{{ $field->key }}"
-        id="{{ $id }}"
-        @foreach($options() as $key => $value) {{$key}}="{{$value}}" @endforeach
-    />
-    <div class="tf-radio-label-spacing">
-        <label for="{{ $id }}" class="tf-radio-label">
-            {{ $label }}
-        </label>
-    </div>
+<div x-data="{ radio: $wire.entangle('{{ $field->key }}'){{ $field->deferString }} }">
+    <fieldset class="{{ $field->wrapperClass }}" id="{{ $field->id }}" name="{{ $field->name }}">
+        @foreach($field->options as $value => $label)
+            <div class="{{ $field->class }}">
+                @php $id = "id" . md5($field->id.$value.$loop->index); @endphp
+                <input
+                    type="radio"
+                    id="{{ $id }}"
+                    name="{{ $field->name }}"
+                    value="{{ $value }}"
+                    wire:key="{{ $id }}"
+                    class="{{ $field->radioClass }}"
+                    x-model="radio"
+                    @if($field->disabled) disabled @endif
+                    {{ $attributes->except(['x-data', 'class', 'value', 'name', 'id', 'type', 'disabled'])->whereDoesntStartWith('x-model')->merge($attr) }}
+                />
+                <div class="{{ $field->spacing }}">
+                    <label for="{{ $id }}" class="{{ $field->radioLabelClass }}">
+                        {{ $label }}
+                    </label>
+                </div>
+            </div>
+        @endforeach
+    </fieldset>
 </div>

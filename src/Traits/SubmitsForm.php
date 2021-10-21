@@ -4,14 +4,12 @@
 namespace Tanthammar\TallForms\Traits;
 
 
-use Illuminate\Support\Arr;
-
 trait SubmitsForm
 {
 
-    public function submit()
+    protected function submit()
     {
-        $validated_data = data_get($this->validate($this->get_rules()), 'form_data', []);
+        $validated_data = data_get($this->validate(), 'form_data', []);
         $fields = $this->getFieldsFlat();
 
         //filter out custom-, and relationship-fields
@@ -21,6 +19,8 @@ trait SubmitsForm
                 $field_names[] = \Str::of($field->key)->remove('*.')->replaceFirst('form_data.', '')->__toString();
             }
         }
+
+        //remove any unwanted request data
         $model_fields_data = $this->arrayDotOnly($validated_data, $field_names);
 
         //make sure to create the model before attaching any relations
@@ -36,29 +36,19 @@ trait SubmitsForm
         }
     }
 
-    public function relations(array $relationship_data)
-    {
-        //
-    }
-
-    public function custom_fields(array $custom_data)
-    {
-        //
-    }
-
-    public function success($model_fields_data)
+    protected function success($model_fields_data)
     {
         // you have to add the methods to your component
         filled($this->model) && $this->model->exists ? $this->onUpdateModel($model_fields_data) : $this->onCreateModel($model_fields_data);
     }
 
-    public function onUpdateModel($validated_data)
+    protected function onUpdateModel($validated_data)
     {
         $this->model->update($validated_data);
     }
 
-    public function onCreateModel($validated_data)
+    protected function onCreateModel($validated_data)
     {
-        //
+        $this->model = $this->model::create($validated_data);
     }
 }

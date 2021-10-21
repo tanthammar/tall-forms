@@ -7,6 +7,7 @@ namespace Tanthammar\TallForms\Traits;
 trait HasIcons
 {
     public $icon;
+    public $iconClass;
     public $tallIcon;
     public $htmlIcon;
     public bool $hasIcon = false;
@@ -16,9 +17,10 @@ trait HasIcons
      * @param string $blade_ui_icon_path
      * @return $this
      */
-    public function icon(string $blade_ui_icon_path): self
+    public function icon(string $blade_ui_icon_path, ?string $class = null): self
     {
         $this->icon = $blade_ui_icon_path;
+        $this->iconClass = $class;
         $this->hasIcon = true;
         return $this;
     }

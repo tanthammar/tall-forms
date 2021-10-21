@@ -4,19 +4,35 @@
 namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
-use Illuminate\View\Component;
-use Tanthammar\TallForms\ImageCropper as Field;
+use Tanthammar\TallForms\Traits\BaseBladeField;
 
-class ImageCropper extends Component
+class ImageCropper extends BaseBladeField
 {
-    public Field $field;
-    public string $imageUrl;
 
-    public function __construct(Field $field, string $imageUrl = null)
+    public function __construct(
+        public array|object $field,
+        public ?string      $imageUrl = '',
+    )
     {
-        $this->field = $field;
-        $this->imageUrl = $imageUrl ?? "";
-        $this->thumbnail = $field->thumbnail ?? 'tf-cropper-thumb'; //default = h-full w-full
+        parent::__construct((array)$field);
+    }
+
+
+    public function defaults(): array
+    {
+        return [
+            'id' => 'imageCropper',
+            'width' => 150,
+            'height' => 150,
+            'shape' => 'square',
+            'dropZoneHelp' => __('tf::form.cropper.drop-zone-help'),
+            'fileInfo' => __('tf::form.cropper.file-info'),
+            'wrapperClass' => 'w-full',
+            'uploadButton' => __('tf::form.cropper.select-file'),
+            'thumbnail' => 'tf-cropper-thumb', //= h-full w-full
+            'includeScript' => true,
+            'disabled' => false,
+        ];
     }
 
     public function render(): View

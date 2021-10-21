@@ -4,11 +4,15 @@
 namespace Tanthammar\TallForms;
 
 
+use Tanthammar\TallForms\Traits\CanBeDisabled;
+
 class Trix extends BaseField
 {
+    use CanBeDisabled;
+
     public bool $includeScript = false;
     public bool $allowAttachments = false;
-    public string $attachmentKey;
+    public null|string $attachmentKey = null;
     public array $allowedMimeTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/tiff', 'image/tif', 'image/gif'];
     public int $maxAttachments = 1;
     public int $maxKB = 1024;
@@ -17,6 +21,9 @@ class Trix extends BaseField
     {
         $this->type = 'trix';
         $this->align_label_top = true;
+        $this->includeScript = config('tall-forms.include-external-scripts');
+        $this->dynamicComponent = false;
+        $this->deferEntangle();
         return $this;
     }
 
@@ -25,9 +32,9 @@ class Trix extends BaseField
      * Else, you must import them yourself
      * Only pushed once
      */
-    public function includeExternalScripts(): self
+    public function includeExternalScripts(bool $state = true): self
     {
-        $this->includeScript = true;
+        $this->includeScript = $state;
         return $this;
     }
 

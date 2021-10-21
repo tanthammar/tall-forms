@@ -1,11 +1,11 @@
-<div class="{{$field->class}}">
+<div {{ $attributes->only('x-data') }} class="{{$field->wrapperClass}}">
     @if($field->prefix || $field->hasIcon)
-        <span class="{{ $icon_span }} {{ $left_border }}">
+        <span class="{{ $field->icon_span }} {{ $field->left_border }}">
             @if($field->icon)
-                <span class="mx-1">@svg($field->icon, 'h-6 w-6')</span>
+                <span class="mx-1">@svg($field->icon, "h-6 w-6 $field->iconClass")</span>
             @endif
             @if($field->tallIcon)
-                <span class="mx-1"><x-tall-svg :path="$field->tallIcon" class="h-6 w-6" /></span>
+                <span class="mx-1"><x-tall-svg :path="$field->tallIcon" class="h-6 w-6 fill-current" /></span>
             @endif
             @if($field->htmlIcon)
                 <span class="mx-1">{!! $field->htmlIcon !!}</span>
@@ -17,22 +17,21 @@
     @endif
     <div class="relative w-full">
         <input
-            value="{{ old($field->key) }}"
-            @if($required) required @endif
-            @foreach($options() as $key => $value) {{$key}}="{{$value}}" @endforeach
-            {{ $attributes->merge(['class' => $errors->has($field->key) ? $error() : $class() ]) }}
+            @if($field->required) required @endif
+            @if($field->disabled) disabled @endif
+            {{ $attributes->except([...array_keys($attr), 'x-data', 'required', 'disabled'])->merge($attr)->merge(['class' => $errors->has($field->key) ? $field->errorClass : $field->class ]) }}
         />
         @error($field->key)
-            <x-tall-error-icon :right="in_array($field->input_type, ['date', 'datetime-local', 'time']) ? 'right-6' : 'right-0'"/>
+            <x-tall-error-icon :right="in_array($field->type, ['date', 'datetime-local', 'time']) ? 'right-6' : 'right-0'"/>
         @enderror
     </div>
     @if($field->suffix || $field->sfxHasIcon)
-        <span class="{{ $icon_span }} {{ $right_border }}">
+        <span class="{{ $field->icon_span }} {{ $field->right_border }}">
             @if($field->sfxIcon)
-                <span class="mx-1">@svg($field->sfxIcon, 'h-6 w-6')</span>
+                <span class="mx-1">@svg($field->sfxIcon, "h-6 w-6 $field->sfxIconClass")</span>
             @endif
             @if($field->sfxTallIcon)
-                <span class="mx-1"><x-tall-svg :path="$field->sfxTallIcon" class="h-6 w-6" /></span>
+                <span class="mx-1"><x-tall-svg :path="$field->sfxTallIcon" class="h-6 w-6 fill-current" /></span>
             @endif
             @if($field->sfxHtmlIcon)
                 <span class="mx-1">{!! $field->sfxHtmlIcon !!}</span>

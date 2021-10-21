@@ -2,11 +2,15 @@
 
 namespace Tanthammar\TallForms\LivewireComponents;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Spatie\Tags\Tag;
 
+/**
+ * @deprecated use TagsSearch or Tags instead
+ */
 class SpatieTags extends Component
 {
     public $model;
@@ -17,7 +21,7 @@ class SpatieTags extends Component
     public $errorClass;
     public $helpClass;
     public $color;
-    public $rules = ['search' => 'string|between:3,50']; //overriden in addFromSearch(), prevents Livewire from squeaking
+    protected $rules = ['search' => 'string|between:3,50']; //overriden in addFromSearch(), prevents Livewire from squeaking
     /**
      * @param array $field
      * @param null|string $tags
@@ -36,6 +40,15 @@ class SpatieTags extends Component
         $this->errorClass = 'tf-error';
         $this->helpClass = 'tf-help';
         $this->color = 'tf-tags-color';
+    }
+
+    //prevent tampering
+    /**
+     * @throws AuthorizationException
+     */
+    public function updatingField()
+    {
+        throw new AuthorizationException(__('tf::form.alerts.tampering'));
     }
 
     public function getExisting()
@@ -69,6 +82,7 @@ class SpatieTags extends Component
     public function syncTags()
     {
         $cleaned = collect(\Arr::sort($this->tags))->unique()->toArray();
+        //add 'tallFillField' listener to your component. The method exists in TallForms/Traits/Helpers.
         filled($this->model) && $this->model->exists
             ? $this->syncModelWithLocale($cleaned)
             : $this->emitUp('tallFillField', [
@@ -124,10 +138,9 @@ class SpatieTags extends Component
     public function addFromSearch()
     {
         $this->validateOnly(
-            'search',
-            ['search' => data_get($this->field, 'tagsRules', 'string|between:3,50')],
-            null,
-            ['search' => 'tag'],
+            field: 'search',
+            rules: ['search' => data_get($this->field, 'tagsRules', 'string|between:3,50')],
+            attributes: ['search' => 'tag'],
         );
         $this->addTag($this->search);
         //$this->search = ""; not needed called in syncTags() later

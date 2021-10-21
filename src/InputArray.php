@@ -3,14 +3,17 @@
 
 namespace Tanthammar\TallForms;
 
+use Tanthammar\TallForms\Traits\CanBeDisabled;
+
 /**
  * The Model attribute must be $cast to array
  * @package Tanthammar\TallForms
  */
 class InputArray extends BaseField
 {
+    use CanBeDisabled;
+
     public string $input_type = 'text';
-    public string $defer = ".defer";
     public string $placeholder = "";
     public int $maxItems = 0;
     public int $minItems = 0;
@@ -20,6 +23,8 @@ class InputArray extends BaseField
         $this->type = 'input-array';
         $this->align_label_top = true;
         $this->allowed_in_repeater = false;
+        $this->defaultErrorPosition = false;
+        $this->deferEntangle();
         return $this;
     }
 
@@ -56,11 +61,14 @@ class InputArray extends BaseField
 
     /**
      * Entangle the field on every keystroke
+     * @deprecated deprecated since version 8.0
+     * <br> replaced with deferEntangle(bool true/false) in BaseField
+     *
      * @return $this
      */
     public function noDefer(): self
     {
-        $this->defer = "";
+        $this->deferEntangle(false);
         return $this;
     }
 

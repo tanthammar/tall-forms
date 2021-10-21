@@ -1,3 +1,3 @@
-<div @foreach($attr as $key => $value) {{$key}}="{{$value}}" @endforeach>
+<div {{ $attributes->merge($attr) }}>
 {{ $slot }}
 </div>

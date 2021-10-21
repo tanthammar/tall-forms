@@ -10,23 +10,26 @@ trait HasAttributes
 {
     public array $attributes = [];
 
-    public string $wire; // default = wire:model.lazy, in config/tall-forms, set in BaseField __construct()
+    public null|string $wire = null; //BaseField construct
+//    public null|string $xmodel = null; //BaseField construct
+    public null|bool $defer = null; //BaseField construct
+    public null|string $deferString = null; //BaseField construct
 
-    public function getAttr($type)
+    public function getAttr($type): mixed
     {
         return data_get($this->attributes, $type, []);
     }
 
-    public function setAttr()
+    public function setAttr(): void
     {
         $this->attributes = config('tall-forms.field-attributes');
         data_set($this->attributes, 'input', []);
     }
 
-    protected function mergeClasses(string $key, array $custom)
+    protected function mergeClasses(string $key, array $custom): void
     {
         $merged = array_merge_recursive($this->attributes[$key], $custom);
-        if(Arr::has($merged, 'class')) {
+        if (Arr::has($merged, 'class')) {
             $merged['class'] = implode(" ", $merged['class']);
         }
         $this->attributes[$key] = $merged;
@@ -80,9 +83,43 @@ trait HasAttributes
         return $this;
     }
 
-    public function wire(string $wire_model_declaration): self
+    /**
+     * Example ->wire('debounce.500ms')
+     */
+    public function wire(string $on = 'wire:model'): self
     {
-        $this->wire = $wire_model_declaration;
+        $this->wire = str_contains($on, 'wire:model') ? $on : "wire:model.$on";
+        if (str_contains($on, 'defer')) $this->deferEntangle();
         return $this;
     }
+
+    /**
+     * Example ->xmodel('debounce.500ms')
+     */
+    /*
+    //TODO do we need xmodel() ?
+    - If it's going to be used, uncomment:
+    - add this to config: 'x-model' => 'x-model', //x-model.lazy, x-model.debounce etc., default field x-model attribute, override with ->xmodel()
+    - BaseField construct
+    - BaseField ->mergeBladeDefaults()
+    - HasAttributes $xmodel
+    - HasAttributes xmodel() (this method)
+
+    public function xmodel(string $on = 'x-model'): self
+    {
+        $this->xmodel = str_contains($on, 'x-model') ? $on : "x-model.$on";
+        if (str_contains($on, 'defer')) { //x-model.defer does not exist
+            $this->deferEntangle();
+            $this->xmodel = 'x-model';
+        }
+        return $this;
+    }*/
+
+    public function deferEntangle(bool $state = true): self
+    {
+        $this->defer = $state;
+        $this->deferString = $state ? '.defer' : null;
+        return $this;
+    }
+
 }

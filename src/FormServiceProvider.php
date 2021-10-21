@@ -2,6 +2,7 @@
 
 namespace Tanthammar\TallForms;
 
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\View\Component as IlluminateComponent;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -20,13 +21,15 @@ class FormServiceProvider extends ServiceProvider
             ]);
         }
 
+        $this->bootAliases();
+
         $this->publishes([__DIR__ . '/../config/tall-forms.php' => config_path('tall-forms.php')], 'tall-form-config');
         $this->publishes([__DIR__ . '/../resources/views' => resource_path('views/vendor/tall-forms')], 'tall-form-views');
         $this->publishes([__DIR__ . '/../resources/views/icons' => resource_path('views/vendor/tall-forms/icons')], 'tall-form-icons');
         $this->publishes([__DIR__ . '/../resources/css/tall-theme.css' => resource_path('css/tall-theme.css')], 'tall-form-theme-css');
-        $this->publishes([__DIR__ . '/../resources/css/tall-theme1x.css' => resource_path('css/tall-theme.css')], 'tall-form-theme-tw1x-css');
-        $this->publishes([__DIR__ . '/../resources/css/tall-theme.css' => resource_path('sass/tall-theme.scss')], 'tall-form-theme-sass');
-        $this->publishes([__DIR__ . '/../resources/css/tall-theme1x.css' => resource_path('sass/tall-theme.scss')], 'tall-form-theme-tw1x-sass');
+        $this->publishes([__DIR__ . '/../resources/lang' => resource_path('lang/vendor/tall-forms'),], 'tall-form-lang');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'tf');
+
 
         \Livewire::component('tall-spatie-tags', \Tanthammar\TallForms\LivewireComponents\SpatieTags::class);
 
@@ -48,6 +51,14 @@ class FormServiceProvider extends ServiceProvider
         Blade::component('tall-forms::components.error-icon', 'tall-error-icon');
         Blade::component('tall-forms::components.notification', 'tall-notification');
         Blade::component('tall-forms::components.div-attr', 'tall-attr');
+    }
+
+    protected function bootAliases()
+    {
+        $loader = AliasLoader::getInstance();
+        foreach (config('tall-forms.aliases', []) as $alias => $component) {
+            $loader->alias($alias, $component);
+        }
     }
 
     private function prefixComponents(): void

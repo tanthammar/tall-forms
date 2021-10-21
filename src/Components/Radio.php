@@ -4,46 +4,31 @@
 namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
-use Illuminate\View\Component;
-use Tanthammar\TallForms\Radio as Field;
+use Tanthammar\TallForms\Traits\BaseBladeField;
 
-class Radio extends Component
+class Radio extends BaseBladeField
 {
-    public Field $field;
-    public string $label;
-    public $value;
-    public $align_label_top = true;
-    public string $id;
-
-    /**
-     * Radio constructor.
-     * @param Field $field
-     * @param int|string $value
-     * @param string $label
-     */
-    public function __construct(Field $field, $value, string $label)
+    public function __construct(
+        public array|object $field = [],
+        public array        $attr = [],
+    )
     {
-        $this->field = $field;
-        $this->value = $value;
-        $this->label = $label;
-        $this->id = \Str::slug($field->key.$value);
+        parent::__construct((array)$field, $attr);
     }
 
-    public function options(): array
+    public function defaults(): array
     {
-        $custom = $this->field->getAttr('input');
-        $default = [
-            $this->field->wire => $this->field->key,
-            'class' => $this->class()
+        return [
+            'id' => 'radio', //unique, concats id.value.loop-index on each radio input,
+            'radioClass' => "form-radio tf-radio",
+            'radioLabelClass' => "tf-radio-label",
+            'spacing' => "tf-radio-label-spacing",
+            'class' => 'flex', //input & label wrapper
+            'wrapperClass' => 'tf-radio-fieldset', //fieldset
+            'options' => [],
+            'disabled' => false,
         ];
-        return array_merge($default, $custom);
     }
-
-    public function class(): string
-    {
-        return "form-radio tf-radio ";
-    }
-
 
     public function render(): View
     {

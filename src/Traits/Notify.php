@@ -2,82 +2,95 @@
 
 namespace Tanthammar\TallForms\Traits;
 
+use Illuminate\Validation\Rule;
+
 trait Notify
 {
     /*
     You can use this trait in both php or in frontend js
-    It either sets a LiveWire property that calls the notify method or
-    you can call the notify method directly.
-    example use in js to update the property
-    @this.set('alert', {
-        type: 'danger',
-        message: Locale == 'sv' //locale is shared to window
-        ? "Bilden du valt överskrider max tillåten dokument storlek. Se 'Max file size' ovanför bilden."
-        : "The image you uploaded exceeds max allowed file size, stated above the picture"
-    });
     exeample use in js to call the notify function
-    @this.call('notify', 'danger', 'Oh No!');
+    $wire.call('notify', 'danger', 'Oh No!');
     */
-    public array $alert = [];
-    private bool $_withSession = false;
 
+    protected bool $withSession = false;
+
+    //TODO find out why this is executed twice, until then remove it
+    /**
+     * example use in Alpine js to update the property
+        $wire.set('alert', {
+        preset: 'danger',
+        message: Locale == 'sv' //if locale is shared to window
+            ? "Bilden du valt överskrider max tillåten dokument storlek. Se 'Max file size' ovanför bilden."
+            : "The image you uploaded exceeds max allowed file size, stated above the picture"
+        });
+    public array $alert = [];
     public function updatedAlert()
     {
+        $this->validateOnly('alert', [
+            'alert.*' => Rule::in(['preset', 'message', 'bg', 'icon', 'iconcolor']),
+            'alert.preset' => ['nullable', Rule::in(['success', 'green', 'saved', 'check', 'warning', 'orange', 'happy', 'positive', 'sad', 'negative', 'danger', 'red', 'info', 'blue'])],
+            'alert.message' => 'nullable|alpha_dash|between:2,100',
+            'alert.bg' => 'nullable|alpha_dash|between:2,30',
+            'alert.icon' => ['nullable', Rule::in(['check', 'exclamation', 'happy', 'sad', 'warning', 'info'])],
+            'alert.iconcolor' => 'nullable|alpha_dash|between:2,30',
+        ]);
+
         $this->notify(
-            array_get($this->alert, 'type', 'saved'),
-            array_get($this->alert, 'message', trans(config('tall-forms.message-updated-success')))
+            preset: data_get($this->alert, 'preset', 'saved'),
+            message: data_get($this->alert, 'message', trans('tf::form.alerts.updated-success')),
+            bg: data_get($this->alert, 'bg'),
+            icon: data_get($this->alert, 'icon'),
+            iconcolor: data_get($this->alert, 'iconcolor')
         );
     }
+*/
 
-    public function withSession()
-	{
-		$this->_withSession = true;
-
-		return $this;
-	}
-
-    public function notify($type = "saved", $message = "")
+    protected function withSession(): static
     {
-        $bg = null;
-        switch ($type) {
-            case 'saved':
-                $bg = 'tf-bg-success';
-                $message = trans(config('tall-forms.message-updated-success'));
-                $this->emitSelf('notify-saved');
-                break;
+        $this->withSession = true;
+        return $this;
+    }
 
-            case 'success':
-                $bg = 'tf-bg-success';
-                break;
+    /**
+     * Presets: 'info', 'success, 'warning', 'danger', 'happy', 'sad'
+     */
+    public function notify(
+        null|string $preset = "saved",
+        null|string $message = "",
+        null|string $bg = 'tf-notify-bg-default',
+        null|string $icon = "info",
+        null|string $iconcolor = "text-white")
+    {
 
-            case 'danger':
-                $bg = 'tf-bg-danger';
-                break;
+        [$bg, $icon, $iconcolor] = match ($preset) {
+            'success', 'green', 'saved', 'check' => ['tf-bg-success', 'check', $iconcolor],
+            'warning', 'orange',                 => ['tf-bg-warning', 'exclamation', $iconcolor],
+            'happy', 'positive'                  => ['bg-white', 'happy', 'text-green-600'],
+            'sad', 'negative'                    => ['bg-white', 'sad', 'text-red-600'],
+            'danger', 'red'                      => ['tf-bg-danger', 'warning', $iconcolor],
+            'info', 'blue'                       => ['tf-bg-info', 'info', $iconcolor],
+            default => [$bg, $icon, $iconcolor],
+        };
 
-            case 'info':
-                $bg = 'tf-bg-info';
-                break;
-
-            case 'warning':
-                $bg = 'tf-bg-warning';
-                break;
-
-            default:
-                $bg = 'tf-notify-bg-default';
-                break;
+        if ($preset == 'saved') {
+            $message = $message ?: trans('tf::form.alerts.updated-success');
+            $this->emitSelf('notify-saved');//x-on:notify-saved.window, flash trans('tf::form.saved') on the form submit button, buttons.root.blade.php
         }
 
         $payload = [
-			'bg'      => $bg,
-			'message' => $message,
-		];
+            'bg' => $bg,
+            'message' => $message,
+            'icon' => $icon,
+            'iconcolor' => $iconcolor,
+        ];
 
-		if ($this->_withSession) {
-			session()->flash('notify', $payload);
+        if ($this->withSession) {
+            session()->flash('notify', $payload);
+            //reset withSession
+            $this->withSession = false;
+            return;
+        }
 
-			return;
-		}
-
-		$this->dispatchBrowserEvent('notify', $payload);
+        $this->dispatchBrowserEvent('notify', $payload);
     }
 }

@@ -3,19 +3,44 @@
 
 namespace Tanthammar\TallForms\Traits;
 
-
 trait ValidatesFields
 {
+    protected int $rulesIteration = 0;
+    protected array $cachedRules = [];
 
-    /**
-     *
-     * @param array|string|null $fields
-     * @param string $prefix
-     * @return array
-     */
-    protected function get_rules($fields = null, string $prefix = 'form_data'): array
+    public function hydrateValidatesFields()
     {
-        $fields = is_null($fields) || !is_array($fields) ? $this->fields() : $fields;
+        //TODO remove when this is fixed: https://github.com/livewire/livewire/discussions/4045
+        //avoid rules() loop to be executed more than once on each request.
+        //see fieldRules() below
+        $this->rulesIteration = 1;
+    }
+
+    //Used by Livewire default getRules():array method where rules() takes precedence before $rules
+    protected function rules(): array
+    {
+        return $this->fieldRules();
+    }
+
+    //Used by Livewire default getValidationAttributes():array method where validationAttributes() takes precedence before $validationAttributes
+    protected function validationAttributes(): array
+    {
+        return $this->fieldValidationAttributes();
+    }
+
+    protected function fieldRules(): array
+    {
+        if ($this->rulesIteration < 2) {
+            $this->rulesIteration += 1;
+            $this->cachedRules = $this->recursiveFieldRules();
+        }
+        return $this->cachedRules;
+    }
+
+
+    protected function recursiveFieldRules($fields = null, string $prefix = 'form_data'): array
+    {
+        $fields = is_null($fields) || !is_array($fields) ? $this->computedFields : $fields;
         $rules = [];
 
         foreach ($fields as $field) {
@@ -25,7 +50,8 @@ trait ValidatesFields
                         $ruleName = $field->type === 'array'
                             ? "$prefix.$field->name.*"
                             : ($field->ignored ? $prefix : "$prefix.$field->name");
-                        $rules = array_merge($rules, $this->get_rules($field->fields, $ruleName));
+                        //recursive
+                        $rules = array_merge($rules, $this->recursiveFieldRules($field->fields, $ruleName));
                     }
                     $rules["$prefix.$field->name"] = $field->rules ?? 'nullable';
 
@@ -33,7 +59,9 @@ trait ValidatesFields
                     if ($field->type === 'file') {
                         $ruleName = $field->multiple ? "$field->name.*" : $field->name;
                     }
-                    elseif (in_array($field->type, ['multiselect', 'input-array'])) {
+                    //TODO add $rulesAppliedToEach = true to these field types
+                    //These field types applies rules to each item, DON'T add checkboxes or multiselect here. They use Rule::in([...]) validation.
+                    elseif (in_array($field->type, ['input-array', 'tags', 'tags-search'])) {
                         $ruleName = "$prefix.$field->name.*";
                     } else {
                         $ruleName = "$prefix.$field->name";
@@ -43,13 +71,14 @@ trait ValidatesFields
                 }
             }
         }
+
         return $rules;
     }
 
-    protected function validationAttributes(): array
+    protected function fieldValidationAttributes(): array
     {
         $attributes = [];
-        if ($this->labelsAsAttributes) {
+        if ($this->form->labelsAsAttributes) {
             foreach ($this->getFieldsFlat() as $field) {
                 if ($field != null && !$field->ignored && $field->labelAsAttribute) {
                     if (in_array($field->type, ['array', 'keyval'])) {
@@ -57,10 +86,12 @@ trait ValidatesFields
                             $key = $field->type === 'array'
                                 ? "$field->key.*.$array_field->name"
                                 : "$field->key.$array_field->name";
-                            $attributes[$key] = $array_field->label;
+                            $attributes[$key] = $array_field->validationAttr ?? $array_field->label;
                         }
+                    } elseif (in_array($field->type, ['input-array', 'tags', 'tags-search'])) {
+                        $attributes[$field->key.'.*'] = $field->validationAttr ?? $field->label;
                     } else {
-                        $attributes[$field->key] = $field->label;
+                        $attributes[$field->key] = $field->validationAttr ?? $field->label;
                     }
                 }
             }
@@ -68,21 +99,32 @@ trait ValidatesFields
         return $attributes;
     }
 
+
     public function updated($field, $value): void
     {
+        //updatedFoo
         $function = $this->parseFunctionNameFrom($field); //studly field->key minus form_data
         $fieldIndexKey = $this->getKeyIndexFrom($field); //first found index integer
         if (method_exists($this, $function)) $this->$function($value, $fieldIndexKey);
 
-        if (filled($fieldCollection = $this->collectField($field)) && $fieldCollection->get('realtimeValidationOn')) {
+        //updatedFooValidate
+        $function = $function . 'Validate';
+        if (method_exists($this, $function)) {
+            $this->$function($value, $fieldIndexKey);
+            return;
+        }
+
+        //realtime validation
+        $fieldCollection = $this->collectField($field);
+        if (filled($fieldCollection)) {
             $fieldRule = $fieldCollection->get('rules') ?? 'nullable';
             $fieldType = $fieldCollection->get('type');
-            if (in_array($fieldType, ['multiselect', 'input-array'])) $field = $field . '.*';
+            if (in_array($fieldType, ['input-array', 'tags', 'tags-search'])) $field = $field . '.*';
             if ($fieldType == 'file') {
-                // livewire native file upload
+                // requires trait UploadsFiles
                 $this->customValidateFilesIn($field, $fieldRule);
             } else {
-                $this->validateOnly($field, $this->get_rules());
+                $this->validateOnly(field: $field);
             }
         }
     }

@@ -7,15 +7,16 @@ namespace Tanthammar\TallForms\Traits;
 
 trait HasLabels
 {
-    public $labelW;
-    public $inlineLabelAlignment;
-    public $labelSuffix;
-    public $afterLabel;
-    public $show_label = true;
-    public $align_label_top = false;
-    public $labelAsAttribute = true;
-    public $labelWrapperClass;
-    public $labelClass = 'tf-label';
+    public null|string $label = null;
+    public null|string $labelW = null;
+    public null|string $inlineLabelAlignment = null;
+    public null|string $labelSuffix = null;
+    public null|string $afterLabel = null;
+    public bool $show_label = true;
+    public bool $align_label_top = false;
+    public bool $labelAsAttribute = true;
+    public null|string $labelWrapperClass = null;
+    public null|string $labelClass = 'tf-label';
 
     /**
      * Used only in inline form

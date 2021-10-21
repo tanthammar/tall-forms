@@ -4,40 +4,48 @@
 namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
-use Illuminate\View\Component;
-use Tanthammar\TallForms\Checkbox as Field;
+use Tanthammar\TallForms\Traits\BaseBladeField;
 
-class Checkbox extends Component
+class Checkbox extends BaseBladeField
 {
-    public Field $field;
     public string $label;
 
-    public function __construct(Field $field)
+    public function __construct(
+        public array|object $field = [],
+        public array       $attr = [],
+    )
     {
-        $this->field = $field;
-        $this->label = $field->placeholder ?? $field->label;
+        parent::__construct((array)$field, $attr);
+        $this->attr = array_merge($this->inputAttributes(), $attr);
+        $this->label = $this->field->placeholder ?? $this->field->label ?? '';
     }
 
-    public function options(): array
+    public function defaults(): array
     {
-        $custom = $this->field->getAttr('input');
-        $default = [
-            $this->field->wire => $this->field->key,
-            'name' => $this->field->key,
-            'id' => \Str::slug($this->field->key),
-            'class' => $this->class()
+        return [
+            'id' => 'checkbox',
+            'class' => 'form-checkbox tf-checkbox',
+            'wrapperClass' => 'flex',
+            'checkboxLabelClass' => 'tf-checkbox-label',
+            'labelWrapperClass' => 'tf-checkbox-label-spacing',
+            'disabled' => false,
         ];
-        return array_merge($default, $custom);
     }
 
-    public function class(): string
+    public function inputAttributes(): array
     {
-        return "form-checkbox tf-checkbox";
+        return [
+            $this->field->wire => $this->field->key,
+            'name' => $this->field->name,
+            'id' => $this->field->id,
+            'value' => old($this->field->name),
+            'wire:key' => $this->field->id,
+        ];
     }
-
 
     public function render(): View
     {
         return view('tall-forms::components.checkbox');
     }
+
 }

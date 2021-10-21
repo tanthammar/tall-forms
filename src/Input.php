@@ -4,24 +4,25 @@
 namespace Tanthammar\TallForms;
 
 
+use Tanthammar\TallForms\Traits\CanBeDisabled;
 use Tanthammar\TallForms\Traits\HasIcons;
 
 class Input extends BaseField
 {
-    use HasIcons;
+    use HasIcons, CanBeDisabled;
 
     public $input_type = 'text';
     public $autocomplete;
     public $placeholder;
     public $prefix;
-    public $step = 1;
-    public $min = 0;
-    public $max = 100;
+    public $step;
+    public $min;
+    public $max;
     public $required = false;
-    public $class = 'tf-input-wrapper';
 
     public $suffix;
     public $sfxIcon;
+    public $sfxIconClass;
     public $sfxTallIcon;
     public $sfxHtmlIcon;
     public bool $sfxHasIcon = false;
@@ -118,9 +119,10 @@ class Input extends BaseField
      * @param string $blade_ui_icon_path
      * @return $this
      */
-    public function suffixIcon(string $blade_ui_icon_path): self
+    public function suffixIcon(string $blade_ui_icon_path, ?string $class = null): self
     {
         $this->sfxIcon = $blade_ui_icon_path;
+        $this->sfxIconClass = $class;
         $this->sfxHasIcon = true;
         return $this;
     }

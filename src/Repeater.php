@@ -23,6 +23,7 @@ class Repeater extends BaseField
         $this->allowed_in_keyval = false;
         $this->inline = false;
         $this->wire = '';
+        $this->defaultErrorPosition = false;
         return $this;
     }
 
@@ -42,7 +43,7 @@ class Repeater extends BaseField
     public function confirmDelete($message = ''): self
     {
         $this->confirm_delete = true;
-        $this->confirm_msg = filled($message) ? $message : config('tall-forms.are-u-sure');
+        $this->confirm_msg = filled($message) ? $message : trans('tf::form.alerts.are-u-sure');
         return $this;
     }
 }

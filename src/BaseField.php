@@ -8,42 +8,39 @@ use Tanthammar\TallForms\Traits\HasAttributes;
 use Tanthammar\TallForms\Traits\HasDesign;
 use Tanthammar\TallForms\Traits\HasLabels;
 use Tanthammar\TallForms\Traits\HasSharedProperties;
+use Tanthammar\TallForms\Traits\HasSlots;
 use Tanthammar\TallForms\Traits\HasViews;
 
 abstract class BaseField
 {
-    use HasLabels, HasAttributes, HasSharedProperties, HasDesign, HasViews;
+    use HasLabels, HasAttributes, HasSharedProperties, HasDesign, HasViews, HasSlots;
 
-    public $label;
-    public $name;
-    public $key;
-    public $type = 'input';
-    public $rules = 'nullable';
+    public string $id = "";
+    public string $name = "";
+    public string $key = "";
+    public string $type = 'input';
+    public mixed $rules = 'nullable';
 
-    public $default;
-    public $help;
+    public mixed $default = null;
 
-    public $before;
-    public $after;
-    public $above;
-    public $below;
+    public bool $realtimeValidationOn = true;
 
-    public $errorMsg;
-
-    public $realtimeValidationOn = true;
-
-    public $allowed_in_repeater = true;
-    public $allowed_in_keyval = true;
+    public bool $allowed_in_repeater = true;
+    public bool $allowed_in_keyval = true;
 
     //Tabs, Groups, Panels and similar design elements that has a field array but should be ignored in form_data and validation
     public bool $ignored = false;
+
+    public bool $dynamicComponent = true;
 
     public function __construct($label, $key)
     {
         $this->label = $label;
         $this->name = $key ?? Str::snake(Str::lower($label));
-        $this->key = 'form_data.' . $this->name;
-        $this->wire = config('tall-forms.field-attributes.wire');
+        $this->key = 'form_data.' . ($key ?? $this->name);
+        $this->deferEntangle(config('tall-forms.field-attributes.defer-entangle', true));
+        $this->wire(config('tall-forms.field-attributes.wire', 'wire:model.lazy'));
+        //$this->xmodel(config('tall-forms.field-attributes.x-model', 'x-model')); //future use maybe
         $this->setAttr();
         $this->overrides();
     }
@@ -60,9 +57,25 @@ abstract class BaseField
     }
 
 
-    public static function make(string $label, string $key = null)
+    public static function make(string $label, string $key = null): static
     {
         return new static($label, $key);
+    }
+
+    /**
+     * Make a headless field to use in custom forms.
+     * <br>ONLY TO BE USED IN BLADE VIEWS
+     * <br>Strips of 'form_data' in $field->key.
+     * <br>Pass the Livewire instance id to get a unique input id.
+     * <br>$wireId = $_instance->id in blade
+     */
+    public static function blade(string $label, string $key = null, string $wireId = '', string $name = '', string $id = ''): static
+    {
+        $field = new static($label, $key);
+        $field->id = filled($id) ? $id : 'id' . md5($wireId . $field->key);
+        $field->key = Str::replaceFirst('form_data.', '', $field->key);
+        $field->name = filled($name) ? $name : $field->name;
+        return $field;
     }
 
     /**
@@ -70,34 +83,15 @@ abstract class BaseField
      * @param array|string $rules
      * @return $this
      */
-    public function rules($rules): self
+    public function rules(mixed $rules): self
     {
         $this->rules = $rules;
         return $this;
     }
 
-    public function default($default): self
+    public function default(mixed $default): self
     {
         $this->default = $default;
-        return $this;
-    }
-
-
-    public function help(string $help): self
-    {
-        $this->help = $help;
-        return $this;
-    }
-
-
-    /**
-     * Add a custom error message displayed on field validation error
-     * @param $string
-     * @return $this
-     */
-    public function errorMsg(string $string): self
-    {
-        $this->errorMsg = $string;
         return $this;
     }
 
@@ -106,42 +100,52 @@ abstract class BaseField
     {
         $array = array();
         foreach ($this as $key => $value) {
-            $array[$key] = is_array($value) ? (array) $value : $value;
+            $array[$key] = is_array($value) ? (array)$value : $value;
         }
         return $array;
     }
 
-    public function before(string $text): self
-    {
-        $this->before = $text;
-        return $this;
-    }
-
-    public function after(string $text): self
-    {
-        $this->after = $text;
-        return $this;
-    }
-
-    public function above(string $text): self
-    {
-        $this->above = $text;
-        return $this;
-    }
-
-    public function below(string $text): self
-    {
-        $this->below = $text;
-        return $this;
-    }
-
     /**
-     * Consider using ->wire('wire:model.defer') instead
+     * Consider ->wire('defer') instead
      * @return $this
      */
-    public function realtimeValidationOff()
+    public function realtimeValidationOff(): self
     {
         $this->realtimeValidationOn = false;
         return $this;
     }
+
+    //TODO remove if we drop xmodel()
+/*    public function makeHtmlId(string $wireInstanceID): string
+    {
+        return 'id' . md5($wireInstanceID . $this->key);
+    }*/
+
+    public function setHtmlId(string $wireInstanceID): self
+    {
+        //applied in field-loop.php or Field::blade
+        //$_instance->id
+        $this->id = 'id' . md5($wireInstanceID . $this->key);
+        return $this;
+    }
+
+    //Todo remove if we drop xmodel()
+/*    public function mergeBladeDefaults(string $wireInstanceID, array $custom = []): array
+    {
+        //This array merges as $custom in BaseBladeField->setDefaults(...)
+        return array_merge([
+            'id' => $this->makeHtmlId($wireInstanceID),
+            'name' => $this->name,
+            'key' => $this->key,
+            'defer' => $this->defer,
+            'deferString' => $this->deferString,
+            'wire' => $this->wire,
+            //'xmodel' => $this->xmodel,
+            'class' => $this->class,
+            'appendClass' => $this->appendClass,
+            'errorClass' => $this->errorClass,
+            'appendErrorClass' => $this->appendErrorClass,
+            'wrapperClass' => $this->wrapperClass,
+        ], $custom);
+    }*/
 }

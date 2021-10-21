@@ -4,53 +4,46 @@
 namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
-use Illuminate\View\Component;
-use Tanthammar\TallForms\FileUpload as Field;
-use Tanthammar\TallForms\Traits\Helpers;
+use Tanthammar\TallForms\Traits\BaseBladeField;
 
-class FileUpload extends Component
+class FileUpload extends BaseBladeField
 {
-    use Helpers;
-
-    public Field $field;
-    public string $uploadFileError;
-    public bool $showFileUploadError;
-    public ?string $showFileUploadErrorFor;
-    public $fieldValue;
-
-    public function __construct(Field $field,
-                                bool $showFileUploadError,
-                                ?string $showFileUploadErrorFor,
-                                $fieldValue = null)
+    public function __construct(
+        public array|object $field,
+        public mixed        $fieldValue = null,
+        public ?bool        $showFileUploadError = false,
+        public ?string      $showFileUploadErrorFor = null,
+        public ?string      $uploadFileError = null)
     {
-        $this->field = $field;
-        $this->uploadFileError = data_get($field, 'errorMsg') ?? (string) trans(config('tall-forms.upload-file-error'));
-        $this->showFileUploadError = $showFileUploadError;
-        $this->showFileUploadErrorFor = $showFileUploadErrorFor;
-        $this->fieldValue = $fieldValue;
+        parent::__construct((array)$field);
+        $this->uploadFileError = data_get($field, 'errorMsg', $this->field->uploadFileError);
+        $this->showFileUploadErrorFor = $this->showFileUploadErrorFor ?: $this->field->key;
     }
 
-    public function class(): string
+    public function defaults(): array
     {
-        return "form-input tf-file-upload";
-    }
-
-    public function inputWrapper(): string
-    {
-        $class = "tf-file-upload-input-wrapper ";
-        $class .= $this->field->class;
-        return Helpers::unique_words($class);
-    }
-
-    public function inputWrapperError(): string
-    {
-        return $this->inputWrapper() . " tf-field-error";
+        return [
+            'id' => 'fileUpload',
+            'multiple' => false,
+            'class' => 'tf-file-upload-input-wrapper', //class and errorClass are applied to the field wrapper, not the input!
+            'inputClass' => "form-input tf-file-upload", //applied to input
+            'wrapperClass' => 'w-full my-1',
+            'confirm_delete' => true,
+            'confirm_msg' => __('tf::form.alerts.are-u-sure'),
+            'accept' => 'image/*',
+            'uploadFileError' => __('tf::form.file-upload.upload-file-error'),
+            'tall_svg_upload' => config('tall-forms.file-upload'),
+            'tall_svg_file' => config('tall-forms.file-icon'),
+            'tall_svg_trash' => config('tall-forms.trash-icon'),
+            'disabled' => false,
+        ];
     }
 
     public function render(): View
     {
         return view('tall-forms::components.file-upload');
     }
+
     public function fileIcon($mime_type)
     {
         $icons = [

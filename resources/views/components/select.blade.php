@@ -1,9 +1,9 @@
-<select @foreach($options() as $key => $value) {{$key}}="{{$value}}" @endforeach
-{{ $attributes->merge(['class' => $errors->has($field->key) ? $error() : $class() ]) }}
->
+<select
+    @if($field->disabled) disabled @endif
+    {{ $attributes->except([...array_keys($attr), 'disabled'])->merge($attr)->merge(['class' => $errors->has($field->key) ? $field->errorClass : $field->class ]) }}>
 @if($field->placeholder) <option value="">{{ $field->placeholder }}</option> @endif
 @forelse($field->options as $value => $label)
-<option wire:key="{{ md5($field->key.$value) }}" value="{{ $value }}">{{ $label }}</option>
+<option wire:key="id{{ md5($field->id.$field->key.$value) }}" value="{{ $value }}">{{ $label }}</option>
 @empty
 <option value="" disabled>...</option>
 @endforelse

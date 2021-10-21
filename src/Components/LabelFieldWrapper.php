@@ -8,24 +8,20 @@ use Illuminate\View\Component;
 
 class LabelFieldWrapper extends Component
 {
-    public $field;
-    public string $inlineLabelAlignment;
-    public string $labelW;
-    public string $fieldW;
 
     public function __construct(
-        $field,
-        bool $componentInline,
-        string $inlineLabelAlignment,
-        string $labelW,
-        string $fieldW)
+        public object $field,
+        public bool $inline = true,
+        public string $labelW = 'tf-label-width',
+        public string $fieldW = 'tf-field-width',
+        public string $inlineLabelAlignment = 'tf-inline-label-alignment',
+        public string $stackedLabelAlignment = 'tf-stacked-label-alignment',
+    )
     {
-        $this->field = $field;
-        $is_inline = $field->inline ?? $componentInline;
+        $is_inline = $field->inline ?? $inline;
         $field->inline = $field->inline === false ? false : $is_inline;
-        $this->inlineLabelAlignment = $inlineLabelAlignment;
-        $this->labelW = $field->labelW ?? $labelW;
-        $this->fieldW = $field->fieldW ?? $fieldW;
+        $this->labelW = $field->labelW ?: $labelW;
+        $this->fieldW = $field->fieldW ?: $fieldW;
     }
 
     public function class(): string
@@ -48,8 +44,8 @@ class LabelFieldWrapper extends Component
     public function labelWidth(): string
     {
         return $this->field->inline
-            ? $this->labelW . ' ' . ($field->inlineLabelAlignment ?? $this->inlineLabelAlignment)
-            : 'tf-stacked-label-alignment';
+            ? $this->labelW . ' ' . ($this->field->inlineLabelAlignment ?: $this->inlineLabelAlignment)
+            : $this->stackedLabelAlignment;
     }
 
     public function render(): View

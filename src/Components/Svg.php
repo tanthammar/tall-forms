@@ -14,7 +14,7 @@ class Svg extends Component
     public function __construct(string $path, ?string $class = null)
     {
         $this->path = $path;
-        $this->class = 'svg-icon '.$class;
+        $this->class = 'svg-icon ' . $class;
     }
 
     public function render(): View

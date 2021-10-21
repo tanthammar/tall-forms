@@ -4,26 +4,26 @@
 namespace Tanthammar\TallForms;
 
 
+use Tanthammar\TallForms\Traits\CanBeDisabled;
 
 class FileUpload extends BaseField
 {
+    use CanBeDisabled;
 
-    public $multiple = false;
-    public $livewireComponent;
-    public $accept = "";
+    public bool $multiple = false;
+    public ?string $livewireComponent = null;
+    public string $accept = "";
+    public bool $confirm_delete = true;
+    public ?string $confirm_msg = null; //defaults in blade class
+
     public $maxBytes = null;
     public $sizeLimitAlert;
-
-    //TODO Next major release, see confirmDelete() below
-    /*
-    public $confirm_delete = false;
-    public $confirm_msg = '';
-    */
 
     protected function overrides(): self
     {
         $this->type = 'file';
         $this->is_custom = true;
+        $this->dynamicComponent = false;
         return $this;
     }
 
@@ -54,16 +54,13 @@ class FileUpload extends BaseField
         return $this;
     }
 
-    //TODO Decide default setting in next major release, see blade view resources/views/includes/file-loop.blade.php
-    /*
-     * Breaking change, until next release default behaviour is to confirm deletion.
-     * This MIGHT change to align with default setting in Repeater.
-    public function confirmDelete($message = ''): self
+
+    public function confirmDelete(null|string $message = null, bool $state = true): self
     {
-        $this->confirm_delete = true;
-        $this->confirm_msg = filled($message) ? $message : config('tall-forms.are-u-sure');
+        $this->confirm_delete = $state;
+        if ($message) $this->confirm_msg = $message;
         return $this;
     }
-    */
+
 }
 

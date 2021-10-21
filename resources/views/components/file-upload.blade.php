@@ -1,33 +1,35 @@
-<div class="w-full my-1">
+<div class="{{ $field->wrapperClass }}" x-data="{ isUploading: false }">
     @if(blank($fieldValue) || $errors->has($field->multiple ? $field->name.'.*' : $field->name))
         {{--only show the file input if the field is empty or there are validation errors, to force the user to upload new files or delete existing. --}}
-        <div x-data="{ isUploading: false }"
-             x-on:livewire-upload-start="isUploading = true; $wire.clearFileUploadError('{{ $field->multiple ? $field->name.'.*': $field->name }}');"
+        <div wire:key="file-upload-blank{{md5($field->name)}}"
+             x-on:livewire-upload-start="isUploading = true && $wire.clearFileUploadError('{{ $field->multiple ? $field->name.'.*': $field->name }}')"
              x-on:livewire-upload-finish="isUploading = false"
              x-on:livewire-upload-error="isUploading = false"
-             class="{{ $showFileUploadError || $errors->has($field->multiple ? $field->name.'.*': $field->name) ? $inputWrapperError() : $inputWrapper() }}">
+             class="{{ $showFileUploadError || $errors->has($field->multiple ? $field->name.'.*': $field->name) ? $field->errorClass : $field->class }}">
             <div class="tf-file-upload-spinner-wrapper">
                 {{-- <div x-cloak x-show="isUploading">--}}
                 <div wire:loading wire:target="{{ $field->name }}">
                     <x-tall-spinner/>
                 </div>
                 <div x-show="!isUploading">
-                    <x-tall-svg :path="config('tall-forms.file-upload')" class="tf-file-upload-icon" />
+                    <x-tall-svg :path="$field->tall_svg_upload" class="tf-file-upload-icon fill-current" />
                 </div>
             </div>
             {{--intentionally removed input id if multiple forms, with the same field name --}}
             <input
                 wire:model="{{ $field->name }}"
+                id="{{ $field->id }}"
                 name="{{ $field->name }}"
                 type="file"
+                @if($field->disabled) disabled @endif
                 @if($showFileUploadError && $showFileUploadErrorFor == $field->name) :value="null" @endif
                 {{ $field->multiple ? 'multiple' : '' }}
                 accept="{{$field->accept}}"
-                class="{{ $class() }}"/>
+                class="{{ $field->inputClass }}"/>
         </div>
     @endif
     @if(filled($fieldValue))
-        <ul class="tf-file-upload-ul">
+        <ul class="tf-file-upload-ul" wire:key="file-upload-filled{{md5($field->name)}}">
             @if($field->multiple)
                 @foreach($fieldValue as $file)
                     @if(filled($file)) @include('tall-forms::includes.file-loop') @endif
@@ -48,3 +50,4 @@
     {{--show components general validation error --}}
     @if($showFileUploadError && $showFileUploadErrorFor == $field->name)<p class="tf-error">{{ $uploadFileError }}</p>@endif
 </div>
+

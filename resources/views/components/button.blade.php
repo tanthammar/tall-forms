@@ -3,6 +3,7 @@
 'size' => 'md',
 'type' => 'button',
 'icon' => null,
+'iconclass' => 'fill-current',
 'icons' => [
     'xs' => '-ml-0.5 mr-2 h-3 w-3',
     'sm' => '-ml-0.5 mr-2 h-4 w-4',
@@ -37,7 +38,7 @@
     'secondary' => 'tf-btn-secondary',
 ]])
 <{{$tag}} {{ $attributes->merge([
-    'class' => "{$sizes[$size]} {$colors[$color]} tf-btn",
-    'type' => ($tag == 'a') ? 'text/html' : $type
-    ]) }}>@if(isset($icon))<x-tall-svg :path="$icon" :class="$icons[$size]" />@endif{{ $text ?? null }}{{ $slot }}
+    'class' => "$sizes[$size] $colors[$color] tf-btn",
+    'type' => $tag === 'a' ? 'text/html' : $type
+    ]) }}>@if(isset($icon))<x-tall-svg :path="$icon" :class="$icons[$size] . ' ' . $iconclass" />@endif{{ $text ?? null }}{{ $slot }}
 </{{$tag}}>

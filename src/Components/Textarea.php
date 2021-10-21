@@ -4,45 +4,41 @@
 namespace Tanthammar\TallForms\Components;
 
 use Illuminate\View\View;
-use Illuminate\View\Component;
-use Tanthammar\TallForms\Textarea as Field;
-use Tanthammar\TallForms\Traits\Helpers;
+use Tanthammar\TallForms\Traits\BaseBladeField;
 
-class Textarea extends Component
+class Textarea extends BaseBladeField
 {
-    use Helpers;
-
-    public Field $field;
-    public bool $required;
-
-    public function __construct(Field $field)
+    public function __construct(
+        public array|object $field = [],
+        public array        $attr = []
+    )
     {
-        $this->field = $field;
-        $this->required = $field->required;
+        parent::__construct((array)$field, $attr);
+        $this->attr = array_merge($this->inputAttributes(), $attr);
     }
 
-    public function options(): array
+    public function defaults(): array
     {
-        $custom = $this->field->getAttr('input');
-        $default = [
+        return [
+            'id' => 'textarea',
+            'required' => false,
+            'class' => 'form-textarea block w-full rounded shadow-inner my-1',
+            'placeholder' => '',
+            'rows' => 5,
+            'disabled' => false,
+        ];
+    }
+
+    public function inputAttributes(): array
+    {
+        return [
             $this->field->wire => $this->field->key,
-            'name' => $this->field->key,
+            'id' => $this->field->id,
+            'name' => $this->field->name,
             'placeholder' => $this->field->placeholder,
             'rows' => $this->field->textarea_rows,
+            'value' => old($this->field->name)
         ];
-        return array_merge($default, $custom);
-    }
-
-    public function class(): string
-    {
-        $class = "form-textarea block w-full rounded shadow-inner my-1 ";
-        $class .= $this->field->class;
-        return Helpers::unique_words($class);
-    }
-
-    public function error(): string
-    {
-        return $this->class()." tf-field-error";
     }
 
     public function render(): View
