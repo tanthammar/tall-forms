@@ -20,6 +20,7 @@ class TagsSearch extends BaseField
         $this->placeholder = trans('tf::form.tags-search.placeholder');
         $this->errorMsg = trans('tf::form.tags-search.error-msg');
         $this->rules = 'string|alpha_dash|between:3,25';
+        $this->allowed_in_repeater = false;
         $this->default = [];
         return $this;
     }
