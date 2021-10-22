@@ -9,7 +9,7 @@
 ])
 <div wire:ignore x-data="{
         showMessages: {{ $show }},
-        messages: {{ json_encode($messages) }},
+        messages: @js($messages),
         showErrors: false,
         errors: [],
         newMessage(obj) {

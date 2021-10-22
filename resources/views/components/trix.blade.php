@@ -1,7 +1,7 @@
 <div class="w-full"
      x-data="{
         trix: $wire.entangle('{{ $field->key }}'){{ $field->deferString }},
-        get notFocused() { return document.activeElement !== this.$refs.trixInput },
+        get notFocused() { return !(document.activeElement === this.$refs.trixInput) },
         setValue() {
             {{-- replace content --}}
             this.$refs.trixInput.editor.loadHTML(trix)
@@ -9,7 +9,7 @@
             this.$refs.trixInput.editor.setSelectedRange(this.$refs.trixInput.editor.getDocument().toString().length - 1)
         },
     }"
-    x-init="$watch('trix', () => notFocused && setValue())"
+    x-init="$watch('trix', () => { if(notFocused) setValue() })"
     x-on:trix-change.debounce.300ms="trix = $refs.trixInput.value"
 >
     @unless ($field->disabled)
