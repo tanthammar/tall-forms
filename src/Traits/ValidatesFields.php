@@ -5,16 +5,7 @@ namespace Tanthammar\TallForms\Traits;
 
 trait ValidatesFields
 {
-    protected int $rulesIteration = 0;
-    protected array $cachedRules = [];
-
-    public function hydrateValidatesFields()
-    {
-        //TODO remove when this is fixed: https://github.com/livewire/livewire/discussions/4045
-        //avoid rules() loop to be executed more than once on each request.
-        //see fieldRules() below
-        $this->rulesIteration = 1;
-    }
+    protected array $memoizedRules = [];
 
     //Used by Livewire default getRules():array method where rules() takes precedence before $rules
     protected function rules(): array
@@ -28,13 +19,11 @@ trait ValidatesFields
         return $this->fieldValidationAttributes();
     }
 
+    // Because Livewire calls rules() multiple times per request, https://github.com/livewire/livewire/discussions/4045
     protected function fieldRules(): array
     {
-        if ($this->rulesIteration < 2) {
-            $this->rulesIteration += 1;
-            $this->cachedRules = $this->recursiveFieldRules();
-        }
-        return $this->cachedRules;
+        if ($this->memoizedRules === []) $this->memoizedRules = $this->recursiveFieldRules();
+        return $this->memoizedRules;
     }
 
 
