@@ -34,13 +34,15 @@ class Checkbox extends BaseBladeField
 
     protected function inputAttributes(): array
     {
-        return [
+        $custom = data_get($this->field, 'attributes.input', []);
+        $default = [
             $this->field->wire => $this->field->key,
             'name' => $this->field->name,
             'id' => $this->field->id,
             'value' => old($this->field->name),
             'wire:key' => $this->field->id,
         ];
+        return array_merge($default, $custom);
     }
 
     public function render(): View

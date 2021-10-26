@@ -31,12 +31,14 @@ class Tags extends BaseBladeField
 
     protected function inputAttributes(): array
     {
-        return [
+        $custom = data_get($this->field, 'attributes.input', []);
+        $default = [
             $this->field->wire => $this->field->key,
             'id' => $this->field->id,
             'name' => $this->field->name,
             'placeholder' => $this->field->placeholder,
         ];
+        return array_merge($default, $custom);
     }
 
     public function render(): View

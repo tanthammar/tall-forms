@@ -31,7 +31,8 @@ class Textarea extends BaseBladeField
 
     protected function inputAttributes(): array
     {
-        return [
+        $custom = data_get($this->field, 'attributes.input', []);
+        $default = [
             $this->field->wire => $this->field->key,
             'id' => $this->field->id,
             'name' => $this->field->name,
@@ -39,6 +40,7 @@ class Textarea extends BaseBladeField
             'rows' => $this->field->textarea_rows,
             'value' => old($this->field->name)
         ];
+        return array_merge($default, $custom);
     }
 
     public function render(): View

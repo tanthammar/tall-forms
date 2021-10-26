@@ -35,11 +35,13 @@ class InputArray extends BaseBladeField
 
     protected function inputAttributes(): array
     {
-        return [
+        $custom = data_get($this->field, 'attributes.input', []);
+        $default = [
             'type' => $this->field->input_type,
             'placeholder' => $this->field->placeholder,
             'class' => $this->field->class,
         ];
+        return array_merge($default, $custom);
     }
 
 

@@ -32,12 +32,14 @@ class Select extends BaseBladeField
 
     protected function inputAttributes(): array
     {
-        return [
+        $custom = data_get($this->field, 'attributes.input', []);
+        $default = [
             $this->field->wire => $this->field->key,
             'id' => $this->field->id,
             'name' => $this->field->name,
             'value' => old($this->field->name)
         ];
+        return array_merge($default, $custom);
     }
 
 

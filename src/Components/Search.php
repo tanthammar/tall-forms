@@ -34,13 +34,15 @@ class Search extends BaseBladeField
 
     protected function inputAttributes(): array
     {
-        return [
+        $custom = data_get($this->field, 'attributes.input', []);
+        $default = [
             'id' => $this->field->id,
             'name' => $this->field->name,
             'value' => old($this->field->name),
             'type' => 'text',
             'placeholder' => $this->field->placeholder,
         ];
+        return array_merge($default, $custom);
     }
 
 

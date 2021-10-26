@@ -58,6 +58,7 @@ class Input extends BaseBladeField
 
     protected function inputAttributes(): array
     {
+        $custom = data_get($this->field, 'attributes.input', []);
         $default = [
             $this->field->wire => $this->field->key,
             'id' => $this->field->id,
@@ -76,7 +77,7 @@ class Input extends BaseBladeField
 
             $default = array_merge($default, $limits);
         }
-        return $default;
+        return array_merge($default, $custom);
     }
 
     public function customClass(): string

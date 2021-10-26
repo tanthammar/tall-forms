@@ -32,7 +32,8 @@ class Range extends BaseBladeField
 
     protected function inputAttributes(): array
     {
-        return [
+        $custom = data_get($this->field, 'attributes.input', []);
+        $default = [
             'type' => 'range',
             'id' => $this->field->id,
             'name' => $this->field->name,
@@ -41,6 +42,7 @@ class Range extends BaseBladeField
             'max' => $this->field->max,
             'step' => $this->field->step,
         ];
+        return array_merge($default, $custom);
     }
 
     public function render(): View
