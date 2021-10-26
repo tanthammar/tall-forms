@@ -22,7 +22,6 @@ class Trix extends BaseField
         $this->type = 'trix';
         $this->align_label_top = true;
         $this->includeScript = config('tall-forms.include-external-scripts');
-        $this->dynamicComponent = false;
         $this->deferEntangle();
         return $this;
     }

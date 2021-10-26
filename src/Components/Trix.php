@@ -10,7 +10,6 @@ class Trix extends BaseBladeField
 {
     public function __construct(
         public array|object $field = [],
-        public ?string      $value = null,
         public array        $attr = [])
     {
         parent::__construct((array)$field, $attr);
