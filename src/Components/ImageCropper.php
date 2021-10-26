@@ -11,7 +11,6 @@ class ImageCropper extends BaseBladeField
 
     public function __construct(
         public array|object $field,
-        public ?string      $imageUrl = '',
     )
     {
         parent::__construct((array)$field);

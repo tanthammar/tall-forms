@@ -27,7 +27,6 @@ class ImageCropper extends BaseField
         $this->align_label_top = true;
         $this->allowed_in_repeater = true;
         $this->allowed_in_keyval = true;
-        $this->dynamicComponent = false;
         $this->includeScript = config('tall-forms.include-external-scripts');
         return $this;
     }
