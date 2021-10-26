@@ -21,7 +21,7 @@ class Input extends BaseBladeField
         $this->field->class = $this->customClass();
     }
 
-    public function defaults(): array
+    protected function defaults(): array
     {
         return [
             'id' => 'input',
@@ -56,7 +56,7 @@ class Input extends BaseBladeField
         ];
     }
 
-    public function inputAttributes(): array
+    protected function inputAttributes(): array
     {
         $default = [
             $this->field->wire => $this->field->key,

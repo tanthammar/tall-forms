@@ -13,11 +13,6 @@ class Form extends Component
         public array  $attr = []
     ){}
 
-    public function class(): string
-    {
-        return data_get($this->attr, 'class', 'tf-form');
-    }
-
     public function render(): View
     {
         return view('tall-forms::components.form');

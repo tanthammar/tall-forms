@@ -17,7 +17,7 @@ class Select extends BaseBladeField
         $this->attr = array_merge($this->inputAttributes(), $attr);
     }
 
-    public function defaults(): array
+    protected function defaults(): array
     {
         return [
             'id' => 'select',
@@ -30,7 +30,7 @@ class Select extends BaseBladeField
         ];
     }
 
-    public function inputAttributes(): array
+    protected function inputAttributes(): array
     {
         return [
             $this->field->wire => $this->field->key,

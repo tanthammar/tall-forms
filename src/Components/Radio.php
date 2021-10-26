@@ -16,7 +16,7 @@ class Radio extends BaseBladeField
         parent::__construct((array)$field, $attr);
     }
 
-    public function defaults(): array
+    protected function defaults(): array
     {
         return [
             'id' => 'radio', //unique, concats id.value.loop-index on each radio input,

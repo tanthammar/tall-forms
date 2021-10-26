@@ -18,7 +18,7 @@ class ImageCropper extends BaseBladeField
     }
 
 
-    public function defaults(): array
+    protected function defaults(): array
     {
         return [
             'id' => 'imageCropper',

@@ -16,7 +16,7 @@ class Range extends BaseBladeField
         $this->attr = array_merge($this->inputAttributes(), $attr);
     }
 
-    public function defaults(): array
+    protected function defaults(): array
     {
         return [
             'id' => 'range',
@@ -30,7 +30,7 @@ class Range extends BaseBladeField
     }
 
 
-    public function inputAttributes(): array
+    protected function inputAttributes(): array
     {
         return [
             'type' => 'range',

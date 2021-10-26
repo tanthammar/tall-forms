@@ -20,7 +20,7 @@ class FileUpload extends BaseBladeField
         $this->showFileUploadErrorFor = $this->showFileUploadErrorFor ?: $this->field->key;
     }
 
-    public function defaults(): array
+    protected function defaults(): array
     {
         return [
             'id' => 'fileUpload',

@@ -4,7 +4,7 @@ return [
     //Use cdn links for fields based on third party scripts, or bundle them with your app.js?
     'include-external-scripts' => true,
 
-    // Component attributes, perfect spot to add default Alpine $refs keys
+    // Component attributes, perfect spot to add default Alpine $refs
     'component-attributes' => [
         // You can add anything to these attributes. Applied as $attributes->merge($attr)
         'form' => [

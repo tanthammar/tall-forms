@@ -20,7 +20,7 @@ abstract class BaseBladeField extends Component
         'appendErrorClass' => 'tf-field-error',
     ];
 
-    abstract public function defaults(): array;
+    abstract protected function defaults(): array;
 
     public function __construct(public array|object $field = [], public array $attr = [])
     {

@@ -20,7 +20,7 @@ class Checkbox extends BaseBladeField
         $this->label = $this->field->placeholder ?? $this->field->label ?? '';
     }
 
-    public function defaults(): array
+    protected function defaults(): array
     {
         return [
             'id' => 'checkbox',
@@ -32,7 +32,7 @@ class Checkbox extends BaseBladeField
         ];
     }
 
-    public function inputAttributes(): array
+    protected function inputAttributes(): array
     {
         return [
             $this->field->wire => $this->field->key,

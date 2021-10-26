@@ -17,7 +17,7 @@ class Search extends BaseBladeField
         $this->attr = array_merge($this->inputAttributes(), $attr);
     }
 
-    public function defaults(): array
+    protected function defaults(): array
     {
         return [
             'id' => 'search',
@@ -32,7 +32,7 @@ class Search extends BaseBladeField
         ];
     }
 
-    public function inputAttributes(): array
+    protected function inputAttributes(): array
     {
         return [
             'id' => $this->field->id,

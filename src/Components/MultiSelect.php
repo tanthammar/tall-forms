@@ -7,7 +7,7 @@ use Illuminate\View\View;
 class MultiSelect extends Select
 {
 
-    public function defaults(): array
+    protected function defaults(): array
     {
         return [
             'id' => 'multiselect',
@@ -21,7 +21,7 @@ class MultiSelect extends Select
     }
 
     //override Select because multiselect is entangled
-    public function inputAttributes(): array
+    protected function inputAttributes(): array
     {
         return [
             //$this->field->wire => $this->field->key, //entangled

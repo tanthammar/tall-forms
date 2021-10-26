@@ -8,6 +8,9 @@ use Illuminate\View\Component;
 
 class LabelFieldWrapper extends Component
 {
+    public string $wrapperClass = '';
+    public string $fieldWidth = '';
+    public string $labelWidth = '';
 
     public function __construct(
         public object $field,
@@ -22,9 +25,13 @@ class LabelFieldWrapper extends Component
         $field->inline = $field->inline === false ? false : $is_inline;
         $this->labelW = $field->labelW ?: $labelW;
         $this->fieldW = $field->fieldW ?: $fieldW;
+        //set these in construct, else executed multiple times
+        $this->wrapperClass = $this->wrapperClass();
+        $this->fieldWidth = $this->fieldWidth();
+        $this->labelWidth = $this->labelWidth();
     }
 
-    public function class(): string
+    public function wrapperClass(): string
     {
         $vertical = $this->field->align_label_top || filled($this->field->afterLabel) || filled($this->field->above) ? '' : ' sm:items-center';
         return $this->field->inline

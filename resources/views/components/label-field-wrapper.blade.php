@@ -1,7 +1,7 @@
-<div class="{{ $class() }}">
+<div class="{{ $wrapperClass }}">
     {{-- label column --}}
     @if($field->show_label)
-        <div class="{{ $labelWidth() }} {{ $field->labelWrapperClass }}">
+        <div class="{{ $labelWidth }} {{ $field->labelWrapperClass }}">
             <label for="{{ $field->id }}" class="{{ $field->labelClass }}">
                 {{$field->label}} <span class="tf-label-suffix">{{ $field->labelSuffix }}</span>
             </label>
@@ -16,7 +16,7 @@
         </div>
     @endif
     {{-- field column --}}
-    <div class="{{ $fieldWidth() }}">
+    <div class="{{ $fieldWidth }}">
         {{ $slot }}
     </div>
 </div>

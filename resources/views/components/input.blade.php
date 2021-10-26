@@ -16,11 +16,14 @@
         </span>
     @endif
     <div class="relative w-full">
+        @unless($field->disabled)
         <input
             @if($field->required) required @endif
-            @if($field->disabled) disabled @endif
             {{ $attributes->except([...array_keys($attr), 'x-data', 'required', 'disabled'])->merge($attr)->merge(['class' => $errors->has($field->key) ? $field->errorClass : $field->class ]) }}
         />
+        @else
+            <input type="{{ $field->input_type ?? 'text' }}" disabled value="{{ data_get($this, $field->key) }}" />
+        @endunless
         @error($field->key)
             <x-tall-error-icon :right="in_array($field->type, ['date', 'datetime-local', 'time']) ? 'right-6' : 'right-0'"/>
         @enderror

@@ -1,4 +1,3 @@
-<form wire:submit.prevent="{{ $onKeyDownEnter }}"
-{{ $attributes->whereDoesntStartWith('wire:submit')->merge($attr)->merge(['class' => $class() ]) }}>
+<form wire:submit.prevent="{{ $onKeyDownEnter }}" {{ $attributes->whereDoesntStartWith('wire:submit')->merge($attr) }}>
 {{ $slot }}
 </form>

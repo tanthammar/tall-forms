@@ -17,7 +17,7 @@ class Tags extends BaseBladeField
         $this->attr = array_merge($this->inputAttributes(), $attr);
     }
 
-    public function defaults(): array
+    protected function defaults(): array
     {
         return [
             'id' => 'tags',
@@ -29,7 +29,7 @@ class Tags extends BaseBladeField
         ];
     }
 
-    public function inputAttributes(): array
+    protected function inputAttributes(): array
     {
         return [
             $this->field->wire => $this->field->key,

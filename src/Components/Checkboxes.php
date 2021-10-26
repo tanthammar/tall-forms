@@ -16,7 +16,7 @@ class Checkboxes extends BaseBladeField
         parent::__construct((array)$field, $attr);
     }
 
-    public function defaults(): array
+    protected function defaults(): array
     {
         return [
             'id' => 'checkboxes',
