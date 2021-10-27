@@ -19,10 +19,10 @@
         {{-- label and field --}}
         <x-tall-label-field-wrapper
             :field="$field"
-            :inline="$this->form->inline"
-            :inlineLabelAlignment="$this->form->inlineLabelAlignment"
-            :label-w="$this->form->labelW"
-            :field-w="$this->form->fieldW">
+            :inline="$form->inline"
+            :inlineLabelAlignment="$form->inlineLabelAlignment"
+            :label-w="$form->labelW"
+            :field-w="$form->fieldW">
             @if($field->type === 'array')
                 @include('tall-forms::includes.array-wrapper')
             @elseif($field->type === 'keyval')

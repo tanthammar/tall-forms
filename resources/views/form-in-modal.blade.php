@@ -1,23 +1,23 @@
 <x-tall-forms::form-modal
     wire:model="modalOpen"
     :id="'modal'.md5($_instance->id.'modalOpen')"
-    :submit="$this->form->onKeyDownEnter"
-    :maxWidth="$this->form->modalMaxWidth">
+    :submit="$form->onKeyDownEnter"
+    :maxWidth="$form->modalMaxWidth">
 
-    @if($this->form->formTitle | $this->form->formSubtitle)
+    @if($form->formTitle | $form->formSubtitle)
     <x-slot name="head">
         <h1 class="tf-modal-form-title">
-            {{ $this->form->formTitle }}
+            {{ $form->formTitle }}
         </h1>
         <p class="tf-modal-form-sub-title">
-            {{ $this->form->formSubtitle }}
+            {{ $form->formSubtitle }}
         </p>
     </x-slot>
     @endif
 
     <x-slot name="content">
-        @if($this->form->beforeFormView)
-            @include($this->form->beforeFormView)
+        @if($form->beforeFormView)
+            @include($form->beforeFormView)
         @endif
         @if(isset($isTabs) && $isTabs)
             @include('tall-forms::fields.tabs')
@@ -25,8 +25,8 @@
             @include('tall-forms::includes.field-loop')
         @endif
         @include('tall-forms::includes.form-footer')
-        @if($this->form->afterFormView)
-            @include($this->form->afterFormView)
+        @if($form->afterFormView)
+            @include($form->afterFormView)
         @endif
     </x-slot>
 
@@ -35,13 +35,13 @@
             size="sm" color="{{ $this->closeBtnColor }}"
             wire:click.prevent.stop="closeModal"
             wire:loading.attr="disabled"
-            :text="$this->form->cancelBtnTxt" />
+            :text="$form->cancelBtnTxt" />
 
         <x-tall-button
             size="sm" class="ml-2" type="submit" color="{{ $this->submitBtnColor }}"
-            wire:click="{{ $this->form->onKeyDownEnter }}"
+            wire:click="{{ $form->onKeyDownEnter }}"
             wire:loading.attr="disabled"
-            :text="$this->form->submitBtnTxt" />
+            :text="$form->submitBtnTxt" />
     </x-slot>
 
 </x-tall-forms::form-modal>

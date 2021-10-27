@@ -29,7 +29,7 @@ trait ValidatesFields
 
     protected function recursiveFieldRules($fields = null, string $prefix = 'form_data'): array
     {
-        $fields = is_null($fields) || !is_array($fields) ? $this->computedFields : $fields;
+        $fields = is_null($fields) || !is_array($fields) ? $this->getFields() : $fields;
         $rules = [];
 
         foreach ($fields as $field) {
@@ -67,7 +67,7 @@ trait ValidatesFields
     protected function fieldValidationAttributes(): array
     {
         $attributes = [];
-        if ($this->form->labelsAsAttributes) {
+        if ($this->getForm()->labelsAsAttributes) {
             foreach ($this->getFieldsFlat() as $field) {
                 if ($field != null && !$field->ignored && $field->labelAsAttribute) {
                     if (in_array($field->type, ['array', 'keyval'])) {

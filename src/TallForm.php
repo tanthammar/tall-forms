@@ -16,6 +16,10 @@ trait TallForm
     public $model;
     public array $form_data = [];
     protected string $previous = '';
+    protected object|null $memoizedForm;
+    protected array $memoizedFields = [];
+    protected array $memoizedFieldsNested = [];
+    protected array $memoizedFieldsFlat = [];
 
     public function __construct($id = null)
     {
@@ -24,18 +28,22 @@ trait TallForm
         parent::__construct($id);
     }
 
-    public function getFormProperty(): object
+    protected function getForm(): object
     {
-        $defaults = config('tall-forms.form');
+        if(!is_object($this->memoizedForm)) {
+            $defaults = config('tall-forms.form');
 
-        return method_exists($this,'formAttr')
-            ? (object) array_merge($defaults, $this->formAttr())
-            : (object) $defaults;
+            $this->memoizedForm = method_exists($this,'formAttr')
+                ? (object) array_merge($defaults, $this->formAttr())
+                : (object) $defaults;
+        }
+        return $this->memoizedForm;
     }
 
-    public function getComputedFieldsProperty(): array
+    protected function getFields(): array
     {
-        return method_exists($this,'fields') ? $this->fields() : [];
+        if ($this->memoizedFields === [] && method_exists($this,'fields')) $this->memoizedFields = $this->fields();
+        return $this->memoizedFields;
     }
 
     protected function mount_form($model)
@@ -72,11 +80,13 @@ trait TallForm
 
     protected function formView()
     {
+        $form = $this->getForm();
         $view = view('tall-forms::layout-picker', [
             'fields' => $this->getFieldsNested(),
+            'form' => $form,
         ]);
-        if (filled($this->form->layout)) $view->layout($this->form->layout);
-        if (filled($this->form->slot)) $view->slot($this->form->slot);
+        if (filled($form->layout)) $view->layout($form->layout);
+        if (filled($form->slot)) $view->slot($form->slot);
         return $view;
     }
 

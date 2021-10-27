@@ -8,25 +8,32 @@ use Tanthammar\TallForms\Traits\HandlesArrays;
 abstract class TallFormFields extends Component
 {
     use HandlesArrays; //to handle FileUpload
+    protected array $memoizedFields = [];
+    protected object|null $memoizedForm;
 
-    public function getFormProperty(): object
+    protected function getForm(): object
     {
-        $defaults = config('tall-forms.form');
+        if(!is_object($this->memoizedForm)) {
+            $defaults = config('tall-forms.form');
 
-        return method_exists($this,'formAttr')
-            ? (object) array_merge($defaults, $this->formAttr())
-            : (object) $defaults;
+            $this->memoizedForm = method_exists($this, 'formAttr')
+                ? (object)array_merge($defaults, $this->formAttr())
+                : (object)$defaults;
+        }
+        return $this->memoizedForm;
     }
 
-    public function getComputedFieldsProperty(): array
+    protected function getFields(): array
     {
-        return method_exists($this,'fields') ? $this->fields() : [];
+        if ($this->memoizedFields === [] && method_exists($this,'fields')) $this->memoizedFields = $this->fields();
+        return $this->memoizedFields;
     }
 
     public function render()
     {
         return view('tall-forms::fields-only', [
-            'fields' => $this->computedFields,
+            'fields' => $this->getFields(),
+            'form' => $this->getForm(),
         ]);
     }
 

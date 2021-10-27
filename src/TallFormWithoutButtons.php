@@ -4,20 +4,23 @@ namespace Tanthammar\TallForms;
 
 abstract class TallFormWithoutButtons extends TallFormComponent
 {
-    public function getFormProperty(): object
+    protected function getForm(): object
     {
-        $defaults = [
-            'showSave' => false,
-            'showDelete' => false,
-            'showReset' => false,
-            'showGoBack' => false,
-            'wrapWithView' => false,
-        ];
+        if (!is_object($this->memoizedForm)) {
+            $defaults = [
+                'showSave' => false,
+                'showDelete' => false,
+                'showReset' => false,
+                'showGoBack' => false,
+                'wrapWithView' => false,
+            ];
 
-        $defaults = array_merge(config('tall-forms.form'), $defaults);
+            $defaults = array_merge(config('tall-forms.form'), $defaults);
 
-        return method_exists($this,'formAttr')
-            ? (object) array_merge($defaults, $this->formAttr())
-            : (object) $defaults;
+            $this->memoizedForm = method_exists($this, 'formAttr')
+                ? (object)array_merge($defaults, $this->formAttr())
+                : (object)$defaults;
+        }
+        return $this->memoizedForm;
     }
 }

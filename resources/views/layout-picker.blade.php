@@ -1,6 +1,6 @@
 <div class="display-contents">
-    @if($this->form->wrapWithView)
-        @include($this->form->wrapViewPath)
+    @if($form->wrapWithView)
+        @include($form->wrapViewPath)
     @else
         @include('tall-forms::form')
     @endif

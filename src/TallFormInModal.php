@@ -2,13 +2,9 @@
 
 namespace Tanthammar\TallForms;
 
-use Lean\LivewireAccess\WithImplicitAccess;
-use Livewire\Component;
 
-abstract class TallFormInModal extends Component
+abstract class TallFormInModal extends TallFormComponent
 {
-    use TallForm;
-
     protected string $closeBtnColor = 'white';
     protected string $submitBtnColor = 'primary';
     public bool $modalOpen = false;
@@ -40,23 +36,26 @@ abstract class TallFormInModal extends Component
         $this->modalOpen = false;
     }
 
-    public function getFormProperty(): object
+    protected function getForm(): object
     {
-        $defaults = [
-            'inline' => false,
-            'wrapWithView' => true,
-            'wrapViewPath' => 'tall-forms::form-in-modal',
-            'submitBtnTxt' => trans('tf::form.save'),
-            'cancelBtnTxt' => trans('tf::form.cancel'),
-            'onKeyDownEnter' => 'modalSubmit',
-            'modalMaxWidth' => 'lg', //options: sm, md, lg, xl, 2xl
-        ];
+        if(!is_object($this->memoizedForm)) {
+            $defaults = [
+                'inline' => false,
+                'wrapWithView' => true,
+                'wrapViewPath' => 'tall-forms::form-in-modal',
+                'submitBtnTxt' => trans('tf::form.save'),
+                'cancelBtnTxt' => trans('tf::form.cancel'),
+                'onKeyDownEnter' => 'modalSubmit',
+                'modalMaxWidth' => 'lg', //options: sm, md, lg, xl, 2xl
+            ];
 
-        $defaults = array_merge(config('tall-forms.form'), $defaults);
+            $defaults = array_merge(config('tall-forms.form'), $defaults);
 
-        return method_exists($this,'formAttr')
-            ? (object) array_merge($defaults, $this->formAttr())
-            : (object) $defaults;
+            $this->memoizedForm = method_exists($this, 'formAttr')
+                ? (object)array_merge($defaults, $this->formAttr())
+                : (object)$defaults;
+        }
+        return $this->memoizedForm;
     }
 
 }

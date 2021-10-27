@@ -94,7 +94,7 @@ trait MiscMethods
     protected function firstLevelFieldNames(): array
     {
         $fieldNames = [];
-        foreach ($this->computedFields as $field) {
+        foreach ($this->getFields() as $field) {
             if (filled($field) && !$field->ignored) $fieldNames[] = $field->name;
             if (filled($field) && $field->ignored && isset($field->fields) && filled($field->fields)){
                 foreach ($field->fields as $nested_field) {
@@ -107,12 +107,14 @@ trait MiscMethods
 
     protected function getFieldsFlat(): array
     {
-        return $this->getFields(null, '', true);
+        if ($this->memoizedFieldsFlat === []) $this->memoizedFieldsFlat = $this->recursiveFields(flatten: true);
+        return $this->memoizedFieldsFlat;
     }
 
     protected function getFieldsNested(): array
     {
-        return $this->getFields(null, '', false);
+        if ($this->memoizedFieldsNested === []) $this->memoizedFieldsNested = $this->recursiveFields(flatten: false);
+        return $this->memoizedFieldsNested;
     }
 
     /**
@@ -122,9 +124,9 @@ trait MiscMethods
      * @param bool $flatten
      * @return array
      */
-    protected function getFields($fields = null, $prefix = '', bool $flatten = true): array
+    protected function recursiveFields($fields = null, $prefix = '', bool $flatten = true): array
     {
-        $fields = is_null($fields) || !is_array($fields) ? $this->computedFields : $fields;
+        $fields = is_null($fields) || !is_array($fields) ? $this->getFields() : $fields;
         $results = [];
 
         foreach ($fields as &$field) {
@@ -135,7 +137,7 @@ trait MiscMethods
                 $field->key = $fieldKey;
                 $fieldKey = ($field->type === 'array') ? "$fieldKey.*" : $fieldKey;
                 if (isset($field->fields) && filled($field->fields)) {
-                    $fieldResults = $this->getFields($field->fields, $fieldKey, $flatten); //recursive
+                    $fieldResults = $this->recursiveFields($field->fields, $fieldKey, $flatten); //recursive
                     if ($flatten) {
                         $results = array_merge($results, $fieldResults);
                     } else {

@@ -1,13 +1,13 @@
-@if(blank($this->form->headView) && !$this->form->wrapWithView && ($this->form->formTitle || $this->form->formSubtitle))
+@if(blank($form->headView) && !$form->wrapWithView && ($form->formTitle || $form->formSubtitle))
     <div class="tf-form-head">
         <h1 class="tf-form-title">
-            {{ $this->form->formTitle }}
+            {{ $form->formTitle }}
         </h1>
         <p class="tf-form-sub-title">
-            {{ $this->form->formSubtitle }}
+            {{ $form->formSubtitle }}
         </p>
     </div>
 @endif
-@if(filled($this->form->headView))
-    @include($this->form->headView)
+@if(filled($form->headView))
+    @include($form->headView)
 @endif
