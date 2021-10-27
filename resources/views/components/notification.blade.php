@@ -29,7 +29,7 @@
             this.errors.splice(this.errors.indexOf(error), 1)
         },
         replaceErrors(errors) {
-            this.showErrors = true;
+            this.showErrors = true
             this.errors = Array.from(errors)
             setTimeout(() => { this.showErrors = false }, 5000)
         },
