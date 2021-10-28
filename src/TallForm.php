@@ -16,7 +16,7 @@ trait TallForm
     public $model;
     public array $form_data = [];
     protected string $previous = '';
-    protected object|null $memoizedForm;
+    protected object|null $memoizedForm = null;
     protected array $memoizedFields = [];
     protected array $memoizedFieldsNested = [];
     protected array $memoizedFieldsFlat = [];

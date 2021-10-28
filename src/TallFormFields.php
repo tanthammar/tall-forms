@@ -9,7 +9,7 @@ abstract class TallFormFields extends Component
 {
     use HandlesArrays; //to handle FileUpload
     protected array $memoizedFields = [];
-    protected object|null $memoizedForm;
+    protected object|null $memoizedForm = null;
 
     protected function getForm(): object
     {
