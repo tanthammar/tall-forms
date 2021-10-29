@@ -66,6 +66,7 @@ trait HandlesArrays
         if ($is_in_form_data) {
             Arr::forget($this->form_data, "{$field_name}.{$key}");
             data_set($this->form_data, $field_name, array_values(data_get($this->form_data, $field_name)));
+            $this->updated('form_data.' . $field_name, data_get($this->form_data, $field_name));
         } else {
             unset($this->$field_name[$key]);
             $this->$field_name = array_values($this->$field_name);
