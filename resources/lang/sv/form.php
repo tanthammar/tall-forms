@@ -67,7 +67,8 @@ return [
     ],
 
     'date-picker' => [
-        'placeholder' => 'Välj datum...'
+        'placeholder' => 'Välj datum...',
+        'close-btn' => 'STÄNG'
     ]
 ];
 
