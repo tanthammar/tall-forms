@@ -29,6 +29,13 @@ abstract class BaseBladeField extends Component
         $this->field->class = $this->class();
         $this->field->errorClass = $this->error();
         $this->attr = array_merge(data_get($field, 'attributes.input', []), $attr);
+
+        //Check if field rules contains 'required', not used by all fields
+        if (isset($this->field->required) && !$this->field->required) {
+            $this->field->required = is_array($this->field->rules)
+                ? in_array('required', $this->field->rules)
+                : str_contains($this->field->rules, 'required');
+        }
     }
 
     protected function class(): string

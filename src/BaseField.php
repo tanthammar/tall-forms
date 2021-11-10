@@ -22,6 +22,7 @@ abstract class BaseField
     public mixed $rules = 'nullable';
 
     public mixed $default = null;
+    public bool $required = false;
 
     public bool $realtimeValidationOn = true;
 
@@ -95,6 +96,12 @@ abstract class BaseField
         return $this;
     }
 
+    public function required(): self
+    {
+        $this->required = true;
+        return $this;
+    }
+
     //used by SpatieTags
     public function fieldToArray(): array
     {
@@ -141,6 +148,7 @@ abstract class BaseField
             'deferString' => $this->deferString,
             'wire' => $this->wire,
             //'xmodel' => $this->xmodel,
+            'required' => $this->required,
             'class' => $this->class,
             'appendClass' => $this->appendClass,
             'errorClass' => $this->errorClass,

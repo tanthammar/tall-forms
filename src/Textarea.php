@@ -12,7 +12,6 @@ class Textarea extends BaseField
 
     public $textarea_rows = 5;
     public $placeholder;
-    public $required = false;
 
     protected function overrides(): self
     {
@@ -30,12 +29,6 @@ class Textarea extends BaseField
     public function placeholder(string $placeholder): self
     {
         $this->placeholder = $placeholder;
-        return $this;
-    }
-
-    public function required(): self
-    {
-        $this->required = true;
         return $this;
     }
 

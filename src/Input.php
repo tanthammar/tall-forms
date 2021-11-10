@@ -18,7 +18,6 @@ class Input extends BaseField
     public $step;
     public $min;
     public $max;
-    public $required = false;
 
     public $suffix;
     public $sfxIcon;
@@ -62,12 +61,6 @@ class Input extends BaseField
     public function suffix(string $suffix): self
     {
         $this->suffix = $suffix;
-        return $this;
-    }
-
-    public function required(): self
-    {
-        $this->required = true;
         return $this;
     }
 
