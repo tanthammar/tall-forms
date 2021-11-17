@@ -107,7 +107,7 @@ return [
     ],
 
     //Register Aliases for easy access in blade files.
-    //Extend or replace the fields.
+    //Remove or replace the Aliases.
     'aliases' => [
         'Checkbox' => \Tanthammar\TallForms\Checkbox::class,
         'Checkboxes' => \Tanthammar\TallForms\Checkboxes::class,
@@ -128,10 +128,9 @@ return [
     ],
 
 
-    // list with blade ui kit components that this package replaces
+    // list with blade components that this package registers
     // the prefix is 'tall',
-    // you cannot change the prefix, but you can extend these components,
-    // and replace the component classes here.
+    // you cannot change the prefix, but you can replace or extend the components.
     'components' => [
         'form' => \Tanthammar\TallForms\Components\Form::class,
         'label-field-wrapper' => \Tanthammar\TallForms\Components\LabelFieldWrapper::class,
