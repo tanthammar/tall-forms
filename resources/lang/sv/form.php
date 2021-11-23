@@ -68,7 +68,7 @@ return [
 
     'date-picker' => [
         'placeholder' => 'Välj datum...',
-        'close-btn' => 'STÄNG'
+        'save-btn' => 'SPARA'
     ]
 ];
 

@@ -69,7 +69,7 @@ return [
 
     'date-picker' => [
         'placeholder' => 'Select date...',
-        'close-btn' => 'CLOSE'
+        'save-btn' => 'SAVE'
     ],
 
 
