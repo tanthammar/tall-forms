@@ -20,8 +20,8 @@
     ],
     "require": {
         "php": "^8.0",
-        "livewire/livewire": "^2.7.2|dev-master",
-        "laravel/framework": "^8.24.0"
+        "livewire/livewire": "^2.8.0|dev-master",
+        "laravel/framework": "^8.73.2"
     },
     "autoload": {
         "psr-4": {
