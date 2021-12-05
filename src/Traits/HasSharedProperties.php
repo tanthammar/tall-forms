@@ -10,6 +10,7 @@ trait HasSharedProperties
     public array $livewireParams = [];
     public bool $is_custom = false;
     public bool $is_relation = false;
+    public bool $has_array_value = false;
 
     public function livewireComponent(string $component, array $params = []): self
     {

@@ -154,12 +154,10 @@ trait MiscMethods
     protected function setFieldValues(array $fields) //expects flattened field list
     {
         foreach ($fields as $field) {
-            if (filled($field) && !$field->ignored) {
+            if (!$field->ignored && filled($field)) {
                 $fieldKey = Str::replaceFirst('form_data.', '', $field->key);
                 if (false === Str::contains($fieldKey, ['*']) && is_null(data_get($this->form_data, $fieldKey, null))) {
-                    //TODO change this to field property
-                    $array = in_array($field->type, ['checkboxes', 'file', 'multiselect', 'input-array', 'tags', 'tags-search']);
-                    data_set($this->form_data, $fieldKey, $field->default ?? ($array ? [] : null));
+                    data_set($this->form_data, $fieldKey, $field->default ?? ($field->has_array_value ? [] : null));
                 }
             }
         }

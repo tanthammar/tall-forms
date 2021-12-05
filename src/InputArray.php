@@ -25,6 +25,7 @@ class InputArray extends BaseField
         $this->allowed_in_repeater = false;
         $this->defaultErrorPosition = false;
         $this->deferEntangle();
+        $this->has_array_value = true;
         return $this;
     }
 

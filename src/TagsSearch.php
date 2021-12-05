@@ -22,6 +22,7 @@ class TagsSearch extends BaseField
         $this->rules = 'string|alpha_dash|between:3,25';
         $this->allowed_in_repeater = false;
         $this->default = [];
+        $this->has_array_value = true;
         return $this;
     }
 

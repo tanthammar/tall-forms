@@ -20,6 +20,7 @@ class Checkboxes extends BaseField
         $this->class = "form-checkbox tf-checkbox";
         $this->align_label_top = true;
         $this->allowed_in_repeater = false;
+        $this->has_array_value = true;
         return $this;
     }
 

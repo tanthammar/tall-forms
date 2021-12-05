@@ -16,8 +16,7 @@
             },
             deleteTag(tagToDelete, refresh = false) {
                 this.tags.splice(this.tags.indexOf(tagToDelete), 1)
-                //TODO add throttle?
-                if(refresh) this.$wire.call('$refresh') {{-- update errorBag --}}
+                if(refresh) Alpine.debounce(() => this.$wire.call('$refresh'), 250) {{-- update errorBag --}}
             },
             clearInput() {
                 this.searchInput = ''
