@@ -26,6 +26,7 @@ class InputArray extends BaseField
         $this->defaultErrorPosition = false;
         $this->deferEntangle();
         $this->has_array_value = true;
+        $this->rules_apply_to_each_item = true;
         return $this;
     }
 

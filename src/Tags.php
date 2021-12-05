@@ -21,6 +21,7 @@ class Tags extends BaseField
         $this->allowed_in_repeater = false;
         $this->default = [];
         $this->has_array_value = true;
+        $this->rules_apply_to_each_item = true;
         return $this;
     }
 

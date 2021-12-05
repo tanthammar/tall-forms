@@ -14,6 +14,7 @@ class MultiSelect extends Select
         $this->allowed_in_repeater = false;
         $this->help = __('tf::form.multiselect.help');
         $this->has_array_value = true;
+        //$this->rules_apply_to_each_item = true; Don't activate, use Rule:in([])
         return $this;
     }
 

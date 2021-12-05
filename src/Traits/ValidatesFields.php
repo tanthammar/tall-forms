@@ -48,9 +48,7 @@ trait ValidatesFields
                     if ($field->type === 'file') {
                         $ruleName = $field->multiple ? "$field->name.*" : $field->name;
                     }
-                    //TODO add $rulesAppliedToEach = true to these field types
-                    //These field types applies rules to each item, DON'T add checkboxes or multiselect here. They use Rule::in([...]) validation.
-                    elseif (in_array($field->type, ['input-array', 'tags', 'tags-search'])) {
+                    elseif ($field->rules_apply_to_each_item) {
                         $ruleName = "$prefix.$field->name.*";
                     } else {
                         $ruleName = "$prefix.$field->name";

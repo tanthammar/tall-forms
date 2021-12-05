@@ -21,6 +21,7 @@ class Checkboxes extends BaseField
         $this->align_label_top = true;
         $this->allowed_in_repeater = false;
         $this->has_array_value = true;
+        //$this->rules_apply_to_each_item = true; Don't activate, use Rule:in([])
         return $this;
     }
 

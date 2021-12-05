@@ -11,6 +11,7 @@ trait HasSharedProperties
     public bool $is_custom = false;
     public bool $is_relation = false;
     public bool $has_array_value = false;
+    public bool $rules_apply_to_each_item = false; //These field types applies rules() to each item, DON'T add to checkboxes or multiselect. They use Rule::in([...]) validation.
 
     public function livewireComponent(string $component, array $params = []): self
     {
