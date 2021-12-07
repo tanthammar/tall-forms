@@ -65,7 +65,6 @@
          x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
          x-trap="show"
     >
-        {{-- TODO docs: added x-trap to modal and package requirements --}}
         {{ $slot }}
     </div>
 

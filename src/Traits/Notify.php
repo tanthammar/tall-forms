@@ -14,7 +14,7 @@ trait Notify
 
     protected bool $withSession = false;
 
-    //TODO find out why this is executed twice, until then remove it
+    //TODO await fix Livewire bug, why this is executed twice, until then remove it
     /**
      * example use in Alpine js to update the property
         $wire.set('alert', {
