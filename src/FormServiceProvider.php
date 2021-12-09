@@ -30,8 +30,8 @@ class FormServiceProvider extends ServiceProvider
         $this->publishes([__DIR__ . '/../resources/lang' => resource_path('lang/vendor/tall-forms'),], 'tall-form-lang');
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'tf');
 
-
-        \Livewire::component('tall-spatie-tags', \Tanthammar\TallForms\LivewireComponents\SpatieTags::class);
+        //TODO: activate this line again, does not work in tests...
+        //\Livewire::component('tall-spatie-tags', \Tanthammar\TallForms\LivewireComponents\SpatieTags::class);
 
         $this->bootViews();
         $this->prefixComponents();

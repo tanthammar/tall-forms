@@ -4,9 +4,9 @@
 
 [Laravel Livewire](https://laravel-livewire.com), Tailwind forms with auto-generated views.
 
-[![Latest Stable Version](https://poser.pugx.org/tanthammar/tall-forms/v)](//packagist.org/packages/tanthammar/tall-forms) 
-[![Total Downloads](https://poser.pugx.org/tanthammar/tall-forms/downloads)](//packagist.org/packages/tanthammar/tall-forms) 
-[![Latest Unstable Version](https://poser.pugx.org/tanthammar/tall-forms/v/unstable)](//packagist.org/packages/tanthammar/tall-forms) 
+[![Latest Stable Version](https://poser.pugx.org/tanthammar/tall-forms/v)](//packagist.org/packages/tanthammar/tall-forms)
+[![Total Downloads](https://poser.pugx.org/tanthammar/tall-forms/downloads)](//packagist.org/packages/tanthammar/tall-forms)
+[![Latest Unstable Version](https://poser.pugx.org/tanthammar/tall-forms/v/unstable)](//packagist.org/packages/tanthammar/tall-forms)
 [![License](https://poser.pugx.org/tanthammar/tall-forms/license)](//packagist.org/packages/tanthammar/tall-forms)
 
 - [Support](https://github.com/tanthammar/tall-forms/issues)
@@ -34,14 +34,20 @@ Want to give tribute to those who made TALL-stack come true. (Alphabetically ord
 - **Pull Requests** I appreciate any input that improves the functionality and usability of this package. **Please contribute!**
 
 # 💬 Let's connect
-Discuss with other tall-form users on the official Livewire Discord channel. 
-You'll find me in the "partners/tall-forms" channel. 
+Discuss with other tall-form users on the official Livewire Discord channel.
+You'll find me in the "partners/tall-forms" channel.
 
 * [🔗 **Discord**](https://discord.gg/livewire)
 * [🔗 **Twitter**](https://twitter.com/TinaHammar)
 * [🔗 **Youtube**](https://www.youtube.com/channel/UCRPTsZ2OduwzGq3EdiynY2Q)
 * [🔗 **Devdojo**](https://devdojo.com/tinahammar)
 
-# Documentation 
+# Documentation
 * [v8.x](https://tina-hammar.gitbook.io/tall-forms/)
 * [v4->v7 Wiki](https://github.com/tanthammar/tall-forms/wiki)
+
+## Testing
+
+```bash
+composer test
+```
