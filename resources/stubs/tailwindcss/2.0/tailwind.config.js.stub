@@ -3,7 +3,7 @@
 module.exports = {
     mode: 'jit', //https://tailwindcss.com/docs/just-in-time-mode#enabling-jit-mode
     presets: [
-        // the preset merges, fonts, variants, plugins, colors and purge content
+        // the preset merges, fonts, variants, plugins, colors and purge settings
         require('./vendor/tanthammar/tall-forms/resources/stubs/tailwindcss/2.0/tall-forms-preset.js'),
     ],
     darkMode: false, // or 'media' or 'class'
