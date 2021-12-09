@@ -14,7 +14,7 @@
                 <x-tall-button
                     x-data="{ open: false }"
                     x-init="$wire.on('notify-saved', () => { open = true; setTimeout(() => { open = false }, 2500); $dispatch('clear-errors'); })"
-                    size="sm" type="submit" color="primary" x-on:click="$dispatch( 'replace-errors', JSON.parse(atob('{{ base64_encode(json_encode($form->notifyErrors ? $errors->all() : [])) }}')) )"  >
+                    size="sm" type="submit" color="primary" x-on:click="$dispatch( 'replace-errors', {{ tfjs::from($form->notifyErrors ? $errors->all() : []) }} )"  >
                     <span class="mr-2" wire:loading wire:target="{{ $form->onKeyDownEnter }}">
                         <x-tall-svg path="icons.circle-spinner" class="w-4 h-4 animate-spin -mt-1 fill-current"></x-tall-svg>
                     </span>

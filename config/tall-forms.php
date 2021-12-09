@@ -23,6 +23,7 @@ return [
         //Can be overridden per field
         'labelsAsAttributes' => true,
         'notifyErrors' => true, //Alert validation errors, on submit (stacked notifications).
+        'wrapWithView' => true,
         'wrapViewPath' => 'tall-forms::wrapper-layout', //A Laravel blade component to wrap your form with, if $wrapWithView = true, see documentation
         'inlineLabelAlignment' => 'tf-inline-label-alignment',
         'formTitle' => '',
@@ -36,7 +37,6 @@ return [
         'formFooterTitle' => '',
         'formFooterSubtitle' => '',
         'inline' => true,
-        'wrapWithView' => true,
         'onKeyDownEnter' => 'saveAndStay', //form submit action
         'showSave' => true,
         'showDelete' => true,
@@ -125,6 +125,7 @@ return [
         'Trix' => \Tanthammar\TallForms\Trix::class,
         'Tags' => \Tanthammar\TallForms\Tags::class,
         'TagsSearch' => \Tanthammar\TallForms\TagsSearch::class,
+        'tfjs' => \Illuminate\Support\Js::class, //Laravel version < 8.75.0 has no alias for this class
     ],
 
 
