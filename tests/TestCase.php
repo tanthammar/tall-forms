@@ -2,13 +2,17 @@
 
 namespace Tanthammar\TallForms\Tests;
 
+use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Tanthammar\TallForms\FormServiceProvider;
 use Tanthammar\TallForms\SkeletonServiceProvider;
+use Livewire\LivewireServiceProvider;
 
 class TestCase extends Orchestra
 {
+    use InteractsWithViews;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -21,6 +25,7 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
+            LivewireServiceProvider::class,
             FormServiceProvider::class,
         ];
     }
