@@ -42,4 +42,6 @@ You'll find me in the "partners/tall-forms" channel.
 * [🔗 **Youtube**](https://www.youtube.com/channel/UCRPTsZ2OduwzGq3EdiynY2Q)
 * [🔗 **Devdojo**](https://devdojo.com/tinahammar)
 
-# Documentation [See the wiki](https://github.com/tanthammar/tall-forms/wiki)
+# Documentation 
+* [v8.x](https://tina-hammar.gitbook.io/tall-forms/)
+* [v4->v7 Wiki](https://github.com/tanthammar/tall-forms/wiki)
