@@ -45,6 +45,7 @@ class InstallTallForms extends Command
         // $this->icons(); //not needed to publish the icons
         $this->laravelMix();
         $this->wrapper();
+        $this->languages();
 
 //        $this->info('Compiling css');
 //        $this->info(exec('npm run dev'));
@@ -216,5 +217,14 @@ class InstallTallForms extends Command
 
         $this->info('Making resources/js/alpine.js');
         File::put(resource_path('js/alpine.js'), $alpine_js);
+    }
+
+    private function languages()
+    {
+        //TODO remove from documentation Quickstart Artisan cmd on next release
+        $this->info('Publishing the language files');
+        $this->call('vendor:publish', [
+            '--tag' => 'tall-form-lang'
+        ]);
     }
 }
