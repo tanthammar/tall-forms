@@ -1,0 +1,11 @@
+import Alpine from 'alpinejs'
+import trap from '@alpinejs/trap'
+import collapse from '@alpinejs/collapse'
+
+window.Alpine = Alpine
+
+Alpine.plugin(trap)
+Alpine.plugin(collapse)
+Alpine.start()
+
+export default Alpine

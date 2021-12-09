@@ -41,6 +41,7 @@ class InstallTallForms extends Command
         $this->livewire();
         $this->tailwind();
         $this->theme();
+        $this->javascript();
         // $this->icons(); //not needed to publish the icons
         $this->laravelMix();
         $this->wrapper();
@@ -52,21 +53,21 @@ class InstallTallForms extends Command
         $this->info('Please support this package if you find in useful :-)');
     }
 
-    public function gitStart()
+    public function gitStart(): void
     {
         $this->info('git commit "Before Tall Forms Installation"');
         exec('git add .');
         exec('git commit -m "Before Tall Forms Installation"');
     }
 
-    public function gitEnd()
+    public function gitEnd(): void
     {
         $this->info('git commit "After Tall Forms Installation"');
         exec('git add .');
         exec('git commit -m "After Tall Forms Installation"');
     }
 
-    public function wrapper()
+    public function wrapper(): void
     {
 
         if (!is_dir($directory = resource_path('views/layouts'))) File::makeDirectory($directory, 0755, true);
@@ -100,7 +101,7 @@ class InstallTallForms extends Command
         File::put(config_path('tall-forms.php'), $config);
     }
 
-    public function icons()
+    public function icons(): void
     {
         $this->info('Publishing the required icon blade views');
         $this->call('vendor:publish', [
@@ -108,7 +109,7 @@ class InstallTallForms extends Command
         ]);
     }
 
-    public function theme()
+    public function theme(): void
     {
         $custom_css = File::get(__DIR__ . '/../../resources/stubs/custom.css.stub');
         $app_css = File::get(__DIR__ . '/../../resources/stubs/app.css.stub');
@@ -125,7 +126,7 @@ class InstallTallForms extends Command
         File::put(resource_path('css/app.css'), $app_css);
     }
 
-    public function tailwind()
+    public function tailwind(): void
     {
         $this->info('Installing Laravel Mix v6.x');
         $this->info('Installing Tailwind CSS v2.x');
@@ -133,18 +134,20 @@ class InstallTallForms extends Command
         $this->info('Adding support for nested css');
         $this->info('Installing postcss-nesting');
         $this->info('Installing autoprefixer');
-        $this->info('Installing alpinejs');
+        $this->info('Installing Alpinejs');
+        $this->info('Installing Alpine Trap plugin');
+        $this->info('Installing Alpine Collapse plugin');
         $this->info('Installing @tailwindcss/forms');
         $this->info('Installing @tailwindcss/typography');
         $this->info('Installing @tailwindcss/aspect-ratio');
 
-        $this->info(exec('npm install -D laravel-mix alpinejs tailwindcss@latest postcss-import postcss-nesting autoprefixer@latest @tailwindcss/forms @tailwindcss/typography @tailwindcss/aspect-ratio --save-dev'));
+        $this->info(exec('npm install -D laravel-mix alpinejs @alpinejs/trap @alpinejs/collapse tailwindcss@latest postcss-import postcss-nesting autoprefixer@latest @tailwindcss/forms @tailwindcss/typography @tailwindcss/aspect-ratio --save-dev'));
         $config = File::get(__DIR__ . '/../../resources/stubs/tailwindcss/2.0/tailwind.config.js.stub');
         $this->info('Enabling Tailwind JIT mode, you can disable it in tailwind config');
         File::put(base_path('tailwind.config.js'), $config);
     }
 
-    private function laravelMix()
+    private function laravelMix(): void
     {
         $this->info('Updating webpack.mix.js');
 
@@ -186,7 +189,7 @@ class InstallTallForms extends Command
         }
     }
 
-    private function livewire()
+    private function livewire(): void
     {
         try {
             $v = \Composer\InstalledVersions::getVersion('livewire/livewire');
@@ -201,5 +204,17 @@ class InstallTallForms extends Command
             $this->info('Installing Livewire');
             exec('composer require livewire/livewire');
         }
+    }
+
+    private function javascript(): void
+    {
+        $app_js = File::get(__DIR__ . '/../../resources/stubs/app.js.stub');
+        $alpine_js = File::get(__DIR__ . '/../../resources/stubs/alpine.js.stub');
+
+        $this->info('Updating app.js');
+        File::put(resource_path('js/app.js'), $app_js);
+
+        $this->info('Making resources/js/alpine.js');
+        File::put(resource_path('js/alpine.js'), $alpine_js);
     }
 }
