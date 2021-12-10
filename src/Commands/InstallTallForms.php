@@ -221,7 +221,6 @@ class InstallTallForms extends Command
 
     private function languages()
     {
-        //TODO remove from documentation Quickstart Artisan cmd on next release
         $this->info('Publishing the language files');
         $this->call('vendor:publish', [
             '--tag' => 'tall-form-lang'
