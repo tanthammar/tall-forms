@@ -19,7 +19,7 @@ class Checkboxes extends BaseField
         $this->wrapperClass = "tf-checkboxes-fieldset";
         $this->class = "form-checkbox tf-checkbox";
         $this->align_label_top = true;
-        $this->allowed_in_repeater = false;
+        //$this->allowed_in_repeater = false;
         $this->has_array_value = true;
         //$this->rules_apply_to_each_item = true; Don't activate, use Rule:in([])
         return $this;

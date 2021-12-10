@@ -36,7 +36,7 @@ class Select extends BaseField
         $this->multiple = true;
         $this->type = 'multiselect';
         $this->align_label_top = true;
-        $this->allowed_in_repeater = false;
+        //$this->allowed_in_repeater = false;
         return $this;
     }
 

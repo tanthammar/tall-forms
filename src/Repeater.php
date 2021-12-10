@@ -19,8 +19,8 @@ class Repeater extends BaseField
     {
         $this->type = 'array';
         $this->align_label_top = true;
-        $this->allowed_in_repeater = false;
-        $this->allowed_in_keyval = false;
+        //$this->allowed_in_repeater = false;
+        //$this->allowed_in_keyval = false;
         $this->inline = false;
         $this->wire = '';
         $this->defaultErrorPosition = false;

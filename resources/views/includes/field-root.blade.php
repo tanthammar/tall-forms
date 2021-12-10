@@ -9,7 +9,7 @@
         {{-- custom Livewire component --}}
         @livewire($field->livewireComponent, $field->livewireParams)
     @elseif($field->type === 'hidden')
-        <input x-ref="{{ $field->key }}" {{ $field->wire }}="{{ $field->key }}" name="{{ $field->key }}" type="hidden"
+        <input {{ $field->wire }}="{{ $field->key }}" name="{{ $field->key }}" type="hidden"
         autocomplete="{{ $field->autocomplete }}" class="nosy" />
     @else
         {{-- before --}}
