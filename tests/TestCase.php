@@ -37,7 +37,7 @@ class TestCase extends Orchestra
             __DIR__ . '/resources/views',
         ]);
 
-        $migration = include __DIR__.'/database/migrations/create_basic_form_models_table.php.stub';
+        $migration = include __DIR__.'/database/migrations/create_cars_table.php.stub';
         $migration->up();
     }
 }

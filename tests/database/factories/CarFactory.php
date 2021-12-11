@@ -3,11 +3,11 @@
 namespace Tanthammar\TallForms\Tests\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Tanthammar\TallForms\Tests\App\Models\BasicFormModel;
+use Tanthammar\TallForms\Tests\App\Models\Car;
 
-class BasicFormModelFactory extends Factory
+class CarFactory extends Factory
 {
-    protected $model = BasicFormModel::class;
+    protected $model = Car::class;
 
     public function definition()
     {
