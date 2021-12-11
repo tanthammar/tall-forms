@@ -8,15 +8,15 @@ use function PHPUnit\Framework\assertTrue;
 
 it("can initialize a basic form and set name to validate change", function() {
 
-    $form = BasicFormModel::factory()->create([]);
+    $basicForm = BasicFormModel::factory()->create([]);
 
     $newName = "Professor Calculus";
 
-    livewire(BasicForm::class, ['model' => $form])
+    livewire(BasicForm::class, ['basicForm' => $basicForm])
         ->set('form_data.name', $newName)
         ->call('saveAndStay')
         ->assertHasNoErrors();
 
-    assertTrue($form->name == $newName);
+    assertTrue(BasicFormModel::whereName($newName)->exists());
 
 });
