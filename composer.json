@@ -30,7 +30,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tanthammar\\TallForms\\Tests\\": "tests"
+            "Tanthammar\\TallForms\\Tests\\": "tests",
+            "Tanthammar\\TallForms\\Tests\\Database\\Factories": "tests/database/factories"
         }
     },
     "extra": {
