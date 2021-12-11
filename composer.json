@@ -46,7 +46,8 @@
         "pestphp/pest": "^1.21",
         "pestphp/pest-plugin-laravel": "^1.1",
         "phpunit/phpunit": "^9.5",
-        "pestphp/pest-plugin-livewire": "^1.0"
+        "pestphp/pest-plugin-livewire": "^1.0",
+        "pestphp/pest-plugin-parallel": "^1.0"
     },
     "scripts": {
         "test": "vendor/bin/pest",
