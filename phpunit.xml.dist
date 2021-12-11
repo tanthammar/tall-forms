@@ -20,7 +20,7 @@
 >
     <testsuites>
         <testsuite name="TallForms Test Suite">
-            <directory suffix="Test.php">tests</directory>
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
     <coverage>
