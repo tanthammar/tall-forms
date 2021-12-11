@@ -15,7 +15,7 @@ jobs:
         os: [ubuntu-latest]
         php: [8.0, 8.1]
         laravel: [8.*]
-        stability: [prefer-lowest, prefer-stable]
+        stability: [prefer-stable]
         include:
           - laravel: 8.*
             testbench: ^6.23
