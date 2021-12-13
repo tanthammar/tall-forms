@@ -95,8 +95,10 @@ trait MiscMethods
     {
         $fieldNames = [];
         foreach ($this->getFields() as $field) {
-            if (filled($field) && !$field->ignored) $fieldNames[] = $field->name;
-            if (filled($field) && $field->ignored && isset($field->fields) && filled($field->fields)){
+            if (!$field?->ignored && filled($field)) {
+                $fieldNames[] = $field->name;
+            }
+            if ($field?->ignored && isset($field?->fields) && filled($field) && filled($field->fields)){
                 foreach ($field->fields as $nested_field) {
                     $fieldNames[] = $nested_field->name;
                 }
@@ -107,24 +109,28 @@ trait MiscMethods
 
     protected function getFieldsFlat(): array
     {
-        if ($this->memoizedFieldsFlat === []) $this->memoizedFieldsFlat = $this->recursiveFields(flatten: true);
+        if ($this->memoizedFieldsFlat === []) {
+            $this->memoizedFieldsFlat = $this->recursiveFields(flatten: true);
+        }
         return $this->memoizedFieldsFlat;
     }
 
     protected function getFieldsNested(): array
     {
-        if ($this->memoizedFieldsNested === []) $this->memoizedFieldsNested = $this->recursiveFields(flatten: false);
+        if ($this->memoizedFieldsNested === []) {
+            $this->memoizedFieldsNested = $this->recursiveFields(flatten: false);
+        }
         return $this->memoizedFieldsNested;
     }
 
     /**
      * Recursive
-     * @param ?array|string $fields
+     * @param array|string|null $fields
      * @param string $prefix
      * @param bool $flatten
      * @return array
      */
-    protected function recursiveFields($fields = null, $prefix = '', bool $flatten = true): array
+    protected function recursiveFields(array|string|null $fields = null, string $prefix = '', bool $flatten = true): array
     {
         $fields = is_null($fields) || !is_array($fields) ? $this->getFields() : $fields;
         $results = [];

@@ -21,18 +21,18 @@
                     </div>
                     <div class="tf-repeater-btns-wrapper">
                         @if($field->array_sortable)
-                            <button type="button" class="tf-repeater-sorter-color" wire:click="arrayMoveUp('{{ $field->name }}', '{{ $key }}')">
+                            <button type="button" class="tf-repeater-sorter-color" wire:click="arrayMoveUp('{{ $field->key }}', '{{ $key }}')">
                                 <x-tall-svg :path="config('tall-forms.arrow-up-icon')" class="tf-repeater-btn-size fill-current" />
                             </button>
 
-                            <button type="button" class="tf-repeater-sorter-color" wire:click="arrayMoveDown('{{ $field->name }}', '{{ $key }}')">
+                            <button type="button" class="tf-repeater-sorter-color" wire:click="arrayMoveDown('{{ $field->key }}', '{{ $key }}')">
                                 <x-tall-svg :path="config('tall-forms.arrow-down-icon')" class="tf-repeater-btn-size fill-current" />
                             </button>
                         @endif
 
                         <button type="button" class="tf-repeater-delete-btn"
                                 @if($field->confirm_delete) onclick="confirm('{{ trans($field->confirm_msg) }}') || event.stopImmediatePropagation();" @endif
-                                wire:click.prevent="arrayRemove('{{ $field->name }}', '{{ $key }}')">
+                                wire:click.prevent="arrayRemove('{{ $field->key }}', '{{ $key }}')">
                             <x-tall-svg :path="config('tall-forms.trash-icon')" class="tf-repeater-btn-size fill-current" />
                         </button>
                     </div>
@@ -40,7 +40,7 @@
             @endforeach
         </div>
     @endif
-    <button type="button" class="tf-repeater-add-button" wire:click.prevent="arrayAdd('{{ $field->name }}')" style="width:fit-content">
+    <button type="button" class="tf-repeater-add-button" wire:click.prevent="arrayAdd('{{ $field->key }}')" style="width:fit-content">
         <x-tall-svg :path="config('tall-forms.plus-icon')" class="tf-repeater-add-button-size fill-current" />
     </button>
 </div>

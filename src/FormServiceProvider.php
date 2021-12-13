@@ -7,6 +7,7 @@ use Illuminate\View\Component as IlluminateComponent;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
+use Livewire\Livewire;
 use Tanthammar\TallForms\Commands\InstallTallForms;
 use Tanthammar\TallForms\Commands\MakeForm;
 
@@ -30,8 +31,7 @@ class FormServiceProvider extends ServiceProvider
         $this->publishes([__DIR__ . '/../resources/lang' => resource_path('lang/vendor/tall-forms'),], 'tall-form-lang');
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'tf');
 
-
-        \Livewire::component('tall-spatie-tags', \Tanthammar\TallForms\LivewireComponents\SpatieTags::class);
+        Livewire::component('tall-spatie-tags', \Tanthammar\TallForms\LivewireComponents\SpatieTags::class);
 
         $this->bootViews();
         $this->prefixComponents();

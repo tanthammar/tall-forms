@@ -28,11 +28,29 @@
             "Tanthammar\\TallForms\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tanthammar\\TallForms\\Tests\\": "tests",
+            "Tanthammar\\TallForms\\Tests\\Database\\Factories\\": "tests/database/factories"
+        }
+    },
     "extra": {
         "laravel": {
             "providers": [
                 "Tanthammar\\TallForms\\FormServiceProvider"
             ]
         }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.23",
+        "pestphp/pest": "^1.21",
+        "pestphp/pest-plugin-laravel": "^1.1",
+        "phpunit/phpunit": "^9.5",
+        "pestphp/pest-plugin-livewire": "^1.0",
+        "pestphp/pest-plugin-parallel": "^1.0"
+    },
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest coverage"
     }
 }
