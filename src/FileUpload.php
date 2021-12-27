@@ -25,6 +25,7 @@ class FileUpload extends BaseField
         $this->is_custom = true;
         $this->dynamicComponent = false;
         $this->has_array_value = true;
+        $this->allowed_in_repeater = false;
         return $this;
     }
 

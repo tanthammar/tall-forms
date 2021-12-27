@@ -105,13 +105,13 @@
         @apply text-gray-100 tf-bg-info hover:bg-blue-600 hover:text-white focus:border-blue-700;
     }
     .tf-btn-success {
-        @apply text-gray-100 tf-bg-success hover:bg-green-600 hover:text-white focus:border-green-700;
+        @apply text-gray-100 tf-bg-success hover:bg-emerald-600 hover:text-white focus:border-emerald-700;
     }
     .tf-btn-danger {
         @apply text-gray-100 tf-bg-danger hover:bg-red-700 hover:text-white focus:border-red-700 focus:shadow;
     }
     .tf-btn-warning {
-        @apply text-gray-100 tf-bg-warning hover:bg-yellow-600 hover:text-white focus:border-yellow-700 focus:shadow;
+        @apply text-gray-100 tf-bg-warning hover:bg-orange-600 hover:text-white focus:border-orange-700 focus:shadow;
     }
     .tf-btn-primary {
         @apply text-gray-100 tf-bg-primary hover:bg-blue-800 hover:text-white focus:border-blue-800 focus:shadow;
@@ -129,7 +129,7 @@
         @apply text-blue-100 bg-blue-500 hover:bg-blue-600 focus:border-blue-700 focus:shadow;
     }
     .tf-btn-green {
-        @apply text-green-100 bg-green-500 hover:bg-green-600 focus:border-green-700 focus:shadow;
+        @apply text-emerald-100 bg-emerald-500 hover:bg-emerald-600 focus:border-emerald-700 focus:shadow;
     }
     .tf-btn-yellow {
         @apply text-yellow-50 bg-yellow-300 hover:bg-yellow-400 focus:border-yellow-500 focus:shadow;
@@ -141,7 +141,7 @@
         @apply text-gray-100 bg-gray-500 hover:bg-gray-600 focus:border-gray-700 focus:shadow;
     }
     .tf-btn-orange {
-        @apply text-yellow-50 bg-yellow-500 hover:bg-yellow-600 focus:border-yellow-700 focus:shadow;
+        @apply text-orange-50 bg-orange-500 hover:bg-orange-600 focus:border-orange-700 focus:shadow;
     }
     .tf-btn-teal {
         @apply text-teal-100 bg-teal-500 hover:bg-teal-600 focus:border-teal-700 focus:shadow;
@@ -312,7 +312,7 @@
         @apply flex-1 mx-1 my-2 sm:mx-2 sm:my-0 sm:grid sm:grid-cols-12 gap-x-2;
     }
     .tf-repeater-btns-wrapper {
-        @apply flex flex-row sm:flex-col flex-shrink justify-around sm:justify-center
+        @apply flex flex-row sm:flex-col shrink justify-around sm:justify-center
         my-0 py-2 px-6 sm:px-2
         space-x-0 space-y-0 sm:space-y-1
         bg-gray-100 border-t sm:border-t-0 sm:border-l
@@ -608,7 +608,7 @@
         @apply flex items-center;
     }
     .tf-heading-icon-col {
-        @apply flex-shrink-0 mr-4;
+        @apply shrink-0 mr-4;
     }
     .tf-heading-icon {
         @apply w-5 h-5 text-indigo-900;
