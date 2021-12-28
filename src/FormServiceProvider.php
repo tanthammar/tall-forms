@@ -28,6 +28,7 @@ class FormServiceProvider extends ServiceProvider
         $this->publishes([__DIR__ . '/../resources/views' => resource_path('views/vendor/tall-forms')], 'tall-form-views');
         $this->publishes([__DIR__ . '/../resources/views/icons' => resource_path('views/vendor/tall-forms/icons')], 'tall-form-icons');
         $this->publishes([__DIR__ . '/../resources/css/tall-theme.css' => resource_path('css/tall-theme.css')], 'tall-form-theme-css');
+        $this->publishes([__DIR__ . '/../resources/css/tall-theme.css' => resource_path('stubs/tailwindcss/2.0/tall-theme2.css')], 'tall-form-theme-css-tw-2');
         $this->publishes([__DIR__ . '/../resources/lang' => resource_path('lang/vendor/tall-forms'),], 'tall-form-lang');
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'tf');
 
