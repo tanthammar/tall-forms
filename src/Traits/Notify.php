@@ -65,7 +65,7 @@ trait Notify
         [$bg, $icon, $iconcolor] = match ($preset) {
             'success', 'green', 'saved', 'check' => ['tf-bg-success', 'check', $iconcolor],
             'warning', 'orange',                 => ['tf-bg-warning', 'exclamation', $iconcolor],
-            'happy', 'positive'                  => ['bg-white', 'happy', 'text-emerald-600'],
+            'happy', 'positive'                  => ['bg-white', 'happy', 'text-green-600'],
             'sad', 'negative'                    => ['bg-white', 'sad', 'text-red-600'],
             'danger', 'red'                      => ['tf-bg-danger', 'warning', $iconcolor],
             'info', 'blue'                       => ['tf-bg-info', 'info', $iconcolor],

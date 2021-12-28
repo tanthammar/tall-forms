@@ -14,13 +14,13 @@
     <div class="overflow-hidden rounded-lg shadow-xs">
         <div class="p-4">
             <div class="flex items-start">
-                <div class="shrink-0">
+                <div class="flex-shrink-0">
                     {{ $icon }}
                 </div>
                 <div class="ml-3 w-0 flex-1 pt-0.5">
                     <p x-text="{{ $xtext }}" x-bind:class="{{ $xcolor }}" class="text-sm font-medium leading-5">{{ $slot }}</p>
                 </div>
-                <div class="flex shrink-0 ml-4">
+                <div class="flex flex-shrink-0 ml-4">
                     <button type="button" x-on:click.prevent.stop="{{ $xclick }}"
                             class="inline-flex text-gray-100 transition duration-150 ease-in-out focus:outline-none focus:white">
                         <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
