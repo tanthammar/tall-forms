@@ -4,6 +4,8 @@ namespace Tanthammar\TallForms;
 
 abstract class TallFormWithoutButtons extends TallFormComponent
 {
+    protected string $view = '';
+
     protected function getForm(): object
     {
         if (!is_object($this->memoizedForm)) {
@@ -22,5 +24,13 @@ abstract class TallFormWithoutButtons extends TallFormComponent
                 : (object)$defaults;
         }
         return $this->memoizedForm;
+    }
+
+    public function render()
+    {
+        return view($this->view, [
+            'form' => $this->getForm(),
+            'fields' => $this->getFieldsNested(),
+        ]);
     }
 }

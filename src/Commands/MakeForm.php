@@ -28,7 +28,8 @@ class MakeForm extends Command
         $stub = match ($this->option('action')) {
             'create' => File::get(__DIR__ . '/../../resources/stubs/create-component.stub'),
             'update' => File::get(__DIR__ . '/../../resources/stubs/update-component.stub'),
-            'modal' => File::get(__DIR__ . '/../../resources/stubs/modal-component.stub')
+            'modal' => File::get(__DIR__ . '/../../resources/stubs/modal-component.stub'),
+            'no-buttons' => File::get(__DIR__ . '/../../resources/stubs/no-buttons-component.stub-component.stub')
         };
         $stub = str_replace('DummyComponent', $this->argument('name'), $stub);
         $stub = str_replace('DummyModel', $this->option('model'), $stub);

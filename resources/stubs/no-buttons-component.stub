@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Namespace;
+
+use ModelsPathDummyModel;
+use Tanthammar\TallForms\Input;
+use Tanthammar\TallForms\TallFormWithoutButtons;
+
+class DummyComponent extends TallFormWithoutButtons
+{
+
+    protected string $view = 'TODO add view path.name here';
+
+    public function mount(?DummyModel $dummymodel)
+    {
+        //Gate::authorize()
+        $this->mount_form($dummymodel); // $dummymodel from hereon, called $this->model
+    }
+
+    protected function formAttr(): array
+    {
+        return [
+           'formTitle' => $this->transTitle(model: 'DummyModel'),
+       ];
+    }
+
+    // OPTIONAL methods, they already exist
+    protected function onCreateModel($validated_data)
+    {
+        $this->model = DummyModel::create($validated_data);
+    }
+
+    protected function onUpdateModel($validated_data)
+    {
+        $this->model->update($validated_data);
+    }
+
+    protected function onDeleteModel()
+    {
+        $this->defaultDelete();
+    }
+
+    protected function fields(): array
+    {
+        return [
+            Input::make('Name')->rules('required'),
+        ];
+    }
+}
