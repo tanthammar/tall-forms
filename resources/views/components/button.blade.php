@@ -13,11 +13,11 @@
 ],
 'text' => null,
 'sizes' => [
-    'xs' => 'px-2 py-1 text-xs rounded leading-normal',
-    'sm' => 'px-3 py-2 text-sm rounded leading-normal',
-    'md' => 'px-4 py-2 text-base rounded leading-normal',
-    'lg' => 'px-4 py-2 text-lg rounded leading-normal',
-    'xl' => 'px-4 py-2 text-xl rounded leading-normal',
+    'xs' => 'px-2 py-1 text-xs leading-normal',
+    'sm' => 'px-3 py-2 text-sm leading-normal',
+    'md' => 'px-4 py-2 text-base leading-normal',
+    'lg' => 'px-4 py-2 text-lg leading-normal',
+    'xl' => 'px-4 py-2 text-xl leading-normal',
 ],
 'color' => 'indigo',
 'colors' => [
