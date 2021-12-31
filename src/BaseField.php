@@ -58,7 +58,7 @@ abstract class BaseField
     }
 
 
-    public static function make(string $label, string $key = null): static
+    public static function make(string $label, null|string $key = null): static
     {
         return new static($label, $key);
     }
@@ -70,7 +70,7 @@ abstract class BaseField
      * <br>Pass the Livewire instance id to get a unique input id.
      * <br>$wireId = $_instance->id in blade
      */
-    public static function blade(string $label, string $key = null, string $wireId = '', string $name = '', string $id = ''): static
+    public static function blade(string $label, null|string $key = null, string $wireId = '', string $name = '', string $id = ''): static
     {
         $field = new static($label, $key);
         $field->id = filled($id) ? $id : 'id' . md5($wireId . $field->key);
