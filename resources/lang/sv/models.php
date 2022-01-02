@@ -61,6 +61,14 @@ return [
         'plural' => 'Momssatser',
         'singular' => 'Momssats',
     ],
+    'Visitor' => [
+        'plural' => 'Besökare',
+        'singular' => 'Besökare'
+    ],
+    'Guest' => [
+        'plural' => 'Gäster',
+        'singular' => 'Gäst'
+    ],
     'Organizer' => [
         'plural' => 'Arrangörer',
         'singular' => 'Arrangör',

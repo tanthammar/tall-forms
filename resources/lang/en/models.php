@@ -61,6 +61,14 @@ return [
         'plural' => 'Vat Rates',
         'singular' => 'Vat Rate'
     ],
+    'Visitor' => [
+        'plural' => 'Visitors',
+        'singular' => 'Visitor'
+    ],
+    'Guest' => [
+        'plural' => 'Guests',
+        'singular' => 'Guest'
+    ],
     'Organizer' => [
         'plural' => 'Organizers',
         'singular' => 'Organizer'
