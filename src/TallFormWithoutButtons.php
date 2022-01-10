@@ -28,9 +28,13 @@ abstract class TallFormWithoutButtons extends TallFormComponent
 
     public function render()
     {
-        return view($this->view, [
-            'form' => $this->getForm(),
+        $form = $this->getForm();
+        $view = view($this->view, [
+            'form' => $form,
             'fields' => $this->getFieldsNested(),
         ]);
+        if (filled($form->layout)) $view->layout($form->layout);
+        if (filled($form->slot)) $view->slot($form->slot);
+        return $view;
     }
 }
