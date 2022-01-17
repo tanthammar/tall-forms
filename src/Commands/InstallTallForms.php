@@ -142,7 +142,7 @@ class InstallTallForms extends Command
         $this->info('Installing @tailwindcss/typography');
         $this->info('Installing @tailwindcss/aspect-ratio');
 
-        $this->info(exec('npm install -D laravel-mix alpinejs @alpinejs/trap @alpinejs/collapse tailwindcss@latest postcss@latest postcss-import autoprefixer@latest @tailwindcss/forms@latest @tailwindcss/typography@latest @tailwindcss/aspect-ratio@latest --save-dev'));
+        $this->info(exec('npm install -D laravel-mix alpinejs @alpinejs/focus @alpinejs/collapse tailwindcss@latest postcss@latest postcss-import autoprefixer@latest @tailwindcss/forms@latest @tailwindcss/typography@latest @tailwindcss/aspect-ratio@latest --save-dev'));
         $config = File::get(__DIR__ . '/../../resources/stubs/tailwindcss/3.0/tailwind.config.js.stub');
         File::put(base_path('tailwind.config.js'), $config);
     }
