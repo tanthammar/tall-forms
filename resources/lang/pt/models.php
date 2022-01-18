@@ -1,240 +1,240 @@
 <?php
 
 return [
-    'Permission' => [
-        'plural' => 'Permissions',
-        'singular' => 'Permission'
-    ],
-    'Role' => [
-        'plural' => 'Roles',
-        'singular' => 'Role'
-    ],
-    'User' => [
-        'plural' => 'Users',
-        'singular' => 'User'
-    ],
-    'Team' => [
-        'plural' => 'Teams',
-        'singular' => 'Team'
-    ],
-    'AuditLog' => [
-        'plural' => 'Audit Logs',
-        'singular' => 'Audit Log'
-    ],
-    'Faq' => [
-        'plural' => 'FAQs',
-        'singular' => 'FAQ'
-    ],
-    'Question' => [
-        'plural' => 'Questions',
-        'singular' => 'Question'
-    ],
-    'Status' => [
-        'plural' => 'Statuses',
-        'singular' => 'Status'
-    ],
-    'Tag' => [
-        'plural' => 'Tags',
-        'singular' => 'Tag'
-    ],
-    'Task' => [
-        'plural' => 'Tasks',
-        'singular' => 'Task'
-    ],
-    'Calendar' => [
-        'plural' => 'Calendars',
-        'singular' => 'Calendar'
-    ],
-    'Category' => [
-        'plural' => 'Categories',
-        'singular' => 'Category'
-    ],
-    'Page' => [
-        'plural' => 'Pages',
-        'singular' => 'Page'
-    ],
-    'Setting' => [
-        'plural' => 'Settings',
-        'singular' => 'Setting'
-    ],
-    'Vat' => [
-        'plural' => 'Vat Rates',
-        'singular' => 'Vat Rate'
-    ],
-    'Visitor' => [
-        'plural' => 'Visitors',
-        'singular' => 'Visitor'
-    ],
-    'Guest' => [
-        'plural' => 'Guests',
-        'singular' => 'Guest'
-    ],
-    'Organizer' => [
-        'plural' => 'Organizers',
-        'singular' => 'Organizer'
-    ],
-    'Location' => [
-        'plural' => 'Locations',
-        'singular' => 'Location'
-    ],
-    'LocationPlan' => [
-        'plural' => 'Location Plans',
-        'singular' => 'Location Plan'
-    ],
-    'Map' => [
-        'plural' => 'Maps',
-        'singular' => 'Map'
-    ],
-    'Market' => [
-        'plural' => 'Markets',
-        'singular' => 'Market'
-    ],
-    'Fair' => [
-        'plural' => 'Fairs',
-        'singular' => 'Fair'
-    ],
-    'Festival' => [
-        'plural' => 'Festivals',
-        'singular' => 'Festival'
-    ],
-    'Event' => [
-        'plural' => 'Events',
-        'singular' => 'Event'
-    ],
-    'Customer' => [
-        'plural' => 'Customers',
-        'singular' => 'Customer'
-    ],
-    'Client' => [
-        'plural' => 'Clients',
-        'singular' => 'Client'
-    ],
-    'Exhibitor' => [
-        'plural' => 'Exhibitors',
-        'singular' => 'Exhibitor',
-    ],
-    'Date' => [
-        'plural' => 'Dates',
-        'singular' => 'Date'
-    ],
-    'Price' => [
-        'plural' => 'Prices',
-        'singular' => 'Price'
-    ],
-    'Article' => [
-        'plural' => 'Articles',
-        'singular' => 'Article'
-    ],
-    'Service' => [
-        'plural' => 'Services',
-        'singular' => 'Service'
-    ],
-    'Rental' => [
-        'plural' => 'Rentals',
-        'singular' => 'Rental'
-    ],
-    'Product' => [
-        'plural' => 'Products',
-        'singular' => 'Product'
-    ],
-    'Term' => [
-        'plural' => 'Terms & Conditions',
-        'singular' => 'Term'
-    ],
-    'Tab' => [
-        'plural' => 'Tabs',
-        'singular' => 'Tab'
-    ],
-    'Booking' => [
-        'plural' => 'Bookings',
-        'singular' => 'Booking'
-    ],
-    'Transaction' => [
-        'plural' => 'Transactions',
-        'singular' => 'Transaction'
-    ],
-    'Invoice' => [
-        'plural' => 'Invoices',
-        'singular' => 'Invoice'
-    ],
-    'Credit' => [
-        'plural' => 'Credits',
-        'singular' => 'Credit'
-    ],
-    'Payment' => [
-        'plural' => 'Payments',
-        'singular' => 'Payment'
-    ],
-    'Refund' => [
-        'plural' => 'Refunds',
-        'singular' => 'Refund'
-    ],
-    'OrderRow' => [
-        'plural' => 'Order Lines',
-        'singular' => 'Order Line'
-    ],
-    'Verification' => [
-        'plural' => 'Verifications',
-        'singular' => 'Verification'
-    ],
-    'VerificationRow' => [
-        'plural' => 'Verification Rows',
-        'singular' => 'Verification Row'
-    ],
-    'Attachement' => [
-        'plural' => 'Attachements',
-        'singular' => 'Attachement'
-    ],
-    'Document' => [
-        'plural' => 'Documents',
-        'singular' => 'Document'
-    ],
-    'Note' => [
-        'plural' => 'Notes',
-        'singular' => 'Note'
-    ],
-    'Account' => [
-        'plural' => 'Accounts',
-        'singular' => 'Account'
-    ],
-    'Help' => [
-        'plural' => 'Help',
-        'singular' => 'Help'
-    ],
-    'Message' => [
-        'plural' => 'Messages',
-        'singular' => 'Message'
-    ],
-    'Mail' => [
-        'plural' => 'Mail',
-        'singular' => 'Mail',
-    ],
-    'Email' => [
-        'plural' => 'Email',
-        'singular' => 'Email',
-    ],
-    'Groupmail' => [
-        'plural' => 'Group Mails',
-        'singular' => 'Group Mail'
-    ],
-    'VipInvitation' => [
-        'plural' => 'Vip Invitations',
-        'singular' => 'Vip Invitation'
-    ],
-    'Image' => [
-        'plural' => 'Images',
-        'singular' => 'Image'
-    ],
-    'Media' => [
-        'plural' => 'Media',
-        'singular' => 'Media'
-    ],
-    'Notification' => [
-        'plural' => 'Notifications',
-        'singular' => 'Notification'
-    ],
-    'Subscription' => [
-        'plural' => 'Subscriptions',
-        'singular' => 'Subscription'
-    ],
+	'Permission' => [
+		'plural' => 'Permissões',
+		'singular' => 'Permissão'
+	],
+	'Role' => [
+		'plural' => 'Funções',
+		'singular' => 'Função'
+	],
+	'User' => [
+		'plural' => 'Utilizadores',
+		'singular' => 'Utilizador'
+	],
+	'Team' => [
+		'plural' => 'Equipas',
+		'singular' => 'Equipa'
+	],
+	'AuditLog' => [
+		'plural' => 'Registos de auditoria',
+		'singular' => 'Registo de auditoria'
+	],
+	'Faq' => [
+		'plural' => 'FAQs',
+		'singular' => 'FAQ'
+	],
+	'Question' => [
+		'plural' => 'Perguntas',
+		'singular' => 'Pergunta'
+	],
+	'Status' => [
+		'plural' => 'Estados',
+		'singular' => 'Estado'
+	],
+	'Tag' => [
+		'plural' => 'Tags',
+		'singular' => 'Tag'
+	],
+	'Task' => [
+		'plural' => 'Tarefas',
+		'singular' => 'Tarefa'
+	],
+	'Calendar' => [
+		'plural' => 'Calendários',
+		'singular' => 'Calendário'
+	],
+	'Category' => [
+		'plural' => 'Categorias',
+		'singular' => 'Categoria'
+	],
+	'Page' => [
+		'plural' => 'Páginas',
+		'singular' => 'Página'
+	],
+	'Setting' => [
+		'plural' => 'Configurações',
+		'singular' => 'Configuração'
+	],
+	'Vat' => [
+		'plural' => 'Taxas de IVA',
+		'singular' => 'Taxa de IVA'
+	],
+	'Visitor' => [
+		'plural' => 'Visitantes',
+		'singular' => 'Visitante'
+	],
+	'Guest' => [
+		'plural' => 'Convidados',
+		'singular' => 'Convidado'
+	],
+	'Organizer' => [
+		'plural' => 'Organizadores',
+		'singular' => 'Organizador'
+	],
+	'Location' => [
+		'plural' => 'Locais',
+		'singular' => 'Local'
+	],
+	'LocationPlan' => [
+		'plural' => 'Planos de localização',
+		'singular' => 'Plano de localização'
+	],
+	'Map' => [
+		'plural' => 'Mapas',
+		'singular' => 'Mapa'
+	],
+	'Market' => [
+		'plural' => 'Mercados',
+		'singular' => 'Mercado'
+	],
+	'Fair' => [
+		'plural' => 'Feiras',
+		'singular' => 'Feira'
+	],
+	'Festival' => [
+		'plural' => 'Festivais',
+		'singular' => 'Festival'
+	],
+	'Event' => [
+		'plural' => 'Eventos',
+		'singular' => 'Evento'
+	],
+	'Customer' => [
+		'plural' => 'Clientes',
+		'singular' => 'Cliente'
+	],
+	'Client' => [
+		'plural' => 'Clientes',
+		'singular' => 'Cliente'
+	],
+	'Exhibitor' => [
+		'plural' => 'Expositores',
+		'singular' => 'Expositor',
+	],
+	'Date' => [
+		'plural' => 'Datas',
+		'singular' => 'Data'
+	],
+	'Price' => [
+		'plural' => 'Preços',
+		'singular' => 'Preço'
+	],
+	'Article' => [
+		'plural' => 'Artigos',
+		'singular' => 'Artigo'
+	],
+	'Service' => [
+		'plural' => 'Serviços',
+		'singular' => 'Serviço'
+	],
+	'Rental' => [
+		'plural' => 'Alugueres',
+		'singular' => 'Aluguer'
+	],
+	'Product' => [
+		'plural' => 'Produtos',
+		'singular' => 'Produto'
+	],
+	'Term' => [
+		'plural' => 'Termos e condições',
+		'singular' => 'Termo e condição'
+	],
+	'Tab' => [
+		'plural' => 'Separadores',
+		'singular' => 'Separador'
+	],
+	'Booking' => [
+		'plural' => 'Reservas',
+		'singular' => 'Reserva'
+	],
+	'Transaction' => [
+		'plural' => 'Transações',
+		'singular' => 'Transação'
+	],
+	'Invoice' => [
+		'plural' => 'Faturas',
+		'singular' => 'Fatura'
+	],
+	'Credit' => [
+		'plural' => 'Créditos',
+		'singular' => 'Crédito'
+	],
+	'Payment' => [
+		'plural' => 'Pagamentos',
+		'singular' => 'Pagamento'
+	],
+	'Refund' => [
+		'plural' => 'Reembolsos',
+		'singular' => 'Reembolso'
+	],
+	'OrderRow' => [
+		'plural' => 'Linhas de pedido',
+		'singular' => 'Linha de pedido'
+	],
+	'Verification' => [
+		'plural' => 'Verificações',
+		'singular' => 'Verificação'
+	],
+	'VerificationRow' => [
+		'plural' => 'Linhas de verificação',
+		'singular' => 'Linha de verificação'
+	],
+	'Attachement' => [
+		'plural' => 'Anexos',
+		'singular' => 'Anexo'
+	],
+	'Document' => [
+		'plural' => 'Documentos',
+		'singular' => 'Documento'
+	],
+	'Note' => [
+		'plural' => 'Notas',
+		'singular' => 'Nota'
+	],
+	'Account' => [
+		'plural' => 'Contas',
+		'singular' => 'Conta'
+	],
+	'Help' => [
+		'plural' => 'Ajuda',
+		'singular' => 'Ajuda'
+	],
+	'Message' => [
+		'plural' => 'Menagens',
+		'singular' => 'Messagem'
+	],
+	'Mail' => [
+		'plural' => 'Correspondência',
+		'singular' => 'Correspondência',
+	],
+	'Email' => [
+		'plural' => 'E-mails',
+		'singular' => 'E-mail',
+	],
+	'Groupmail' => [
+		'plural' => 'Grupo de e-mails',
+		'singular' => 'Grupo de e-mail',
+	],
+	'VipInvitation' => [
+		'plural' => 'Convites VIP',
+		'singular' => 'Convite VIP'
+	],
+	'Image' => [
+		'plural' => 'Imagens',
+		'singular' => 'Imagem'
+	],
+	'Media' => [
+		'plural' => 'Meios de comunicação',
+		'singular' => 'Meio de comunicação'
+	],
+	'Notification' => [
+		'plural' => 'Notificações',
+		'singular' => 'Notificação'
+	],
+	'Subscription' => [
+		'plural' => 'Assinaturas',
+		'singular' => 'Assinatura'
+	],
 ];
