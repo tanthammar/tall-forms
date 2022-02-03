@@ -136,7 +136,7 @@ class InstallTallForms extends Command
         $this->info('Installing postcss-nesting');
         $this->info('Installing autoprefixer');
         $this->info('Installing Alpinejs');
-        $this->info('Installing Alpine Trap plugin');
+        $this->info('Installing Alpine Focus plugin');
         $this->info('Installing Alpine Collapse plugin');
         $this->info('Installing @tailwindcss/forms');
         $this->info('Installing @tailwindcss/typography');
