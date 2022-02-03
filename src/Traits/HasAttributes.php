@@ -29,9 +29,11 @@ trait HasAttributes
     protected function mergeClasses(string $key, array $custom): void
     {
         $merged = array_merge_recursive($this->attributes[$key], $custom);
-        if (Arr::has($merged, 'class')) {
+
+        if (Arr::has($merged, 'class') && is_array($merged['class'])) {
             $merged['class'] = implode(" ", $merged['class']);
         }
+
         $this->attributes[$key] = $merged;
     }
 

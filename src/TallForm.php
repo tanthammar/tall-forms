@@ -14,7 +14,7 @@ trait TallForm
     use Notify, MiscMethods, HandlesArrays, ValidatesFields, SubmitsForm, HasButtons;
 
     public $model;
-    public array $form_data = [];
+    public $form_data = [];
     protected string $previous = '';
     protected object|null $memoizedForm = null;
     protected array $memoizedFields = [];
