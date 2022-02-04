@@ -9,7 +9,7 @@
 ])
 <div wire:ignore x-data="{
         showMessages: {{ $show }},
-        messages: {{ tfjs::from($messages) }},
+        messages: [{{ tfjs::from($messages) }}],
         showErrors: false,
         errors: [],
         newMessage(obj) {
