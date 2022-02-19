@@ -53,6 +53,7 @@ class Input extends BaseBladeField
             'min' => 0,
             'max' => null,
             'disabled' => false,
+            'maskOptions' => ''
         ];
     }
 

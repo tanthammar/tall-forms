@@ -25,6 +25,7 @@ class Input extends BaseField
     public $sfxTallIcon;
     public $sfxHtmlIcon;
     public bool $sfxHasIcon = false;
+    public string $maskOptions = '';
 
     protected function overrides(): self
     {
@@ -141,6 +142,15 @@ class Input extends BaseField
     {
         $this->sfxHtmlIcon = $html;
         $this->sfxHasIcon = true;
+        return $this;
+    }
+    /**
+     * @param string $mask_options
+     * @return $this
+     */
+    public function maskOptions(string $mask_options): self
+    {
+        $this->maskOptions = $mask_options;
         return $this;
     }
 
