@@ -41,7 +41,7 @@
         @apply focus:ring-gray-400 focus:border-gray-400 focus:shadow-md border-gray-300 rounded
     }
     .form-multiselect {
-        @apply form-select my-1 w-full shadow px-0 divide-y
+        @apply focus:ring-gray-400 focus:border-gray-400 focus:shadow-md border-gray-300 rounded my-1 w-full shadow px-0 divide-y
     }
     .form-checkbox {
         @apply focus:ring-blue-400 text-blue-500 border-gray-300 rounded

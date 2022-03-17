@@ -21,6 +21,8 @@ class DesignElement
     public bool $dynamicComponent = false;
 
     public string $label;
+    public null|string $labelW = null;
+    public null|string $fieldW = null;
     public string $name;
     public string $key;
 
@@ -74,6 +76,14 @@ class DesignElement
     public function colspan(int $cols): self
     {
         $this->colspan = $cols;
+        return $this;
+    }
+
+    public function setHtmlId(string $wireInstanceID): self
+    {
+        //applied in field-loop.php or Field::blade
+        //$_instance->id
+        $this->id = 'id' . md5($wireInstanceID . $this->key);
         return $this;
     }
 
