@@ -53,8 +53,11 @@ trait ValidatesFields
                     } else {
                         $ruleName = "$prefix.$field->name";
                     }
-
-                    $rules[$ruleName] = $field->rules ?? 'nullable';
+                    if ($field->type === 'file' && is_array($field->rules)) {
+                        $rules = $field->rules;
+                    }else{
+                        $rules[$ruleName] = $field->rules ?? 'nullable';
+                    }
                 }
             }
         }
