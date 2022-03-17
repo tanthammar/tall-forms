@@ -1,4 +1,4 @@
-<div {{ $attributes->only('x-data') }} class="{{$field->wrapperClass}}">
+<div @if($field->maskOptions) x-data @endif class="{{$field->wrapperClass}}">
     @if($field->prefix || $field->hasIcon)
         <span class="{{ $field->icon_span }} {{ $field->left_border }}">
             @if($field->icon)
@@ -19,6 +19,7 @@
         @unless($field->disabled)
         <input
             @if($field->required) required @endif
+            @if($field->maskOptions) x-ref="imaskref" x-init="$nextTick(() => IMask($refs.imaskref, {{$field->maskOptions}} ))" @endif
             {{ $attributes->except([...array_keys($attr), 'x-data', 'required', 'disabled'])->merge($attr)->merge(['class' => $errors->has($field->key) ? $field->errorClass : $field->class ]) }}
         />
         @else
@@ -45,3 +46,9 @@
         </span>
     @endif
 </div>
+@if($field->maskOptions)
+    @tfonce('scripts:imask')
+        <script src="https://unpkg.com/imask"></script>
+    @endtfonce
+@endif
+
