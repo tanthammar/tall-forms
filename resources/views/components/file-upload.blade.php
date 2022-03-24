@@ -41,10 +41,14 @@
         </ul>
     @endif
     {{--show livewire file upload default validation error--}}
-    @error($field->multiple ? $field->name.'.*': $field->name)
-    @foreach($errors->get($field->multiple ? $field->name.'.*': $field->name) as $message)
-        <p wire:key="{{ $loop->index }}" class="tf-error">{{ $field->multiple ? \Tanthammar\TallForms\ErrorMessage::parse($message[0]) : \Tanthammar\TallForms\ErrorMessage::parse($message) }}</p>
-    @endforeach
+    @error($field->name)
+        <p class="tf-error">{{ \Tanthammar\TallForms\ErrorMessage::parse($message) }}</p>
+    @enderror
+    @error($field->name.'.*')
+
+    @foreach($errors->get($field->name.'.*') as $message)
+            <p wire:key="{{ $loop->index }}" class="tf-error">{{ \Tanthammar\TallForms\ErrorMessage::parse($message[0])}}</p>
+        @endforeach
         @if(!$showFileUploadError)<p class="tf-error">{{ $uploadFileError }}</p>@endif
     @enderror
     {{--show components general validation error --}}
