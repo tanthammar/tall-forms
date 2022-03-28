@@ -43,3 +43,8 @@
         </span>
     @endif
 </div>
+@if($field->maskOptions)
+    @tfonce('scripts:imask')
+        <script src="https://unpkg.com/imask"></script>
+    @endtfonce
+@endif
