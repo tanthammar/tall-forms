@@ -1,4 +1,4 @@
-<div @if($field->maskOptions) x-data @endif class="{{$field->wrapperClass}}">
+<div {{ $attributes->only('x-data') }} class="{{$field->wrapperClass}}">
     @if($field->prefix || $field->hasIcon)
         <span class="{{ $field->icon_span }} {{ $field->left_border }}">
             @if($field->icon)
