@@ -169,7 +169,8 @@ class InstallTallForms extends Command
         //Jetstream or Breeze
         try {
             $v = \Composer\InstalledVersions::getVersion('laravel/jetstream');
-            $this->jetstream = $v == 'dev-master' || $v >= "2.3";
+            $version = collect(explode('.', $v))->slice(0, 2)->toArray();
+            $this->jetstream = $v == 'dev-master' || ($version[0] >= 2 && $version[1] >= 3);
             if(filled($v) && !$this->jetstream) {
                 $this->info('ABORTING: This installer only supports Jetstream >= v2.3');
                 exit;
@@ -179,7 +180,8 @@ class InstallTallForms extends Command
         }
         try {
             $v = \Composer\InstalledVersions::getVersion('laravel/breeze');
-            $this->breeze = $v == 'dev-master' || $v >= "1.1";
+            $version = collect(explode('.', $v))->slice(0, 2)->toArray();
+            $this->breeze = $v == 'dev-master' || ($version[0] >= 1 && $version[1] >= 1);
             if(filled($v) && !$this->breeze) {
                 $this->info('ABORTING: This installer only supports Breeze >= v1.1');
                 exit;
