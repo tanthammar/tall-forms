@@ -21,7 +21,7 @@
     "require": {
         "php": "^8.0.2|^8.1",
         "livewire/livewire": "^2.10|dev-master",
-        "laravel/framework": "^8.75.0|^9.0"
+        "laravel/framework": "^8.75.0|^9.0|^10.0"
     },
     "autoload": {
         "psr-4": {
@@ -42,7 +42,7 @@
         }
     },
     "require-dev": {
-        "orchestra/testbench": "^7.0",
+        "orchestra/testbench": "^7.0|^8.0",
         "pestphp/pest": "^1.21",
         "pestphp/pest-plugin-laravel": "^1.2",
         "phpunit/phpunit": "^9.5.10",
