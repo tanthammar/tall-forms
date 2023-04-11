@@ -42,7 +42,7 @@
         }
     },
     "require-dev": {
-        "orchestra/testbench": "^7.0",
+        "orchestra/testbench": "^7.0|^8.0",
         "pestphp/pest": "^1.21",
         "pestphp/pest-plugin-laravel": "^1.2",
         "phpunit/phpunit": "^9.5.10",
