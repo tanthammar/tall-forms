@@ -12,6 +12,34 @@
 - [Support](https://github.com/tanthammar/tall-forms/issues)
 - [Contributions](https://github.com/tanthammar/tall-forms/pulls)
 
+
+
+
+# Project Deprecation Notice
+
+## Important: This Package is No Longer Maintained
+As of now, this package has been deprecated and is no longer being actively maintained. I've decided to shift my focus entirely to contributing to [Filament](https://filamentphp.com/), an alternative that offers all the functionalities of this package and much more.
+
+## Why This Change?
+- **Advancements in Technology:** Livewire v3 and other technological advancements have made some of the features in this package obsolete.
+- **Better Alternatives:** Filament provides a more comprehensive set of features that are better suited for current development needs.
+
+## What Does This Mean for Users?
+- **No New Updates:** There will be no new features, bug fixes, or updates to this package.
+- **Not Recommended for New Projects:** I strongly advise against using this package for new projects.
+- **Support and Documentation:** Existing documentation will remain available, but with no updates or new additions.
+
+## Looking for a New Maintainer
+If you find value in this project and are interested in taking over its maintenance, please feel free to PM me.
+
+## Thank You!
+I want to extend my heartfelt thanks to everyone who has used, contributed to, and supported this package over the years. Your engagement and feedback have been invaluable.
+
+------------------
+------------------
+
+
+
 # Features
 * This is not an admin panel generator, it is a package that auto-generates Laravel Livewire forms without you having to create any blade views.
 * Laravel Nova like syntax to auto generate TALL-stack forms
