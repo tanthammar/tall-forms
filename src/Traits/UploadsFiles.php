@@ -24,9 +24,9 @@ trait UploadsFiles
         if(filled($this->$field_name) && filled($rules)) {
             $key = is_array($this->$field_name) ? $field_name.'.*' : $field_name;
             try {
-                Validator::make([$field_name => $this->$field_name], [
-                    $key => $rules,
-                ])->validate();
+                Validator::make([$field_name => $this->$field_name],
+                    is_array($rules) ? $rules : [$key => $rules])
+                ->validate();
                 $this->showFileUploadError = false;
             } catch (ValidationException $e) {
                 $this->showFileUploadError = true;
