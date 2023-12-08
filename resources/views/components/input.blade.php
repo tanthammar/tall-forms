@@ -16,10 +16,10 @@
         </span>
     @endif
     <div class="relative w-full">
-
         <input
             @if($field->required) required @endif
             @if($field->disabled) disabled @endif
+            @if($field->maskOptions) x-ref="imaskref" x-init="$nextTick(() => IMask($refs.imaskref, {{$field->maskOptions}} ))" @endif
             {{ $attributes->except([...array_keys($attr), 'x-data', 'required', 'disabled'])->merge($attr)->merge(['class' => $errors->has($field->key) ? $field->errorClass : $field->class ]) }}
         />
         @error($field->key)
@@ -43,3 +43,8 @@
         </span>
     @endif
 </div>
+@if($field->maskOptions)
+    @tfonce('scripts:imask')
+        <script src="https://unpkg.com/imask"></script>
+    @endtfonce
+@endif
